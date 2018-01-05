@@ -6,7 +6,7 @@ if [[ $# > 1 ]] ; then
 fi
 
 DIR="${1:-.test-project/}"
-COMPONENTS=""
+COMPONENTS="symfony/var-dumper "
 BUNDLES=""
 
 for PACKAGE in $(find src/*/composer.json -type f) ; do
