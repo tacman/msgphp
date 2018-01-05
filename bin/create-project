@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+if [[ $# > 1 ]] ; then
+    echo "Usage: $0 <working-directory>"
+    exit 1
+fi
+
+DIR="${1:-.test-project/}"
+COMPONENTS=""
+BUNDLES=""
+
+for PACKAGE in $(find src/*/composer.json -type f) ; do
+    PACKAGE_NAME=$(grep -E "^\s*\"name\"\s*:\s*\"msgphp\/([^\"]+)\"\s*,\s*$" "${PACKAGE}")
+    if [[ ! -z $PACKAGE_NAME ]] ; then
+        PACKAGE_NAME=$(echo "${PACKAGE_NAME}" | sed -e "s/^\s*\"name\":\s*\"msgphp\///" -e "s/\"\s*,\s*$//")
+        if [[ ! $PACKAGE_NAME = *-bundle ]] ; then
+            COMPONENTS="${COMPONENTS}msgphp/${PACKAGE_NAME}:@dev "
+        else
+            echo -en "\e[34mInstall \"msgphp/${PACKAGE_NAME}\"? [yN]\e[0m "
+            read answer
+            if [[ $answer =~ ^y|Y|yes|YES$ ]] ; then
+                BUNDLES="${BUNDLES}msgphp/${PACKAGE_NAME} "
+            fi
+        fi
+    fi
+done
+
+composer create-project --prefer-dist symfony/skeleton "${DIR}"
+pushd ${DIR} &> /dev/null
+
+echo -e "\e[34mInstalling components...\e[0m"
+composer require --prefer-dist --no-suggest "${COMPONENTS}"
+
+echo -e "\e[34mInstalling bundles...\e[0m"
+composer require --prefer-dist --no-suggest "${BUNDLES}"
+
+popd &> /dev/null
