@@ -26,12 +26,23 @@ for PACKAGE in $(find src/*/composer.json -type f) ; do
 done
 
 composer create-project --prefer-dist symfony/skeleton "${DIR}"
+
+if [[ $? -ne 0 ]] ; then
+    exit $?
+fi
+
 pushd ${DIR} &> /dev/null
 
 echo -e "\e[34mInstalling components...\e[0m"
-composer require --prefer-dist --no-suggest "${COMPONENTS}"
+composer require --prefer-dist --no-suggest ${COMPONENTS}
 
-echo -e "\e[34mInstalling bundles...\e[0m"
-composer require --prefer-dist --no-suggest "${BUNDLES}"
+if [[ $? -ne 0 ]] ; then
+    exit $?
+fi
+
+if [[ ! -z $BUNDLES ]] ; then
+    echo -e "\e[34mInstalling bundles...\e[0m"
+    composer require --prefer-dist --no-suggest ${BUNDLES}
+fi
 
 popd &> /dev/null
