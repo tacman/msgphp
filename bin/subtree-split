@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
 
-if [[ $# > 1 ]] ; then
-    echo "Usage: $0 <working-directory>"
+if [[ $# -gt 1 ]] ; then
+    echo "Usage: $0 [<working-directory>]"
     exit 1
 fi
 
 DIR="${1:-.subtree-split/}"
-mkdir -p ${DIR}
-pushd ${DIR} &> /dev/null
+mkdir -p "${DIR}"
+pushd "${DIR}" &> /dev/null
 
 echo -e "\e[34mSetup tooling...\e[0m"
 if [[ ! -d bin/.git ]] ; then
     echo "Cloning..."
     git clone --quiet git@github.com:msgphp/git-subtree-sync.git bin
+    [[ $? -ne 0 ]] && echo "Failed!" && exit 1
 fi
 
 git -C bin pull
@@ -23,6 +24,7 @@ if [[ ! -d main/.git ]] ; then
     mkdir main subtrees
     echo "Cloning..."
     git clone --quiet git@github.com:msgphp/msgphp.git main
+    [[ $? -ne 0 ]] && echo "Failed!" && exit 1
 fi
 
 git -C main fetch --tags
