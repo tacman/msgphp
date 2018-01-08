@@ -22,17 +22,19 @@ fi
 
 if [[ ! -f "${PACKAGE_DIR}/${BIN}" ]] ; then
     composer update --no-progress --prefer-dist --no-interaction --no-suggest --working-dir="${PACKAGE_DIR}"
+    [[ $? -ne 0 ]] && exit 1
 fi
 
 if [[ ! $TRAVIS ]] || ( [[ $DEPS = high && $TRAVIS_BRANCH = master ]] ) ; then
+    WORKING_DIR="$(dirname $(dirname "$0"))"
     composer link -h &> /dev/null
     if [[ $? != 0 ]] ; then
-        composer require --dev --no-progress --prefer-dist --no-interaction --no-suggest ro0nl/link
+        composer require --dev --no-progress --prefer-dist --no-interaction --no-suggest --working-dir="${WORKING_DIR}" ro0nl/link
         [[ $? -ne 0 ]] && exit 1
     fi
 
-    echo -e "\e[34mLinking package\e[0m"
-    composer link "${PACKAGE_DIR}"
+    composer link --working-dir="${WORKING_DIR}" "$(cd "${PACKAGE_DIR}" && pwd)"
+    [[ $? -ne 0 ]] && exit 1
 fi
 
 pushd "${PACKAGE_DIR}" &> /dev/null
