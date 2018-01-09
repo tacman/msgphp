@@ -1,7 +1,6 @@
 <?php
 
-use PhpCsFixer\Config;
-use PhpCsFixer\Finder;
+use PhpCsFixer\{Config, Finder};
 
 $cacheDir = __DIR__ . '/var/cache';
 $rules = [
