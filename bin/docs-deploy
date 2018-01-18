@@ -29,7 +29,7 @@ if [[ $SHA != master ]] ; then
     TARGET="${TARGET}-${SHA}"
 fi
 
-mkdir -p "${TARGET}"
+rm -rf "${TARGET}"
 mv build "${TARGET}"
 
 echo -en "\e[34mPush \"${SHA}\"? [yN]\e[0m "
