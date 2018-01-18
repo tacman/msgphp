@@ -16,13 +16,13 @@ $packages = array();
 $flags = \PHP_VERSION_ID >= 50400 ? JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE : 0;
 
 foreach ($dirs as $k => $dir) {
-//    if (!system("git diff --name-only $mergeBase -- $dir", $exitStatus)) {
-//        if ($exitStatus) {
-//            exit($exitStatus);
-//        }
-//        unset($dirs[$k]);
-//        continue;
-//    }
+    if (!system("git diff --name-only $mergeBase -- $dir", $exitStatus)) {
+        if ($exitStatus) {
+            exit($exitStatus);
+        }
+        unset($dirs[$k]);
+        continue;
+    }
     echo "$dir\n";
 
     $json = ltrim(file_get_contents($dir.'/composer.json'));
@@ -54,11 +54,13 @@ foreach ($dirs as $k => $dir) {
     $versions = file_get_contents('https://packagist.org/packages/'.$package->name.'.json');
     $versions = json_decode($versions)->package->versions;
 
-    if ($package->version === str_replace('-dev', '.x-dev', $versions->{'dev-master'}->extra->{'branch-alias'}->{'dev-master'})) {
-        unset($versions->{'dev-master'});
-    }
+//    if ($package->version === str_replace('-dev', '.x-dev', $versions->{'dev-master'}->extra->{'branch-alias'}->{'dev-master'})) {
+//        unset($versions->{'dev-master'});
+//    }
 
+    $packageName = $package->name;
     foreach ($versions as $v => $package) {
+        $package->name = $packageName;
         $packages[$package->name] += array($v => $package);
     }
 }
