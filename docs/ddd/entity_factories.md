@@ -2,7 +2,7 @@
 
 An entity factory is a domain object factory and is bound to `MsgPhp\Domain\Factory\EntityFactoryInterface`.
 Besides initializing the entity via `create()` it can also initialize an identifier using either `identify()` or 
-`nextIdentity()`.
+`nextIdentifier()`.
 
 ## Implementations
 
@@ -25,10 +25,10 @@ Returns an identifier for the given entity class from a known primitive value.
 
 ---
 
-### `nextIdentity(string $class): DomainIdInterface`
+### `nextIdentifier(string $class): DomainIdInterface`
 
-Returns the next identifier for the given entity. Depending on the identifier implementation its value might be 
-considered empty in case it's not capable to calculate a value upfront.
+Returns the next identifier for the given entity class. Depending on the implementation its value might be considered
+empty if it's not capable to calculate one upfront.
 
 ## Generic example
 
@@ -48,9 +48,9 @@ $factory = new EntityFactory([
 
 /** @var DomainId $object */
 $entityId = $factory->identify(MyEntity::class, '1');
-$factory->nextIdentity(MyEntity::class)->isEmpty(); // true
+$factory->nextIdentifier(MyEntity::class)->isEmpty(); // true
 
 /** @var DomainUuid $object */
 $otherEntityId = $factory->identify(MyOtherEntity::class, 'cf3d2f85-6c86-44d1-8634-af51c91a9a74');
-$factory->nextIdentity(MyOtherEntity::class)->isEmpty(); // false
+$factory->nextIdentifier(MyOtherEntity::class)->isEmpty(); // false
 ```

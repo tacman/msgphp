@@ -43,7 +43,7 @@ fi
 
 popd &> /dev/null
 
-echo -en "\e[34mLink dependencies? [yN]\e[0m "
+echo -en "\e[34mLink dependencies? [yN]\e[0m"
 read answer
 if [[ $answer =~ ^y|Y|yes|YES$ ]] ; then
     composer link -h &> /dev/null

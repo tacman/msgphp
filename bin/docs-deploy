@@ -32,7 +32,7 @@ fi
 rm -rf "${TARGET}"
 mv build "${TARGET}"
 
-echo -en "\e[34mPush \"${SHA}\"? [yN]\e[0m "
+echo -en "\e[34mPush docs for \"${SHA}\"? [yN]\e[0m"
 read answer
 if [[ $answer =~ ^y|Y|yes|YES$ ]] ; then
     git -C src add --all
