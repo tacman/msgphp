@@ -31,7 +31,7 @@ $collection = new DomainCollection([1, 2, 3]); // allowed
 
 ### `isEmpty(): bool`
 
-Tells if a colletion is considered empty, i.e. contains zero elements.
+Tells if a collection is considered empty, i.e. contains zero elements.
 
 ```php
 <?php

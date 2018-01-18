@@ -6,6 +6,7 @@ site_dir: var/docs/build/
 
 theme:
     name: 'material'
+extra_css: [style.css]
 markdown_extensions:
     - codehilite
 
@@ -13,8 +14,11 @@ pages:
 - Home: index.md
 - Domain-driven-design:
     - Identifiers: ddd/identifiers.md
+    - Identity mapping: ddd/identity_mapping.md
     - Collections: ddd/collections.md
     - Factories:
         - Object factories: ddd/object_factories.md
         - Entity factories: ddd/entity_factories.md
         - Static factories: ddd/static_factories.md
+    - Repositories: ddd/repositories.md
+    - Exceptions: ddd/exceptions.md

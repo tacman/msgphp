@@ -1,6 +1,6 @@
 # Identifiers
 
-An identifier is a domain value object and is bound to `MsgPhp\Domain\DomainIdInterface`. It's used to identity domain
+An identifier is a domain value object and is bound to `MsgPhp\Domain\DomainIdInterface`. It's used to identify domain
 objects, i.e. entities.
 
 ## Implementations
@@ -67,6 +67,15 @@ DomainId::fromValue('1')->equals(MyDomainId::fromValue('1')); // false!
 
 Returns the string value of the identifier. If the the identifier is empty (see `isEmpty`) an empty string (`""`) 
 should be returned.
+
+```php
+<?php
+
+use MsgPhp\Domain\DomainId;
+
+echo (new DomainId('1'))->toString();
+echo new DomainId('2');
+```
 
 ## UUID example
 
