@@ -73,11 +73,14 @@ $object = $factory->create(KnownInterface::class);
 
 use MsgPhp\Domain\Factory\DomainObjectFactory;
 
-class Some {
-    public function __construct(int $a, int $b, int $c)
+class Some
+{
+    public function __construct(int $a, ?int $b, ?int $c)
     { }
 }
-class Subject {
+
+class Subject
+{
     public function __construct(string $argument, Some $some, Subject $otherSubject = null)
     { }
 }
@@ -90,6 +93,7 @@ $object = $factory->create(Subject::class, [
     'some' => [1, 2, 3],
     'other_subject' => [
         'argument' => 'other_value',
+        'some' => ['a' => 1],
     ],
 ]);
 ```
