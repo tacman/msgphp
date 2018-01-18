@@ -21,4 +21,3 @@ pages:
         - Entity factories: ddd/entity_factories.md
         - Static factories: ddd/static_factories.md
     - Repositories: ddd/repositories.md
-    - Exceptions: ddd/exceptions.md

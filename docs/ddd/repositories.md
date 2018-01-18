@@ -1,8 +1,8 @@
 # Repositories
 
-A repository is not interface bounded by default. Instead you can leverage various trait objects to rapidly create one, 
+A repository is not interface bound by default. Instead you can leverage various trait objects to rapidly create one, 
 depending on the type of infrastructure needed. By design they follow the same API although there might be subtle
-differences per infrastructure type.
+differences per implementation.
 
 ## Implementations
 
@@ -22,6 +22,13 @@ Finds all entities available.
 ### `doFindAllByFields(array $fields, int $offset = 0, int $limit = 0): DomainCollectionInterface`
 
 Finds all entities matching all specified fields.
+
+```php
+<?php
+$this->doFindAllByFields(['field' => null]);
+$this->doFindAllByFields(['field' => 'value']);
+$this->doFindAllByFields(['field' => ['one', 'of', 'these']);
+```
 
 ### `doFind($id, ...$idN): object`
 
