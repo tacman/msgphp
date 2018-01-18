@@ -14,4 +14,7 @@ pages:
 - Domain-driven-design:
     - Identifiers: ddd/identifiers.md
     - Collections: ddd/collections.md
-    - Object factories: ddd/object_factories.md
+    - Factories:
+        - Object factories: ddd/object_factories.md
+        - Entity factories: ddd/entity_factories.md
+        - Static factories: ddd/static_factories.md
