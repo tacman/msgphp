@@ -129,7 +129,7 @@ $twoAndThree = $collection->slice(1);
 
 ### `map(callable $mapper): array`
 
-Returns a map of each collection element as returned by `$mapper`.
+Returns a map with each collection element as returned by `$mapper`.
 
 ```php
 <?php
