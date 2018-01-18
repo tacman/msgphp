@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [[ ! -f var/cache/sami.phar ]] ; then
+    curl -so var/cache/sami.phar http://get.sensiolabs.org/sami.phar
+fi
+
+php var/cache/sami.phar "${@}"

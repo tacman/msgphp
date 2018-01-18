@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
-if [[ $# -gt 1 ]] ; then
-    echo "Usage: $0 [<working-directory>]"
+if [[ ! $# -eq 0 ]] ; then
+    echo "Usage: $0"
     exit 1
 fi
 
 SHA=$(git rev-parse --abbrev-ref --short --verify HEAD)
-DIR="${1:-var/docs}"
+DIR="var/docs"
 mkdir -p "${DIR}"
 
-rm -rf "${DIR}/build/"
-bin/docs build -d "${DIR}/build/"
+bin/sami update .sami.dist
+[[ $? -ne 0 ]] && exit 1
+
+bin/mkdocs build
+[[ $? -ne 0 ]] && exit 1
 
 pushd "${DIR}" &> /dev/null
 
@@ -24,13 +27,15 @@ fi
 git -C src fetch --tags
 git -C src pull
 
-TARGET="src/docs"
+API_DIR="src/api"
+DOCS_DIR="src/docs"
 if [[ $SHA != master ]] ; then
-    TARGET="${TARGET}-${SHA}"
+    DOCS_DIR="${DOCS_DIR}-${SHA}"
 fi
 
-rm -rf "${TARGET}"
-mv build "${TARGET}"
+rm -rf "${DOCS_DIR}" "${API_DIR}"
+mv build "${DOCS_DIR}"
+mv build-api "${API_DIR}"
 
 echo -en "\e[34mPush docs for \"${SHA}\"? [yN]\e[0m"
 read answer
