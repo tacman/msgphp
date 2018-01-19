@@ -6,7 +6,8 @@ MsgPHP is a project that aims to provide (common) message based domain layers fo
 
 ## Documentation
 
-- Read the [main documentation](https://msgphp.github.io/docs)
+- Read the [main documentation](https://msgphp.github.io/docs/)
+- Browse the [API documentation](https://msgphp.github.io/api/)
 - Try the Symfony [demo application](https://github.com/msgphp/symfony-demo-app)
 
 ## Packages
