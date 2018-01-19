@@ -66,3 +66,8 @@ cache:
   directories:
     - $HOME/.composer/cache/files/
     - var/
+
+branches:
+  only:
+    - master
+    - /^\d\.\d$/
