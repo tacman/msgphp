@@ -19,6 +19,7 @@ Domain | Bundle
 
 ## Blog posts
 
-- [Building a new Symfony User Bundle](https://medium.com/@ro0NL/building-a-new-symfony-user-bundle-b4fe5a9d9d80)
-- [Continuous integration: Favoring stability and consistency by default!](https://medium.com/@ro0NL/continuous-integration-favoring-stability-and-consistency-by-default-147b33504675)
+- [Decoupling the User entity with a new Symfony User Bundle](https://medium.com/@ro0NL/decoupling-the-user-entity-with-a-new-symfony-user-bundle-7d2d5d85bdf9)
 - [Continuous integration: Automate everything!](https://medium.com/@ro0NL/continuous-integration-automate-everything-6787758c4945)
+- [Continuous integration: Favoring stability and consistency by default!](https://medium.com/@ro0NL/continuous-integration-favoring-stability-and-consistency-by-default-147b33504675)
+- [Building a new Symfony User Bundle](https://medium.com/@ro0NL/building-a-new-symfony-user-bundle-b4fe5a9d9d80)
