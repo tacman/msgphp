@@ -1,7 +1,7 @@
 # Domain events
 
 A domain event is bound to `MsgPhp\Domain\Event\DomainEventInterface`. Its purpose is to identify concrete domain events
-and represents something that happens, leading to an application state change.
+and represent something that happens. When handled it might lead to an application state change.
 
 ## Implementations
 
