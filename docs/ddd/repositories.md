@@ -4,6 +4,8 @@ A repository is not interface bound by default. Instead you can leverage various
 depending on the type of infrastructure needed. By design they follow the same API although there might be subtle
 differences per implementation.
 
+Note default (interface bound) repositories are provided per domain layer.
+
 ## Implementations
 
 - `MsgPhp\Domain\Infra\InMemory\DomainEntityRepositoryTrait` (In-memory persistence)

@@ -22,3 +22,4 @@ pages:
         - Entity factory: ddd/factory/entity.md
         - Static factory: ddd/factory/static.md
     - Repositories: ddd/repositories.md
+    - Entities: ddd/entities.md
