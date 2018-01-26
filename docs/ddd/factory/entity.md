@@ -1,4 +1,4 @@
-# Entity factories
+# Entity factory
 
 An entity factory is a domain object factory and is bound to `MsgPhp\Domain\Factory\EntityFactoryInterface`.
 Besides initializing the entity via `create()` it can also initialize an identifier using either `identify()` or 

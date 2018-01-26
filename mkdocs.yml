@@ -12,13 +12,13 @@ markdown_extensions:
 
 pages:
 - Home: index.md
-- Code conventions: code_conventions.md
+- Code conventions: code-conventions.md
 - Domain-driven-design:
     - Identifiers: ddd/identifiers.md
-    - Identity mapping: ddd/identity_mapping.md
+    - Identity mapping: ddd/identity-mapping.md
     - Collections: ddd/collections.md
     - Factories:
-        - Object factories: ddd/object_factories.md
-        - Entity factories: ddd/entity_factories.md
-        - Static factories: ddd/static_factories.md
+        - Object factory: ddd/factory/object.md
+        - Entity factory: ddd/factory/entity.md
+        - Static factory: ddd/factory/static.md
     - Repositories: ddd/repositories.md
