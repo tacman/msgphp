@@ -1,12 +1,13 @@
 # Command Query Responsibility Segregation
 
-Command domain objects are provided per domain layer and usually follow a [POPO](https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean)
-design. It's a specific message type that can be dispatched using any [message bus](domain-message-bus.md).
+Commands are domain objects and provided per domain layer. They usually follow a [POPO](https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean)
+design. Its purpose is to describe an action to be taken. For commands being messages they can be dispatched using any
+[message bus](domain-message-bus.md).
 
 ## Command handlers
 
-A command message is handled by a _command handler_. It's designed, but not limited, to handle one specific command
-message.
+The message bus resolves a command handler, which in turn handles the command. Thus performs the requested action.
+Usually a command handlers is designed, but not limited, to handle one specific command message.
 
 ## Implementations
 
@@ -14,14 +15,13 @@ message.
 
 Sources a [domain event](../event-sourcing/domain-events.md) from a command message.
 
-- `doHandle($command, callable $onHandled = null): void`
-    - Invokes the domain event
-    - If the domain event is handled `$onHandled`, if given, is invoked receiving the handler as first argument
-- `abstract getDomainEvent(object $message): DomainEventInterface`
-    - Get the domain event to be handled
-- `abstract getDomainEventHandler($message)`
-    - Get the [domain event handler](../event-sourcing/domain-event-handlers.md) (should be type
-    `DomainEventHandlerInterface`)
+- `doHandle(object $command, callable $onHandled = null): void`
+    - Invokes the domain event for the given command message
+    - If the domain event is handled `$onHandled` will be invoked (if given) receiving the handler as first argument
+- `abstract getDomainEvent(object $command): DomainEventInterface`
+    - Get the [domain event](../event-sourcing/domain-events.md) to be handled
+- `abstract getDomainEventHandler(object $command): DomainEventHandlerInterface`
+    - Get the [domain event handler](../event-sourcing/domain-event-handlers.md) to handle the domain event
 
 ## Generic example
 
@@ -31,7 +31,7 @@ Sources a [domain event](../event-sourcing/domain-events.md) from a command mess
 class MyCommand { }
 class MyCommandHandler
 {
-    public function handle(MyCommand $command): void
+    public function __invoke(MyCommand $command): void
     {
         // do something
     }
@@ -53,19 +53,19 @@ class MyCommandHandler
 {
     use EventSourcingCommandHandlerTrait;
 
-    public function handle(MyCommand $command): void
+    public function __invoke(MyCommand $command): void
     {
         $this->doHandle($command, function (MyEntity $entity): void {
             // do something, e.g. save entity using a repository
         });
     }
-    
+
     protected function getDomainEvent(MyCommand $command): DomainEventInterface
     {
         return new MyDomainEvent();
     }
-    
-    protected function getDomainEventHandler(MyCommand $command)
+
+    protected function getDomainEventHandler(MyCommand $command): DomainEventHandlerInterface
     {
         // usually the command provides e.g. an entity identity to be looked up by a repository
         return new MyEntity();
@@ -79,10 +79,10 @@ class MyEntity implements DomainEventHandlerInterface
     {
         if ($event instanceof MyDomainEvent) {
             // do something
-            
+
             return true;
         }
-        
+
         return false;
     }
 }
