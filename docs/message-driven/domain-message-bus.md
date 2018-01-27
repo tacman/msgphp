@@ -6,7 +6,6 @@ message object and helps you to use CQRS and event sourcing.
 ## Implementations
 
 - `MsgPhp\Domain\Infra\SimpleBus\DomainMessageBus`
-    - Dispatches both _command_ and _event_ message types
     - Requires `simple-bus/message-bus`
 
 ## API

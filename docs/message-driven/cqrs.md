@@ -7,21 +7,21 @@ design. Its purpose is to describe an action to be taken. For commands being mes
 ## Command handlers
 
 The message bus resolves a command handler, which in turn handles the command. Thus performs the requested action.
-Usually a command handlers is designed, but not limited, to handle one specific command message.
+Usually a command handler is designed, but not limited, to handle one specific command message.
 
 ## Implementations
 
 ### `MsgPhp\Domain\Command\EventSourcingCommandHandlerTrait`
 
-Sources a [domain event](../event-sourcing/domain-events.md) from a command message.
+Sources a domain event from a command message.
 
 - `doHandle(object $command, callable $onHandled = null): void`
     - Invokes the domain event for the given command message
-    - If the domain event is handled `$onHandled` will be invoked (if given) receiving the handler as first argument
+    - If the domain event is handled `$onHandled` will be invoked (if given), receiving the handler as first argument
 - `abstract getDomainEvent(object $command): DomainEventInterface`
-    - Get the [domain event](../event-sourcing/domain-events.md) to be handled
+    - The [domain event](../event-sourcing/domain-events.md) to be handled
 - `abstract getDomainEventHandler(object $command): DomainEventHandlerInterface`
-    - Get the [domain event handler](../event-sourcing/domain-event-handlers.md) to handle the domain event
+    - The [domain event handler](../event-sourcing/domain-event-handlers.md) handling the domain event
 
 ## Generic example
 
@@ -56,7 +56,7 @@ class MyCommandHandler
     public function __invoke(MyCommand $command): void
     {
         $this->doHandle($command, function (MyEntity $entity): void {
-            // do something, e.g. save entity using a repository
+            // do something
         });
     }
 
@@ -67,7 +67,6 @@ class MyCommandHandler
 
     protected function getDomainEventHandler(MyCommand $command): DomainEventHandlerInterface
     {
-        // usually the command provides e.g. an entity identity to be looked up by a repository
         return new MyEntity();
     }
 }
