@@ -1,17 +1,13 @@
 # Static factory
 
-A static factory is a utility class, it cannot be initialized as a new instance using `new ...();`. In general its
-purpose is to factorize a known implementation for a given interface. It's designed, but not limited, to be used
-internally mainly.
+A static factory is a utility class, it cannot be initialized as a new instance using `new ...();`. Its purpose is to
+factorize a known implementation for a given class.
 
-## Implementations
+## `MsgPhp\Domain\Factory\DomainIdFactory`
 
-- `MsgPhp\Domain\Factory\DomainIdFactory`
-- `MsgPhp\Domain\Factory\DomainCollectionFactory`
+Factorize an [identifier](../identifiers.md) from any primitive value.
 
-## Domain identifier factory
-
-Factorizes a `MsgPhp\Domain\DomainIdInterface`.
+- `static create($value): DomainIdInterface`
 
 ### Basic example
 
@@ -29,9 +25,11 @@ $id = DomainIdFactory::create(1);
 $uuid = DomainIdFactory::create('cf3d2f85-6c86-44d1-8634-af51c91a9a74');
 ```
 
-## Domain collection factory
+## `MsgPhp\Domain\Factory\DomainCollectionFactory`
 
-Factorizes a `MsgPhp\Domain\DomainCollectionInterface`.
+Factorizes a [collection](../collections.md) from any primitive iterable value.
+
+- `static create(?iterable $value): DomainCollectionInterface`
 
 ### Basic example
 

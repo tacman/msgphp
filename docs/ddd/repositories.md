@@ -16,7 +16,7 @@ Note default (interface bound) repositories are provided per domain layer.
 
 ## API
 
-Note this API is exposed privately as a trait. You can decide to [change method visibility](https://secure.php.net/manual/en/language.oop5.traits.php#language.oop5.traits.visibility)
+> Exposed `private` as a trait. You can decide to [change method visibility](https://secure.php.net/manual/en/language.oop5.traits.php#language.oop5.traits.visibility)
 on a per case basis.
 
 ### `doFindAll(int $offset = 0, int $limit = 0): DomainCollectionInterface`
