@@ -10,7 +10,7 @@ on a per case basis.
 
 ### `dispatch(string $class, array $context = []): mixed`
 
-Dispatches the given message object. The dispatcher can return a value coming from handlers, but is not required to do
+Dispatches the given message class. The dispatcher can return a value coming from handlers, but is not required to do
 so.
 
 ## Basic example
