@@ -20,6 +20,7 @@ Domain | Bundle
 
 ## Blog posts
 
+- [Initializing objects with CLI and the power of Symfony Console](https://medium.com/@ro0NL/initializing-objects-with-cli-and-the-power-of-symfony-console-2a008d5611f)
 - [Commanding a decoupled User entity](https://medium.com/@ro0NL/commanding-a-decoupled-user-entity-aee8723c43e5)
 - [Decoupling the User entity with a new Symfony User Bundle](https://medium.com/@ro0NL/decoupling-the-user-entity-with-a-new-symfony-user-bundle-7d2d5d85bdf9)
 - [Continuous integration: Automate everything!](https://medium.com/@ro0NL/continuous-integration-automate-everything-6787758c4945)
