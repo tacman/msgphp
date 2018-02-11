@@ -19,14 +19,14 @@ pages:
     - Collections: ddd/collections.md
     - Factories:
         - Object factory: ddd/factory/object.md
-        - Entity aware factory: ddd/factory/entity_aware.md
+        - Entity aware factory: ddd/factory/entity-aware.md
         - Static factory: ddd/factory/static.md
     - Repositories: ddd/repositories.md
     - Entities: ddd/entities.md
 - Event sourcing:
-    - Domain events: event-sourcing/domain-events.md
-    - Domain event handlers: event-sourcing/domain-event-handlers.md
+    - Events: event-sourcing/events.md
+    - Event handlers: event-sourcing/event-handlers.md
 - Message driven:
-    - Domain message bus: message-driven/domain-message-bus.md
+    - Message bus: message-driven/message-bus.md
     - Message dispatcher: message-driven/message-dispatcher.md
     - CQRS: message-driven/cqrs.md

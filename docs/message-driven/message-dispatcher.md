@@ -1,7 +1,7 @@
-# Domain message dispatcher
+# Message dispatcher
 
-The message dispatcher is a utility trait. Its purpose is to dispatch a message, factorized by a [object factory](../ddd/factory/object.md),
-using any [message bus](domain-message-bus.md).
+The domain message dispatcher is a utility trait. Its purpose is to dispatch a message, factorized by a
+[object factory](../ddd/factory/object.md), using any [message bus](domain-message-bus.md).
 
 ## API
 

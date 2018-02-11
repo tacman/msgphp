@@ -1,7 +1,7 @@
 # Identifiers
 
-An identifier is a domain value object and is bound to `MsgPhp\Domain\DomainIdInterface`. Its purpose is to identify
-domain objects, e.g. entities.
+A domain identifier is a value object and bound to `MsgPhp\Domain\DomainIdInterface`. Its purpose is to identify domain
+objects, i.e. entities.
 
 ## Implementations
 
