@@ -39,6 +39,13 @@ Returns the actual identifier values of `$object`.
 
 ---
 
+### `getIdentifierFieldNames(string $class): array`
+
+Returns the identifier field names for `$class`. Any instance should have an identity composed of these field values.
+See also `DomainIdentityMappingInterface::getIdentifierFieldNames()`.
+
+---
+
 ### `isIdentity(string $class, array $value): bool`
 
 Tells if `$value` is a valid identity for type `$class`. An identity value is considered valid if it's exactly indexed

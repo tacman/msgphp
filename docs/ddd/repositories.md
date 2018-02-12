@@ -23,6 +23,8 @@ on a per case basis.
 
 Finds all entities available.
 
+---
+
 ### `doFindAllByFields(array $fields, int $offset = 0, int $limit = 0): DomainCollectionInterface`
 
 Finds all entities matching all specified fields.
@@ -34,25 +36,37 @@ $this->doFindAllByFields(['field' => 'value']);
 $this->doFindAllByFields(['field' => ['one', 'of', 'these']);
 ```
 
+---
+
 ### `doFind($id, ...$idN): object`
 
 Finds a single entity by its identity.
+
+---
 
 ### `doFindByFields(array $fields): object`
 
 Finds the first entity matching all specified fields.
 
+---
+
 ### `doExists($id, ...$idN): bool`
 
 Verify if an entity exists by its identity.
+
+---
 
 ### `doExistsByFields(array $fields): bool`
 
 Verify if an entity exists matching all specified fields.
 
+---
+
 ### `doSave(object $entity): void`
 
 Persist an entity in the identity map. The entity will be available on any subsequent query.
+
+---
 
 ### `doDelete(object $entity): void`
 

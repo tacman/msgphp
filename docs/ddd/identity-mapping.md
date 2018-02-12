@@ -17,6 +17,8 @@ the identifier metadata for a known domain object.
 
 Returns the identifier field names for `$class`. Any instance should have an identity composed of these field values.
 
+---
+
 ### `getIdentity(object $object): array`
 
 Returns the actual identifier values of `$object`. Each identifier value is keyed by its corresponding identifier field
