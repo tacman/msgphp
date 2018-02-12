@@ -21,8 +21,8 @@ Inherited from `MsgPhp\Domain\Factory\DomainObjectFactoryInterface::create()`.
 
 ### `reference(string $class, $id, ...$idN): object`
 
-Returns a reference object for an existing entity by identity. Depending on the implementation the reference might be
-partially loaded. Meaning one can only safely rely on the entity identifier values being available.
+Returns a reference for a known entity object. Depending on the implementation the reference object might be partially
+loaded. Meaning one can only safely rely on the entity identifier values being available.
 
 ---
 
@@ -84,8 +84,8 @@ class Some
 $realFactory = ...;
 
 $factory = new EntityAwareFactory($realFactory, [], [
-    function (string $class, array $identity) {
-        return new $class(...$identity);
+    function (string $class, array $ids) {
+        return new $class(...$ids);
     },
 ]);
 
