@@ -6,6 +6,7 @@
 
 # News
 
+- **`2018-02-12`** Added [domain identities](ddd/identities.md) chapter
 - **`2018-01-27`** Added initial _message driven_ chapter
 - **`2018-01-26`** Added initial _event sourcing_ chapter
 - **`2018-01-25`** Added initial project [code conventions](code-conventions.md)

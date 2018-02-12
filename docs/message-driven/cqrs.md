@@ -2,7 +2,7 @@
 
 Commands are domain objects and provided per domain layer. They usually follow a [POPO](https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean)
 design. Its purpose is to describe an action to be taken. For commands being messages they can be dispatched using any
-[message bus](domain-message-bus.md).
+[message bus](message-bus.md).
 
 ## Command handlers
 
@@ -18,9 +18,9 @@ Handles a command message by sourcing a domain event.
 - `handle(object $command, callable $onHandled = null): void`
     - If the domain event is handled `$onHandled` will be invoked (if given), receiving the handler as first argument
 - `abstract getDomainEvent(object $command): DomainEventInterface`
-    - The [domain event](../event-sourcing/domain-events.md) to be handled
+    - The [domain event](../event-sourcing/events.md) to be handled
 - `abstract getDomainEventHandler(object $command): DomainEventHandlerInterface`
-    - The [domain event handler](../event-sourcing/domain-event-handlers.md) handling the domain event
+    - The [domain event handler](../event-sourcing/event-handlers.md) handling the domain event
 
 ## Generic example
 

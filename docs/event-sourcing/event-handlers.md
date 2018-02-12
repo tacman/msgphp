@@ -1,8 +1,8 @@
 # Event handlers
 
 A domain event handler is bound to `MsgPhp\Domain\Event\DomainEventHandlerInterface`. Its purpose is to handle
-[domain events](domain-events.md). By convention a trait implementation is provided to map concrete events to
-corresponding handling methods.
+[domain events](events.md). By convention a trait implementation is provided to map concrete events to corresponding
+handling methods.
 
 ## Implementations
 
