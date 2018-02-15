@@ -13,6 +13,13 @@ objects, i.e. entities.
 
 ## API
 
+### Extends
+
+- [`\Serializable`](https://secure.php.net/manual/en/class.serializable.php)
+- [`\JsonSerializable`](https://secure.php.net/manual/en/class.jsonserializable.php)
+
+---
+
 ### `static fromValue($value): DomainIdInterface`
 
 Factorizes a new identifier from a primitive value.

@@ -15,6 +15,13 @@ The technical implementation is generic and may hold any type of elements from a
 
 ## API
 
+### Extends
+
+- [`\Countable`](https://secure.php.net/manual/en/class.countable.php)
+- [`\IteratorAggregate`](https://secure.php.net/manual/en/class.iteratoraggregate.php)
+
+---
+
 ### `static fromValue(?iterable $value): DomainCollectionInterface`
 
 Factorizes a new collection from a primitive iterable value.
