@@ -24,9 +24,9 @@ Factorizes a new collection from a primitive iterable value.
 
 use MsgPhp\Domain\DomainCollection;
 
-$collection = DomainCollection::fromValue(null); // allowed; empty collection
-$collection = new DomainCollection(null); // not allowed
-$collection = new DomainCollection([1, 2, 3]); // allowed
+$collection = DomainCollection::fromValue(null);
+$collection = DomainCollection::fromValue([1, 2, 3]);
+$collection = DomainCollection::fromValue(new \ArrayIterator([]));
 ```
 
 ---

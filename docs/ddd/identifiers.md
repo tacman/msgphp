@@ -23,7 +23,7 @@ Factorizes a new identifier from a primitive value.
 use MsgPhp\Domain\DomainId;
 
 $id = DomainId::fromValue(1);
-$id = new DomainId('1');
+$id = DomainId::fromValue('1');
 ```
 
 ---
