@@ -29,13 +29,6 @@ Finds all entities available.
 
 Finds all entities matching all specified fields.
 
-```php
-<?php
-$this->doFindAllByFields(['field' => null]);
-$this->doFindAllByFields(['field' => 'value']);
-$this->doFindAllByFields(['field' => ['one', 'of', 'these']);
-```
-
 ---
 
 ### `doFind($id): object`
@@ -93,5 +86,5 @@ $em = ...;
 $repository = new MyGenericRepository(MyEntity::class, $em); 
 
 /** @var MyEntity $entity */
-$entity = $repository->find('1');
+$entity = $repository->find(1);
 ```

@@ -22,9 +22,8 @@ Factorizes a new identifier from a primitive value.
 
 use MsgPhp\Domain\DomainId;
 
-$id = DomainId::fromValue(1); // allowed
-$id = new DomainId(1); // not allowed
-$id = new DomainId('1'); // allowed
+$id = DomainId::fromValue(1);
+$id = new DomainId('1');
 ```
 
 ---
@@ -60,7 +59,9 @@ use MsgPhp\Domain\DomainId;
 
 class MyDomainId extends DomainId { }
 
-DomainId::fromValue('1')->equals(MyDomainId::fromValue('1')); // false!
+(new DomainId('1'))->equals(new DomainId('1')); // true
+(new DomainId('1'))->equals(new DomainId('2')); // false
+(new DomainId('1'))->equals(new MyDomainId('1')); // false
 ```
 
 ---
@@ -84,12 +85,12 @@ echo new DomainId('2');
 ```php
 <?php
 
-use MsgPhp\Domain\Infra\Uuid\DomainId;
+use MsgPhp\Domain\Infra\Uuid\DomainId as DomainUuid;
 use Ramsey\Uuid\Uuid;
 
-$uuid4 = DomainId::fromValue('cf3d2f85-6c86-44d1-8634-af51c91a9a74');
-$uuid4Alt = DomainId::fromValue(Uuid::fromString('cf3d2f85-6c86-44d1-8634-af51c91a9a74'));
-$uuid4Alt2 = DomainId::fromValue(Uuid::uuid4());
-$newUuid4 = new DomainId();
-$newUuid5 = new DomainId(Uuid::uuid5(Uuid::NAMESPACE_URL, 'http://php.net/'));
+$uuid4 = DomainUuid::fromValue('cf3d2f85-6c86-44d1-8634-af51c91a9a74');
+$uuid4Alt = DomainUuid::fromValue(Uuid::fromString('cf3d2f85-6c86-44d1-8634-af51c91a9a74'));
+$uuid4Alt2 = DomainUuid::fromValue(Uuid::uuid4());
+$newUuid4 = new DomainUuid();
+$newUuid5 = new DomainUuid(Uuid::uuid5(Uuid::NAMESPACE_URL, 'http://php.net/'));
 ```

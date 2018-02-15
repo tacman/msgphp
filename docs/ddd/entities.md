@@ -3,11 +3,11 @@
 Entity objects are provided per domain layer and usually follow a [POPO](https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean)
 design.
 
-To simplify the creation of entities the base domain layer provides common fields and features in the form of PHP
-traits. Entity fields can be compared to a read-operation, whereas entity features represent a write-operation.
+To simplify entity definitions common fields and features are provided in the form of PHP [traits](https://secure.php.net/manual/en/language.oop5.traits.php).
+Entity fields can be compared to a read-operation, whereas entity features represent a write-operation.
 
-They are defined in a dedicated namespace for discovery, respectively `Msgphp\Domain\Entiy\Field\` and
-`MsgPhp\Domain\Entity\Features\`.
+They are defined in a dedicated namespace for discovery, respectively `Msgphp\Domain\Entity\Fields\` and
+`MsgPhp\Domain\Entity\Features\`. Additionally more specific fields and features can be provided per domain layer.
 
 ## Common entity fields
 
@@ -20,7 +20,7 @@ A datetime value representing the entity was initially created at.
 
 ### `EnabledField`
 
-A boolean value representing the entity should be considered enabled yes or no.
+A boolean value representing the entity its availability state.
 
 - `isEnabled(): bool`
     - `false` by default
@@ -36,7 +36,7 @@ A datetime value representing the entity was last updated at.
 
 ### `CanBeConfirmed`
 
-Provides ability to confirm an entity. When used an entity is considered initially unconfirmed.
+Provides ability to confirm an entity.
 
 - `getConfirmationToken(): ?string`
     - Required to be set initially
@@ -44,12 +44,13 @@ Provides ability to confirm an entity. When used an entity is considered initial
 - `isConfirmed(): bool` 
 - `confirm(): void` 
     - `confirmationToken` is unset
-    - `confirmatedAt` is set to current datetime
+    - `confirmatedAt` is set to the current datetime
 
 ### `CanBeEnabled`
 
-Provides ability to toggle an entity availability state.
+Provides ability to toggle an entity its availability state.
 
 - Inherits from `EnabledField`
 - `enable(): void`
 - `disable(): void`
+2

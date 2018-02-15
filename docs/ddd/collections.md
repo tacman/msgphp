@@ -85,7 +85,7 @@ $collection->containsKey(3); // false
 
 ### `first()`
 
-Returns the first element, or `false` if the collection is empty.
+Returns the first element or `false` if the collection is empty.
 
 ```php
 <?php
@@ -100,7 +100,7 @@ $collection->first(); // int(1)
 
 ### `last()`
 
-Returns the last element, or `false` if the collection is empty.
+Returns the last element or `false` if the collection is empty.
 
 ```php
 <?php
@@ -115,7 +115,7 @@ $collection->last(); // int(3)
 
 ### `get($key)`
 
-Returns the element at the given key/index, or `null` if the collection is empty.
+Returns the element at the given key/index or `null` if the collection is empty.
 
 ```php
 <?php

@@ -53,7 +53,7 @@ $factory = new EntityAwareFactory($realFactory, [
 ]);
 
 /** @var DomainId $entityId */
-$entityId = $factory->identify(MyEntity::class, '1');
+$entityId = $factory->identify(MyEntity::class, 1);
 $factory->nextIdentifier(MyEntity::class)->isEmpty(); // true
 
 /** @var DomainUuid $entityId */
@@ -68,30 +68,18 @@ $factory->nextIdentifier(MyOtherEntity::class)->isEmpty(); // false
 
 use MsgPhp\Domain\Factory\EntityAwareFactory;
 
-class MyCompositeEntity
+class MyEntity
 {
-    public function __construct($idA, $idB)
-    { }
-}
-
-class Some
-{
-    public function __construct(MyCompositeEntity $entity)
+    public function __construct($id)
     { }
 }
 
 $realFactory = ...;
 
 $factory = new EntityAwareFactory($realFactory, [], function (string $class, $id) {
-    if (MyCompositeEntity::class === $class && is_array($id)) {
-        return new $class($id['idA'] ?? null, $id['idB'] ?? null);
-    }
-
     return new $class($id);
 });
 
-/** @var Some $object */
-$object = $factory->create(Some::class, [
-    'entity' => $factory->reference(MyCompositeEntity::class, ['idA' => 1, 'idB' => 2]),
-]);
+/** @var MyEntity $ref */
+$ref = $factory->reference(MyEntity::class, 1);
 ```
