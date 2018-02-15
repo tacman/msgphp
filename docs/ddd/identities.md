@@ -65,4 +65,4 @@ Returns a composite identity value for `$class` from `$value`.
 ### `getIdentity(object $object): array`
 
 Returns the actual, non empty, identifier values of `$object`. Each identifier value is keyed by its corresponding
-identifier field name. ee also `DomainIdentityMappingInterface::getIdentity()`.
+identifier field name. See also `DomainIdentityMappingInterface::getIdentity()`.
