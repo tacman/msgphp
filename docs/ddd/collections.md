@@ -16,7 +16,7 @@ The technical implementation is generic and may hold any type of elements from a
 
 ### `static fromValue(?iterable $value): DomainCollectionInterface`
 
-Factorizes a new collection from a primitive iterable value.
+Factorizes a new collection from its primitive value.
 
 ```php
 <?php

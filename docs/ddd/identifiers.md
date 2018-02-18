@@ -14,7 +14,7 @@ objects, i.e. entities.
 
 ### `static fromValue($value): DomainIdInterface`
 
-Factorizes a new identifier from a primitive value.
+Factorizes a new identifier from its primitive value.
 
 ```php
 <?php
@@ -30,7 +30,7 @@ $id = DomainId::fromValue('1');
 ### `isEmpty(): bool`
 
 Tells if an identifier value is considered empty. In general this is the case when an identifier is created from a
-primitive `null` value, and therefor enables to differ its string value from an explicit empty string value (`""`).
+primitive `null` value, and therefor enables to differ its string value (`""`) from an explicit empty string value.
 
 ```php
 <?php
@@ -48,8 +48,8 @@ $value = $id->isEmpty() ? null : (string) $id; // ""
 
 ### `equals(): bool`
 
-Tells if an identifier equals another identifier. Default implementations vary on type (including UUID). Meaning the
-same identifier value is considered **not** equal when comparing e.g.:
+Tells if an identifier equals another identifier. Default implementations vary on type. Meaning the same identifier
+value is considered **not** equal when comparing e.g.:
 
 ```php
 <?php
@@ -59,7 +59,6 @@ use MsgPhp\Domain\DomainId;
 class MyDomainId extends DomainId { }
 
 (new DomainId('1'))->equals(new DomainId('1')); // true
-(new DomainId('1'))->equals(new DomainId('2')); // false
 (new DomainId('1'))->equals(new MyDomainId('1')); // false
 ```
 
