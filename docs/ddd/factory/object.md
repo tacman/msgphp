@@ -3,6 +3,12 @@
 A domain object factory is bound to `MsgPhp\Domain\Factory\DomainObjectFactoryInterface`. Its purpose is to initialize
 any domain object based on a class name and context.
 
+## API
+
+### `create(string $class, array $context = []): object`
+
+Factorizes a new domain object by class name. Optionally a context can be provided for the factory to act upon.
+
 ## Implementations
 
 ### `MsgPhp\Domain\Factory\ChainObjectFactory`
@@ -29,11 +35,37 @@ Nested objects (e.g. `MyObject $myArgument`) might be provided as nested context
 be used to initialize the object as argument value. Another (decorating) factory can be set using 
 `DomainObjectFactory::setNestedFactory(DomainObjectFactoryInterface $factory)`.
 
-## API
+## Basic example
 
-### `create(string $class, array $context = []): object`
+```php
+<?php
 
-Factorizes a new domain object by class name. Optionally a context can be provided for the factory to act upon.
+use MsgPhp\Domain\Factory\DomainObjectFactory;
+
+class Some
+{
+    public function __construct(int $a, ?int $b, ?int $c)
+    { }
+}
+
+class Subject
+{
+    public function __construct(string $argument, Some $some, Subject $otherSubject = null)
+    { }
+}
+
+$factory = new DomainObjectFactory();
+
+/** @var Subject $object */
+$object = $factory->create(Subject::class, [
+    'argument' =>  'value',
+    'some' => [1, 2, 3],
+    'other_subject' => [
+        'argument' => 'other_value',
+        'some' => ['a' => 1],
+    ],
+]);
+```
 
 ## Chain example
 
@@ -65,36 +97,4 @@ $factory = new ClassMappingObjectFactory([KnownInterface::class => Subject::clas
 
 /** @var Subject $object */
 $object = $factory->create(KnownInterface::class);
-```
-
-## Generic example
-
-```php
-<?php
-
-use MsgPhp\Domain\Factory\DomainObjectFactory;
-
-class Some
-{
-    public function __construct(int $a, ?int $b, ?int $c)
-    { }
-}
-
-class Subject
-{
-    public function __construct(string $argument, Some $some, Subject $otherSubject = null)
-    { }
-}
-
-$factory = new DomainObjectFactory();
-
-/** @var Subject $object */
-$object = $factory->create(Subject::class, [
-    'argument' =>  'value',
-    'some' => [1, 2, 3],
-    'other_subject' => [
-        'argument' => 'other_value',
-        'some' => ['a' => 1],
-    ],
-]);
 ```

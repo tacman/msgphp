@@ -3,14 +3,6 @@
 An identity mapping is a domain service and is bound to `MsgPhp\Domain\DomainIdentityMappingInterface`. It tells about
 the identifier metadata for a known domain object.
 
-## Implementations
-
-- `MsgPhp\Domain\Infra\InMemory\DomainIdentityMapping`
-    - Based on in-memory identity map
-- `MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping`
-    - Based on Doctrine's identity map
-    - Requires `doctrine/orm`
-
 ## API
 
 ### `getIdentifierFieldNames(string $class): array`
@@ -23,6 +15,14 @@ Returns the identifier field names for `$class`. Any instance should have an ide
 
 Returns the actual, non empty, identifier values of `$object`. Each identifier value is keyed by its corresponding
 identifier field name.
+
+## Implementations
+
+- `MsgPhp\Domain\Infra\InMemory\DomainIdentityMapping`
+    - Based on in-memory identity map
+- `MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping`
+    - Based on Doctrine's identity map
+    - Requires [`doctrine/orm`](https://packagist.org/packages/doctrine/orm)
 
 ## Doctrine example
 

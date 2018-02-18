@@ -31,3 +31,5 @@ pages:
     - Message bus: message-driven/message-bus.md
     - Message dispatcher: message-driven/message-dispatcher.md
     - CQRS: message-driven/cqrs.md
+- Infrastructure:
+    - Symfony Console: infrastructure/symfony-console.md

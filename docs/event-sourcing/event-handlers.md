@@ -4,19 +4,20 @@ A domain event handler is bound to `MsgPhp\Domain\Event\DomainEventHandlerInterf
 [domain events](events.md). By convention a trait implementation is provided to map concrete events to corresponding
 handling methods.
 
-## Implementations
-
-- `MsgPhp\Domain\Event\DomainEventHandlerTrait`
-    - Maps events to `handle<ClassName_Without_Event_Suffix>Event()` methods
-
 ## API
 
 ### `handleEvent(DomainEventInterface $event): bool`
 
-Handles the given domain event for a known subject. A boolean return value tells a domain event is actually handled yes
-or no.
+Handles the given domain event for a known subject. A boolean return value tells if the domain event is actually handled
+yes or no.
 
-## Generic example
+## Implementations
+
+- `MsgPhp\Domain\Event\DomainEventHandlerTrait`
+    - Maps events to `handle<Event_Class_Name_Without_Event_Suffix>Event()` methods
+    - Handles default [events](events.md) out-of-the-box
+
+## Basic example
 
 ```php
 <?php

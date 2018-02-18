@@ -22,7 +22,7 @@ Handles a command message by sourcing a domain event.
 - `abstract getDomainEventHandler(object $command): DomainEventHandlerInterface`
     - The [domain event handler](../event-sourcing/event-handlers.md) handling the domain event
 
-## Generic example
+## Basic example
 
 ```php
 <?php
@@ -54,7 +54,7 @@ class MyCommandHandler
 
     public function __invoke(MyCommand $command): void
     {
-        $this->doHandle($command, function (MyEntity $entity): void {
+        $this->handle($command, function (MyEntity $entity): void {
             // do something
         });
     }

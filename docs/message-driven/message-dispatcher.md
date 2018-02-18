@@ -20,13 +20,23 @@ so.
 
 use MsgPhp\Domain\Message\MessageDispatchingTrait;
 
+class MyMessage
+{
+    public $argument;
+
+    public function __construct(string $argument)
+    {
+        $this->argument = $argument;
+    }
+}
+
 class MyClass
 {
     use MessageDispatchingTrait;
 
     public function doSomething(): void
     {
-        $this->dispatch(SomeMessage::class, ['arg' => 'value']);
+        $this->dispatch(MyMessage::class, ['argument' => 'value']);
     }
 }
 ```

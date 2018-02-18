@@ -4,13 +4,6 @@ An entity aware factory is a domain object factory, bound to `MsgPhp\Domain\Fact
 Besides initializing any domain object via `create()` it's also capable to initialize an entity identifier / reference
 object.
 
-## Implementations
-
-### `MsgPhp\Domain\Factory\EntityAwareFactory`
-
-Generic entity factory and decorates any object factory. Additionally it must be provided with an entity to identifier
-class mapping.
-
 ## API
 
 ### `create(string $class, array $context = []): object`
@@ -36,7 +29,14 @@ Returns an identifier for the given entity class from a known primitive value.
 Returns the next identifier for the given entity class. Depending on the implementation its value might be considered
 empty if it's not capable to calculate one upfront.
 
-## Generic example
+## Implementations
+
+### `MsgPhp\Domain\Factory\EntityAwareFactory`
+
+Generic entity factory and decorates any object factory. Additionally it must be provided with an entity to identifier
+class mapping.
+
+## Basic example
 
 ```php
 <?php

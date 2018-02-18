@@ -5,14 +5,6 @@ bound together by a root entity.
 
 The technical implementation is generic and may hold any type of elements from any iterable value.
 
-## Implementations
-
-- `MsgPhp\Domain\DomainCollection`
-    - Generic collection
-- `MsgPhp\Domain\Infra\Doctrine\DomainCollection`
-    - Doctrine collection
-    - Requires `doctrine/collections`
-
 ## API
 
 ### Extends
@@ -182,6 +174,14 @@ $timesTwo = $collection->map(function (int $element): int {
     return $element * 2;
 });
 ```
+
+## Implementations
+
+- `MsgPhp\Domain\DomainCollection`
+    - Generic collection
+- `MsgPhp\Domain\Infra\Doctrine\DomainCollection`
+    - Doctrine collection
+    - Requires [`doctrine/collections`](https://packagist.org/packages/doctrine/collections)
 
 ## Doctrine example
 

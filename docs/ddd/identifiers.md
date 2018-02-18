@@ -3,14 +3,6 @@
 A domain identifier is a value object, bound to `MsgPhp\Domain\DomainIdInterface`. Its purpose is to identify domain
 objects, i.e. entities.
 
-## Implementations
-
-- `MsgPhp\Domain\DomainId`
-    - Generic scalar values
-- `MsgPhp\Domain\Infra\Uuid\DomainId`
-    - UUID values
-    - Requires `ramsey/uuid`
-
 ## API
 
 ### Extends
@@ -86,6 +78,14 @@ use MsgPhp\Domain\DomainId;
 echo (new DomainId('1'))->toString();
 echo new DomainId('2');
 ```
+
+## Implementations
+
+- `MsgPhp\Domain\DomainId`
+    - Generic scalar values
+- `MsgPhp\Domain\Infra\Uuid\DomainId`
+    - UUID values
+    - Requires [`ramsey/uuid`](https://packagist.org/packages/ramsey/uuid)
 
 ## UUID example
 

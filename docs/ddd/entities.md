@@ -53,4 +53,3 @@ Provides ability to toggle an entity its availability state.
 - Inherits from `EnabledField`
 - `enable(): void`
 - `disable(): void`
-2
