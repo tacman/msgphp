@@ -42,6 +42,13 @@ class MyCompositeEntity
     public $year;
 }
 
+$mapping = new DomainIdentityMapping([
+    MyEntity::class => 'id',
+    MyCompositeEntity::class => ['name', 'year'],
+]);
+
+// --- USAGE ---
+
 $entity = new MyEntity();
 $entity->id = ...;
 
@@ -49,18 +56,11 @@ $compositeEntity = new MyCompositeEntity();
 $compositeEntity->name = ...;
 $compositeEntity->year = ...;
 
-$mapping = new DomainIdentityMapping([
-    MyEntity::class => 'id',
-    MyCompositeEntity::class => ['car', 'year'],
-]);
-
-// --- USAGE ---
-
 $mapping->getIdentifierFieldNames(MyEntity::class); // ['id']
-$mapping->getIdentifierFieldNames(MyCompositeEntity::class); // ['car', 'year']
+$mapping->getIdentifierFieldNames(MyCompositeEntity::class); // ['name', 'year']
 
 $mapping->getIdentity($entity); // ['id' => ...]
-$mapping->getIdentity($entity); // ['car' => ..., 'year' => ...]
+$mapping->getIdentity($compositeEntity); // ['name' => ..., 'year' => ...]
 ```
 
 ### `MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping`

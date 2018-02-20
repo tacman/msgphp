@@ -13,38 +13,34 @@ They are defined in a dedicated namespace for discovery, respectively `Msgphp\Do
 
 ### `CreatedAtField`
 
-A datetime value representing the entity was initially created at.
+A datetime value representing an entity was initially created at. Requires `$createdAt` to be set initially.
 
 - `getCreatedAt(): \DateTimeInterface`
-    - Required to be set initially
 
 ### `EnabledField`
 
-A boolean value representing the entity its availability state.
+A boolean value representing an entity its availability state. Sets `$enabled` to `false` by default.
 
 - `isEnabled(): bool`
-    - `false` by default
 
 ### `LastUpdatedAtField`
 
-A datetime value representing the entity was last updated at.
+A datetime value representing an entity was last updated at. Requires `$lastUpdatedAt` to be set initially.
 
 - `getLastUpdatedAt(): \DateTimeInterface`
-    - Required to be set initially
 
 ## Common entity features
 
 ### `CanBeConfirmed`
 
-Provides ability to confirm an entity.
+Provides ability to confirm an entity. Requires `$confirmationToken` to be set initially (usually a random token).
 
 - `getConfirmationToken(): ?string`
-    - Required to be set initially
 - `getConfirmedAt(): ?\DateTimeInterface` 
 - `isConfirmed(): bool` 
 - `confirm(): void` 
-    - `confirmationToken` is unset
-    - `confirmatedAt` is set to the current datetime
+    - Resets `$confirmationToken`
+    - Sets `$confirmatedAt` to the current datetime
 
 ### `CanBeEnabled`
 
@@ -52,4 +48,6 @@ Provides ability to toggle an entity its availability state.
 
 - Inherits from `EnabledField`
 - `enable(): void`
+    - Sets `$enabled` to `true`
 - `disable(): void`
+    - Sets `$enabled` to `false`

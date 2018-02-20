@@ -88,6 +88,13 @@ class MyCompositeEntity
     public $year;
 }
 
+$helper = new DomainIdentityHelper(new DomainIdentityMapping([
+   MyEntity::class => 'id',
+   MyCompositeEntity::class => ['name', 'year'],
+]));
+
+// --- USAGE ---
+
 $entity = new MyEntity();
 $entity->id = new DomainId('1');
 
@@ -95,30 +102,23 @@ $compositeEntity = new MyCompositeEntity();
 $compositeEntity->name = ...;
 $compositeEntity->year = ...;
 
-$helper = new DomainIdentityHelper(new DomainIdentityMapping([
-   MyEntity::class => 'id',
-   MyCompositeEntity::class => ['car', 'year'],
-]));
-
-// --- USAGE ---
-
 $helper->isIdentity('1'); // false
 $helper->isIdentity(new DomainId('1')); // true
-$helper->isIdentity($compositeEntity); // true
+$helper->isIdentity($entity); // true
 
 $helper->normalizeIdentifier(new DomainId()); // null
 $helper->normalizeIdentifier(new DomainId('1')); // "1"
 $helper->normalizeIdentifier('1'); // "1"
 $helper->normalizeIdentifier($entity); // "1"
-$helper->normalizeIdentifier($compositeEntity); // ['car' => ..., 'year' => ....]
+$helper->normalizeIdentifier($compositeEntity); // ['name' => ..., 'year' => ....]
 
-$helper->getIdentifiers($compositeEntity); // [<car>, <year>]
 $helper->getIdentifiers($entity); // [<id>]
+$helper->getIdentifiers($compositeEntity); // [<name>, <year>]
 
 $helper->isIdentity(MyEntity::class, 1); // true
 $helper->isIdentity(MyCompositeEntity::class, 1); // false
-$helper->isIdentity(MyCompositeEntity::class, ['car' => ...]); // false
-$helper->isIdentity(MyCompositeEntity::class, ['car' => ..., 'year' => ...]); // true
+$helper->isIdentity(MyCompositeEntity::class, ['name' => ...]); // false
+$helper->isIdentity(MyCompositeEntity::class, ['name' => ..., 'year' => ...]); // true
 
 $helper->toIdentity(MyEntity::class, 1); // ['id' => 1]
 ```

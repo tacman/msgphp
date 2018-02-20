@@ -34,11 +34,67 @@ class MyCompositeEntity
     public $year;
 }
 
-$compositeEntity = new MyCompositeEntity();
-$compositeEntity->name = ...;
-$compositeEntity->year = ...;
-
 /** @var EntityManagerInterface $em */
 $em = ...;
 $mapping = new DomainIdentityMapping($em);
+```
+
+## Domain repository
+
+A Doctrine tailored [repository trait](../ddd/repositories.md) is provided by
+`MsgPhp\Domain\Infra\Doctrine\DomainEntityRepositoryTrait`. It uses Doctrine's entity manager, bound to
+`Doctrine\ORM\EntityManagerInterface`, as underlying persistence layer.
+
+- `__construct(string $class, EntityManagerInterface $em, DomainIdentityHelper $identityHelper = null)`
+    - `$class`: The entity class this repository is tied to
+    - `$em`: The entity manager to use
+    - `$identityHelper`: Custom domain identity helper. By default it's resolved from the given entity manager.
+      [Read more](../ddd/identities.md).
+
+### Basic example
+
+```php
+<?php
+
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping as ORM;
+use MsgPhp\Domain\Infra\Doctrine\DomainEntityRepositoryTrait;
+
+// --- SETUP ---
+
+/** @ORM\Entity() */
+class MyCompositeEntity
+{
+    /** @ORM\Id @ORM\Column(type="string") */
+    public $name;
+
+    /** @ORM\Id @ORM\Column(type="integer") */
+    public $year;
+}
+
+
+class MyCompositeEntityRepository
+{
+    use DomainEntityRepositoryTrait {
+        doFind as public find;
+        doExists as public exists;
+        doSave as public save;
+    }
+}
+
+/** @var EntityManagerInterface $em */
+$em = ...;
+$repository = new MyCompositeEntityRepository(MyCompositeEntity::class, $em);
+
+// --- USAGE ---
+
+if ($repository->exists($id = ['name' => ..., 'year' => ...])) {
+    $entity = $repository->find($id);
+} else {
+    $entity = new MyCompositeEntity();
+    $entity->name = ...;
+    $entity->year = ...;
+
+    $repository->save($entity);
+}
 ```

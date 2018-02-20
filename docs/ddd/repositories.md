@@ -1,10 +1,8 @@
 # Repositories
 
-A repository is not interface bound by default. Instead you can leverage various trait objects to rapidly create one, 
-depending on the type of infrastructure needed. By design they follow the same API although there might be subtle
-differences per implementation.
-
-Note default (interface bound) repositories are provided per domain layer.
+A domain repository is not interface bound by default. Instead you can leverage a trait object, tied to specific
+infrastructure (e.g. Doctrine), to rapidly create one. This page describes the suggested API for any specific repository
+trait and the one used by default implementations.
 
 ## API
 
@@ -13,21 +11,22 @@ on a per case basis.
 
 ### `doFindAll(int $offset = 0, int $limit = 0): DomainCollectionInterface`
 
-Find all entities available.
+Find all entities available. An unlimited collection is implied by `$limit` set to zero.
 
 ---
 
 ### `doFindAllByFields(array $fields, int $offset = 0, int $limit = 0): DomainCollectionInterface`
 
-Find all entities matching all specified fields. Supported field values should be `null`, `scalar`, `array` (one of)
-and `object` (foreign entity or [identifier](identifiers.md)).
+Find all entities matching all specified fields. Supported field values should be `null`, `scalar`, `array` (one of a
+known literal list) and `object` (foreign entity or an [identifier](identifiers.md)). An unlimited collection is implied
+by `$limit` set to zero.
 
 ---
 
 ### `doFind($id): object`
 
 Find a single entity by its identity. Supported identity values should be `scalar`, `array` (composite [identity](identities.md))
-and `object` (foreign entity or [identifier](identifiers.md)).
+and `object` (foreign entity or an [identifier](identifiers.md)).
 
 ---
 
@@ -61,32 +60,60 @@ Remove an entity from the identity map. The entity will be unavailable on any su
 
 ## Implementations
 
-- `MsgPhp\Domain\Infra\InMemory\DomainEntityRepositoryTrait`
-    - In-memory persistence
-- `MsgPhp\Domain\Infra\Doctrine\DomainEntityRepositoryTrait`
-    - Doctrine persistence
-    - Requires [`doctrine/orm`](https://packagist.org/packages/doctrine/orm)
+### `MsgPhp\Domain\Infra\InMemory\DomainEntityRepositoryTrait`
 
-## Generic Doctrine repository example
+Repository trait based on in-memory persistence.
+
+- `__construct(string $class, DomainIdentityHelper $identityHelper, GlobalObjectMemory $memory = null, ObjectFieldAccessor $accessor = null)`
+    - `$class`: The entity class this repository is tied to
+    - `$identityHelper`: The domain identity helper. [Read more](identities.md).
+    - `$memory`: Custom memory layer. By default the same global pool is used. See also [GlobalObjectMemory](https://msgphp.github.io/api/MsgPhp/Domain/Infra/InMemory/GlobalObjectMemory.html).
+    - `$accessor`: Custom object field accessor. See also [GlobalObjectMemory](https://msgphp.github.io/api/MsgPhp/Domain/Infra/InMemory/ObjectFieldAccessor.html).
+
+#### Basic example
 
 ```php
 <?php
 
-use MsgPhp\Domain\Infra\Doctrine\DomainEntityRepositoryTrait;
-use Doctrine\ORM\EntityManagerInterface;
+use MsgPhp\Domain\DomainIdentityHelper;
+use MsgPhp\Domain\Infra\InMemory\{DomainIdentityMapping, DomainEntityRepositoryTrait};
 
-class MyGenericRepository
+// --- SETUP ---
+
+class MyEntity
+{
+    public $id;
+}
+
+class MyEntityRepository
 {
     use DomainEntityRepositoryTrait {
         doFind as public find;
+        doExists as public exists;
+        doSave as public save;
     }
 }
 
-/** @var EntityManagerInterface $em */
-$em = ...;
+$helper = new DomainIdentityHelper(new DomainIdentityMapping([
+   MyEntity::class => 'id',
+]));
 
-$repository = new MyGenericRepository(MyEntity::class, $em); 
+$repository = new MyEntityRepository(MyEntity::class, $helper);
 
-/** @var MyEntity $entity */
-$entity = $repository->find(1);
+// --- USAGE ---
+
+if ($repository->exists(1)) {
+    $entity = $repository->find(1);
+} else {
+    $entity = new MyEntity();
+    $entity->id = 1;
+
+    $repository->save($entity);
+}
 ```
+
+### `MsgPhp\Domain\Infra\Doctrine\DomainEntityRepositoryTrait`
+
+Repository trait based on _Doctrine ORM_ persistence.
+
+- [Read more](../infrastructure/doctrine-orm.md#domain-repository)
