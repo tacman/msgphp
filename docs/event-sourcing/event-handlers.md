@@ -1,8 +1,13 @@
 # Event handlers
 
-A domain event handler is bound to `MsgPhp\Domain\Event\DomainEventHandlerInterface`. Its purpose is to handle
-[domain events](events.md). By convention a trait implementation is provided to map concrete events to corresponding
-handling methods.
+A domain event handler is bound to `MsgPhp\Domain\Event\DomainEventHandlerInterface`. Its purpose is to implement the
+handling of [domain events](events.md) within a certain context.
+
+Usually an entity implements it in order to mutate its own state (i.e. self-handling). It enforces the entity state to
+be valid by design as it encapsulates all write operations.
+
+In practice domain events can be recorded on trigger. It allows to re-play them at any point in time afterwards.
+Consider this a design choice to be made upfront, e.g. in case your entity design requires its history to be accessible.
 
 ## API
 
@@ -13,17 +18,20 @@ yes or no.
 
 ## Implementations
 
-- `MsgPhp\Domain\Event\DomainEventHandlerTrait`
-    - Maps events to `handle<Event_Class_Name_Without_Event_Suffix>Event()` methods
-    - Handles default [events](events.md) out-of-the-box
+### `MsgPhp\Domain\Event\DomainEventHandlerTrait`
 
-## Basic example
+A utility trait implementing the event handler API. By convention it maps events to
+`handle<Event_Class_Name_Without_Event_Suffix>Event()` methods. It's designed to support default [events](events.md#implementations)
+out-of-the-box.
+
+#### Basic example
 
 ```php
 <?php
 
-use MsgPhp\Domain\Event\DomainEventHandlerInterface;
-use MsgPhp\Domain\Event\DomainEventHandlerTrait;
+use MsgPhp\Domain\Event\{DomainEventHandlerInterface, DomainEventHandlerTrait};
+
+// --- SETUP ---
 
 class MyEvent
 {
@@ -54,8 +62,11 @@ class MyEntity implements DomainEventHandlerInterface
     
 }
 
+// --- USAGE ---
+
 $entity = new MyEntity();
-if ($entity->handleEvent(new MyEvent('value'))) {
+
+if ($entity->handleEvent(new MyEvent('new value'))) {
     // do something
 }
 ```

@@ -4,51 +4,29 @@ Commands are domain objects and provided per domain layer. They usually follow a
 design. Its purpose is to describe an action to be taken. For commands being messages they can be dispatched using any
 [message bus](message-bus.md).
 
-## Command handlers
+## Event-sourcing command handler
 
-The message bus resolves a command handler, which in turn handles the command. Thus performs the requested action.
-Usually a command handler is designed, but not limited, to handle one specific command message.
-
-## Implementations
-
-### `MsgPhp\Domain\Command\EventSourcingCommandHandlerTrait`
-
-Handles a command message by sourcing a domain event.
+An event-sourcing command handler utility trait is provided by `MsgPhp\Domain\Command\EventSourcingCommandHandlerTrait`.
+Its purpose is to ease the handling of command by messages by sourcing a [domain event](../event-sourcing/events.md) to
+its [event handler](../event-sourcing/event-handlers.md).
 
 - `handle(object $command, callable $onHandled = null): void`
-    - If the domain event is handled `$onHandled` will be invoked (if given), receiving the handler as first argument
+    - `$command`: The command message to be handled
+    - `$onHandled`: Callable to be invoked in case the triggered domain event is handled. It receives the event handler
+      as first argument.
 - `abstract getDomainEvent(object $command): DomainEventInterface`
-    - The [domain event](../event-sourcing/events.md) to be handled
 - `abstract getDomainEventHandler(object $command): DomainEventHandlerInterface`
-    - The [domain event handler](../event-sourcing/event-handlers.md) handling the domain event
 
-## Basic example
-
-```php
-<?php
-
-class MyCommand
-{
-}
-
-class MyCommandHandler
-{
-    public function __invoke(MyCommand $command): void
-    {
-        // handle $command
-    }
-}
-
-$bus->dispatch(new MyCommand());
-```
-
-## Event sourcing example
+### Basic example
 
 ```php
 <?php
 
 use MsgPhp\Domain\Command\EventSourcingCommandHandlerTrait; 
-use MsgPhp\Domain\Event\{DomainEventHandlerInterface, DomainEventInterface}; 
+use MsgPhp\Domain\Event\{DomainEventHandlerInterface, DomainEventInterface};
+use MsgPhp\Domain\Message\DomainMessageBusInterface;
+
+// --- SETUP ---
 
 class MyCommand
 {
@@ -93,6 +71,11 @@ class MyEntity implements DomainEventHandlerInterface
         return false;
     }
 }
+
+// --- USAGE ---
+
+/** @var DomainMessageBusInterface $bus */
+$bus = ...;
 
 $bus->dispatch(new MyCommand());
 ```

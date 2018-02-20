@@ -4,4 +4,4 @@
 
 .md-typeset h3 > code:first-child:before { content: "▍"; }
 .md-typeset h3 > code { font-weight: bold; }
-.md-typeset p code { color: #e83e8c; }
+.md-typeset p code { color: #e83e8c; word-break: break-all; }

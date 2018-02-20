@@ -1,13 +1,9 @@
 # Repositories
 
-A domain repository is not interface bound by default. Instead you can leverage a trait object, tied to specific
-infrastructure (e.g. Doctrine), to rapidly create one. This page describes the suggested API for any specific repository
-trait and the one used by default implementations.
+A domain repository is not interface bound by default. Instead you can leverage a utility trait, tied to specific
+infrastructure (e.g. Doctrine), to rapidly create one. This page describes the API provided by default [implementations](#implementations).
 
 ## API
-
-> Exposed `private` as a trait. You can decide to [change method visibility](https://secure.php.net/manual/en/language.oop5.traits.php#language.oop5.traits.visibility)
-on a per case basis.
 
 ### `doFindAll(int $offset = 0, int $limit = 0): DomainCollectionInterface`
 
