@@ -18,40 +18,53 @@ identifier field name.
 
 ## Implementations
 
-- `MsgPhp\Domain\Infra\InMemory\DomainIdentityMapping`
-    - Based on in-memory identity map
-- `MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping`
-    - Based on Doctrine's identity map
-    - Requires [`doctrine/orm`](https://packagist.org/packages/doctrine/orm)
+### `MsgPhp\Domain\Infra\InMemory\DomainIdentityMapping`
 
-## Doctrine example
+Identity mapping based on a known in-memory mapping.
+
+#### Basic example
 
 ```php
 <?php
 
-use MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping as ORM;
+use MsgPhp\Domain\Infra\InMemory\DomainIdentityMapping;
 
-/** @ORM\Entity() */
+// --- SETUP ---
+
 class MyEntity
 {
-    /** @ORM\Id @ORM\Column(type="string") */
-    public $name;
+    public $id;
+}
 
-    /** @ORM\Id @ORM\Column(type="integer") */
+class MyCompositeEntity
+{
+    public $name;
     public $year;
 }
 
 $entity = new MyEntity();
-$entity->name = ...;
-$entity->year = ...;
+$entity->id = ...;
 
-/** @var EntityManagerInterface $em */
-$em = ...;
+$compositeEntity = new MyCompositeEntity();
+$compositeEntity->name = ...;
+$compositeEntity->year = ...;
 
-$identityMapping = new DomainIdentityMapping($em);
+$mapping = new DomainIdentityMapping([
+    MyEntity::class => 'id',
+    MyCompositeEntity::class => ['car', 'year'],
+]);
 
-$fields = $identityMapping->getIdentifierFieldNames(MyEntity::class); // ['name', 'year']
-$identity = $identityMapping->getIdentity($entity); // ['name' => ..., 'year' => ...]
+// --- USAGE ---
+
+$mapping->getIdentifierFieldNames(MyEntity::class); // ['id']
+$mapping->getIdentifierFieldNames(MyCompositeEntity::class); // ['car', 'year']
+
+$mapping->getIdentity($entity); // ['id' => ...]
+$mapping->getIdentity($entity); // ['car' => ..., 'year' => ...]
 ```
+
+### `MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping`
+
+Identity mapping based on Doctrine's identity map.
+
+- [Read more](../infrastructure/doctrine-orm.md#domain-identity-mapping)

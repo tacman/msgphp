@@ -32,4 +32,8 @@ pages:
     - Message dispatcher: message-driven/message-dispatcher.md
     - CQRS: message-driven/cqrs.md
 - Infrastructure:
-    - Symfony Console: infrastructure/symfony-console.md
+    - Doctrine:
+        - Collections: infrastructure/doctrine-collections.md
+        - ORM: infrastructure/doctrine-orm.md
+    - Symfony:
+        - Console: infrastructure/symfony-console.md

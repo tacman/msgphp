@@ -1,9 +1,7 @@
 # Collections
 
-A domain collection is bound to `MsgPhp\Domain\DomainCollectionInterface`. Its main purpose is is to aggregate objects
-bound together by a root entity.
-
-The technical implementation is generic and may hold any type of elements from any iterable value.
+A domain collection is bound to `MsgPhp\Domain\DomainCollectionInterface`. Its main purpose is to aggregate objects
+bound together by a root entity, however, technically it may hold any type of element values.
 
 ## API
 
@@ -16,17 +14,7 @@ The technical implementation is generic and may hold any type of elements from a
 
 ### `static fromValue(?iterable $value): DomainCollectionInterface`
 
-Factorizes a new collection from its primitive value.
-
-```php
-<?php
-
-use MsgPhp\Domain\DomainCollection;
-
-$collection = DomainCollection::fromValue(null);
-$collection = DomainCollection::fromValue([1, 2, 3]);
-$collection = DomainCollection::fromValue(new \ArrayIterator([]));
-```
+Factorizes a new collection from its primitive value. Using `null` implies an empty collection.
 
 ---
 
@@ -34,34 +22,11 @@ $collection = DomainCollection::fromValue(new \ArrayIterator([]));
 
 Tells if a collection is considered empty, i.e. contains zero elements.
 
-```php
-<?php
-
-use MsgPhp\Domain\DomainCollection;
-
-$collection = new DomainCollection([]);
-$collection->isEmpty(); // true
-
-$collection = new DomainCollection([1, 2, 3]);
-$collection->isEmpty(); // false
-```
-
 ---
 
 ### `contains($element): bool`
 
 Tells if a collection contains the given element. Comparison is done strictly.
-
-```php
-<?php
-
-use MsgPhp\Domain\DomainCollection;
-
-$collection = new DomainCollection([1, 2, 3]);
-
-$collection->contains(2); // true
-$collection->contains('2'); // false
-```
 
 ---
 
@@ -69,31 +34,11 @@ $collection->contains('2'); // false
 
 Tells if a collection contains an element at the given key/index.
 
-```php
-<?php
-
-use MsgPhp\Domain\DomainCollection;
-
-$collection = new DomainCollection([1, 2, 3]);
-
-$collection->containsKey(2); // true
-$collection->containsKey(3); // false
-```
-
 ---
 
 ### `first()`
 
 Returns the first element or `false` if the collection is empty.
-
-```php
-<?php
-
-use MsgPhp\Domain\DomainCollection;
-
-$collection = new DomainCollection([1, 2, 3]);
-$collection->first(); // int(1)
-```
 
 ---
 
@@ -101,29 +46,11 @@ $collection->first(); // int(1)
 
 Returns the last element or `false` if the collection is empty.
 
-```php
-<?php
-
-use MsgPhp\Domain\DomainCollection;
-
-$collection = new DomainCollection([1, 2, 3]);
-$collection->last(); // int(3)
-```
-
 ---
 
 ### `get($key)`
 
 Returns the element at the given key/index or `null` if the collection is empty.
-
-```php
-<?php
-
-use MsgPhp\Domain\DomainCollection;
-
-$collection = new DomainCollection([1, 2, 3]);
-$collection->get(1); // int(2)
-```
 
 ---
 
@@ -131,68 +58,72 @@ $collection->get(1); // int(2)
 
 Returns a **new** collection containing only elements for which `$filter` returns `true`. Keys are preserved.
 
-```php
-<?php
-
-use MsgPhp\Domain\DomainCollection;
-
-$collection = new DomainCollection([1, 2, 3]);
-$twoOrHigher = $collection->filter(function (int $element): bool {
-    return $element >= 2;
-});
-```
-
 ---
 
 ### `slice(int $offset, int $limit = 0): DomainCollectionInterface`
 
-Returns a **new** collection containing a slice of elements. By default the slice has no limit, implied by integer `0`. Keys are preserved.
-
-```php
-<?php
-
-use MsgPhp\Domain\DomainCollection;
-
-$collection = new DomainCollection([1, 2, 3]);
-$onlyTwo = $collection->slice(1, 1);
-$twoAndThree = $collection->slice(1);
-```
+Returns a **new** collection containing a slice of elements. By default the slice has no limit, implied by integer `0`.
+Keys are preserved.
 
 ---
 
 ### `map(callable $mapper): array`
 
-Returns a map with each collection element as returned by `$mapper`.
+Returns a map with each collection element as returned by `$mapper`.s
+
+## Implementations
+
+### `MsgPhp\Domain\DomainCollection`
+
+A first class citizen domain collection. It leverages `iterable` as underlying data type. Lazy support is built-in for
+type `\Traversable`. Meaning the minimal no. of elements are traversed, i.e. until the first element in case of
+`isEmpty()`. Note type `\Generator` can only start traversing once.
+
+- `__construct(iterable $elements)`
+    - `$elements`: The elements this collection contains
+
+#### Basic example
 
 ```php
 <?php
 
 use MsgPhp\Domain\DomainCollection;
 
-$collection = new DomainCollection([1, 2, 3]);
-$timesTwo = $collection->map(function (int $element): int {
-    return $element * 2;
+// --- SETUP ---
+
+$collection = new DomainCollection(['a', 'b', 'c', 1, 2, 3, 'key' => 'value']);
+
+// --- USAGE ---
+
+$collection->isEmpty(); // false
+count($collection); // int(7)
+
+$collection->contains(2); // true
+$collection->contains('2'); // false
+
+$collection->containsKey(0); // true
+$collection->containsKey('0'); // true
+
+$collection->first(); // "a"
+$collection->last(); // int(3)
+
+$collection->get('0'); // "a"
+$collection->get(3); // int(1)
+$collection->get('key'); // "value"
+
+$onlyInts = $collection->filter(function ($value): bool {
+    return is_int($value);
 });
+
+$firstTwoInts = $onlyInts->slice(0, 2);
+
+$firstTwoIntsPlussed = $firstTwoInts->map(function (int $value): int {
+    return ++$value;
+}); // [2, 4]
 ```
 
-## Implementations
+### `MsgPhp\Domain\Infra\Doctrine\DomainCollection`
 
-- `MsgPhp\Domain\DomainCollection`
-    - Generic collection
-- `MsgPhp\Domain\Infra\Doctrine\DomainCollection`
-    - Doctrine collection
-    - Requires [`doctrine/collections`](https://packagist.org/packages/doctrine/collections)
+Domain collection based on _Doctrine Collections_.
 
-## Doctrine example
-
-```php
-<?php
-
-use MsgPhp\Domain\Infra\Doctrine\DomainCollection;
-use Doctrine\Common\Collections\ArrayCollection;
-
-$collection = DomainCollection::fromValue([1, 2, 3]);
-$collectionAlt = DomainCollection::fromValue(new ArrayCollection([1, 2, 3]));
-$collectionAlt2 = new DomainCollection(new ArrayCollection([1, 2, 3]));
-```
-
+- [Read more](../infrastructure/doctrine-collections.md#domain-collection)

@@ -1,13 +1,13 @@
 # Identities
 
 A domain identity is a composite value of one or more individual identifier values, indexed by an identifier field name.
-Its usage is to uniquely identify a domain object, and therefor qualifying it an entity object.
+Its usage is to uniquely identify a domain object, thus qualifying it an entity object.
 
-Identifier values can be of any type, e.g. a [domain identifier](identifiers.md), another (foreign) entity object, or
-any primitive value.
+Identifier values can be of any type; a [domain identifier](identifiers.md), another (foreign) entity object, or any
+primitive value.
 
-To ease working with the [identity mapping](identity-mapping.md) one can use a `MsgPhp\Domain\DomainIdentityHelper`
-domain service.
+`MsgPhp\Domain\DomainIdentityHelper` is a domain a helper service. Its purpose is to ease working with the
+[identity mapping](identity-mapping.md).
 
 ## API
 
@@ -66,3 +66,59 @@ Returns a composite identity value for `$class` from `$value`.
 
 Returns the actual, non empty, identifier values of `$object`. Each identifier value is keyed by its corresponding
 identifier field name. See also `DomainIdentityMappingInterface::getIdentity()`.
+
+## Basic example
+
+```php
+<?php
+
+use MsgPhp\Domain\{DomainId, DomainIdentityHelper};
+use MsgPhp\Domain\Infra\InMemory\DomainIdentityMapping;
+
+// --- SETUP ---
+
+class MyEntity
+{
+    public $id;
+}
+
+class MyCompositeEntity
+{
+    public $name;
+    public $year;
+}
+
+$entity = new MyEntity();
+$entity->id = new DomainId('1');
+
+$compositeEntity = new MyCompositeEntity();
+$compositeEntity->name = ...;
+$compositeEntity->year = ...;
+
+$helper = new DomainIdentityHelper(new DomainIdentityMapping([
+   MyEntity::class => 'id',
+   MyCompositeEntity::class => ['car', 'year'],
+]));
+
+// --- USAGE ---
+
+$helper->isIdentity('1'); // false
+$helper->isIdentity(new DomainId('1')); // true
+$helper->isIdentity($compositeEntity); // true
+
+$helper->normalizeIdentifier(new DomainId()); // null
+$helper->normalizeIdentifier(new DomainId('1')); // "1"
+$helper->normalizeIdentifier('1'); // "1"
+$helper->normalizeIdentifier($entity); // "1"
+$helper->normalizeIdentifier($compositeEntity); // ['car' => ..., 'year' => ....]
+
+$helper->getIdentifiers($compositeEntity); // [<car>, <year>]
+$helper->getIdentifiers($entity); // [<id>]
+
+$helper->isIdentity(MyEntity::class, 1); // true
+$helper->isIdentity(MyCompositeEntity::class, 1); // false
+$helper->isIdentity(MyCompositeEntity::class, ['car' => ...]); // false
+$helper->isIdentity(MyCompositeEntity::class, ['car' => ..., 'year' => ...]); // true
+
+$helper->toIdentity(MyEntity::class, 1); // ['id' => 1]
+```

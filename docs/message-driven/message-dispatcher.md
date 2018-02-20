@@ -1,7 +1,7 @@
 # Message dispatcher
 
-The domain message dispatcher is a utility trait. Its purpose is to dispatch a message, factorized by a
-[object factory](../ddd/factory/object.md), using any [message bus](message-bus.md).
+The domain message dispatcher is a utility trait. Its purpose is to dispatch a factorized message object using a
+[object factory](../ddd/factory/object.md) and a [message bus](message-bus.md).
 
 ## API
 
@@ -10,8 +10,8 @@ on a per case basis.
 
 ### `dispatch(string $class, array $context = []): mixed`
 
-Dispatches the given message class. The dispatcher can return a value coming from handlers, but is not required to do
-so.
+Dispatches a message object factorized from `$class` and `$context`. The dispatcher can return a value coming from
+handlers, but is not required to do so.
 
 ## Basic example
 
