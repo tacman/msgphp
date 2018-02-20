@@ -9,6 +9,7 @@ theme:
 extra_css: [style.css]
 markdown_extensions:
     - codehilite
+google_analytics: [UA-114399471-1, auto]
 
 pages:
 - Home: index.md
