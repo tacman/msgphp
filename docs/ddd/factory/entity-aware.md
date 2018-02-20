@@ -71,7 +71,8 @@ use MsgPhp\Domain\Factory\EntityAwareFactory;
 class MyEntity
 {
     public function __construct($id)
-    { }
+    {
+    }
 }
 
 $realFactory = ...;

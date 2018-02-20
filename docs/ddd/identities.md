@@ -1,7 +1,7 @@
 # Identities
 
-A domain identity is a composite value of one or more individual identifier values, indexed by an identifier field name.
-Its usage is to uniquely identify a domain object, thus qualifying it an entity object.
+A domain identity is a composite value (`array`) of one or more individual identifier values, indexed by an identifier
+field name. Its usage is to uniquely identify a domain object, thus qualifying it an entity object.
 
 Identifier values can be of any type; a [domain identifier](identifiers.md), another (foreign) entity object, or any
 primitive value.

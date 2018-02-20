@@ -1,7 +1,7 @@
 # Collections
 
-A domain collection is bound to `MsgPhp\Domain\DomainCollectionInterface`. Its main purpose is to aggregate objects
-bound together by a root entity, however, technically it may hold any type of element values.
+A domain collection is a traversable and bound to `MsgPhp\Domain\DomainCollectionInterface`. Its purpose is to utilize
+a primitive traversable value. It may hold any type of element values.
 
 ## API
 

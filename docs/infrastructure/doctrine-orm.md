@@ -8,7 +8,7 @@ An overview of available infrastructural code when using [Doctrine Object Relati
 
 A Doctrine tailored [domain identity mapping](../ddd/identity-mapping.md) is provided by
 `MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping`. It uses Doctrine's entity manager, bound to
-`Doctrine\ORM\EntityManagerInterface`, directly.
+`Doctrine\ORM\EntityManagerInterface`, as underlying mapping.
 
 - `__construct(EntityManagerInterface $em)`
     - `$em`: The entity manager to use
@@ -40,8 +40,5 @@ $compositeEntity->year = ...;
 
 /** @var EntityManagerInterface $em */
 $em = ...;
-$em->persist($compositeEntity);
-$em->flush();
-
 $mapping = new DomainIdentityMapping($em);
 ```

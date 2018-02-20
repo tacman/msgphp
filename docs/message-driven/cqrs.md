@@ -27,12 +27,15 @@ Handles a command message by sourcing a domain event.
 ```php
 <?php
 
-class MyCommand { }
+class MyCommand
+{
+}
+
 class MyCommandHandler
 {
     public function __invoke(MyCommand $command): void
     {
-        // do something
+        // handle $command
     }
 }
 
@@ -47,7 +50,10 @@ $bus->dispatch(new MyCommand());
 use MsgPhp\Domain\Command\EventSourcingCommandHandlerTrait; 
 use MsgPhp\Domain\Event\{DomainEventHandlerInterface, DomainEventInterface}; 
 
-class MyCommand { }
+class MyCommand
+{
+}
+
 class MyCommandHandler
 {
     use EventSourcingCommandHandlerTrait;
@@ -55,7 +61,7 @@ class MyCommandHandler
     public function __invoke(MyCommand $command): void
     {
         $this->handle($command, function (MyEntity $entity): void {
-            // do something
+            // do something when $command is handled
         });
     }
 
@@ -70,7 +76,10 @@ class MyCommandHandler
     }
 }
 
-class MyDomainEvent implements DomainEventInterface { }
+class MyDomainEvent implements DomainEventInterface
+{
+}
+
 class MyEntity implements DomainEventHandlerInterface
 {
     public function handleEvent(DomainEventInterface $event): bool

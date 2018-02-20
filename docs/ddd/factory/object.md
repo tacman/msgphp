@@ -45,13 +45,15 @@ use MsgPhp\Domain\Factory\DomainObjectFactory;
 class Some
 {
     public function __construct(int $a, ?int $b, ?int $c)
-    { }
+    {
+    }
 }
 
 class Subject
 {
     public function __construct(string $argument, Some $some, Subject $otherSubject = null)
-    { }
+    {
+    }
 }
 
 $factory = new DomainObjectFactory();
@@ -88,8 +90,13 @@ $object = $factory->create(SomeObject::class, ['key' => 'value']);
 
 use MsgPhp\Domain\Factory\ClassMappingObjectFactory;
 
-interface KnownInterface { }
-class Subject implements KnownInterface { }
+interface KnownInterface
+{
+}
+
+class Subject implements KnownInterface
+{
+}
 
 $realFactory = ...;
 

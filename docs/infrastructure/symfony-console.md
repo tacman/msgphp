@@ -68,7 +68,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class MyClass
 {
     public function __construct(string $argument)
-    { }
+    {
+    }
 }
 
 class MyContextElementProvider implements ContextElementProviderInterface

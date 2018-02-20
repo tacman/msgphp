@@ -23,4 +23,8 @@ use MsgPhp\Domain\Infra\Doctrine\DomainCollection;
 // --- SETUP ---
 
 $collection = new DomainCollection(new ArrayCollection([1, 2, 3]));
+
+// static
+
+$collection = DomainCollection::fromValue([1, 2, 3]);
 ```

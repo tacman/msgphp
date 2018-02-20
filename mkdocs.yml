@@ -32,6 +32,7 @@ pages:
     - Message dispatcher: message-driven/message-dispatcher.md
     - CQRS: message-driven/cqrs.md
 - Infrastructure:
+    - UUID: infrastructure/uuid.md
     - Doctrine:
         - Collections: infrastructure/doctrine-collections.md
         - ORM: infrastructure/doctrine-orm.md
