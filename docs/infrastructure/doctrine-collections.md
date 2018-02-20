@@ -1,6 +1,6 @@
 # Doctrine Collections
 
-An overview of available infrastructural code when using [Doctrine Collections](http://www.doctrine-project.org/projects/collections.html).
+An overview of available infrastructural code when using Doctrine's [Collections](http://www.doctrine-project.org/projects/collections.html).
 
 - Requires [`doctrine/collections`](https://packagist.org/packages/doctrine/collections)
 

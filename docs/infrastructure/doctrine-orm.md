@@ -1,6 +1,6 @@
 # Doctrine Object Relational Mapper
 
-An overview of available infrastructural code when using [Doctrine Object Relational Mapper](http://www.doctrine-project.org/projects/orm.html).
+An overview of available infrastructural code when using Doctrine's [Object Relational Mapper](http://www.doctrine-project.org/projects/orm.html).
 
 - Requires [`doctrine/orm`](https://packagist.org/packages/doctrine/orm)
 
@@ -98,3 +98,15 @@ if ($repository->exists($id = ['name' => ..., 'year' => ...])) {
     $repository->save($entity);
 }
 ```
+
+## Hydration
+
+TODO
+
+## Entity reference loader
+
+TODO
+
+## Object field mappings
+
+TODO + sf infra

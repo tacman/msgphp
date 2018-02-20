@@ -35,7 +35,7 @@ $id = DomainIdFactory::create('cf3d2f85-6c86-44d1-8634-af51c91a9a74');
 Factorizes a [collection](../collections.md).
 
 - `static create(?iterable $value): DomainCollectionInterface`
-    - `$value`: Any (primitive) iterable value
+    - `$value`: Any (primitive) iterable value or `null` to imply an empty collection
 
 #### Basic example
 
