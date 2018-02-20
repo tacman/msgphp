@@ -6,6 +6,8 @@ field name. Its usage is to uniquely identify a domain object, thus qualifying i
 Identifier values can be of any type; a [domain identifier](identifiers.md), another (foreign) entity object, or any
 primitive value.
 
+A single identifier value might represent an actual identity in case it's composed by a single identifier field.
+
 `MsgPhp\Domain\DomainIdentityHelper` is a domain a helper service. Its purpose is to ease working with the
 [identity mapping](identity-mapping.md).
 

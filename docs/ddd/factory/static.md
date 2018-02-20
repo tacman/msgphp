@@ -7,45 +7,50 @@ factorize a known implementation for a given class.
 
 ### `MsgPhp\Domain\Factory\DomainIdFactory`
 
-Factorize an [identifier](../identifiers.md) from any primitive value.
+Factorizes an [identifier](../identifiers.md).
 
 - `static create($value): DomainIdInterface`
+    - `$value`: Any (primitive) identifier value
 
-### `MsgPhp\Domain\Factory\DomainCollectionFactory`
-
-Factorizes a [collection](../collections.md) from any primitive iterable value.
-
-- `static create(?iterable $value): DomainCollectionInterface`
-
-### Identifier factory example
+#### Basic example
 
 ```php
 <?php
 
-use MsgPhp\Domain\Factory\DomainIdFactory;
 use MsgPhp\Domain\DomainId;
+use MsgPhp\Domain\Factory\DomainIdFactory;
 use MsgPhp\Domain\Infra\Uuid\DomainId as DomainUuid;
+
+// --- USAGE ---
 
 /** @var DomainId $id */
 $id = DomainIdFactory::create(1);
 
-/** @var DomainUuid $uuid */
-$uuid = DomainIdFactory::create('cf3d2f85-6c86-44d1-8634-af51c91a9a74');
+/** @var DomainUuid $id */
+$id = DomainIdFactory::create('cf3d2f85-6c86-44d1-8634-af51c91a9a74');
 ```
 
-### Collection factory example
+### `MsgPhp\Domain\Factory\DomainCollectionFactory`
+
+Factorizes a [collection](../collections.md).
+
+- `static create(?iterable $value): DomainCollectionInterface`
+    - `$value`: Any (primitive) iterable value
+
+#### Basic example
 
 ```php
 <?php
 
-use MsgPhp\Domain\Factory\DomainCollectionFactory;
 use MsgPhp\Domain\DomainCollection;
+use MsgPhp\Domain\Factory\DomainCollectionFactory;
 use MsgPhp\Domain\Infra\Doctrine\DomainCollection as DoctrineDomainCollection;
-use Doctrine\Common\Collections\ArrayCollection;
+
+// --- USAGE ---
 
 /** @var DomainCollection $collection */
 $collection = DomainCollectionFactory::create([1, 2, 3]);
 
-/** @var DoctrineDomainCollection $doctrineCollection */
-$doctrineCollection = DomainCollectionFactory::create(new ArrayCollection([1, 2, 3]));
+/** @var DoctrineDomainCollection $collection */
+$collection = DomainCollectionFactory::create([1, 2, 3]);
 ```

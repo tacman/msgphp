@@ -1,7 +1,7 @@
 # Identifiers
 
-A domain identifier is a value object and bound to `MsgPhp\Domain\DomainIdInterface`. Its purpose is to utilize a
-primitive identifier value.
+A domain identifier is a [string-ish](https://secure.php.net/manual/en/language.oop5.magic.php#object.tostring) value
+object and bound to `MsgPhp\Domain\DomainIdInterface`. Its purpose is to utilize a primitive identifier value.
 
 ## API
 

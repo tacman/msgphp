@@ -1,7 +1,8 @@
 # Collections
 
-A domain collection is a traversable and bound to `MsgPhp\Domain\DomainCollectionInterface`. Its purpose is to utilize
-a primitive traversable value. It may hold any type of element values.
+A domain collection is a [traversable](https://secure.php.net/manual/en/class.traversable.php) and bound to
+`MsgPhp\Domain\DomainCollectionInterface`. Its purpose is to utilize a primitive iterable value. It may hold any type of
+element values.
 
 ## API
 

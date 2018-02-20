@@ -1,4 +1,5 @@
-.md-nav__link[data-md-state="blur"]:before {content: "✔"; }
+.md-nav__link[data-md-state="blur"] { word-break: break-all; }
+.md-nav__link[data-md-state="blur"]:before { content: "✔"; }
 .md-nav__link.md-nav__link--active:before { content: "↘"; }
 
 .md-typeset h3 > code:first-child:before { content: "▍"; }

@@ -1,7 +1,7 @@
 # Object factory
 
 A domain object factory is bound to `MsgPhp\Domain\Factory\DomainObjectFactoryInterface`. Its purpose is to initialize
-any domain object based on a class name and context.
+any domain object based on a given class name and context.
 
 ## API
 
@@ -11,36 +11,29 @@ Factorizes a new domain object by class name. Optionally a context can be provid
 
 ## Implementations
 
-### `MsgPhp\Domain\Factory\ChainObjectFactory`
-
-Holds many object factories. It returns a domain object from the first supporting factory.
-
-### `MsgPhp\Domain\Factory\ClassMappingObjectFactory`
-
-Decorates any object factory. It resolves the actual class name to use from a provided mapping or, if unknown, it uses
-the original provided class name.
-
 ### `MsgPhp\Domain\Factory\DomainObjectFactory`
 
-Generic object factory. Initializes the given class name by reading its constructor arguments. Argument values are
+A generic object factory. It initializes the given class by reading its constructor arguments. Argument values are
 resolved from the provided context. By convention a camel cased argument name (e.g. `$myArgument`) matches a
-corresponding underscored context key (e.g. `['my_argument' => 'value']`). If the context key is numeric its value will
-be provided to a corresponding argument at index N. In case an exact match exists (e.g. `['myArgument' => 'value']`) it
-will always be used instead.
+corresponding underscored context key (i.e. `'my_argument'`), note however, an exact match (i.e. `'myArgument'`) has
+higher precedence. In case the context key is numeric its value will be provided to a corresponding argument at index N.
 
 Any sub class of `MsgPhp\Domain\DomainIdInterface` or `MsgPhp\Domain\DomainCollectionInterface` will be initialized
-from `$class::fromValue()` by default, otherwise initialization happens regulary (i.e. `new $class(...$args)`).
+using `$class::fromValue()` by default, otherwise initialization happens regularly (i.e. `new $class(...$arguments)`).
 
-Nested objects (e.g. `MyObject $myArgument`) might be provided as nested context (thus array). The current factory will
-be used to initialize the object as argument value. Another (decorating) factory can be set using 
-`DomainObjectFactory::setNestedFactory(DomainObjectFactoryInterface $factory)`.
+Nested objects (e.g. `MyObject $myArgument`) can be provided as nested context (thus nested array).
 
-## Basic example
+- `setNestedFactory(?DomainObjectFactoryInterface $factory): void`
+    - `$factory`: The optional factory to use for nested objects. If not set the current factory will be used instead.
+
+#### Basic example
 
 ```php
 <?php
 
 use MsgPhp\Domain\Factory\DomainObjectFactory;
+
+// --- SETUP ---
 
 class Some
 {
@@ -58,6 +51,8 @@ class Subject
 
 $factory = new DomainObjectFactory();
 
+// --- USAGE ---
+
 /** @var Subject $object */
 $object = $factory->create(Subject::class, [
     'argument' =>  'value',
@@ -69,26 +64,50 @@ $object = $factory->create(Subject::class, [
 ]);
 ```
 
-## Chain example
+### `MsgPhp\Domain\Factory\ChainObjectFactory`
+
+A chain object factory. It holds many object factories and returns a domain object from the first supporting factory.
+
+- `__construct(iterable $factories)`
+    - `$factories`: Available object factories
+
+#### Basic example
 
 ```php
 <?php
 
-use MsgPhp\Domain\Factory\ChainObjectFactory;
+use MsgPhp\Domain\Factory\{ChainObjectFactory, DomainObjectFactory, DomainObjectFactoryInterface};
 
-$firstFactory = ...;
-$secondFactory = ...;
+// --- SETUP ---
 
-$factory = new ChainObjectFactory([$firstFactory, $secondFactory]);
-$object = $factory->create(SomeObject::class, ['key' => 'value']);
+class MyFactory implements DomainObjectFactoryInterface
+{
+    public function create(string $class, array $context = [])
+    {
+        // ...
+    }
+}
+
+$factory = new ChainObjectFactory([new MyFactory(), new DomainObjectFactory()]);
 ```
 
-## Class mapping example
+### `MsgPhp\Domain\Factory\ClassMappingObjectFactory`
+
+A class mapping object factory. It decorates any object factory and resolves the actual class name from a provided
+mapping. In case the class is not mapped it will be used as is.
+
+- `__construct(DomainObjectFactoryInterface $factory, array $mapping)`
+    - `$factory`: The decorated object factory
+    - `$mapping`: The class mapping (`['SourceClass' => 'TargetClass']`)
+
+#### Basic example
 
 ```php
 <?php
 
-use MsgPhp\Domain\Factory\ClassMappingObjectFactory;
+use MsgPhp\Domain\Factory\{ClassMappingObjectFactory, DomainObjectFactory};
+
+// --- SETUP ---
 
 interface KnownInterface
 {
@@ -98,9 +117,12 @@ class Subject implements KnownInterface
 {
 }
 
-$realFactory = ...;
+$factory = new ClassMappingObjectFactory(
+    new DomainObjectFactory(),
+    [KnownInterface::class => Subject::class]
+);
 
-$factory = new ClassMappingObjectFactory([KnownInterface::class => Subject::class], $realFactory);
+// --- USAGE ---
 
 /** @var Subject $object */
 $object = $factory->create(KnownInterface::class);

@@ -1,8 +1,7 @@
 # Entity aware factory
 
-An entity aware factory is a domain object factory, bound to `MsgPhp\Domain\Factory\EntityAwareFactoryInterface`.
-Besides initializing any domain object via `create()` it's also capable to initialize an entity identifier / reference
-object.
+An entity aware factory is an [object factory](object.md) and additionally bound to
+`MsgPhp\Domain\Factory\EntityAwareFactoryInterface`. Its purpose is to factorize entity related objects.
 
 ## API
 
@@ -14,73 +13,67 @@ Inherited from `MsgPhp\Domain\Factory\DomainObjectFactoryInterface::create()`.
 
 ### `reference(string $class, $id): object`
 
-Returns a reference for a known existing entity object.
+Factorize a reference object for a known existing entity object. The object must be of type `$class`. Any type of
+[identity](../identities.md) value can be passed as `$id`.
 
 ---
 
 ### `identify(string $class, $value): DomainIdInterface`
 
-Returns an identifier for the given entity class from a known primitive value.
+Factorize an [identifier](../identifiers.md) for the given entity class from a known primitive value.
 
 ---
 
 ### `nextIdentifier(string $class): DomainIdInterface`
 
-Returns the next identifier for the given entity class. Depending on the implementation its value might be considered
-empty if it's not capable to calculate one upfront.
+Factorize the next [identifier](../identifiers.md) for the given entity class. Depending on the implementation its value
+might be considered empty if it's not capable to calculate one upfront.
 
 ## Implementations
 
 ### `MsgPhp\Domain\Factory\EntityAwareFactory`
 
-Generic entity factory and decorates any object factory. Additionally it must be provided with an entity to identifier
+A generic entity factory. It decorates any object factory and additionally must be provided with an entity to identifier
 class mapping.
 
-## Basic example
+- `__construct(DomainObjectFactoryInterface $factory, array $identifierMapping, callable $referenceLoader = null)`
+    - `$factory`: The decorated object factory
+    - `$identifierMapping`: The identifier class mapping (`['EntityClass' => 'IdClass']`)
+    - `$referenceLoader`: An optional reference loader. If `null` using `reference()` is not supported. The callable
+      receives the same arguments as given to `reference()`. It should return an instance of the received class name.
+
+#### Basic example
 
 ```php
 <?php
 
-use MsgPhp\Domain\Factory\EntityAwareFactory;
-use MsgPhp\Domain\DomainId;
+use MsgPhp\Domain\Factory\{DomainObjectFactory, EntityAwareFactory};
 use MsgPhp\Domain\Infra\Uuid\DomainId as DomainUuid;
 
-$realFactory = ...;
-
-$factory = new EntityAwareFactory($realFactory, [
-    MyEntity::class => DomainId::class,
-    MyOtherEntity::class => DomainUuid::class,
-]);
-
-/** @var DomainId $entityId */
-$entityId = $factory->identify(MyEntity::class, 1);
-$factory->nextIdentifier(MyEntity::class)->isEmpty(); // true
-
-/** @var DomainUuid $entityId */
-$entityId = $factory->identify(MyOtherEntity::class, 'cf3d2f85-6c86-44d1-8634-af51c91a9a74');
-$factory->nextIdentifier(MyOtherEntity::class)->isEmpty(); // false
-```
-
-## Entity reference example
-
-```php
-<?php
-
-use MsgPhp\Domain\Factory\EntityAwareFactory;
+// --- SETUP ---
 
 class MyEntity
 {
-    public function __construct($id)
-    {
-    }
+    public $id;
 }
 
-$realFactory = ...;
+$factory = new EntityAwareFactory(new DomainObjectFactory(), [
+    MyEntity::class => DomainUuid::class,
+], function (string $class, $id) {
+    $object = new $class();
+    $object->id = $id;
 
-$factory = new EntityAwareFactory($realFactory, [], function (string $class, $id) {
-    return new $class($id);
+    return $object;
 });
 
-/** @var MyEntity $ref */
-$ref = $factory->reference(MyEntity::class, 1);
+// --- USAGE ---
+
+/** @var MyEntity $entity */
+$ref = $factory->reference(MyEntity::class, new DomainUuid());
+
+/** @var DomainUuid $id */
+$id = $factory->identify(MyEntity::class, 'cf3d2f85-6c86-44d1-8634-af51c91a9a74');
+
+/** @var DomainUuid $id */
+$id = $factory->nextIdentifier(MyEntity::class);
 ```
