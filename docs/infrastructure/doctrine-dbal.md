@@ -66,5 +66,5 @@ MyDomainIdType::setDataType(UuidType::NAME);
 [dbal-project]: http://www.doctrine-project.org/projects/dbal.html
 [doctrine/dbal]: https://packagist.org/packages/doctrine/dbal
 [api-type]: http://www.doctrine-project.org/api/dbal/2.5/class-Doctrine.DBAL.Types.Type.html
-[late-static-bindings]: https://secure.php.net/manual/en/language.oop5.late-static-bindings.php
+[late static bindings]: https://secure.php.net/manual/en/language.oop5.late-static-bindings.php
 [ramsey/uuid-doctrine]: https://packagist.org/packages/ramsey/uuid-doctrine
