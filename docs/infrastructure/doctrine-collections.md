@@ -1,8 +1,8 @@
 # Doctrine Collections
 
-An overview of available infrastructural code when using Doctrine's [Collections](http://www.doctrine-project.org/projects/collections.html).
+An overview of available infrastructural code when using Doctrine's [Collections][collections-project].
 
-- Requires [`doctrine/collections`](https://packagist.org/packages/doctrine/collections)
+- Requires [doctrine/collections]
 
 ## Domain collection
 
@@ -28,3 +28,6 @@ $collection = new DomainCollection(new ArrayCollection([1, 2, 3]));
 
 $collection = DomainCollection::fromValue([1, 2, 3]);
 ```
+
+[collections-project]: http://www.doctrine-project.org/projects/collections.html
+[doctrine/collections]: https://packagist.org/packages/doctrine/collections

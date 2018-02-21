@@ -1,8 +1,7 @@
 # Command Query Responsibility Segregation
 
-Commands are domain objects and provided per domain layer. They usually follow a [POPO](https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean)
-design. Its purpose is to describe an action to be taken. For commands being messages they can be dispatched using any
-[message bus](message-bus.md).
+Commands are domain objects and provided per domain layer. They usually follow a [POPO] design. Its purpose is to
+describe an action to be taken. For commands being messages they can be dispatched using any [message bus](message-bus.md).
 
 ## Event-sourcing command handler
 
@@ -79,3 +78,5 @@ $bus = ...;
 
 $bus->dispatch(new MyCommand());
 ```
+
+[POPO]: https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean

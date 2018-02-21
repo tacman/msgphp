@@ -1,8 +1,8 @@
 # Symfony Console
 
-An overview of available infrastructural code when using [Symfony Console](https://symfony.com/doc/current/components/console.html).
+An overview of available infrastructural code when using [Symfony Console][console-project].
 
-- Requires [`symfony/console`](https://packagist.org/packages/symfony/console)
+- Requires [symfony/console]
 
 ## Context builder
 
@@ -16,14 +16,13 @@ context provided to an [object factory](../ddd/factory/object.md).
 
 #### `configure(InputDefinition $definition): void`
 
-Configure a command input definition. See also [`InputDefinition`](https://api.symfony.com/master/Symfony/Component/Console/Input/InputDefinition.html).
+Configure a command input definition. See also [`InputDefinition`][api-inputdefinition].
 
 ---
 
 #### `getContext(InputInterface $input, StyleInterface $io): array`
 
-Resolve the actual context from the console IO. See also [`InputInterface`](https://api.symfony.com/master/Symfony/Component/Console/Input/InputInterface.html)
-and [`StyleInterface`](https://api.symfony.com/master/Symfony/Component/Console/Style/StyleInterface.html).
+Resolve the actual context from the console IO. See also [`InputInterface`][api-inputinterface] and [`StyleInterface`][api-styleinterface].
 
 ### Implementations
 
@@ -49,8 +48,7 @@ is given it will be asked interactively. If interaction is not possible an excep
 Per-element configuration can be provided by implementing a `MsgPhp\Domain\Infra\Console\ContextBuilder\ContextElementProviderInterface`.
 
 - `getElement(string $class, string $method, string $argument): ?ContextElement`
-    - Resolve a [`ContextElement`](https://msgphp.github.io/api/MsgPhp/Domain/Infra/Console/ContextBuilder/ContextElement.html)
-      from a class/method/argument combination
+    - Resolve a [`ContextElement`][api-contextelement] from a class/method/argument combination
 
 ##### Basic example
 
@@ -116,3 +114,10 @@ class MyCommand extends Command
 
 // $ bin/console my-command
 ```
+
+[console-project]: https://symfony.com/doc/current/components/console.html
+[symfony/console]: https://packagist.org/packages/symfony/console
+[api-inputdefinition]: https://api.symfony.com/master/Symfony/Component/Console/Input/InputDefinition.html
+[api-inputinterface]: https://api.symfony.com/master/Symfony/Component/Console/Input/InputInterface.html
+[api-styleinterface]: https://api.symfony.com/master/Symfony/Component/Console/Style/StyleInterface.html
+[api-contextelement]: https://msgphp.github.io/api/MsgPhp/Domain/Infra/Console/ContextBuilder/ContextElement.html

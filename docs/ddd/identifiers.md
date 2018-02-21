@@ -1,14 +1,14 @@
 # Identifiers
 
-A domain identifier is a [string-ish](https://secure.php.net/manual/en/language.oop5.magic.php#object.tostring) value
-object and bound to `MsgPhp\Domain\DomainIdInterface`. Its purpose is to utilize a primitive identifier value.
+A domain identifier is a [string-able] value object and bound to `MsgPhp\Domain\DomainIdInterface`. Its purpose is to
+utilize a primitive identifier value.
 
 ## API
 
 ### Extends
 
-- [`\Serializable`](https://secure.php.net/manual/en/class.serializable.php)
-- [`\JsonSerializable`](https://secure.php.net/manual/en/class.jsonserializable.php)
+- [`\Serializable`][serializable]
+- [`\JsonSerializable`][json-serializable]
 
 ---
 
@@ -83,3 +83,7 @@ $emptyId->isEmpty() ? null : $emptyId->toString(); // null
 Domain identifier based on UUID values.
 
 - [Read more](../infrastructure/uuid.md)
+
+[string-able]: https://secure.php.net/manual/en/language.oop5.magic.php#object.tostring
+[serializable]: https://secure.php.net/serializable
+[json-serializable]: https://secure.php.net/jsonserializable

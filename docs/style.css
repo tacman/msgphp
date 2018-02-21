@@ -5,3 +5,4 @@
 .md-typeset h3 > code:first-child:before { content: "▍"; }
 .md-typeset h3 > code { font-weight: bold; }
 .md-typeset p code { color: #e83e8c; word-break: break-all; }
+.md-typeset p a > code { text-decoration: underline; }

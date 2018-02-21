@@ -1,10 +1,9 @@
 # Entities
 
-Entity objects are provided per domain layer and usually follow a [POPO](https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean)
-design.
+Entity objects are provided per domain layer and usually follow a [POPO] design.
 
-To simplify entity definitions common fields and features are provided in the form of PHP [traits](https://secure.php.net/manual/en/language.oop5.traits.php).
-Entity fields can be compared to a read-operation, whereas entity features represent a write-operation.
+To simplify entity definitions common fields and features are provided in the form of PHP [traits]. Entity fields can be
+compared to a read-operation, whereas entity features represent a write-operation.
 
 They are defined in a dedicated namespace for discovery, respectively `Msgphp\Domain\Entity\Fields\` and
 `MsgPhp\Domain\Entity\Features\`. Additionally more specific fields and features can be provided per domain layer.
@@ -51,3 +50,6 @@ Provides ability to toggle an entity its availability state.
     - Sets `$enabled` to `true`
 - `disable(): void`
     - Sets `$enabled` to `false`
+
+[POPO]: https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean
+[traits]: https://secure.php.net/traits

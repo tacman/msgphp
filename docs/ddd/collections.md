@@ -1,15 +1,14 @@
 # Collections
 
-A domain collection is a [traversable](https://secure.php.net/manual/en/class.traversable.php) and bound to
-`MsgPhp\Domain\DomainCollectionInterface`. Its purpose is to utilize a primitive iterable value. It may hold any type of
-element values.
+A domain collection is a [traversable] and bound to `MsgPhp\Domain\DomainCollectionInterface`. Its purpose is to utilize
+a primitive iterable value. It may hold any type of element values.
 
 ## API
 
 ### Extends
 
-- [`\Countable`](https://secure.php.net/manual/en/class.countable.php)
-- [`\IteratorAggregate`](https://secure.php.net/manual/en/class.iteratoraggregate.php)
+- [`\Countable`][countable]
+- [`\IteratorAggregate`][iterator-aggregate]
 
 ---
 
@@ -128,3 +127,7 @@ $firstTwoIntsPlussed = $firstTwoInts->map(function (int $value): int {
 Domain collection based on _Doctrine Collections_.
 
 - [Read more](../infrastructure/doctrine-collections.md#domain-collection)
+
+[traversable]: https://secure.php.net/traversable
+[countable]: https://secure.php.net/countable
+[iterator-aggregate]: https://secure.php.net/iteratoraggregate

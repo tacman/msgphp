@@ -1,8 +1,8 @@
 # Universally Unique Identifier
 
-An overview of available infrastructural code when working with [UUID's](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+An overview of available infrastructural code when working with [UUID's][uuid].
 
-- Requires [`ramsey/uuid`](https://packagist.org/packages/ramsey/uuid)
+- Requires [ramsey/uuid]
 
 ## Domain identifier
 
@@ -31,3 +31,6 @@ $id = new DomainId(Uuid::fromString('00000000-0000-0000-0000-000000000000')); //
 
 $id = DomainId::fromValue('00000000-0000-0000-0000-000000000000'); 
 ```
+
+[uuid]: https://en.wikipedia.org/wiki/Universally_unique_identifier
+[ramsey/uuid]: https://packagist.org/packages/ramsey/uuid
