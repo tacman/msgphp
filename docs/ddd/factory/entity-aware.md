@@ -77,3 +77,6 @@ $id = $factory->identify(MyEntity::class, 'cf3d2f85-6c86-44d1-8634-af51c91a9a74'
 /** @var DomainUuid $id */
 $id = $factory->nextIdentifier(MyEntity::class);
 ```
+
+When working with Doctrine one can leverage its tailored [entity reference loader](../../infrastructure/doctrine-orm.md#entity-reference-loader)
+and provide it as the callable reference loader to be used.

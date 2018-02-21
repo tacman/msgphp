@@ -7,8 +7,8 @@ design. Its purpose is to describe an action to be taken. For commands being mes
 ## Event-sourcing command handler
 
 An event-sourcing command handler utility trait is provided by `MsgPhp\Domain\Command\EventSourcingCommandHandlerTrait`.
-Its purpose is to ease the handling of command by messages by sourcing a [domain event](../event-sourcing/events.md) to
-its [event handler](../event-sourcing/event-handlers.md).
+Its purpose is to ease the handling of command messages by sourcing a [domain event](../event-sourcing/events.md) to its
+[event handler](../event-sourcing/event-handlers.md).
 
 - `handle(object $command, callable $onHandled = null): void`
     - `$command`: The command message to be handled
