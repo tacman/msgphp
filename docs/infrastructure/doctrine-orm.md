@@ -102,12 +102,11 @@ if ($repository->exists($id = ['name' => ..., 'year' => ...])) {
 ## Hydration
 
 When working with [identifiers](../ddd/identifiers.md) and the corresponding [type](doctrine-dbal.md#domain-identifier-type)
-a problem might occur when hydrating scalar values (e.g. using [`getScalarResult`](http://www.doctrine-project.org/api/orm/2.5/class-Doctrine.ORM.AbstractQuery.html#_getScalarResult));
+a problem might occur when hydrating scalar values, e.g. using [`getScalarResult()`](http://www.doctrine-project.org/api/orm/2.5/class-Doctrine.ORM.AbstractQuery.html#_getScalarResult);
 it would return instances of `MsgPhp\Domain\DomainIdInterface` that can only be casted to string as its (true) scalar
-value (due the `__toString` implementation). In case the underlying data type is e.g. `integer` we'll lose it.
+value (due to `__toString()`). In case the underlying data type is e.g. `integer` we'll lose it.
 
-To overcome two hydration modes are available in order to hydrate the primitive identifier value instead, based on the
-true database type used.
+To overcome, two hydration modes are available in order to hydrate the primitive identifier value instead.
 
 ### Basic example
 
