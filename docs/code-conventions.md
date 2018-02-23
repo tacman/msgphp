@@ -4,12 +4,11 @@ A brief description of code conventions this project follows.
 
 ## General principles
 
-- No [SOLID] violations, yet be pragmatic
+- Follows [SOLID] principles
 - Reduce [lines of code] where possible
 - Reduce coupling ([law of demeter])
 - Favor latest stable PHP7 features
 - Checks must pass (code style, static analysis & unit tests)
-- Add PHPDoc / comments if needed for clarification or static analysis
 
 ## Code style
 
@@ -41,9 +40,16 @@ use Other\SomeOtherB;
 ## Static analysis
 
 - Follows [PHPStan] level max
-- Exclude / ignore rules are discussed per case/topic
+- Exclude- and ignore-rules are discussed per case / topic
 
-## PHP 7.x forward compatibility
+## PHPDoc
+
+- Add comments if needed for either clarification or static analysis (might result in e.g. partial `@param` annotations)
+- Inline `@var` annotations (`/** @var Some $some*/`)
+- Interfaces must have a description with its purpose (at the class- as well as the method-level)
+- No usage of `@inheritdoc`
+
+## PHP 7.2 forward compatibility
 
 - Intended object values are type hinted (`@param object $value` and `@return object`)
 
