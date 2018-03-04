@@ -94,7 +94,7 @@ $repository = new MyEntityRepository(MyEntity::class, $em);
 if ($repository->exists($id = ['name' => ..., 'year' => ...])) {
     $entity = $repository->find($id);
 } else {
-    $entity = new MyCompositeEntity();
+    $entity = new MyEntity();
     $entity->name = ...;
     $entity->year = ...;
 
