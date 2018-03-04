@@ -69,7 +69,7 @@ Keys are preserved.
 
 ### `map(callable $mapper): array`
 
-Returns a map with each collection element as returned by `$mapper`.s
+Returns a map with each collection element as returned by `$mapper`.
 
 ## Implementations
 
