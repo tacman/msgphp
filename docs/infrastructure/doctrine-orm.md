@@ -20,20 +20,9 @@ the identity mapping from its class metadata.
 <?php
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping as ORM;
 use MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping;
 
 // --- SETUP ---
-
-/** @ORM\Entity */
-class MyCompositeEntity
-{
-    /** @ORM\Id @ORM\Column(type="string") */
-    public $name;
-
-    /** @ORM\Id @ORM\Column(type="integer") */
-    public $year;
-}
 
 /** @var EntityManagerInterface $em */
 $em = ...;
