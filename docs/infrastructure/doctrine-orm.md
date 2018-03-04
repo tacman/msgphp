@@ -148,7 +148,10 @@ class MyOtherEntity extends MyEntity
 /** @var EntityManagerInterface $em */
 $em = ...;
 $factory = new EntityAwareFactory(
-    new BaseEntityAwareFactory(new DomainObjectFactory(), new DomainIdentityMapping($em)),
+    new BaseEntityAwareFactory(
+        new DomainObjectFactory(),
+        new DomainIdentityMapping($em)
+    ),
     $em
 );
 
@@ -157,7 +160,7 @@ $factory = new EntityAwareFactory(
 /** @var MyEntity $ref */
 $ref = $factory->reference(MyEntity::class, 1); // no database hit
 
-/** @var MyOtherEntity $ref */
+/** @var MyOtherEntity $otherRef */
 $otherRef = $factory->reference(MyEntity::class, [
     'id' => 1,
     'discriminator' => MyEntity::TYPE_OTHER

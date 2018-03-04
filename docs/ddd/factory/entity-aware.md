@@ -74,7 +74,7 @@ $factory = new EntityAwareFactory(
 
 // --- USAGE ---
 
-/** @var MyEntity $entity */
+/** @var MyEntity $ref */
 $ref = $factory->reference(MyEntity::class, new DomainId('1'));
 
 /** @var DomainId $id */
