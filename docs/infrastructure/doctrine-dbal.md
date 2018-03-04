@@ -10,16 +10,16 @@ A translation between the database type and a [identifier](../ddd/identifiers.md
 `MsgPhp\Domain\Infra\Doctrine\DomainIdType`. Its purpose is to abstract the underlying data type of the identifier
 value.
 
-The design is based on [late static bindings], due the design of the Doctrine type system itself. Besides extending from
-the default [`Type`][api-type] implementation it can be used as a base type for custom identifiers (which in turn require custom
-types).
+The design is based on [late static bindings], due the design of the Doctrine type system itself. It extends from the
+default [`Type`][api-type] implementation and can either be used generic or as a base class for custom identifier
+(which in turn require custom types).
 
 - `static setClass(string $class): void`
     - `$class`: A sub class of `DomainIdInterface` to use as PHP value. If not set the [default identifier](../ddd/identifiers.md#msgphpdomaindomainid)
-      object is used.
+      is used.
 - `static getClass(): string`
 - `static setDataType(string $type): void`
-    - `$type`: A doctrine type name to use as underlying data type. If not set it defaults to `Type::INTEGER`.
+    - `$type`: A doctrine type name to use as underlying data type. If not set `Type::INTEGER` is used.
 - `static getDataType(): string`
 
 ### Basic example
