@@ -11,7 +11,7 @@ A translation between the database type and a [identifier](../ddd/identifiers.md
 value.
 
 The design is based on [late static bindings], due the design of the Doctrine type system itself. It extends from the
-default [`Type`][api-type] implementation and can either be used generic or as a base class for custom identifier
+default [`Type`][api-type] implementation and can be used either generic or as a base class for custom identifiers
 (which in turn require custom types).
 
 - `static setClass(string $class): void`
