@@ -62,11 +62,15 @@ class MyEntity
     }
 }
 
-$factory = new EntityAwareFactory(new DomainObjectFactory(), new DomainIdentityMapping([
-    MyEntity::class => 'id',
-]), [
-    MyEntity::class => DomainId::class,
-]);
+$factory = new EntityAwareFactory(
+    new DomainObjectFactory(),
+    new DomainIdentityMapping([
+        MyEntity::class => 'id',
+    ]),
+    [
+        MyEntity::class => DomainId::class,
+    ]
+);
 
 // --- USAGE ---
 

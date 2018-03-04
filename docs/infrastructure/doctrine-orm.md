@@ -158,7 +158,10 @@ $factory = new EntityAwareFactory(
 $ref = $factory->reference(MyEntity::class, 1); // no database hit
 
 /** @var MyOtherEntity $ref */
-$otherRef = $factory->reference(MyEntity::class, ['id' => 1, 'discriminator' => MyEntity::TYPE_OTHER]);
+$otherRef = $factory->reference(MyEntity::class, [
+    'id' => 1,
+    'discriminator' => MyEntity::TYPE_OTHER
+]);
 
 /** @var MyOtherEntity $otherEntity */
 $otherEntity = $factory->create(MyEntity::class, [
@@ -200,8 +203,10 @@ Type::addType(DomainIdType::NAME, DomainIdType::class);
 
 /** @var EntityManagerInterface $em */
 $em = ...;
-$em->getConfiguration()->addCustomHydrationMode(ScalarHydrator::NAME, ScalarHydrator::class);
-$em->getConfiguration()->addCustomHydrationMode(SingleScalarHydrator::NAME, SingleScalarHydrator::class);
+$config = $em->getConfiguration();
+
+$config->addCustomHydrationMode(ScalarHydrator::NAME, ScalarHydrator::class);
+$config->addCustomHydrationMode(SingleScalarHydrator::NAME, SingleScalarHydrator::class);
 
 // --- USAGE ---
 
