@@ -64,7 +64,7 @@ use MsgPhp\Domain\Infra\Doctrine\DomainEntityRepositoryTrait;
 // --- SETUP ---
 
 /** @ORM\Entity */
-class MyCompositeEntity
+class MyEntity
 {
     /** @ORM\Id @ORM\Column(type="string") */
     public $name;
@@ -74,18 +74,20 @@ class MyCompositeEntity
 }
 
 
-class MyCompositeEntityRepository
+class MyEntityRepository
 {
     use DomainEntityRepositoryTrait {
         doFind as public find;
         doExists as public exists;
         doSave as public save;
     }
+
+    private $alias = 'my_entity';
 }
 
 /** @var EntityManagerInterface $em */
 $em = ...;
-$repository = new MyCompositeEntityRepository(MyCompositeEntity::class, $em);
+$repository = new MyEntityRepository(MyEntity::class, $em);
 
 // --- USAGE ---
 
