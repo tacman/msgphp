@@ -7,11 +7,12 @@ An overview of available infrastructural code when using Doctrine's [Object Rela
 ## Domain identity mapping
 
 A Doctrine tailored [domain identity mapping](../ddd/identity-mapping.md) is provided by
-`MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping`. It uses Doctrine's [`EntityManagerInterface`][api-em] as
-underlying mapping.
+`MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping`. It uses Doctrine's [`EntityManagerInterface`][api-em] to provide
+the identity mapping from its class metadata.
 
-- `__construct(EntityManagerInterface $em)`
+- `__construct(EntityManagerInterface $em, array $classMapping = [])`
     - `$em`: The entity manager to use
+    - `$classMapping`: The class mapping (`['SourceType' => 'TargetType']`)
 
 ### Basic example
 
@@ -99,6 +100,72 @@ if ($repository->exists($id = ['name' => ..., 'year' => ...])) {
 }
 ```
 
+## Entity aware factory
+
+A Doctrine tailored [entity aware factory](../ddd/factory/entity-aware.md) is provided by
+`MsgPhp\Domain\Infra\Doctrine\EntityAwareFactory`. It decorates any entity aware factory and uses Doctrine's
+[`EntityManagerInterface`][api-em]. Its purpose is to create lazy-loading references when using `reference()` (see 
+[`EntityManagerInterface::getReference()`][api-em-getreference]) and handle an entity its discriminator map when working
+with [inheritance][orm-inheritance].
+
+- `__construct(EntityAwareFactoryInterface $factory, EntityManagerInterface $em, array $classMapping = [])`
+    - `$factory`: The decorated factory
+    - `$em`: The entity manager to use
+    - `$classMapping`: The class mapping (`['SourceType' => 'TargetType']`)
+
+### Basic example
+
+```php
+<?php
+
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping as ORM;
+use MsgPhp\Domain\Factory\{DomainObjectFactory, EntityAwareFactory as BaseEntityAwareFactory};
+use MsgPhp\Domain\Infra\Doctrine\{DomainIdentityMapping, EntityAwareFactory};
+
+// --- SETUP ---
+
+/**
+ * @ORM\Entity
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discriminator", type="string")
+ * @ORM\DiscriminatorMap({"self" = "MyEntity", "other" = "MyOtherEntity"})
+ */
+class MyEntity
+{
+    public const TYPE_SELF = 'self';
+    public const TYPE_OTHER = 'other';
+
+    /** @ORM\Id */
+    public $id;
+}
+
+/** @ORM\Entity */
+class MyOtherEntity extends MyEntity
+{
+}
+
+/** @var EntityManagerInterface $em */
+$em = ...;
+$factory = new EntityAwareFactory(
+    new BaseEntityAwareFactory(new DomainObjectFactory(), new DomainIdentityMapping($em)),
+    $em
+);
+
+// --- USAGE ---
+
+/** @var MyEntity $ref */
+$ref = $factory->reference(MyEntity::class, 1); // no database hit
+
+/** @var MyOtherEntity $ref */
+$otherRef = $factory->reference(MyEntity::class, ['id' => 1, 'discriminator' => MyEntity::TYPE_OTHER]);
+
+/** @var MyOtherEntity $otherEntity */
+$otherEntity = $factory->create(MyEntity::class, [
+    'discriminator' => MyEntity::TYPE_OTHER,
+]);
+```
+
 ## Hydration
 
 When working with [identifiers](../ddd/identifiers.md) and the corresponding [type](doctrine-dbal.md#domain-identifier-type)
@@ -147,49 +214,8 @@ $query->getSingleScalarResult(); // "1"
 $query->getSingleResult(SingleScalarHydrator::NAME); // int(1)
 ```
 
-## Entity reference loader
-
-A Doctrine tailored entity reference loader in the form of an invokable object is provided by
-`MsgPhp\Domain\Infra\Doctrine\EntityReferenceLoader`. Its main purpose is to be used as a callable _reference loader_
-when working with the generic [entity aware factory](../ddd/factory/entity-aware.md#msgphpdomainfactoryentityawarefactory)
-in effort to get a lazy-loading reference object, managed by Doctrine. See also [`EntityManagerInterface::getReference()`][api-em-getreference].
-
-- `__construct(EntityManagerInterface $em, array $classMapping = [], DomainIdentityHelper $identityHelper = null)`
-    - `$em`: The entity manager to use
-    - `$classMapping`: An optional class mapping to use (`['SourceClass' => 'TargetClass']`)
-    - `$identityHelper`: Custom domain identity helper. By default it's resolved from the given entity manager.
-      [Read more](../ddd/identities.md).
-- `__invoke(string $class, $id): ?object`
-
-### Basic example
-
-```php
-<?php
-
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping as ORM;
-use MsgPhp\Domain\Infra\Doctrine\EntityReferenceLoader;
-
-// --- SETUP ---
-
-/** @ORM\Entity */
-class MyEntity
-{
-    /** @ORM\Id */
-    public $id;
-}
-
-/** @var EntityManagerInterface $em */
-$em = ...;
-$loader = new EntityReferenceLoader($em);
-
-// --- USAGE ---
-
-/** @var MyEntity|null $ref */
-$ref = $loader(MyEntity::class, 1); // no database hit
-```
-
 [orm-project]: http://www.doctrine-project.org/projects/orm.html
+[orm-inheritance]: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html
 [doctrine/orm]: https://packagist.org/packages/doctrine/orm
 [api-em]: http://www.doctrine-project.org/api/orm/2.5/class-Doctrine.ORM.EntityManagerInterface.html
 [api-em-getreference]: http://www.doctrine-project.org/api/orm/2.5/class-Doctrine.ORM.EntityManagerInterface.html#_getReference
