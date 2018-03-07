@@ -9,6 +9,7 @@ REV=$(git rev-parse --abbrev-ref --short --verify HEAD)
 DIR="var/docs"
 mkdir -p "${DIR}"
 
+rm -rf var/cache/api
 bin/sami update .sami.dist
 [[ $? -ne 0 ]] && exit 1
 
