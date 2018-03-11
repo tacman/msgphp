@@ -1,6 +1,6 @@
 # Universally Unique Identifier
 
-An overview of available infrastructural code when working with [UUID's][uuid].
+An overview of available infrastructural code when working with [UUIDs][uuid].
 
 - Requires [ramsey/uuid]
 
