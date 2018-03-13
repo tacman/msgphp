@@ -12,7 +12,7 @@ the identity mapping from its class metadata.
 
 - `__construct(EntityManagerInterface $em, array $classMapping = [])`
     - `$em`: The entity manager to use
-    - `$classMapping`: The class mapping (`['SourceType' => 'TargetType']`)
+    - `$classMapping`: Global class mapping. Usually used to map abstracts to concretes.
 
 ### Basic example
 
@@ -102,7 +102,7 @@ with [inheritance][orm-inheritance].
 - `__construct(EntityAwareFactoryInterface $factory, EntityManagerInterface $em, array $classMapping = [])`
     - `$factory`: The decorated factory
     - `$em`: The entity manager to use
-    - `$classMapping`: The class mapping (`['SourceType' => 'TargetType']`)
+    - `$classMapping`: Global class mapping. Usually used to map abstracts to concretes.
 
 ### Basic example
 

@@ -7,10 +7,7 @@ An overview of available infrastructural code when using [Symfony Console][conso
 ## Context builder
 
 A context builder is bound to `MsgPhp\Domain\Infra\Console\ContextBuilder\ContextBuilderInterface`. Its purpose is to
-(interactively) built an arbitrary array value, i.e. the context, from a CLI command. Its value can be used as e.g. a
-context provided to an [object factory](../ddd/factory/object.md).
-
-- Blog post: [Initializing objects with CLI and the power of Symfony Console](https://medium.com/@ro0NL/initializing-objects-with-cli-and-the-power-of-symfony-console-2a008d5611f)
+(interactively) built an arbitrary array value (the context) from a CLI command.
 
 ### API
 
@@ -28,19 +25,22 @@ Resolve the actual context from the console IO. See also [`InputInterface`][api-
 
 #### `MsgPhp\Domain\Infra\Console\ContextBuilder\ClassContextBuilder`
 
-Build a context value from any class method signature. It configures the CLI signature by mapping required class method
+Builds a context based on any class method signature. It configures the CLI signature by mapping required class method
 arguments to command arguments, whereas optional ones are mapped to command options.
 
-By default any command argument / option will be optional. If the actual class method argument is required and no value
-is given it will be asked interactively. If interaction is not possible an exception will be thrown instead.
+```bash
+bin/console command --optional-argument [--] required-argument
+```
+
+In both cases a value is optional, if the actual class method argument is required and no value is given it will be
+asked interactively. If interaction is not possible an exception will be thrown instead.
 
 - `__construct(string $class, string $method, iterable $elementProviders = [], array $classMapping = [], int $flags = 0)`
     - `$class / $method`: The class method to resolve
     - `$elementProviders`: Available context element providers (see [Providing context elements](#providing-context-elements))
-    - `$classMapping`: Global class mapping which resolves `$class` or any nested class name from type info. Usually used
-      to map interfaces to concretes.
+    - `$classMapping`: Global class mapping. Usually used to map abstracts to concretes.
     - `$flags`: A bit mask value to toggle various flags
-        - `ClassContextBuilder::ALWAYS_OPTIONAL`: Always map class method argument to command options
+        - `ClassContextBuilder::ALWAYS_OPTIONAL`: Always map class method arguments to command options
         - `ClassContextBuilder::NO_DEFAULTS`: Leave out default values when calling `getContext()`
 
 ##### Providing context elements
@@ -93,15 +93,12 @@ class MyCommand extends Command
     {
        $this->setName('my-command');
        $this->contextBuilder->configure($this->getDefinition());
-
-       // The CLI usage is now:
-       // bin/console my-command [argument]
     }
 
     protected function execute(InputInterface $input,OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $context = $this->contextBuilder->getContext($input, $io); // ['argument' => 'VALUE']
+        $context = $this->contextBuilder->getContext($input, $io);
         $object = new MyClass(...array_values($context));
 
         // do something

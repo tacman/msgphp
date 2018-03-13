@@ -94,7 +94,7 @@ $factory = new ChainObjectFactory([new MyFactory(), new DomainObjectFactory()]);
 ### `MsgPhp\Domain\Factory\ClassMappingObjectFactory`
 
 A class mapping object factory. It decorates any object factory and resolves the actual class name from a provided
-mapping. In case the class is not mapped it will be used as is.
+mapping. It's usually used to map abstracts to concretes. In case the class is not mapped it will be used as is.
 
 - `__construct(DomainObjectFactoryInterface $factory, array $mapping)`
     - `$factory`: The decorated object factory

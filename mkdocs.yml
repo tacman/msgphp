@@ -35,12 +35,10 @@ pages:
     - CQRS: message-driven/cqrs.md
 - Infrastructure:
     - UUID: infrastructure/uuid.md
-    - Doctrine:
-        - Collections: infrastructure/doctrine-collections.md
-        - DBAL: infrastructure/doctrine-dbal.md
-        - ORM: infrastructure/doctrine-orm.md
-    - Symfony:
-        - Console: infrastructure/symfony-console.md
+    - Doctrine Collections: infrastructure/doctrine-collections.md
+    - Doctrine DBAL: infrastructure/doctrine-dbal.md
+    - Doctrine ORM: infrastructure/doctrine-orm.md
+    - Symfony Console: infrastructure/symfony-console.md
 - Domain layers:
     - Architecture: domain/architecture.md
     - User domain: domain/user.md

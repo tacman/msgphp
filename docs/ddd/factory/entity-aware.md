@@ -34,7 +34,7 @@ might be considered empty if it's not capable to calculate one upfront.
 ### `MsgPhp\Domain\Factory\EntityAwareFactory`
 
 A generic entity factory. It decorates any object factory and is based on a known [identity mapping](../identity-mapping.md)
-as well as the entity to identifier class mapping.
+as well as a known entity to identifier class mapping.
 
 - `__construct(DomainObjectFactoryInterface $factory, DomainIdentityMappingInterface $identityMapping, array $identifierMapping = [])`
     - `$factory`: The decorated object factory
