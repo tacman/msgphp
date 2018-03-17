@@ -16,7 +16,7 @@ final class SecurityUser implements UserInterface, EquatableInterface, \Serializ
 {
     private $id;
     private $roles;
-    private $password;
+    private $password = '';
     private $passwordSalt;
 
     public function __construct(User $user, array $roles = [])
@@ -27,11 +27,7 @@ final class SecurityUser implements UserInterface, EquatableInterface, \Serializ
         $credential = $user->getCredential();
         if ($credential instanceof PasswordProtectedInterface) {
             $this->password = $credential->getPassword();
-
-            $algorithm = $credential->getPasswordAlgorithm();
-            if (null !== $algorithm->salt) {
-                $this->passwordSalt = $algorithm->salt->token;
-            }
+            $this->passwordSalt = $credential->getPasswordAlgorithm()->salt->token;
         }
     }
 
@@ -47,7 +43,7 @@ final class SecurityUser implements UserInterface, EquatableInterface, \Serializ
 
     public function getPassword(): string
     {
-        return $this->password ?? '';
+        return $this->password;
     }
 
     public function getSalt(): ?string
