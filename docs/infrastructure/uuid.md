@@ -13,6 +13,8 @@ leverages type `Ramsey\Uuid\UuidInterface` as underlying data type.
     - `$uuid`: The underlying UUID. In case of `null` a UUID version 4 value is generated upfront. Meaning the
       identifier will never be considered empty.
 
+See also the [reference](../reference/identifiers.md) page for all available UUID identifiers provided per domain.
+
 ### Basic example
 
 ```php

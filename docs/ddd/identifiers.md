@@ -37,6 +37,8 @@ should be returned.
 
 ## Implementations
 
+See also the [reference](../reference/identifiers.md) page for all available identifiers provided per domain.
+
 ### `MsgPhp\Domain\DomainId`
 
 A first class citizen domain identifier. It leverages `string|null` as underlying data type.

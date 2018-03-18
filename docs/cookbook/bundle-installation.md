@@ -72,6 +72,8 @@ By convention any [Doctrine DBAL type] can be used. Additionally the following U
 - `uuid_binary`
 - `uuid_binary_ordered_time`
 
+See also the [reference](../reference/identifiers.md) page for all available identifiers provided per domain.
+
 ### Default identifier type
 
 Configures a default type name to use for all known domain identifiers provided by the bundle.
@@ -120,8 +122,6 @@ msgphp_<name>:
         # MsgPhp\FooIdInterface: MsgPhp\Domain\DomainId
         # MsgPhp\BazIdInterface: MsgPhp\Domain\Infra\Uuid\DomainId
 ```
-
-See also the [domain identifier reference](../reference/identifiers.md).
 
 [Symfony Framework]: https://symfony.com/
 [dependency injection]: https://symfony.com/doc/current/components/dependency_injection.html

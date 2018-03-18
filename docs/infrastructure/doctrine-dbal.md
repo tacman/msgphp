@@ -63,6 +63,9 @@ MyDomainIdType::setClass(DomainUuid::class);
 MyDomainIdType::setDataType(UuidType::NAME);
 ```
 
+See also the [reference](../reference/doctrine-identifier-types.md) page for all available identifier types provided per
+domain.
+
 [dbal-project]: http://www.doctrine-project.org/projects/dbal.html
 [doctrine/dbal]: https://packagist.org/packages/doctrine/dbal
 [api-type]: http://www.doctrine-project.org/api/dbal/2.5/class-Doctrine.DBAL.Types.Type.html
