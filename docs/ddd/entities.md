@@ -1,12 +1,13 @@
 # Entities
 
-Entity objects are provided per domain layer and usually follow a [POPO] design.
-
-To simplify entity definitions common fields and features are provided in the form of PHP [traits]. Entity fields can be
-compared to a read-operation, whereas entity features represent a write-operation.
+Entity objects are provided per domain layer and usually follow a [POPO] design. To simplify its definition common
+fields and features are provided in the form of PHP [traits]. Fields can be compared to a read-operation, whereas
+features represent a read/write-operation.
 
 They are defined in a dedicated namespace for discovery, respectively `Msgphp\Domain\Entity\Fields\` and
 `MsgPhp\Domain\Entity\Features\`. Additionally more specific fields and features can be provided per domain layer.
+
+See also the [reference](../reference/entities.md) page for all available entities provided per domain.
 
 ## Common entity fields
 

@@ -43,4 +43,5 @@ pages:
     - Bundle installation: cookbook/bundle-installation.md
 - Reference:
     - Domain identifiers: reference/identifiers.md
+    - Domain entities: reference/entities.md
     - Doctrine identifier types: reference/doctrine-identifier-types.md

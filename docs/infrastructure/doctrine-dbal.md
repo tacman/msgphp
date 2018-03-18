@@ -22,6 +22,9 @@ default [`Type`][api-type] implementation and can be used either generic or as a
     - `$type`: A doctrine type name to use as underlying data type. If not set `Type::INTEGER` is used.
 - `static getDataType(): string`
 
+See also the [reference](../reference/doctrine-identifier-types.md) page for all available identifier types provided per
+domain.
+
 ### Basic example
 
 ```php
@@ -62,9 +65,6 @@ use Ramsey\Uuid\Doctrine\UuidType;
 MyDomainIdType::setClass(DomainUuid::class);
 MyDomainIdType::setDataType(UuidType::NAME);
 ```
-
-See also the [reference](../reference/doctrine-identifier-types.md) page for all available identifier types provided per
-domain.
 
 [dbal-project]: http://www.doctrine-project.org/projects/dbal.html
 [doctrine/dbal]: https://packagist.org/packages/doctrine/dbal
