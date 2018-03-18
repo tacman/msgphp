@@ -115,7 +115,7 @@ msgphp_<name>:
         MsgPhp\BarIdInterface: App\MyBarUuid
         # implied:
         # MsgPhp\FooIdInterface: MsgPhp\Domain\DomainId
-        # MsgPhp\BazIdInterface: MsgPhp\Domain\Infra\Uuid
+        # MsgPhp\BazIdInterface: MsgPhp\Domain\Infra\Uuid\DomainId
 ```
 
 [Symfony Framework]: https://symfony.com/
