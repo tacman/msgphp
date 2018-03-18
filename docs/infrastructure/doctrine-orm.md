@@ -52,13 +52,13 @@ use MsgPhp\Domain\Infra\Doctrine\DomainEntityRepositoryTrait;
 
 // --- SETUP ---
 
-/** @ORM\Entity */
+/** @ORM\Entity() */
 class MyEntity
 {
-    /** @ORM\Id @ORM\Column(type="string") */
+    /** @ORM\Id() @ORM\Column(type="string") */
     public $name;
 
-    /** @ORM\Id @ORM\Column(type="integer") */
+    /** @ORM\Id() @ORM\Column(type="integer") */
     public $year;
 }
 
@@ -117,7 +117,7 @@ use MsgPhp\Domain\Infra\Doctrine\{DomainIdentityMapping, EntityAwareFactory};
 // --- SETUP ---
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discriminator", type="string")
  * @ORM\DiscriminatorMap({"self" = "MyEntity", "other" = "MyOtherEntity"})
@@ -127,7 +127,7 @@ class MyEntity
     public const TYPE_SELF = 'self';
     public const TYPE_OTHER = 'other';
 
-    /** @ORM\Id */
+    /** @ORM\Id() @ORM\Column(type="integer") */
     public $id;
 }
 
@@ -186,10 +186,10 @@ use MsgPhp\Domain\Infra\Doctrine\Hydration\{ScalarHydrator, SingleScalarHydrator
 
 // --- SETUP ---
 
-/** @ORM\Entity */
+/** @ORM\Entity() */
 class MyEntity
 {
-    /** @var DomainId @ORM\Id @ORM\Column(type="msgphp_domain_id") */
+    /** @var DomainId @ORM\Id() @ORM\Column(type="msgphp_domain_id") */
     public $id;
 }
 
