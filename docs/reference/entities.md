@@ -17,17 +17,30 @@ Reference of available [entities](../ddd/entities.md) per domain.
 
 ## EAV domain
 
+### Entities
+
+Class | Abstract | Required
+--- | --- | ---
+`MsgPhp\Eav\Entity\Attribute` | ✔ | ✔
+`MsgPhp\Eav\Entity\AttributeValue` | ✔ | ✔
+
 ### Entity fields
 
 - `MsgPhp\Eav\Entity\Fields\AttributesField`
 - `MsgPhp\Eav\Entity\Fields\AttributeValueField`
 
-### Mapped super classes
-
-- `MsgPhp\Eav\Entity\Attribute`
-- `MsgPhp\Eav\Entity\AttributeValue`
-
 ## User domain
+
+### Entities
+
+Class | Abstract | Required
+--- | --- | ---
+`MsgPhp\User\Entity\Role` | ✔ | ✗
+`MsgPhp\User\Entity\User` | ✔ | ✔
+`MsgPhp\User\Entity\UserAttributeValue` | ✔ | ✗
+`MsgPhp\User\Entity\UserEmail` | ✔ | ✗
+`MsgPhp\User\Entity\Username` | ✗ | ✗
+`MsgPhp\User\Entity\UserRole` | ✔ | ✗
 
 ### Entity fields
 
@@ -41,7 +54,7 @@ Reference of available [entities](../ddd/entities.md) per domain.
 
 - `MsgPhp\User\Entity\Features\ResettablePassword`
 
-#### Credentials
+#### Credential types
 
 - `MsgPhp\User\Entity\Features\EmailCredential`
 - `MsgPhp\User\Entity\Features\EmailPasswordCredential`
@@ -50,15 +63,3 @@ Reference of available [entities](../ddd/entities.md) per domain.
 - `MsgPhp\User\Entity\Features\NicknamePasswordCredential`
 - `MsgPhp\User\Entity\Features\NicknameSaltedPasswordCredential`
 - `MsgPhp\User\Entity\Features\TokenCredential`
-
-### Mapped super classes
-
-- `MsgPhp\User\Entity\Role`
-- `MsgPhp\User\Entity\User`
-- `MsgPhp\User\Entity\UserAttributeValue`
-- `MsgPhp\User\Entity\UserEmail`
-- `MsgPhp\User\Entity\UserRole`
-
-### Entities
-
-- `MsgPhp\User\Entity\Username`
