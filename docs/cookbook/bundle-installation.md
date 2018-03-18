@@ -9,8 +9,8 @@ infrastructural services are created automatically.
 
 ## Available bundles
 
-- `msgphp/eav-bundle`: Provides basic entity-attribute-value management
-- `msgphp/user-bundle`: Provides basic user management
+- `msgphp/eav-bundle`: Provides basic entity-attribute-value management (the EAV domain)
+- `msgphp/user-bundle`: Provides basic user management (the user domain)
 
 ## Installing using [Composer]
 
@@ -35,7 +35,7 @@ msgphp_<name>:
     commands: []
 ```
 
-Depending on your personal preference you can also write the configuration in any other supported format. See
+Depending on your personal preference you can also write the configuration in any other supported format. See the
 [demo configuration] for a more advanced example.
 
 ### Class mapping
@@ -50,7 +50,7 @@ msgphp_<name>:
 
 The class mapping applies when working with an [object factory](../ddd/factory/object.md#).
 
-Depending on the bundle a specific class mapping entry might enable one of the bundle its features which are otherwise
+Depending on the bundle a specific class mapping entry might enable one of the bundle its features which is otherwise
 disabled by default.
 
 ### Identifier type mapping
@@ -66,12 +66,15 @@ msgphp_<name>:
         MsgPhp\SomeDomainIdInterface: some_type_name
 ```
 
-By convention any [Doctrine DBAL type] can be used. Additionally `uuid`, `uuid_binary` or `uuid_binary_ordered_time` are
-also detected.
+By convention any [Doctrine DBAL type] can be used. Additionally the following UUID types are detected as well:
+
+- `uuid`
+- `uuid_binary`
+- `uuid_binary_ordered_time`
 
 ### Default identifier type
 
-Configures a default identifier type name to use for all known identifiers provided by the bundle.
+Configures a default type name to use for all known domain identifiers provided by the bundle.
 
 ```yaml
 msgphp_<name>:
@@ -97,7 +100,7 @@ msgphp_<name>:
 
 ## Basic configuration example
 
-Given a bundle provides the following identifiers:
+Given a bundle provides the following domain identifiers:
 
 - `MsgPhp\FooIdInterface`
 - `MsgPhp\BarIdInterface`
@@ -117,6 +120,8 @@ msgphp_<name>:
         # MsgPhp\FooIdInterface: MsgPhp\Domain\DomainId
         # MsgPhp\BazIdInterface: MsgPhp\Domain\Infra\Uuid\DomainId
 ```
+
+See also the [domain identifier reference](../reference/identifiers.md).
 
 [Symfony Framework]: https://symfony.com/
 [dependency injection]: https://symfony.com/doc/current/components/dependency_injection.html
