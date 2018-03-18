@@ -41,3 +41,6 @@ pages:
     - Symfony Console: infrastructure/symfony-console.md
 - Cookbook:
     - Bundle installation: cookbook/bundle-installation.md
+- Reference:
+    - Domain identifiers: reference/identifiers.md
+    - Doctrine identifier types: reference/doctrine-identifier-types.md
