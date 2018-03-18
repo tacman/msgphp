@@ -1,3 +1,0 @@
-# Bundle architecture
-
-TODO
