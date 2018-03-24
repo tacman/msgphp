@@ -4,7 +4,7 @@ An overview of available infrastructural code when using [API Platform].
 
 - Requires [api-platform/core]
 
-## Domain projection data provider
+## Domain Projection Data Provider
 
 When working with [projections](../projection/models.md) an [API Data Provider] is provided by `MsgPhp\Domain\Infra\ApiPlatform\DomainProjectionDataProvider`.
 It uses any [projection repository](../projection/repositories.md) in an effort to provide API resources. 

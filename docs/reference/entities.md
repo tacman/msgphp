@@ -15,6 +15,8 @@ Reference of available [entities](../ddd/entities.md) per domain.
 - `MsgPhp\Domain\Entity\Features\CanBeConfirmed`
 - `MsgPhp\Domain\Entity\Features\CanBeEnabled`
 
+---
+
 ## EAV Domain
 
 ### Entities
@@ -28,6 +30,8 @@ Class | Abstract | Required
 
 - `MsgPhp\Eav\Entity\Fields\AttributesField`
 - `MsgPhp\Eav\Entity\Fields\AttributeValueField`
+
+---
 
 ## User Domain
 

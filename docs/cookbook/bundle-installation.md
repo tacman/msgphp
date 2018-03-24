@@ -38,7 +38,7 @@ msgphp_<name>:
 Depending on your personal preference you can also write the configuration in any other supported format. See the
 [demo configuration] for a more advanced example.
 
-### Class mapping
+### `class_mapping`
 
 Configures the bundle with a class mapping to to well which classes of yours should be used for a known class of ours.
 
@@ -53,7 +53,7 @@ The class mapping applies when working with an [object factory](../ddd/factory/o
 Depending on the bundle a specific class mapping entry might enable one of the bundle its features which is otherwise
 disabled by default.
 
-### Identifier type mapping
+### `id_type_mapping`
 
 Configures the bundle [domain identifier](../ddd/identifiers.md) types. Each key must be a sub class of
 `MsgPhp\Domain\DomainIdInterface` whereas each value must be a known type name.
@@ -74,7 +74,7 @@ By convention any [Doctrine DBAL type] can be used. Additionally the following U
 
 See also the [reference](../reference/identifiers.md) page for all available identifiers provided per domain.
 
-### Default identifier type
+### `default_id_type`
 
 Configures a default type name to use for all known domain identifiers provided by the bundle.
 
@@ -83,7 +83,7 @@ msgphp_<name>:
     default_id_type: uuid
 ```
 
-### Commands
+### `commands`
 
 By default a command handler provided by the bundle might be enabled or disabled depending on an [entity feature](../ddd/entities.md#common-entity-features)
 is being used yes or no.

@@ -47,7 +47,7 @@ $typeRegistry = new DomainProjectionTypeRegistry($client, 'some_index', [
 ]);
 ```
 
-## Domain projection repository
+## Domain Projection Repository
 
 An Elasticsearch tailored [domain projection repository](../projection/repositories.md) is provided by `MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository`.
 It works directly with any [`Client`][api-client].

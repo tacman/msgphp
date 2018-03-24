@@ -4,7 +4,7 @@ An overview of available infrastructural code when working with [UUIDs][uuid].
 
 - Requires [ramsey/uuid]
 
-## Domain identifier
+## Domain Identifier
 
 A UUID tailored [domain identifier](../ddd/identifiers.md) is provided by `MsgPhp\Domain\Infra\Uuid\DomainId`. It
 leverages type `Ramsey\Uuid\UuidInterface` as underlying data type.

@@ -18,7 +18,7 @@ pages:
 - Domain-Driven-Design:
     - Identifiers: ddd/identifiers.md
     - Identities: ddd/identities.md
-    - Identity mapping: ddd/identity-mapping.md
+    - Identity Mapping: ddd/identity-mapping.md
     - Collections: ddd/collections.md
     - Factories:
         - Object Factory: ddd/factory/object.md
@@ -28,7 +28,7 @@ pages:
     - Entities: ddd/entities.md
 - Event-Sourcing:
     - Events: event-sourcing/events.md
-    - Event handlers: event-sourcing/event-handlers.md
+    - Event Handlers: event-sourcing/event-handlers.md
 - Message Driven:
     - Message Bus: message-driven/message-bus.md
     - Message Dispatcher: message-driven/message-dispatcher.md

@@ -5,8 +5,6 @@ which represent something that happens. When handled it might lead to an applica
 
 ## Implementations
 
-Domain events provided and handled by default [entity features](../ddd/entities.md#common-entity-features):
-
 ### `MsgPhp\Domain\Event\ConfirmEvent`
 
 Triggers a confirmation. Handled by default with `MsgPhp\Domain\Entity\Features\CanBeConfirmed::handleConfirmEvent()`.

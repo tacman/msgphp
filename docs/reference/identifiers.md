@@ -1,14 +1,16 @@
-# Domain identifiers
+# Domain Identifiers
 
 Reference of available [identifiers](../ddd/identifiers.md) per domain.
 
-## Base domain
+## Base Domain
 
 - `MsgPhp\Domain\DomainIdInterface`
     - Scalar types: `MsgPhp\Domain\DomainId`
     - UUID types: `MsgPhp\Domain\Infra\Uuid\DomainId`
 
-## EAV domain
+---
+
+## EAV Domain
 
 - `MsgPhp\Eav\AttributeIdInterface`
     - Scalar types: `MsgPhp\Eav\AttributeId`
@@ -17,7 +19,9 @@ Reference of available [identifiers](../ddd/identifiers.md) per domain.
     - Scalar types: `MsgPhp\Eav\AttributeValueId`
     - UUID types: `MsgPhp\Eav\Infra\Uuid\AttributeValueId`
 
-## User domain
+---
+
+## User Domain
 
 - `MsgPhp\User\UserIdInterface`
     - Scalar types: `MsgPhp\User\UserId`

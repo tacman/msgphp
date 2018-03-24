@@ -9,7 +9,7 @@ They are defined in a dedicated namespace for discovery, respectively `Msgphp\Do
 
 See also the [reference](../reference/entities.md) page for all available entities provided per domain.
 
-## Common entity fields
+## Entity Fields
 
 ### `CreatedAtField`
 
@@ -29,7 +29,7 @@ A datetime value representing an entity was last updated at. Requires `$lastUpda
 
 - `getLastUpdatedAt(): \DateTimeInterface`
 
-## Common entity features
+## Entity Features
 
 ### `CanBeConfirmed`
 
