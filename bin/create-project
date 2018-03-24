@@ -35,9 +35,9 @@ composer require --prefer-dist --no-suggest ${COMPONENTS} ${BUNDLES}
 
 popd &> /dev/null
 
-echo -en "\e[34mLink dependencies? [yN]\e[0m"
+echo -en "\e[34mLink dependencies? [Yn]\e[0m"
 read answer
-if [[ $answer =~ ^y|Y|yes|YES$ ]] ; then
+if [[ ${answer:-y} =~ ^y|Y|yes|YES$ ]] ; then
     composer link -h &> /dev/null
     if [[ $? != 0 ]] ; then
         composer require --dev --no-progress --prefer-dist --no-interaction --no-suggest ro0nl/link

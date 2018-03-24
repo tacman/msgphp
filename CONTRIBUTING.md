@@ -41,7 +41,7 @@ bin/pr <pr-number>
 It will add a new git remote `github-pr-XXX` pointing to the author's SSH URL and checkout their branch locally using
 the same name.
 
-## Setup a project
+## Setup a test project
 
 To setup a test project use:
 
@@ -49,8 +49,8 @@ To setup a test project use:
 bin/create-project
 ```
 
-It will create a new Symfony skeleton application and ask you which bundles to install. The bundles will be
-automatically symlinked to your local clone.
+It will create a new Symfony skeleton application and ask you which bundles to install. The bundles can be automatically
+symlinked to your local clone after.
 
 ## Perform a smoke test
 
