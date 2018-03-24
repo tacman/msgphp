@@ -14,30 +14,30 @@ markdown_extensions:
 
 pages:
 - Home: index.md
-- Code conventions: code-conventions.md
-- Domain-driven-design:
+- Code Conventions: code-conventions.md
+- Domain-Driven-Design:
     - Identifiers: ddd/identifiers.md
     - Identities: ddd/identities.md
     - Identity mapping: ddd/identity-mapping.md
     - Collections: ddd/collections.md
     - Factories:
-        - Object factory: ddd/factory/object.md
-        - Entity aware factory: ddd/factory/entity-aware.md
-        - Static factory: ddd/factory/static.md
+        - Object Factory: ddd/factory/object.md
+        - Entity Aware Factory: ddd/factory/entity-aware.md
+        - Static Factory: ddd/factory/static.md
     - Repositories: ddd/repositories.md
     - Entities: ddd/entities.md
-- Event sourcing:
+- Event-Sourcing:
     - Events: event-sourcing/events.md
     - Event handlers: event-sourcing/event-handlers.md
-- Message driven:
-    - Message bus: message-driven/message-bus.md
-    - Message dispatcher: message-driven/message-dispatcher.md
+- Message Driven:
+    - Message Bus: message-driven/message-bus.md
+    - Message Dispatcher: message-driven/message-dispatcher.md
     - CQRS: message-driven/cqrs.md
 - Projection:
     - Models: projection/models.md
     - Documents: projection/documents.md
-    - Document transformers: projection/document-transformers.md
-    - Type registry: projection/type-registry.md
+    - Document Transformers: projection/document-transformers.md
+    - Type Registry: projection/type-registry.md
     - Repositories: projection/repositories.md
     - Synchronization: projection/synchronization.md
 - Infrastructure:
@@ -50,8 +50,8 @@ pages:
     - Symfony Console: infrastructure/symfony-console.md
     - UUID: infrastructure/uuid.md
 - Cookbook:
-    - Bundle installation: cookbook/bundle-installation.md
+    - Bundle Installation: cookbook/bundle-installation.md
 - Reference:
-    - Domain identifiers: reference/identifiers.md
-    - Domain entities: reference/entities.md
-    - Doctrine identifier types: reference/doctrine-identifier-types.md
+    - Domain Identifiers: reference/identifiers.md
+    - Domain Entities: reference/entities.md
+    - Doctrine Identifier Types: reference/doctrine-identifier-types.md
