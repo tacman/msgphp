@@ -10,7 +10,7 @@ bin/phpunit
 bin/phpunit user-bundle
 ```
 
-## Code style
+## Code Style
 
 ```bash
 # all packages
@@ -20,7 +20,7 @@ bin/cs
 bin/cs user-bundle
 ```
 
-## Static analysis
+## Static Analysis
 
 ```bash
 # all packages

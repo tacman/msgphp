@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+echo -e "\e[34mUpdating dependencies...\e[0m"
+bin/composer update --no-suggest --no-progress && composer update --no-suggest --no-progress
+[[ $? -ne 0 ]] && exit 1
+
+echo -e "\e[34mCode Style / Static Analysis\e[0m"
+bin/cs && bin/sa
+[[ $? -ne 0 ]] && exit 1
+
+echo -e "\e[34mUnit Tests\e[0m"
+bin/phpunit
