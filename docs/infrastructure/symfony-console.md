@@ -26,7 +26,7 @@ utility service.
 bin/console domain:projection:synchronize
 ```
 
-## Context factory
+## Context Factory
 
 A context factory is bound to `MsgPhp\Domain\Infra\Console\Context\ContextFactoryInterface`. Its purpose is to leverage
 a CLI command in an effort to interactively built an arbitrary array value (the context).

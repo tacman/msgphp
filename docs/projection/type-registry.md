@@ -1,4 +1,4 @@
-# Projection type registry
+# Projection Type Registry
 
 A projection type registry is bound to `MsgPhp\Domain\Projection\DomainProjectionTypeRegistryInterface`.
 Its purpose is to manage all available [projection](models.md) type information.

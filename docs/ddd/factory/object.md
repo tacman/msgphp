@@ -1,4 +1,4 @@
-# Object factory
+# Object Factory
 
 A domain object factory is bound to `MsgPhp\Domain\Factory\DomainObjectFactoryInterface`. Its purpose is to initialize
 any domain object based on a given class name and context.

@@ -1,18 +1,18 @@
-# Code conventions
+# Code Conventions
 
 A brief description of code conventions this project follows.
 
-## General principles
+## General Principles
 
 - Follows [SOLID] principles
 - Reduce [lines of code] where possible
-- Reduce coupling ([law of demeter])
+- Reduce coupling ([Law of Demeter])
 - Favor latest stable PHP7 features
 - Checks must pass (code style, static analysis & unit tests)
 
-## Code style
+## Code Style (CS)
 
-- Follows [PSR2] with [Symfony style]
+- Follows [PSR-2] with [Symfony Sstyle]
 - `use` statements are declared in alpha-order
 - `use` statements for `MsgPhp\` namespace are grouped by deepest common namespace
 
@@ -37,7 +37,7 @@ use Other\SomeOtherA;
 use Other\SomeOtherB;
 ```
 
-## Static analysis
+## Static Analysis (SA)
 
 - Follows [PHPStan] level max
 - Exclude- and ignore-rules are discussed per case / topic
@@ -49,17 +49,17 @@ use Other\SomeOtherB;
 - Interfaces must have a description with its purpose (at the class- as well as the method-level)
 - No usage of `@inheritdoc`
 
-## PHP 7.2 forward compatibility
+## PHP 7.2 Forward Compatibility
 
 - Intended object values are type hinted (`@param object $value` and `@return object`)
 
-## Unit tests
+## Unit Tests
 
-- All of the above, _in general_, applies to unit tests as well
+- All of the above, _in general_, apply to unit tests as well
 
 [SOLID]: https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)
 [lines of code]: https://en.wikipedia.org/wiki/Source_lines_of_code
-[law of demeter]: https://en.wikipedia.org/wiki/Law_of_Demeter
-[PSR2]: https://www.php-fig.org/psr/psr-2/
-[Symfony style]: https://symfony.com/doc/master/contributing/code/standards.html
+[Law of Demeter]: https://en.wikipedia.org/wiki/Law_of_Demeter
+[PSR-2]: https://www.php-fig.org/psr/psr-2/
+[Symfony Style]: https://symfony.com/doc/master/contributing/code/standards.html
 [PHPStan]: https://github.com/phpstan/phpstan

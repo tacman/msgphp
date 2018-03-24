@@ -1,4 +1,4 @@
-# Projection document transformers
+# Projection Document Transformers
 
 A projection document transformer is bound to `MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface`.
 Its purpose is to transform domain objects into [projection documents](documents.md).

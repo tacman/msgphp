@@ -1,4 +1,4 @@
-# Projection repositories
+# Projection Repositories
 
 A domain projection repository is bound to `MsgPhp\Domain\Projection\DomainProjectionRepositoryInterface`. Its purpose
 is to store and query [projection documents](documents.md).

@@ -1,4 +1,4 @@
-# Doctrine identifier types
+# Doctrine Identifier Types
 
 Reference of available [Doctrine identifier types](../infrastructure/doctrine-dbal.md#domain-identifier-type) across all
 domains.

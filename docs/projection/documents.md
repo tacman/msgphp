@@ -1,4 +1,4 @@
-# Projection documents
+# Projection Documents
 
 A projection document is a domain value object of type `MsgPhp\Domain\Projection\DomainProjectionDocument`. Its purpose
 is to hold a projection document its (meta)data and current state.

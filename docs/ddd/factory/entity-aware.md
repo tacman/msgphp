@@ -1,4 +1,4 @@
-# Entity aware factory
+# Entity Aware Factory
 
 An entity aware factory is an [object factory](object.md) and additionally bound to
 `MsgPhp\Domain\Factory\EntityAwareFactoryInterface`. Its purpose is to factorize entity related objects.

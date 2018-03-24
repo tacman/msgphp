@@ -1,4 +1,4 @@
-# Static factory
+# Static Factory
 
 A static factory is a utility class, it cannot be initialized as a new instance using `new ...();`. Its purpose is to
 factorize a known implementation for a given class.

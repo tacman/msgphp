@@ -1,4 +1,4 @@
-# Identity mapping
+# Identity Mapping
 
 An identity mapping is a domain service and is bound to `MsgPhp\Domain\DomainIdentityMappingInterface`. It tells about
 the identifier metadata for a known domain object.

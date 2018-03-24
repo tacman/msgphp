@@ -4,7 +4,7 @@ An overview of available infrastructural code when using Doctrine's [Database Ab
 
 - Requires [doctrine/dbal]
 
-## Domain identifier type
+## Domain Identifier Type
 
 A translation between the database type and a [identifier](../ddd/identifiers.md) type in PHP is provided by
 `MsgPhp\Domain\Infra\Doctrine\DomainIdType`. Its purpose is to abstract the underlying data type of the identifier

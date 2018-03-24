@@ -4,7 +4,7 @@ An overview of available infrastructural code when using Doctrine's [Collections
 
 - Requires [doctrine/collections]
 
-## Domain collection
+## Domain Collection
 
 A Doctrine tailored [domain collection](../ddd/collections.md) is provided by `MsgPhp\Domain\Infra\Doctrine\DomainCollection`.
 It leverages type `Doctrine\Common\Collections\Collection` as underlying data type.

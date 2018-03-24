@@ -4,7 +4,7 @@ An overview of available infrastructural code when using Doctrine's [Object Rela
 
 - Requires [doctrine/orm]
 
-## Domain identity mapping
+## Domain Identity Mapping
 
 A Doctrine tailored [domain identity mapping](../ddd/identity-mapping.md) is provided by
 `MsgPhp\Domain\Infra\Doctrine\DomainIdentityMapping`. It uses Doctrine's [`EntityManagerInterface`][api-em] to provide
@@ -29,7 +29,7 @@ $em = ...;
 $mapping = new DomainIdentityMapping($em);
 ```
 
-## Domain repository
+## Domain Repository
 
 A Doctrine tailored [repository trait](../ddd/repositories.md) is provided by
 `MsgPhp\Domain\Infra\Doctrine\DomainEntityRepositoryTrait`. It uses Doctrine's [`EntityManagerInterface`][api-em] as
@@ -91,7 +91,7 @@ if ($repository->exists($id = ['name' => ..., 'year' => ...])) {
 }
 ```
 
-## Entity aware factory
+## Entity Aware Factory
 
 A Doctrine tailored [entity aware factory](../ddd/factory/entity-aware.md) is provided by
 `MsgPhp\Domain\Infra\Doctrine\EntityAwareFactory`. It decorates any entity aware factory and uses Doctrine's

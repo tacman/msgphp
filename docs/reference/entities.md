@@ -1,21 +1,21 @@
-# Domain entities
+# Domain Entities
 
 Reference of available [entities](../ddd/entities.md) per domain.
 
-## Base domain
+## Base Domain
 
-### Entity fields
+### Entity Fields
 
 - `MsgPhp\Domain\Entity\Fields\CreatedAtField`
 - `MsgPhp\Domain\Entity\Fields\EnabledField`
 - `MsgPhp\Domain\Entity\Fields\LastUpdatedAtField`
 
-### Entity features
+### Entity Features
 
 - `MsgPhp\Domain\Entity\Features\CanBeConfirmed`
 - `MsgPhp\Domain\Entity\Features\CanBeEnabled`
 
-## EAV domain
+## EAV Domain
 
 ### Entities
 
@@ -24,12 +24,12 @@ Class | Abstract | Required
 `MsgPhp\Eav\Entity\Attribute` | ✔ | ✔
 `MsgPhp\Eav\Entity\AttributeValue` | ✔ | ✔
 
-### Entity fields
+### Entity Fields
 
 - `MsgPhp\Eav\Entity\Fields\AttributesField`
 - `MsgPhp\Eav\Entity\Fields\AttributeValueField`
 
-## User domain
+## User Domain
 
 ### Entities
 
@@ -42,7 +42,7 @@ Class | Abstract | Required
 `MsgPhp\User\Entity\Username` | ✗ | ✗
 `MsgPhp\User\Entity\UserRole` | ✔ | ✗
 
-### Entity fields
+### Entity Fields
 
 - `MsgPhp\User\Entity\Fields\AttributeValuesField`
 - `MsgPhp\User\Entity\Fields\EmailsField`
@@ -50,11 +50,11 @@ Class | Abstract | Required
 - `MsgPhp\User\Entity\Fields\RolesField`
 - `MsgPhp\User\Entity\Fields\UserField`
 
-### Entity features
+### Entity Features
 
 - `MsgPhp\User\Entity\Features\ResettablePassword`
 
-#### Credential types
+#### Credential Types
 
 - `MsgPhp\User\Entity\Features\EmailCredential`
 - `MsgPhp\User\Entity\Features\EmailPasswordCredential`

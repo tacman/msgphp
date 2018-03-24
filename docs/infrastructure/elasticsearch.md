@@ -4,7 +4,7 @@ An overview of available infrastructural code when using Elasticsearch's [PHP Ap
 
 - Requires [elasticsearch/elasticsearch]
 
-## Domain projection type registry
+## Domain Projection Type Registry
 
 An Elasticsearch tailored [domain projection type registry](../projection/type-registry.md) is provided by `MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry`.
 It works directly with any [`Client`][api-client] and a known configuration of type information.

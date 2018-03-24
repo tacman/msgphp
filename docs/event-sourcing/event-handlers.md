@@ -1,4 +1,4 @@
-# Event handlers
+# Event Handlers
 
 A domain event handler is bound to `MsgPhp\Domain\Event\DomainEventHandlerInterface`. Its purpose is to implement the
 handling of [domain events](events.md) within a certain context.

@@ -3,7 +3,7 @@
 Commands are domain objects and provided per domain layer. They usually follow a [POPO] design. Its purpose is to
 describe an action to be taken. For commands being messages they can be dispatched using any [message bus](message-bus.md).
 
-## Event-sourcing command handler
+## Event-Sourcing Command Handler
 
 An event-sourcing command handler utility trait is provided by `MsgPhp\Domain\Command\EventSourcingCommandHandlerTrait`.
 Its purpose is to ease the handling of command messages by sourcing a [domain event](../event-sourcing/events.md) to its

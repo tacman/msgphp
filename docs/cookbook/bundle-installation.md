@@ -1,4 +1,4 @@
-# Bundle installation
+# Bundle Installation
 
 The project bundles are tailored to the [Symfony Framework] and designed to be used standalone. Its main purpose is to
 provide the application with services, based on minimal configuration and to be used with [dependency injection]. In

@@ -4,7 +4,7 @@ An overview of available infrastructural code when using PSR [Containers][contai
 
 - Requires [psr/container]
 
-## Domain projection document transformer
+## Domain Projection Document Transformer
 
 A PSR tailored [domain projection document transformer](../projection/document-transformers.md) is provided by `MsgPhp\Domain\Infra\Psr\DomainProjectionDocumentTransformer`.
 It decorates any [`ContainerInterface`][api-container] and uses callable factories as container entries, identified by a
