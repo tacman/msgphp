@@ -7,31 +7,31 @@ is to store and query [projection documents](documents.md).
 
 ### `findAll(string $type, int $offset = 0, int $limit = 0): iterable`
 
-Find all [projections](models.md) by type.
+Finds all [projections](models.md) by type.
 
 ---
 
 ### `find(string $type, string $id): ?DomainProjectionInterface`
 
-Find a single [projection](models.md) by type and ID. In case its document cannot be found `null` should be returned.
+Finds a single [projection](models.md) by type and ID. In case its document cannot be found `null` should be returned.
 
 ---
 
 ### `clear(string $type): void`
 
-Delete all projection documents by type.
+Deletes all projection documents by type.
 
 ---
 
 ### `save(DomainProjectionDocument $document): void`
 
-Save a projection document. The document will be available on any subsequent query.
+Saves a projection document. The document will be available on any subsequent query.
 
 ---
 
 ### `delete(DomainProjectionDocument $document): void`
 
-Delete a projection document. The document will be unavailable on any subsequent query.
+Deletes a projection document. The document will be unavailable on any subsequent query.
 
 ## Implementations
 

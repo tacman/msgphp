@@ -35,14 +35,14 @@ a CLI command in an effort to interactively built an arbitrary array value (the 
 
 #### `configure(InputDefinition $definition): void`
 
-Configure a command input definition. See also [`InputDefinition`][api-inputdefinition]. Should be called before using
+Configures a command input definition. See also [`InputDefinition`][api-inputdefinition]. Should be called before using
 `getContext()`.
 
 ---
 
 #### `getContext(InputInterface $input, StyleInterface $io, array $values = []): array`
 
-Resolve the actual context from the console IO. See also [`InputInterface`][api-inputinterface] and [`StyleInterface`][api-styleinterface].
+Resolves the actual context from the console IO. See also [`InputInterface`][api-inputinterface] and [`StyleInterface`][api-styleinterface].
 Any element value provided by `$values` takes precedence and should be used as-is.
 
 ### Implementations

@@ -13,20 +13,20 @@ Inherited from `MsgPhp\Domain\Factory\DomainObjectFactoryInterface::create()`.
 
 ### `reference(string $class, $id): object`
 
-Factorize a reference object for a known existing entity object. The object must be of type `$class`. Any type of
-[identity](../identities.md) value can be passed as `$id`.
+Returns a factorized reference object for a known existing entity object. The object must be of type `$class`. Any type
+of [identity](../identities.md) value can be passed as `$id`.
 
 ---
 
 ### `identify(string $class, $value): DomainIdInterface`
 
-Factorize an [identifier](../identifiers.md) for the given entity class from a known primitive value.
+Returns a factorized [identifier](../identifiers.md) for the given entity class from a known primitive value.
 
 ---
 
 ### `nextIdentifier(string $class): DomainIdInterface`
 
-Factorize the next [identifier](../identifiers.md) for the given entity class. Depending on the implementation its value
+Returns the nex [identifier](../identifiers.md) for the given entity class. Depending on the implementation its value
 might be considered empty if it's not capable to calculate one upfront.
 
 ## Implementations

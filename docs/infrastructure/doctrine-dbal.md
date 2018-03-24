@@ -19,7 +19,7 @@ default [`Type`][api-type] implementation and can be used either generic or as a
       is used.
 - `static getClass(): string`
 - `static setDataType(string $type): void`
-    - `$type`: A doctrine type name to use as underlying data type. If not set `Type::INTEGER` is used.
+    - `$type`: A Doctrine type name to use as underlying data type. If not set `Type::INTEGER` is used.
 - `static getDataType(): string`
 
 See also the [reference](../reference/doctrine-identifier-types.md) page for all available identifier types provided per

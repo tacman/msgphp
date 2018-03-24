@@ -7,13 +7,13 @@ infrastructure (e.g. Doctrine), to rapidly create one. This page describes the A
 
 ### `doFindAll(int $offset = 0, int $limit = 0): DomainCollectionInterface`
 
-Find all entities available. An unlimited collection is implied by `$limit` set to zero.
+Finds all entities available. An unlimited collection is implied by `$limit` set to zero.
 
 ---
 
 ### `doFindAllByFields(array $fields, int $offset = 0, int $limit = 0): DomainCollectionInterface`
 
-Find all entities matching all specified fields. Supported field values should be `null`, `scalar`, `array` (one of a
+Finds all entities matching all specified fields. Supported field values should be `null`, `scalar`, `array` (one of a
 known literal list) and `object` (foreign entity or an [identifier](identifiers.md)). An unlimited collection is implied
 by `$limit` set to zero.
 
@@ -21,38 +21,38 @@ by `$limit` set to zero.
 
 ### `doFind($id): object`
 
-Find a single entity by its identity. Supported identity values should be `scalar`, `array` (composite [identity](identities.md))
+Finds a single entity by its identity. Supported identity values should be `scalar`, `array` (composite [identity](identities.md))
 and `object` (foreign entity or an [identifier](identifiers.md)).
 
 ---
 
 ### `doFindByFields(array $fields): object`
 
-Find the first entity matching all specified fields. See `doFindAllByFields()` for supported field values.
+Finds the first entity matching all specified fields. See `doFindAllByFields()` for supported field values.
 
 ---
 
 ### `doExists($id): bool`
 
-Verify if an entity exists by its identity. See `doFind()` for supported identity values.
+Verifies if an entity exists by its identity. See `doFind()` for supported identity values.
 
 ---
 
 ### `doExistsByFields(array $fields): bool`
 
-Verify if an entity exists matching all specified fields. See `doFindAllByFields()` for supported field values.
+Verifies if an entity matching all specified fields exists. See `doFindAllByFields()` for supported field values.
 
 ---
 
 ### `doSave(object $entity): void`
 
-Persist an entity in the identity map. The entity will be available on any subsequent query.
+Persists an entity into the identity map. The entity will be available on any subsequent query.
 
 ---
 
 ### `doDelete(object $entity): void`
 
-Remove an entity from the identity map. The entity will be unavailable on any subsequent query.
+Removes an entity from the identity map. The entity will be unavailable on any subsequent query.
 
 ## Implementations
 

@@ -7,7 +7,7 @@ any domain object based on a given class name and context.
 
 ### `create(string $class, array $context = []): object`
 
-Factorizes a new domain object by class name. Optionally a context can be provided for the factory to act upon.
+Returns a factorized domain object by class name. Optionally a context can be provided for the factory to act upon.
 
 ## Implementations
 

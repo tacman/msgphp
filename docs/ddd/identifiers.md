@@ -14,7 +14,7 @@ utilize a primitive identifier value.
 
 ### `static fromValue($value): DomainIdInterface`
 
-Factorizes a new identifier from its primitive value. Using `null` might imply an empty identifier.
+Returns a factorized identifier from any primitive value. Using `null` might imply an empty identifier.
 
 ---
 

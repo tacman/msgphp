@@ -13,7 +13,7 @@ any [transformer](document-transformers.md). A document is then stored using any
 Yields a projection document for each provided domain object regarding its state. The actual document status can be
 read from [`ProjectionDocument::$status`][api-projection-document-status].
 
-[api-projection-document-status]: https://msgphp.github.io/api/MsgPhp/Domain/Projection/DomainProjectionSynchronization.html#property_status
+[api-projection-document-status]: https://msgphp.github.io/api/MsgPhp/Domain/Projection/DomainProjectionDocument.html#property_status
 
 ## Basic example
 

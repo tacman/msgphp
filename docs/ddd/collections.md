@@ -14,7 +14,7 @@ a primitive iterable value. It may hold any type of element values.
 
 ### `static fromValue(?iterable $value): DomainCollectionInterface`
 
-Factorizes a new collection from its primitive value. Using `null` implies an empty collection.
+Returns a factorized collection from any primitive iterable. Using `null` implies an empty collection.
 
 ---
 

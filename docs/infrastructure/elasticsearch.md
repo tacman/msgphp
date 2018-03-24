@@ -10,9 +10,9 @@ An Elasticsearch tailored [domain projection type registry](../projection/type-r
 It works directly with any [`Client`][api-client] and a known configuration of type information.
 
 - `__construct(Client $client, string $index, array $mappings, array $settings = [], LoggerInterface $logger = null)`
-    - `$client`: The Client to work with
+    - `$client`: The client to work with
     - `$index`: The index to use
-    - `$mappings` / `$settings`: Index management information. [Read more][index management]
+    - `$mappings` / `$settings`: Index management information. [Read more][index management].
     - `$logger`: An optional [PSR logger]
 
 ### Basic example
