@@ -11,6 +11,7 @@ rm -rf var/smoke-test/bundles/*Bundle/
 if [[ ! -d var/smoke-test/bundles/base ]] ; then
     mkdir -p var/smoke-test/bundles/base
 fi
+
 pushd var/smoke-test/bundles/base &> /dev/null
 if [[ -d vendor ]] ; then
     composer update --prefer-dist --quiet
@@ -38,7 +39,11 @@ for PACKAGE in $(find src/*Bundle/composer.json -type f) ; do
         DIR="var/smoke-test/bundles/$(basename $(dirname "${PACKAGE}"))"
         cp -R var/smoke-test/bundles/base "${DIR}"
         pushd "${DIR}" &> /dev/null
-        CMD="composer config minimum-stability dev && composer require --no-progress --no-suggest --no-interaction msgphp/${PACKAGE_NAME}"
+        composer config minimum-stability dev
+        if [[ ! $TRAVIS ]] || ( [[ $DEPS = high && $TRAVIS_PULL_REQUEST = false ]] ) ; then
+            composer config repositories.bundle path "${BASE_DIR}/$(dirname "${PACKAGE}")/"
+        fi
+        CMD="composer require --no-progress --no-suggest --no-interaction msgphp/${PACKAGE_NAME}:@dev"
         if [[ $TRAVIS = true ]] ; then
             tfold "Testing ${PACKAGE_NAME}" "${CMD}"
         else

@@ -5,6 +5,8 @@ if [[ $# -lt 1 ]] ; then
     exit 1
 fi
 
+BASE_DIR=$(pwd)
+
 if [[ -d $1 ]] ; then
     PACKAGE_DIR="$1"
 else
@@ -21,25 +23,24 @@ if [[ ! -f "${PACKAGE_DIR}/phpunit.xml.dist" ]] ; then
 fi
 
 if [[ ! -f "${PACKAGE_DIR}/${BIN}" ]] ; then
-    composer update --no-progress --prefer-dist --no-interaction --no-suggest --working-dir="${PACKAGE_DIR}"
+    composer update --prefer-dist --quiet --working-dir="${PACKAGE_DIR}"
     [[ $? -ne 0 ]] && exit 1
 fi
 
-if [[ ! $TRAVIS ]] || ( [[ $DEPS = high && $TRAVIS_BRANCH = master && $TRAVIS_PULL_REQUEST = false ]] ) ; then
-    WORKING_DIR="$(dirname $(dirname "$0"))"
+if [[ ! $TRAVIS ]] || ( [[ $DEPS = high && $TRAVIS_PULL_REQUEST = false ]] ) ; then
     composer link -h &> /dev/null
     if [[ $? != 0 ]] ; then
-        composer update --no-progress --prefer-dist --no-interaction --no-suggest --working-dir="${WORKING_DIR}"
+        composer update --prefer-dist --quiet
         [[ $? -ne 0 ]] && exit 1
     fi
 
-    composer link --working-dir="${WORKING_DIR}" "$(cd "${PACKAGE_DIR}" && pwd)"
+    composer link "$(cd "${PACKAGE_DIR}" && pwd)"
     [[ $? -ne 0 ]] && exit 1
 fi
 
 pushd "${PACKAGE_DIR}" &> /dev/null
 
 echo -e "\e[34mTesting package\e[0m"
-${CMD}
+bash -xc "${CMD}" 2>&1
 
 popd &> /dev/null

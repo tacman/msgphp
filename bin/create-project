@@ -38,7 +38,7 @@ read answer
 if [[ ${answer:-y} =~ ^y|Y|yes|YES$ ]] ; then
     composer link -h &> /dev/null
     if [[ $? != 0 ]] ; then
-        composer require --dev --no-progress --prefer-dist --no-interaction --no-suggest ro0nl/link
+        composer update --prefer-dist --quiet
         [[ $? -ne 0 ]] && exit 1
     fi
 
