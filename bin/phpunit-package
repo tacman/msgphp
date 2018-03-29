@@ -5,8 +5,6 @@ if [[ $# -lt 1 ]] ; then
     exit 1
 fi
 
-BASE_DIR=$(pwd)
-
 if [[ -d $1 ]] ; then
     PACKAGE_DIR="$1"
 else
@@ -28,13 +26,14 @@ if [[ ! -f "${PACKAGE_DIR}/${BIN}" ]] ; then
 fi
 
 if [[ ! $TRAVIS ]] || ( [[ $DEPS = high && $TRAVIS_PULL_REQUEST = false ]] ) ; then
+    WORKING_DIR="$(dirname $(dirname "$0"))"
     composer link -h &> /dev/null
     if [[ $? != 0 ]] ; then
-        composer update --prefer-dist --quiet --working-dir="${BASE_DIR}"
+        composer update --prefer-dist --quiet --working-dir="${WORKING_DIR}"
         [[ $? -ne 0 ]] && exit 1
     fi
 
-    composer link --working-dir="${BASE_DIR}" "$(cd "${PACKAGE_DIR}" && pwd)"
+    composer link --working-dir="${WORKING_DIR}" "$(cd "${PACKAGE_DIR}" && pwd)"
     [[ $? -ne 0 ]] && exit 1
 fi
 
