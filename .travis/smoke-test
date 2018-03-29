@@ -38,10 +38,7 @@ for PACKAGE in $(find src/*Bundle/composer.json -type f) ; do
         DIR="var/smoke-test/bundles/$(basename $(dirname "${PACKAGE}"))"
         cp -R var/smoke-test/bundles/base "${DIR}"
         pushd "${DIR}" &> /dev/null
-        if [[ $TRAVIS_PULL_REQUEST != false ]] ; then
-            composer config minimum-stability dev
-        fi
-        CMD="composer require --no-progress --no-suggest --no-interaction msgphp/${PACKAGE_NAME}"
+        CMD="composer config minimum-stability dev && composer require --no-progress --no-suggest --no-interaction msgphp/${PACKAGE_NAME}"
         if [[ $TRAVIS = true ]] ; then
             tfold "Testing ${PACKAGE_NAME}" "${CMD}"
         else
