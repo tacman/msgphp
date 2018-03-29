@@ -30,11 +30,11 @@ fi
 if [[ ! $TRAVIS ]] || ( [[ $DEPS = high && $TRAVIS_PULL_REQUEST = false ]] ) ; then
     composer link -h &> /dev/null
     if [[ $? != 0 ]] ; then
-        composer update --prefer-dist --quiet
+        composer update --prefer-dist --quiet --working-dir="${BASE_DIR}"
         [[ $? -ne 0 ]] && exit 1
     fi
 
-    composer link "$(cd "${PACKAGE_DIR}" && pwd)"
+    composer link --working-dir="${BASE_DIR}" "$(cd "${PACKAGE_DIR}" && pwd)"
     [[ $? -ne 0 ]] && exit 1
 fi
 
