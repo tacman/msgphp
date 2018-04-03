@@ -10,9 +10,6 @@ parameters:
         - '#Static property MsgPhp\\Domain\\Tests\\Infra\\InMemory\\DomainEntityRepositoryTraitTest::\$memory \(MsgPhp\\Domain\\Infra\\InMemory\\GlobalObjectMemory\) does not accept null\.#'
         - '#Class MsgPhp\\Domain\\Tests\\Factory\\WrongCase referenced with incorrect case: MsgPhp\\Domain\\Tests\\Factory\\wrongcase\.#'
 
-        # see https://github.com/symfony/symfony/pull/26297
-        - '#Parameter \#1 \$name of method Symfony\\Component\\Config\\Definition\\Builder\\NodeBuilder::node\(\) expects string, null given\.#'
-
         # forward compatibility
         - '#Class MsgPhp\\Domain\\Infra\\Config\\ClassMappingNode constructor invoked with 3 parameters, 1\-2 required\.#'
         - '#Access to an undefined property MsgPhp\\Domain\\Infra\\Config\\ClassMappingNodeDefinition::\$pathSeparator#'
