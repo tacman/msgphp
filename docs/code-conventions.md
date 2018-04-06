@@ -12,7 +12,7 @@ A brief description of code conventions this project follows.
 
 ## Code Style (CS)
 
-- Follows [PSR-2] with [Symfony Sstyle]
+- Follows [PSR-2] with [Symfony Style]
 - `use` statements are declared in alpha-order
 - `use` statements for `MsgPhp\` namespace are grouped by deepest common namespace
 
