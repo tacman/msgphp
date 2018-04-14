@@ -3,6 +3,8 @@
 A domain identifier is a [string-able] value object and bound to `MsgPhp\Domain\DomainIdInterface`. Its purpose is to
 utilize a primitive identifier value.
 
+See also the [reference](../reference/identifiers.md) page for all available identifiers provided per domain.
+
 ## API
 
 ### Extends
@@ -36,8 +38,6 @@ Returns the identifier its primitive string value. If the identifier is empty (s
 should be returned.
 
 ## Implementations
-
-See also the [reference](../reference/identifiers.md) page for all available identifiers provided per domain.
 
 ### `MsgPhp\Domain\DomainId`
 

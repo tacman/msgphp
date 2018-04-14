@@ -9,10 +9,10 @@ infrastructural services are created automatically.
 
 ## Available bundles
 
-- `msgphp/eav-bundle`: Provides basic entity-attribute-value management (the EAV domain)
-- `msgphp/user-bundle`: Provides basic user management (the user domain)
+- `msgphp/eav-bundle`: Provides basic entity-attribute-value management (the `Eav` domain)
+- `msgphp/user-bundle`: Provides basic user management (the `User` domain)
 
-## Installing using [Composer]
+## Installation
 
 ```bash
 composer require msgphp/<name>-bundle
@@ -28,6 +28,8 @@ automatically based on [MsgPHP recipes].
 By default a bundle provides the following minimal configuration:
 
 ```yaml
+# config/packages/msgphp_<name>.yaml
+
 msgphp_<name>:
     class_mapping: []
     id_type_mapping: []
@@ -125,7 +127,6 @@ msgphp_<name>:
 
 [Symfony Framework]: https://symfony.com/
 [dependency injection]: https://symfony.com/doc/current/components/dependency_injection.html
-[Composer]: https://getcomposer.org/
 [Symfony Flex]: https://symfony.com/doc/current/setup/flex.html
 [MsgPHP recipes]: https://github.com/symfony/recipes-contrib/tree/master/msgphp
 [autowiring]: https://symfony.com/doc/current/service_container/autowiring.html

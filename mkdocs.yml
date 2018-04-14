@@ -51,6 +51,7 @@ pages:
     - UUID: infrastructure/uuid.md
 - Cookbook:
     - Bundle Installation: cookbook/bundle-installation.md
+    - Configuring Doctrine ORM: cookbook/configuring-doctrine-orm.md
 - Reference:
     - Domain Identifiers: reference/identifiers.md
     - Domain Entities: reference/entities.md
