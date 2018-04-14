@@ -19,6 +19,10 @@ Domain | Bundle
 [`msgphp/eav`](https://github.com/msgphp/eav) | [`msgphp/eav-bundle`](https://github.com/msgphp/eav-bundle)
 [`msgphp/user`](https://github.com/msgphp/user) | [`msgphp/user-bundle`](https://github.com/msgphp/user-bundle)
 
+## Contributing
+
+See the [contributing](CONTRIBUTING.md) section.
+
 ## Blog posts
 
 - [Adding user management to your Symfony application](https://medium.com/@ro0NL/adding-user-management-to-your-symfony-application-ceeefe2a2e9)
