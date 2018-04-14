@@ -15,7 +15,7 @@ is to hold a projection document its data and current state.
 
 ### `getType(): string`
 
-Gets the projection type. Always must refer to a [projection](models.md) class name.
+Gets the projection type and refers to a [projection](models.md) class name.
 
 ---
 
