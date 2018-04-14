@@ -44,7 +44,7 @@ Depending on your personal preference you can also write the configuration in an
 
 ### `class_mapping`
 
-Configures the bundle with a class mapping to to well which classes of yours should be used for a known class of ours.
+Configures the bundle with a class mapping to tell which classes of yours should be used for a known class of ours.
 
 ```yaml
 msgphp_<name>:
