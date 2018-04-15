@@ -15,7 +15,7 @@ composer install orm
 
 See the Doctrine Bundle [recipe configuration] for the minimal configuration to put in `config/packages/doctrine.yaml`.
 
-Although the examples use annotation based mappings, you are not required to do so. [Read more](doctrine-bundle-mapping-type).
+Although the examples use annotation based mappings, you are not required to do so. [Read more](doctrine-bundle-mapping-config).
 
 _The configuration is added automatically when using Symfony Flex._
 
@@ -201,4 +201,5 @@ bin/console doctrine:schema:update --force
 ```
 
 [recipe configuration]: https://github.com/symfony/recipes/blob/master/doctrine/doctrine-bundle/1.6/config/packages/doctrine.yaml
+[doctrine-bundle-mapping-config]: https://symfony.com/doc/master/bundles/DoctrineBundle/configuration.html#mapping-configuration
 [mapped superclasses]: https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html#mapped-superclasses
