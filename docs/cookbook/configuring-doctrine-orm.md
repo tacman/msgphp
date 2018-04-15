@@ -150,8 +150,8 @@ class SomeEntity extends BaseSomeEntity
 
 ### Without Automatic Hydration
 
-To hydrate the primitive identifier value instead of a value object, the type can be configured regularly. Without
-nullability it requires to couple with a known identifier class. [Read more](../infrastructure/doctrine-orm.md#hydration).
+To hydrate the primitive identifier value instead of a value object, the type can be configured regularly. It requires
+to couple with a known identifier class. [Read more](../infrastructure/doctrine-orm.md#hydration).
 
 ```php
 <?php
@@ -161,6 +161,7 @@ nullability it requires to couple with a known identifier class. [Read more](../
 class SomeEntity extends BaseSomeEntity
 {
     /**
+     * @var int|null
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
