@@ -20,20 +20,20 @@ of [identity](../identities.md) value can be passed as `$id`.
 
 ### `identify(string $class, $value): DomainIdInterface`
 
-Returns a factorized [identifier](../identifiers.md) for the given entity class from a known primitive value.
+Returns a factorized [domain identifier](../identifiers.md) for the given entity class from a known primitive value.
 
 ---
 
 ### `nextIdentifier(string $class): DomainIdInterface`
 
-Returns the nex [identifier](../identifiers.md) for the given entity class. Depending on the implementation its value
-might be considered empty if it's not capable to calculate one upfront.
+Returns the next [domain identifier](../identifiers.md) for the given entity class. Depending on the implementation its
+value might be considered empty if it's not capable to calculate one upfront.
 
 ## Implementations
 
 ### `MsgPhp\Domain\Factory\EntityAwareFactory`
 
-A generic entity factory. It decorates any object factory and is based on a known [identity mapping](../identity-mapping.md)
+A generic entity factory. It decorates any object factory and uses the [domain identity mapping](../identity-mapping.md)
 as well as a known entity to identifier class mapping.
 
 - `__construct(DomainObjectFactoryInterface $factory, DomainIdentityMappingInterface $identityMapping, array $identifierMapping = [])`
