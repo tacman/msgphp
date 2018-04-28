@@ -1,16 +1,12 @@
 # Bundle Installation
 
 The project bundles are tailored to the [Symfony Framework] and designed to be used standalone. Its main purpose is to
-provide the application with services, based on minimal configuration and to be used with [dependency injection]. In
-general [autowiring] is leveraged in an effort to favor convention over configuration where possible.
+enable a specific domain layer within an application.
 
-Various services might be created depending on other enabled bundles. If a supported bundle is enabled its available
-infrastructural services are created automatically.
-
-## Available bundles
+## Available Bundles
 
 <!--ref-start:available-bundles-->
-- `msgphp/eav-bundle`: Basic entity-attribute-value management (the `Eav` domain)
+- `msgphp/eav-bundle`: Basic entity-attribute-value management (the `EAV` domain)
 - `msgphp/user-bundle`: Basic user management (the `User` domain)
 <!--ref-end:available-bundles-->
 
@@ -32,7 +28,7 @@ By default a bundle provides the following minimal configuration:
 ```yaml
 # config/packages/msgphp_<name>.yaml
 
-msgphp_<name>:
+msgphp_<name>: # e.g. "msgphp_user"
     class_mapping: []
     id_type_mapping: []
     default_id_type: integer
@@ -52,7 +48,7 @@ msgphp_<name>:
         MsgPhp\SomeClass: App\SomeClass
 ```
 
-The class mapping applies when working with an [object factory](../ddd/factory/object.md#).
+The class mapping applies when working with an [object factory](../ddd/factory/object.md).
 
 Depending on the bundle a specific class mapping entry might enable one of the bundle its features which is otherwise
 disabled by default.
@@ -67,16 +63,17 @@ It ensures a default class mapping entry is added which maps the identifier to a
 ```yaml
 msgphp_<name>:
     id_type_mapping:
-        MsgPhp\SomeDomainIdInterface: some_type_name
+        MsgPhp\SomeDomain\SomeIdInterface: some_type_name
 ```
 
-By convention any [Doctrine DBAL type] can be used. Additionally the following UUID types are detected as well:
+See also the [reference](../reference/identifiers.md) page for all available identifiers provided per domain.
+
+By convention any [Doctrine DBAL type] can be used for a type name. Additionally the following UUID types are detected
+as well:
 
 - `uuid`
 - `uuid_binary`
 - `uuid_binary_ordered_time`
-
-See also the [reference](../reference/identifiers.md) page for all available identifiers provided per domain.
 
 ### `default_id_type`
 
@@ -104,7 +101,7 @@ msgphp_<name>:
         MsgPhp\SomeOtherCommand: false
 ```
 
-## Basic configuration example
+## Basic Configuration Example
 
 Given a bundle provides the following domain identifiers:
 
