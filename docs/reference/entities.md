@@ -57,9 +57,6 @@ Class | Abstract
 
 ### Entity Features
 
-- `MsgPhp\User\Entity\Features\AbstractCredential`
-- `MsgPhp\User\Entity\Features\AbstractPasswordCredential`
-- `MsgPhp\User\Entity\Features\AbstractSaltedPasswordCredential`
 - `MsgPhp\User\Entity\Features\EmailCredential`
 - `MsgPhp\User\Entity\Features\EmailPasswordCredential`
 - `MsgPhp\User\Entity\Features\EmailSaltedPasswordCredential`

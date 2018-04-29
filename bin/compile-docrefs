@@ -37,7 +37,9 @@ $msgphpGlobal = function(): array {
             }, glob(dirname($file).'/Entity/Fields/*Field.php')),
             'entity_features' => array_map(function (string $file): string {
                 return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
-            }, glob(dirname($file).'/Entity/Features/*.php')),
+            }, array_filter(glob(dirname($file).'/Entity/Features/*.php'), function (string $file): bool {
+                return 'Abstract' !== substr(basename($file), 0, 8);
+            })),
         ];
     }
 
