@@ -54,7 +54,7 @@ after_success:
 cache:
   directories:
     - $HOME/.composer/cache/files/
-    - var/
+    - var/cache/
 
 branches:
   only:
