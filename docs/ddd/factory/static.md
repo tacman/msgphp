@@ -42,6 +42,7 @@ Factorizes a [collection](../collections.md).
 ```php
 <?php
 
+use Doctrine\Common\Collections\ArrayCollection;
 use MsgPhp\Domain\DomainCollection;
 use MsgPhp\Domain\Factory\DomainCollectionFactory;
 use MsgPhp\Domain\Infra\Doctrine\DomainCollection as DoctrineDomainCollection;
@@ -52,5 +53,5 @@ use MsgPhp\Domain\Infra\Doctrine\DomainCollection as DoctrineDomainCollection;
 $collection = DomainCollectionFactory::create([1, 2, 3]);
 
 /** @var DoctrineDomainCollection $collection */
-$collection = DomainCollectionFactory::create([1, 2, 3]);
+$collection = DomainCollectionFactory::create(new ArrayCollection([1, 2, 3]));
 ```
