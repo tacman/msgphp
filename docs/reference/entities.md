@@ -2,7 +2,8 @@
 
 Reference of available [entities](../ddd/entities.md) per domain.
 
-## Base Domain
+<!--ref-start:entities-->
+## `msgphp/domain`
 
 ### Entity Fields
 
@@ -15,36 +16,36 @@ Reference of available [entities](../ddd/entities.md) per domain.
 - `MsgPhp\Domain\Entity\Features\CanBeConfirmed`
 - `MsgPhp\Domain\Entity\Features\CanBeEnabled`
 
----
-
-## EAV Domain
+## `msgphp/eav`
 
 ### Entities
 
-Class | Abstract | Required
---- | --- | ---
-`MsgPhp\Eav\Entity\Attribute` | ✔ | ✔
-`MsgPhp\Eav\Entity\AttributeValue` | ✔ | ✔
+Class | Abstract
+--- | ---
+`MsgPhp\Eav\Entity\Attribute` | ✔
+`MsgPhp\Eav\Entity\AttributeValue` | ✔
 
 ### Entity Fields
 
-- `MsgPhp\Eav\Entity\Fields\AttributesField`
 - `MsgPhp\Eav\Entity\Fields\AttributeValueField`
+- `MsgPhp\Eav\Entity\Fields\AttributesField`
 
----
+### Entity Features
 
-## User Domain
+- No features available
+
+## `msgphp/user`
 
 ### Entities
 
-Class | Abstract | Required
---- | --- | ---
-`MsgPhp\User\Entity\Role` | ✔ | ✗
-`MsgPhp\User\Entity\User` | ✔ | ✔
-`MsgPhp\User\Entity\UserAttributeValue` | ✔ | ✗
-`MsgPhp\User\Entity\UserEmail` | ✔ | ✗
-`MsgPhp\User\Entity\Username` | ✗ | ✗
-`MsgPhp\User\Entity\UserRole` | ✔ | ✗
+Class | Abstract
+--- | ---
+`MsgPhp\User\Entity\Role` | ✔
+`MsgPhp\User\Entity\User` | ✔
+`MsgPhp\User\Entity\UserAttributeValue` | ✔
+`MsgPhp\User\Entity\UserEmail` | ✔
+`MsgPhp\User\Entity\UserRole` | ✔
+`MsgPhp\User\Entity\Username` | ✗
 
 ### Entity Fields
 
@@ -56,14 +57,15 @@ Class | Abstract | Required
 
 ### Entity Features
 
-- `MsgPhp\User\Entity\Features\ResettablePassword`
-
-#### Credential Types
-
+- `MsgPhp\User\Entity\Features\AbstractCredential`
+- `MsgPhp\User\Entity\Features\AbstractPasswordCredential`
+- `MsgPhp\User\Entity\Features\AbstractSaltedPasswordCredential`
 - `MsgPhp\User\Entity\Features\EmailCredential`
 - `MsgPhp\User\Entity\Features\EmailPasswordCredential`
 - `MsgPhp\User\Entity\Features\EmailSaltedPasswordCredential`
 - `MsgPhp\User\Entity\Features\NicknameCredential`
 - `MsgPhp\User\Entity\Features\NicknamePasswordCredential`
 - `MsgPhp\User\Entity\Features\NicknameSaltedPasswordCredential`
+- `MsgPhp\User\Entity\Features\ResettablePassword`
 - `MsgPhp\User\Entity\Features\TokenCredential`
+<!--ref-end:entities-->

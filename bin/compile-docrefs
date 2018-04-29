@@ -13,16 +13,53 @@ if (!is_file('vendor/autoload.php')) {
 
 require 'vendor/autoload.php';
 
-$getTemplate = function (string $file) {
+$msgphpGlobal = function(): array {
+    $result = ['domains' => [], 'bundles' => []];
+    foreach (glob('src/*/composer.json') as $file) {
+        $package = json_decode(file_get_contents($file));
+        if ('-bundle' === substr($package->name, -7)) {
+            $result['bundles'][$package->name] = [
+                'package' => $package,
+            ];
+            continue;
+        }
+
+        $result['domains'][$package->name] = [
+            'package' => $package,
+            'entities' => array_map(function (string $file): array {
+                return [
+                    'class' => $class = 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4)),
+                    'abstract' => (new \ReflectionClass($class))->isAbstract(),
+                ];
+            }, glob(dirname($file).'/Entity/*.php')),
+            'entity_fields' => array_map(function (string $file): string {
+                return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
+            }, glob(dirname($file).'/Entity/Fields/*Field.php')),
+            'entity_features' => array_map(function (string $file): string {
+                return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
+            }, glob(dirname($file).'/Entity/Features/*.php')),
+        ];
+    }
+
+    ksort($result['domains']);
+    ksort($result['bundles']);
+
+    $result['domains'] = [$k = 'msgphp/domain' => $result['domains'][$k]] + $result['domains'];
+
+    return $result;
+};
+
+$getTemplate = function (string $file) use ($msgphpGlobal): array {
     $oldBaseDir = getcwd();
     chdir(dirname(__DIR__));
+    extract(['msgphp' => $msgphpGlobal()]);
     $template = include $file;
     chdir($oldBaseDir);
 
     return $template;
 };
-$templates = $templateVars = [];
 
+$templates = $templateVars = [];
 foreach (glob('docs/.refs/*.php') as $reference) {
     $vars = $getTemplate($reference);
     $templates[$name = basename($reference, '.php')] = array_shift($vars);
@@ -30,6 +67,7 @@ foreach (glob('docs/.refs/*.php') as $reference) {
 }
 
 $twig = new Environment(new ArrayLoader($templates));
+$twig->addGlobal('msgphp', $msgphpGlobal());
 $replacements = [];
 
 foreach (array_keys($templates) as $template) {
@@ -37,6 +75,7 @@ foreach (array_keys($templates) as $template) {
     $to = $start."\n".trim($twig->render($template, $templateVars[$template]))."\n".$end;
     $replacements[$from] = $to;
 }
+
 foreach (glob('docs/{*,**/*}.md', \GLOB_BRACE) as $file) {
     file_put_contents($file, preg_replace(array_keys($replacements), array_values($replacements), file_get_contents($file)));
 }
