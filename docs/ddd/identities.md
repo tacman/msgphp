@@ -69,7 +69,7 @@ Returns a composite identity value for `$class` from `$value`.
 Returns the actual, non empty, identifier values of `$object`. Each identifier value is keyed by its corresponding
 identifier field name. See also `DomainIdentityMappingInterface::getIdentity()`.
 
-## Basic example
+## Basic Example
 
 ```php
 <?php

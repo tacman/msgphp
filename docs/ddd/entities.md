@@ -52,5 +52,36 @@ Provides ability to toggle an entity its availability state.
 - `disable(): void`
     - Sets `$enabled` to `false`
 
+## Basic Example
+
+```php
+<?php
+
+use MsgPhp\Domain\Entity\Fields\CreatedAtField;
+use MsgPhp\Domain\Entity\Features\CanBeEnabled;
+
+// --- SETUP ---
+
+class MyEntity
+{
+    use CreatedAtField;
+    use CanBeEnabled;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
+}
+
+// --- USAGE ---
+
+$entity = new MyEntity();
+$createdAt = $entity->getCreatedAt();
+
+if (!$entity->isEnabled()) {
+    $entity->enable();
+}
+```
+
 [POPO]: https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean
 [traits]: https://secure.php.net/traits
