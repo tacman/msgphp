@@ -11,7 +11,6 @@ mkdir -p "${DIR}"
 
 rm -rf var/cache/api
 bin/sami update .sami.dist
-[[ $? -ne 0 ]] && exit 1
 
 bin/mkdocs build
 [[ $? -ne 0 ]] && exit 1
