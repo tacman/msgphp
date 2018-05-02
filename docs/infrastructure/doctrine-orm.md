@@ -31,7 +31,7 @@ $mapping = new DomainIdentityMapping($em);
 
 ## Domain Repository
 
-A Doctrine tailored [repository trait](../ddd/repositories.md) is provided by
+A Doctrine tailored [domain repository trait](../ddd/repositories.md) is provided by
 `MsgPhp\Domain\Infra\Doctrine\DomainEntityRepositoryTrait`. It uses Doctrine's [`EntityManagerInterface`][api-em] as
 underlying persistence layer.
 
@@ -163,9 +163,9 @@ $otherEntity = $factory->create(MyEntity::class, [
 ]);
 ```
 
-## Hydration
+## Domain Identifier Hydration
 
-When working with [identifiers](../ddd/identifiers.md) and the corresponding [type](doctrine-dbal.md#domain-identifier-type)
+When working with [domain identifiers](../ddd/identifiers.md) and its corresponding [type](doctrine-dbal.md#domain-identifier-type)
 a problem might occur when hydrating scalar values, e.g. using [`Query::getScalarResult()`][api-query-getscalarresult];
 it would return instances of `MsgPhp\Domain\DomainIdInterface` that can only be casted to string as its (true) scalar
 value (due to `__toString()`). In case the underlying data type is e.g. `integer` we'll lose it.

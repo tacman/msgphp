@@ -63,8 +63,7 @@ msgphp_<name>:
 
 ## Mapping Identifiers
 
-When an entity object is identified using a [domain identifier](../ddd/identifiers.md) we must configure it accordingly.
-[Read more](../infrastructure/doctrine-dbal.md#domain-identifier-type).
+When an entity object is identified using a [domain identifier](../ddd/identifiers.md) we must configure it accordingly:
 
 ```php
 <?php
@@ -89,7 +88,14 @@ class SomeEntity extends BaseSomeEntity
     See the [reference](../reference/doctrine-identifier-types.md) page for all available identifier types provided per
     domain
 
-Note when using an identifier that is able to calculate a value upfront the `@ORM\GeneratedValue()` is not necessary.
+!!! note
+    When using an identifier that is able to calculate a value upfront (e.g. UUIDs) the `@ORM\GeneratedValue()` is not
+    necessary
+
+!!! info
+    [Read more](../infrastructure/doctrine-dbal.md#domain-identifier-type) about the Doctrine domain identifier type
+
+### Custom Identifiers
 
 In case a custom implementation is used it should be configured accordingly:
 
@@ -101,9 +107,6 @@ msgphp_<name>:
     id_type_mapping:
         MsgPhp\SomeDomain\SomeIdInterface: bigint
 ```
-
-!!! note
-    See the [reference](../reference/identifiers.md) page for all available identifiers provided per domain
 
 ### Without Nullability
 
@@ -156,7 +159,7 @@ class SomeEntity extends BaseSomeEntity
 ### Without Automatic Hydration
 
 To hydrate the primitive identifier value instead of a value object, the type can be configured regularly. It requires
-to couple with a known identifier class. [Read more](../infrastructure/doctrine-orm.md#hydration).
+to couple with a known identifier class.
 
 ```php
 <?php
@@ -184,6 +187,9 @@ class SomeEntity extends BaseSomeEntity
     }
 }
 ```
+
+!!! info
+    [Read more](../infrastructure/doctrine-orm.md#domain-identifier-hydration) about Doctrine identifier hydration
 
 ## Database Setup
 
