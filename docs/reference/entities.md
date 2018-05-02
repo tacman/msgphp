@@ -64,4 +64,5 @@ Class | Abstract
 - `MsgPhp\User\Entity\Features\NicknameSaltedPasswordCredential`
 - `MsgPhp\User\Entity\Features\ResettablePassword`
 - `MsgPhp\User\Entity\Features\TokenCredential`
+
 <!--ref-end:entities-->

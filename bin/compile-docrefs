@@ -17,15 +17,14 @@ $msgphpGlobal = function(): array {
     $result = ['domains' => [], 'bundles' => []];
     foreach (glob('src/*/composer.json') as $file) {
         $package = json_decode(file_get_contents($file));
+        $entry = ['path' => dirname($file), 'package' => $package];
+
         if ('-bundle' === substr($package->name, -7)) {
-            $result['bundles'][$package->name] = [
-                'package' => $package,
-            ];
+            $result['bundles'][$package->name] = $entry;
             continue;
         }
 
-        $result['domains'][$package->name] = [
-            'package' => $package,
+        $result['domains'][$package->name] = $entry + [
             'entities' => array_map(function (string $file): array {
                 return [
                     'class' => $class = 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4)),
@@ -40,6 +39,13 @@ $msgphpGlobal = function(): array {
             }, array_filter(glob(dirname($file).'/Entity/Features/*.php'), function (string $file): bool {
                 return 'Abstract' !== substr(basename($file), 0, 8);
             })),
+            'identifiers' => array_map(function (string $file): array {
+                return [
+                    'class' => $class = 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4)),
+                    'scalar' => class_exists($scalar = substr($class, 0, -9)) ? $scalar : null,
+                    'uuid' => class_exists($uuid = 'MsgPhp\\'.basename(dirname($file)).'\\Infra\\Uuid\\'.basename($file, 'Interface.php')) ? $uuid : null,
+                ];
+            }, glob(dirname($file).'/*IdInterface.php')),
         ];
     }
 
@@ -74,7 +80,7 @@ $replacements = [];
 
 foreach (array_keys($templates) as $template) {
     $from = '~'.preg_quote($start = '<!--ref-start:'.$template.'-->', '~').'.*'.preg_quote($end = '<!--ref-end:'.$template.'-->', '~').'~s';
-    $to = $start."\n".trim($twig->render($template, $templateVars[$template]))."\n".$end;
+    $to = $start."\n".$twig->render($template, $templateVars[$template]).$end;
     $replacements[$from] = $to;
 }
 

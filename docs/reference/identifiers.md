@@ -2,27 +2,39 @@
 
 Reference of available [identifiers](../ddd/identifiers.md) per domain.
 
-## Base Domain
+<!--ref-start:identifiers-->
+## `msgphp/domain`
 
-- `MsgPhp\Domain\DomainIdInterface`
-    - Scalar types: `MsgPhp\Domain\DomainId`
-    - UUID types: `MsgPhp\Domain\Infra\Uuid\DomainId`
+### `MsgPhp\Domain\DomainIdInterface`
 
----
+Primitive type | Implementation
+--- | ---
+Scalar | `MsgPhp\Domain\DomainId`
+UUID | `MsgPhp\Domain\Infra\Uuid\DomainId`
 
-## EAV Domain
+## `msgphp/eav`
 
-- `MsgPhp\Eav\AttributeIdInterface`
-    - Scalar types: `MsgPhp\Eav\AttributeId`
-    - UUID types: `MsgPhp\Eav\Infra\Uuid\AttributeId`
-- `MsgPhp\Eav\AttributeValueIdInterface`
-    - Scalar types: `MsgPhp\Eav\AttributeValueId`
-    - UUID types: `MsgPhp\Eav\Infra\Uuid\AttributeValueId`
+### `MsgPhp\Eav\AttributeIdInterface`
 
----
+Primitive type | Implementation
+--- | ---
+Scalar | `MsgPhp\Eav\AttributeId`
+UUID | `MsgPhp\Eav\Infra\Uuid\AttributeId`
 
-## User Domain
+### `MsgPhp\Eav\AttributeValueIdInterface`
 
-- `MsgPhp\User\UserIdInterface`
-    - Scalar types: `MsgPhp\User\UserId`
-    - UUID types: `MsgPhp\User\Infra\Uuid\UserId`
+Primitive type | Implementation
+--- | ---
+Scalar | `MsgPhp\Eav\AttributeValueId`
+UUID | `MsgPhp\Eav\Infra\Uuid\AttributeValueId`
+
+## `msgphp/user`
+
+### `MsgPhp\User\UserIdInterface`
+
+Primitive type | Implementation
+--- | ---
+Scalar | `MsgPhp\User\UserId`
+UUID | `MsgPhp\User\Infra\Uuid\UserId`
+
+<!--ref-end:identifiers-->
