@@ -22,8 +22,9 @@ default [`Type`][api-type] implementation and can be used either generic or as a
     - `$type`: A Doctrine type name to use as underlying data type. If not set `Type::INTEGER` is used.
 - `static getDataType(): string`
 
-See also the [reference](../reference/doctrine-identifier-types.md) page for all available identifier types provided per
-domain.
+!!! note
+    See the [reference](../reference/doctrine-identifier-types.md) page for all available identifier types provided per
+    domain
 
 ### Basic example
 

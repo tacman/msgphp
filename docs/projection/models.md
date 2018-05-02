@@ -9,7 +9,8 @@ considered read-only and disposable, as they can be re-created / synchronized at
 A practical use case for domain projections are APIs, where each API resource is a so called projection from a
 corresponding entity. It enables decoupling and thus optimized API responses.
 
-For integration with [API Platform] see also the [domain projection data provider](../infrastructure/api-platform.md#domain-projection-data-provider).
+!!! info
+    For integration with [API Platform] see the [domain projection data provider](../infrastructure/api-platform.md#domain-projection-data-provider)
 
 ## API
 

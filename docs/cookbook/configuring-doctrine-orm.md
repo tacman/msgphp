@@ -17,7 +17,8 @@ See the Doctrine Bundle [recipe configuration] for the minimal configuration to 
 
 Although the examples use annotation based mappings, you are not required to do so. [Read more][doctrine-bundle-mapping-config].
 
-_The configuration is added automatically when using Symfony Flex._
+!!! info
+    The configuration is automatically added when using Symfony Flex
 
 ## Mapping Entities
 
@@ -50,13 +51,15 @@ msgphp_<name>:
         MsgPhp\SomeDomain\Entity\SomeEntity: App\Entity\SomeEntity
 ```
 
-See also the [reference](../reference/entities.md) page for all available entities provided per domain.
+!!! note
+    See the [reference](../reference/entities.md) page for all available entities provided per domain
 
-When using a default entity _field-_ or _feature-trait_ its ORM mapping is configured automatically. You can override it
-on a per-property basis.
+!!! info
+    When using a default entity _field-_ or _feature-trait_ a default ORM mapping is configured automatically
 
-_The required entities of a MsgPHP bundle are automatically created, including ORM mapping and configuration, when using
-Symfony Flex._
+!!! info
+    When using Symfony Flex the required entities of a MsgPHP bundle are automatically created, including ORM mapping
+    and configuration
 
 ## Mapping Identifiers
 
@@ -82,8 +85,9 @@ class SomeEntity extends BaseSomeEntity
 }
 ```
 
-See also the [reference](../reference/doctrine-identifier-types.md) page for all available identifier types provided per
-domain.
+!!! note
+    See the [reference](../reference/doctrine-identifier-types.md) page for all available identifier types provided per
+    domain
 
 Note when using an identifier that is able to calculate a value upfront the `@ORM\GeneratedValue()` is not necessary.
 
@@ -98,7 +102,8 @@ msgphp_<name>:
         MsgPhp\SomeDomain\SomeIdInterface: bigint
 ```
 
-See also the [reference](../reference/identifiers.md) page for all available identifiers provided per domain.
+!!! note
+    See the [reference](../reference/identifiers.md) page for all available identifiers provided per domain
 
 ### Without Nullability
 

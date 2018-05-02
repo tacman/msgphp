@@ -8,9 +8,9 @@ theme:
     name: material
     custom_dir: docs/.theme
 extra_css: [style.css]
-
 markdown_extensions:
-    - codehilite
+  - codehilite # https://squidfunk.github.io/mkdocs-material/extensions/codehilite/
+  - admonition # https://squidfunk.github.io/mkdocs-material/extensions/admonition/
 
 pages:
 - Home: index.md

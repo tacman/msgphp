@@ -11,13 +11,14 @@ It uses any [projection repository](../projection/repositories.md) in an effort 
 
 ### Minimal configuration
 
-See also [API Platform Configuration].
-
 ```yaml
 api_platform:
     resource_class_directories:
         - '%kernel.project_dir%/src/Api/Projection'
 ```
+
+!!! note
+    See also [API Platform Configuration] documentation
 
 ### Basic example
 

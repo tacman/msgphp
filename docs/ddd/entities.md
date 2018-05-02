@@ -7,7 +7,8 @@ features represent a read/write-operation.
 They are defined in a dedicated namespace for discovery, respectively `Msgphp\Domain\Entity\Fields\` and
 `MsgPhp\Domain\Entity\Features\`. Additionally more specific fields and features can be provided per domain layer.
 
-See also the [reference](../reference/entities.md) page for all available entities provided per domain.
+!!! note
+    See the [reference](../reference/entities.md) page for all available entities provided per domain
 
 ## Entity Fields
 

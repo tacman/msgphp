@@ -16,10 +16,9 @@ enable a specific domain layer within an application.
 composer require msgphp/<name>-bundle
 ```
 
-### With Symfony Flex
-
-When [Symfony Flex] is used to mange your Symfony application the minimal bundle configuration is created for you
-automatically based on [MsgPHP recipes].
+!!! info
+    When [Symfony Flex] is used to mange your Symfony application the minimal bundle configuration is created for you
+    automatically based on [MsgPHP recipes]
 
 ## Configuration
 
@@ -35,8 +34,10 @@ msgphp_<name>: # e.g. "msgphp_user"
     commands: []
 ```
 
-Depending on your personal preference you can also write the configuration in any other supported format. See the
-[demo configuration] for a more advanced example.
+Depending on your personal preference you can also write the configuration in any other supported format.
+
+!!! info
+    See the [demo configuration] for a more advanced example
 
 ### `class_mapping`
 
@@ -66,7 +67,8 @@ msgphp_<name>:
         MsgPhp\SomeDomain\SomeIdInterface: some_type_name
 ```
 
-See also the [reference](../reference/identifiers.md) page for all available identifiers provided per domain.
+!!! note
+    See the [reference](../reference/identifiers.md) page for all available identifiers provided per domain
 
 By convention any [Doctrine DBAL type] can be used for a type name. Additionally the following UUID types are detected
 as well:
