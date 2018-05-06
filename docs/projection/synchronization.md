@@ -21,6 +21,7 @@ read from [`ProjectionDocument::$status`][api-projection-document-status].
 <?php
 
 use MsgPhp\Domain\Projection\DomainProjectionDocument;
+use MsgPhp\Domain\Projection\DomainProjectionDocumentProvider;
 use MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface;
 use MsgPhp\Domain\Projection\DomainProjectionRepositoryInterface;
 use MsgPhp\Domain\Projection\DomainProjectionSynchronization;
@@ -38,23 +39,24 @@ class MyEntity
     }
 }
 
-/** @var DomainProjectionDocumentTransformerInterface $transformer */
-$transformer = ...;
 /** @var DomainProjectionTypeRegistryInterface $typeRegistry */
 $typeRegistry = ...;
 /** @var DomainProjectionRepositoryInterface $repository */
 $repository = ...;
-$synchronization = new DomainProjectionSynchronization($typeRegistry, $repository, $transformer, [
+/** @var DomainProjectionDocumentTransformerInterface $transformer */
+$transformer = ...;
+$provider = new DomainProjectionDocumentProvider($transformer, [
     function (): iterable {
         yield new MyEntity(1);
         yield new MyEntity(2);
     },
 ]);
+$synchronization = new DomainProjectionSynchronization($typeRegistry, $repository, $provider);
 
 // --- USAGE ---
 
 foreach ($synchronization->synchronize() as $document) {
-    if (DomainProjectionDocument::STATUS_VALID === $document->status) {
+    if (DomainProjectionDocument::STATUS_SYNCHRONIZED === $document->status) {
         echo 'Synchronized projection for '.get_class($document->source).' with ID '.$document->source->id.PHP_EOL;
         continue;
     }

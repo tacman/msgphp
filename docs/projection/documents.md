@@ -8,7 +8,7 @@ is to hold a projection document its data and current state.
 ### Properties
 
 - `int $status`: The current document status. See also [default statuses][api-statuses].
-- `?\Exception $error`: An occurred error, if any
+- `?\Throwable $error`: An occurred error, if any
 - `?object $source`: The origin object source, if any
 
 ---
@@ -40,8 +40,8 @@ Transforms the document into its projection model.
 ```php
 <?php
 
-use MsgPhp\Domain\Projection\DomainProjectionInterface;
 use MsgPhp\Domain\Projection\DomainProjectionDocument;
+use MsgPhp\Domain\Projection\DomainProjectionInterface;
 
 // --- SETUP ---
 
