@@ -29,9 +29,9 @@ Saves a projection document. The document will be available on any subsequent qu
 
 ---
 
-### `delete(DomainProjectionDocument $document): void`
+### `delete(string $type, string $id): void`
 
-Deletes a projection document. The document will be unavailable on any subsequent query.
+Deletes a projection document by type and ID. The document will be unavailable on any subsequent query.
 
 ## Implementations
 
