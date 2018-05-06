@@ -8,9 +8,14 @@ fi
 REV=$(git rev-parse --abbrev-ref --short --verify HEAD)
 DIR="var/docs"
 mkdir -p "${DIR}"
-
 rm -rf var/cache/api
-bin/sami update .sami.dist
+
+lando version >/dev/null 2>&1
+if [[ $? -eq 0 ]] ; then
+    lando bash "bin/sami update .sami.dist"
+else
+    bin/sami update .sami.dist
+fi
 
 bin/mkdocs build
 [[ $? -ne 0 ]] && exit 1
