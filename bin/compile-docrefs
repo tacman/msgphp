@@ -46,6 +46,9 @@ $msgphpGlobal = function(): array {
                     'uuid' => class_exists($uuid = 'MsgPhp\\'.basename(dirname($file)).'\\Infra\\Uuid\\'.basename($file, 'Interface.php')) ? $uuid : null,
                 ];
             }, glob(dirname($file).'/*IdInterface.php')),
+            'repositories' => array_map(function (string $file): string {
+                return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
+            }, glob(dirname($file).'/Repository/*RepositoryInterface.php')),
         ];
     }
 

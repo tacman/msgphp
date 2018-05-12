@@ -56,4 +56,5 @@ pages:
 - Reference:
     - Domain Identifiers: reference/identifiers.md
     - Domain Entities: reference/entities.md
+    - Domain Repositories: reference/repositories.md
     - Doctrine Identifier Types: reference/doctrine-identifier-types.md

@@ -3,6 +3,9 @@
 A domain repository is not interface bound by default. Instead you can leverage a utility trait, tied to specific
 infrastructure (e.g. Doctrine), to rapidly create one. This page describes the API provided by default [implementations](#implementations).
 
+!!! note
+    See the [reference](../reference/repositories.md) page for all available repositories provided per domain
+
 ## API
 
 ### `doFindAll(int $offset = 0, int $limit = 0): DomainCollectionInterface`
