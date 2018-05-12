@@ -22,22 +22,7 @@ composer require msgphp/<name>-bundle
 
 ## Configuration
 
-By default a bundle provides the following minimal configuration:
-
-```yaml
-# config/packages/msgphp_<name>.yaml
-
-msgphp_<name>: # e.g. "msgphp_user"
-    class_mapping: []
-    id_type_mapping: []
-    default_id_type: integer
-    commands: []
-```
-
-Depending on your personal preference you can also write the configuration in any other supported format.
-
-!!! info
-    See the [demo configuration] for a more advanced example
+A bundle provides the following configuration nodes by default:
 
 ### `class_mapping`
 
@@ -79,11 +64,11 @@ as well:
 
 ### `default_id_type`
 
-Configures a default type name to use for all known domain identifiers provided by the bundle.
+Configures a default type name to use for all known domain identifiers provided by the bundle. See also [`id_type_mapping`](#id_type_mapping).
 
 ```yaml
 msgphp_<name>:
-    default_id_type: uuid
+    default_id_type: integer
 ```
 
 ### `commands`
@@ -107,29 +92,32 @@ msgphp_<name>:
 
 Given a bundle provides the following domain identifiers:
 
-- `MsgPhp\FooIdInterface`
-- `MsgPhp\BarIdInterface`
-- `MsgPhp\BazIdInterface`
+- `MsgPhp\SomeDomain\FooIdInterface`
+- `MsgPhp\SomeDomain\BarIdInterface`
+- `MsgPhp\SomeDomain\BazIdInterface`
 
 ```yaml
 msgphp_<name>:
     default_id_type: uuid
     id_type_mapping:
-        MsgPhp\FooIdInterface: integer
+        MsgPhp\SomeDomain\FooIdInterface: integer
         # implied:
-        # MsgPhp\BarIdInterface: uuid
-        # MsgPhp\BazIdInterface: uuid
+        # MsgPhp\SomeDomain\BarIdInterface: uuid
+        # MsgPhp\SomeDomain\BazIdInterface: uuid
     class_mapping:
-        MsgPhp\BarIdInterface: App\MyBarUuid
+        MsgPhp\SomeDomain\BarIdInterface: App\MyBarUuid
         # implied:
-        # MsgPhp\FooIdInterface: MsgPhp\Domain\DomainId
-        # MsgPhp\BazIdInterface: MsgPhp\Domain\Infra\Uuid\DomainId
+        # MsgPhp\SomeDomain\FooIdInterface: MsgPhp\SomeDomain\FooId
+        # MsgPhp\SomeDomain\BazIdInterface: MsgPhp\SomeDomain\Infra\Uuid\BazId
 ```
+
+!!! info
+    See also the [demo application configuration]
 
 [Symfony Framework]: https://symfony.com/
 [dependency injection]: https://symfony.com/doc/current/components/dependency_injection.html
 [Symfony Flex]: https://symfony.com/doc/current/setup/flex.html
 [MsgPHP recipes]: https://github.com/symfony/recipes-contrib/tree/master/msgphp
 [autowiring]: https://symfony.com/doc/current/service_container/autowiring.html
-[demo configuration]: https://github.com/msgphp/symfony-demo-app/blob/master/config/packages/msgphp.php
+[demo application configuration]: https://github.com/msgphp/symfony-demo-app/blob/master/config/packages/msgphp.php
 [Doctrine DBAL type]: http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/types.html
