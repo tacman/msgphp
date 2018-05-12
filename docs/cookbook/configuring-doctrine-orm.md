@@ -46,16 +46,15 @@ Let MsgPHP know about your entity:
 
 ```yaml
 msgphp_<name>:
-    # ...
     class_mapping:
         MsgPhp\SomeDomain\Entity\SomeEntity: App\Entity\SomeEntity
+
+    # ...
 ```
 
 !!! note
-    See the [reference](../reference/entities.md) page for all available entities provided per domain
-
-!!! info
-    When using a default entity _field-_ or _feature-trait_ a default ORM mapping is configured automatically
+    See the [reference](../reference/entities.md) page for all available entities provided per domain. When using a
+    entity field / feature trait its default ORM mapping is configured automatically.
 
 !!! info
     When using Symfony Flex the required entities of a MsgPHP bundle are automatically created, including ORM mapping
@@ -101,11 +100,12 @@ In case a custom implementation is used it should be configured accordingly:
 
 ```yaml
 msgphp_<name>:
-    # ...
     class_mapping:
         MsgPhp\SomeDomain\SomeIdInterface: App\SomeId
     id_type_mapping:
         MsgPhp\SomeDomain\SomeIdInterface: bigint
+
+    # ...
 ```
 
 ### Without Nullability
@@ -220,9 +220,9 @@ To change the default entity manager used by MsgPHP, override its alias service:
 # config/services.yaml
 
 services:
-    # ...
-
     msgphp.doctrine.entity_manager: '@doctrine.orm.some_entity_manager'
+
+    # ...
 ```
 
 [recipe configuration]: https://github.com/symfony/recipes/blob/master/doctrine/doctrine-bundle/1.6/config/packages/doctrine.yaml

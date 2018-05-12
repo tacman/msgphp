@@ -99,8 +99,8 @@ can be explicitly enabled or disabled by command.
 ```yaml
 msgphp_<name>:
     commands:
-        MsgPhp\SomeCommand: true
-        MsgPhp\SomeOtherCommand: false
+        MsgPhp\SomeDomain\Command\SomeCommand: true
+        MsgPhp\SomeDomain\Command\SomeOtherCommand: false
 ```
 
 ## Basic Configuration Example
