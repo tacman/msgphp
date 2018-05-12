@@ -18,7 +18,7 @@ if [[ -f composer.lock ]] ; then
 else
     composer create-project --prefer-dist --quiet symfony/skeleton . && \
     composer config extra.symfony.allow-contrib true && \
-    composer require --prefer-dist --quiet orm symfony/messenger:@dev
+    composer require --prefer-dist --quiet orm
 fi
 [[ $? -ne 0 ]] && exit 1
 popd &> /dev/null
