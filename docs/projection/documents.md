@@ -9,7 +9,7 @@ is to hold a projection document its data and current state.
 
 - `int $status`: The current document status. See also [default statuses][api-statuses].
 - `?\Throwable $error`: An occurred error, if any
-- `?object $source`: The origin object source, if any
+- `?object $source`: The source object, if any
 
 ---
 
@@ -27,7 +27,7 @@ Gets the document ID, if any. Otherwise an auto-generated value is implied.
 
 ### `getBody(): array`
 
-Gets the document body.
+Gets the document data.
 
 ---
 

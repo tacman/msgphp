@@ -24,8 +24,8 @@ pages:
         - Object Factory: ddd/factory/object.md
         - Entity Aware Factory: ddd/factory/entity-aware.md
         - Static Factory: ddd/factory/static.md
-    - Repositories: ddd/repositories.md
     - Entities: ddd/entities.md
+    - Repositories: ddd/repositories.md
 - Event-Sourcing:
     - Events: event-sourcing/events.md
     - Event Handlers: event-sourcing/event-handlers.md

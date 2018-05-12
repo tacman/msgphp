@@ -73,5 +73,7 @@ if (null === $projection) {
         'some_field' => 'value',
     ]);
     $repository->save($document);
+
+    $projection = $document->toProjection();
 }
 ```

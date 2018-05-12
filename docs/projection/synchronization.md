@@ -1,19 +1,13 @@
 # Projection Synchronization
 
 `MsgPhp\Domain\Projection\DomainProjectionSynchronization` is a utility domain service. Its purpose is to ease
-synchronizing provided [projections](models.md).
-
-So called _providers_ actually provide domain objects, which are in turn transformed to [documents](documents.md) using
-any [transformer](document-transformers.md). A document is then stored using any [repository](repositories.md).
+synchronizing [projection documents](documents.md) from source objects.
 
 ## API
 
 ### `synchronize(): iterable`
 
-Yields a projection document for each provided domain object regarding its state. The actual document status can be
-read from [`ProjectionDocument::$status`][api-projection-document-status].
-
-[api-projection-document-status]: https://msgphp.github.io/api/MsgPhp/Domain/Projection/DomainProjectionDocument.html#property_status
+Yields all projection documents attempted to be synchronized. The actual document status can be read from [`ProjectionDocument::$status`][api-projection-document-status].
 
 ## Basic example
 
@@ -75,3 +69,5 @@ foreach ($synchronization->synchronize() as $document) {
 A synchronization can be ran using the CLI when working with Symfony Console.
 
 - [Read more](../infrastructure/symfony-console.md#synchronizedomainprojectionscommand)
+
+[api-projection-document-status]: https://msgphp.github.io/api/MsgPhp/Domain/Projection/DomainProjectionDocument.html#property_status

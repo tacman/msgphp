@@ -1,7 +1,7 @@
 # Projections
 
 A domain projection is a model object and bound to `MsgPhp\Domain\Projection\DomainProjectionInterface`. Its purpose is
-to convert raw model data (a document) into a projection, enabling to be stored separate.
+to convert raw model data (a document) into a projection.
 
 The document is usually a transformation from a domain object (e.g. an entity) and therefor projections should be
 considered read-only and disposable, as they can be re-created / synchronized at any time from a source of truth.
