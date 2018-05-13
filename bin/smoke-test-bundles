@@ -5,7 +5,8 @@ if [[ ! $# -eq 0 ]] ; then
     exit 1
 fi
 
-BASE_DIR="$(cd $(dirname $(dirname "$0")) && pwd)"
+bin/composer install --quiet
+[[ $? -ne 0 ]] && exit 1
 
 rm -rf var/smoke-test/bundles/*Bundle/
 if [[ ! -d var/smoke-test/bundles/base ]] ; then
@@ -23,6 +24,7 @@ fi
 [[ $? -ne 0 ]] && exit 1
 popd &> /dev/null
 
+BASE_DIR="$(cd $(dirname $(dirname "$0")) && pwd)"
 PACKAGER=""
 if [[ -f "${BASE_DIR}/packages.json" ]] ; then
     PACKAGER="${PACKAGER}composer config repositories.main composer file://${BASE_DIR}/ && "
