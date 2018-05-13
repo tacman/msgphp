@@ -1,7 +1,7 @@
 # Projection Synchronization
 
-`MsgPhp\Domain\Projection\DomainProjectionSynchronization` is a utility domain service. Its purpose is to ease
-synchronizing [projection documents](documents.md) from source objects.
+`MsgPhp\Domain\Projection\ProjectionSynchronization` is a utility domain service. Its purpose is to ease synchronizing
+[projection documents](documents.md) from source objects.
 
 ## API
 

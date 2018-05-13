@@ -31,6 +31,24 @@ class MyCommand
 {
 }
 
+class MyDomainEvent implements DomainEventInterface
+{
+}
+
+class MyEntity implements DomainEventHandlerInterface
+{
+    public function handleEvent(DomainEventInterface $event): bool
+    {
+        if ($event instanceof MyDomainEvent) {
+            // do something
+
+            return true;
+        }
+
+        return false;
+    }
+}
+
 class MyCommandHandler
 {
     use EventSourcingCommandHandlerTrait;
@@ -50,24 +68,6 @@ class MyCommandHandler
     protected function getDomainEventHandler(MyCommand $command): DomainEventHandlerInterface
     {
         return new MyEntity();
-    }
-}
-
-class MyDomainEvent implements DomainEventInterface
-{
-}
-
-class MyEntity implements DomainEventHandlerInterface
-{
-    public function handleEvent(DomainEventInterface $event): bool
-    {
-        if ($event instanceof MyDomainEvent) {
-            // do something
-
-            return true;
-        }
-
-        return false;
     }
 }
 

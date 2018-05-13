@@ -29,11 +29,11 @@ A utility trait implementing the event handler API. By convention it maps events
 ```php
 <?php
 
-use MsgPhp\Domain\Event\{DomainEventHandlerInterface, DomainEventHandlerTrait};
+use MsgPhp\Domain\Event\{DomainEventHandlerInterface, DomainEventHandlerTrait, DomainEventInterface};
 
 // --- SETUP ---
 
-class MyEvent
+class MyDomainEvent implements DomainEventInterface
 {
     public $newValue;
     
@@ -49,7 +49,7 @@ class MyEntity implements DomainEventHandlerInterface
     
     public $value;
     
-    private function handleMyEvent(MyEvent $event): bool
+    private function handleMyDomainEvent(MyDomainEvent $event): bool
     {
         if ($this->value === $event->newValue) {
             return false;
@@ -66,7 +66,7 @@ class MyEntity implements DomainEventHandlerInterface
 
 $entity = new MyEntity();
 
-if ($entity->handleEvent(new MyEvent('new value'))) {
+if ($entity->handleEvent(new MyDomainEvent('new value'))) {
     // do something
 }
 ```
