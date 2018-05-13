@@ -7,4 +7,4 @@
 - Renamed `DomainProjectionSynchronization` to `ProjectionSynchronization`
 - Updated `DomainProjectionRepositoryInterface::findAll(): DomainProjectionInterface[]` to `findAll(): ProjectionDocument[]`
 - Updated `DomainProjectionRepositoryInterface::find(): ?DomainProjectionInterface` to `find(): ?ProjectionDocument`
-- Added default domain messages (`Command\` and `Event\`)
+- Added default domain projection messages (`Command\` and `Event\`)
