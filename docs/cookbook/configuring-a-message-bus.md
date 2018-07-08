@@ -48,10 +48,10 @@ to use any other bus:
 # config/services.yaml
 
 services:
+    # ...
+
     msgphp.messenger.command_bus: '@command_bus'
     msgphp.messenger.event_bus: '@event_bus'
-
-    # ...
 ```
 
 ## Using [SimpleBus](../infrastructure/simple-bus.md)
@@ -85,10 +85,10 @@ services to use any other bus:
 # config/services.yaml
 
 services:
+    # ...
+
     msgphp.simple_bus.command_bus: '@simple_bus.command_bus'
     msgphp.simple_bus.event_bus: '@simple_bus.event_bus'
-
-    # ...
 ```
 
 ## Using A Custom Bus
@@ -99,9 +99,9 @@ To use a custom [message bus](../message-driven/message-bus.md) implementation y
 # config/services.yaml
 
 services:
-    MsgPhp\Domain\Message\DomainMessageBusInterface: '@my_bus'
-
     # ...
+
+    MsgPhp\Domain\Message\DomainMessageBusInterface: '@my_bus'
 ```
 
 !!! info

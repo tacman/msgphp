@@ -27,9 +27,9 @@ entity manager:
 # config/services.yaml
 
 services:
-    msgphp.doctrine.entity_manager: '@doctrine.orm.some_other_entity_manager'
-
     # ...
+
+    msgphp.doctrine.entity_manager: '@doctrine.orm.some_other_entity_manager'
 ```
 
 ## Mapping Entities
@@ -58,10 +58,10 @@ Let MsgPHP know about your entity:
 
 ```yaml
 msgphp_<name>:
+    # ...
+
     class_mapping:
         MsgPhp\SomeDomain\Entity\SomeEntity: App\Entity\SomeEntity
-
-    # ...
 ```
 
 !!! note
@@ -112,12 +112,12 @@ In case a custom implementation is used it should be configured accordingly:
 
 ```yaml
 msgphp_<name>:
+    # ...
+
     class_mapping:
         MsgPhp\SomeDomain\SomeIdInterface: App\SomeId
     id_type_mapping:
         MsgPhp\SomeDomain\SomeIdInterface: bigint
-
-    # ...
 ```
 
 ### Without Nullability

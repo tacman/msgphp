@@ -13,17 +13,17 @@ It uses any [projection repository](../projection/repositories.md) in an effort 
 
 ```yaml
 api_platform:
+    # ...
+
     resource_class_directories:
         - '%kernel.project_dir%/src/Api/Projection'
 
-    # ...
-
 services:
+    # ..
+.
     MsgPhp\Domain\Infra\ApiPlatform\ProjectionDataProvider:
         tags: [api_platform.collection_data_provider]
         autowire: true
-
-    # ...
 ```
 
 !!! note
