@@ -9,7 +9,7 @@ field name. Its usage is to uniquely identify a domain object, thus qualifying i
 Identifier values can be of any type; a [domain identifier](identifiers.md), another (foreign) entity object, or any
 primitive value.
 
-A single identifier value might represent an actual identity in case it's composed by a single identifier field.
+A single identifier value might represent an identity in case the identity is composed from a single identifier field.
 
 ## API
 
