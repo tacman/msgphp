@@ -15,9 +15,7 @@ use MsgPhp\Organization\OrganizationIdInterface;
  */
 final class OrganizationRepository implements OrganizationRepositoryInterface
 {
-    use DomainEntityRepositoryTrait {
-        __construct as private __parent_construct;
-    }
+    use DomainEntityRepositoryTrait;
 
     private $alias = 'organization';
 

@@ -15,9 +15,7 @@ use MsgPhp\Organization\TeamIdInterface;
  */
 final class TeamRepository implements TeamRepositoryInterface
 {
-    use DomainEntityRepositoryTrait {
-        __construct as private __parent_construct;
-    }
+    use DomainEntityRepositoryTrait;
 
     private $alias = 'organization';
 
