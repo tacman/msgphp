@@ -20,10 +20,8 @@ Reference of available [entities](../ddd/entities.md) per domain.
 
 ### Entities
 
-Class | Abstract
---- | ---
-`MsgPhp\Eav\Entity\Attribute` | ✔
-`MsgPhp\Eav\Entity\AttributeValue` | ✔
+- `MsgPhp\Eav\Entity\Attribute`
+- `MsgPhp\Eav\Entity\AttributeValue`
 
 ### Fields
 
@@ -37,14 +35,12 @@ Class | Abstract
 
 ### Entities
 
-Class | Abstract
---- | ---
-`MsgPhp\User\Entity\Role` | ✔
-`MsgPhp\User\Entity\User` | ✔
-`MsgPhp\User\Entity\UserAttributeValue` | ✔
-`MsgPhp\User\Entity\UserEmail` | ✔
-`MsgPhp\User\Entity\UserRole` | ✔
-`MsgPhp\User\Entity\Username` | ✗
+- `MsgPhp\User\Entity\Role`
+- `MsgPhp\User\Entity\User`
+- `MsgPhp\User\Entity\UserAttributeValue`
+- `MsgPhp\User\Entity\UserEmail`
+- `MsgPhp\User\Entity\UserRole`
+- `MsgPhp\User\Entity\Username`
 
 ### Fields
 

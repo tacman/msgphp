@@ -26,7 +26,7 @@ $msgphpGlobal = function(): array {
         }
 
         $result['domains'][$package->name] = $entry + [
-            'entities' => array_map(function (string $file): array {
+            'entities' => array_map(function (string $file): string {
                 return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
             }, glob(dirname($file).'/Entity/*.php')),
             'entity_fields' => array_map(function (string $file): string {
