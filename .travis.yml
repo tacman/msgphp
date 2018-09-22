@@ -43,7 +43,7 @@ script:
   - bin/phpunit $PHPUNIT_ARGS
 
 after_success:
-  - if [[ $CC = true ]] ; then .travis/codecov ; fi
+  - if [[ $CC = true ]] ; then bash <(curl -s https://codecov.io/bash) ; fi
 
 before_cache:
   - rm -rf $HOME/.composer/cache/files/msgphp
