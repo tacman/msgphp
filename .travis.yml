@@ -45,6 +45,9 @@ script:
 after_success:
   - if [[ $CC = true ]] ; then .travis/codecov ; fi
 
+before_cache:
+  - rm -rf $HOME/.composer/cache/files/msgphp
+
 cache:
   directories:
     - $HOME/.composer/cache
