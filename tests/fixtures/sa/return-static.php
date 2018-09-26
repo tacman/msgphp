@@ -1,6 +1,6 @@
 <?php
 
-use MsgPhp\Domain\{DomainId, DomainIdInterface, Infra\Doctrine\DomainCollection};
+use MsgPhp\Domain\{DomainId, DomainIdInterface};
 
 interface SomeIdInterface extends DomainIdInterface
 {
