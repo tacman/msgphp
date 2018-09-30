@@ -15,10 +15,6 @@ parameters:
         - '#Static property MsgPhp\\Domain\\Tests\\Infra\\Doctrine\\.+Test::\$em \(Doctrine\\ORM\\EntityManager\) does not accept null\.#'
         - '#Class MsgPhp\\Domain\\Tests\\Factory\\WrongCase referenced with incorrect case: MsgPhp\\Domain\\Tests\\Factory\\wrongcase\.#'
 
-        # generics
-        - '#Method MsgPhp\\.+\\Infra\\Doctrine\\Repository\\.+Repository::find.*\(\) should return MsgPhp\\.+\\Entity\\.+ but returns object\.#'
-        - '#Parameter \#1 \$command of method MsgPhp\\.+\\Command\\Handler\\.+Handler::getDomainEvent(Handler)?\(\) expects MsgPhp\\.+\\Command\\.+Command, object given\.#'
-
         # phpstan
         - '#Cannot call method getName\(\) on ReflectionClass\|null\.#'
 
@@ -26,8 +22,14 @@ parameters:
         - '#Parameter \#1 \$hydrationMode of method Doctrine\\ORM\\AbstractQuery::getResult\(\) expects int, string given\.#'
         - '#Parameter \#1 \$hydrationMode of method Doctrine\\ORM\\AbstractQuery::getSingleResult\(\) expects int\|null, string given\.#'
 
-        # symfony
+        # msgphp
+        - '#Method MsgPhp\\.+\\Infra\\Doctrine\\Repository\\.+Repository::find.*\(\) should return MsgPhp\\.+\\Entity\\.+ but returns object\.#'
+        - '#Parameter \#1 \$command of method MsgPhp\\.+\\Command\\Handler\\.+Handler::getDomainEvent(Handler)?\(\) expects MsgPhp\\.+\\Command\\.+Command, object given\.#'
         - '#Cannot call method classMappingNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.#'
+
+        # symfony/console
+        - '#Strict comparison using === between null and array<string>(?:\|bool)?\|string will always evaluate to false\.#'
+        - '#Parameter \#2 \.\.\.\$args of function sprintf expects bool\|float\|int\|string\|null, array<string>\|bool\|string given\.#'
 
     excludes_analyse:
         - '*/vendor/*'
