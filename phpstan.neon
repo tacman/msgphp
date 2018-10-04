@@ -27,10 +27,6 @@ parameters:
         - '#Parameter \#1 \$command of method MsgPhp\\.+\\Command\\Handler\\.+Handler::getDomainEvent(Handler)?\(\) expects MsgPhp\\.+\\Command\\.+Command, object given\.#'
         - '#Cannot call method classMappingNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.#'
 
-        # symfony/console
-        - '#Strict comparison using === between null and array<string>(?:\|bool)?\|string will always evaluate to false\.#'
-        - '#Parameter \#2 \.\.\.\$args of function sprintf expects bool\|float\|int\|string\|null, array<string>\|bool\|string given\.#'
-
     excludes_analyse:
         - '*/vendor/*'
         - src/UserBundle/Resources/skeleton/
