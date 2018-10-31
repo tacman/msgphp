@@ -12,9 +12,13 @@ $rules = [
     '@PHP71Migration' => true,
     '@PHP71Migration:risky' => true,
     '@PHPUnit60Migration:risky' => true,
-    'single_import_per_statement' => false,
     'array_syntax' => ['syntax' => 'short'],
+    'compact_nullable_typehint' => true,
+    'explicit_string_variable' => true,
+    'fully_qualified_strict_types' => true,
+    'list_syntax' => ['syntax' => 'short'],
     'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
+    'single_import_per_statement' => false,
 ];
 
 return Config::create()
