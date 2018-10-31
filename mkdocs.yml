@@ -11,6 +11,8 @@ extra_css: [style.css]
 markdown_extensions:
   - codehilite # https://squidfunk.github.io/mkdocs-material/extensions/codehilite/
   - admonition # https://squidfunk.github.io/mkdocs-material/extensions/admonition/
+  - toc: # https://squidfunk.github.io/mkdocs-material/extensions/permalinks/
+      permalink: true
 
 pages:
 - Home: index.md
