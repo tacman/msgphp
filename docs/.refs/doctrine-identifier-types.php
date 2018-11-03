@@ -7,7 +7,9 @@ foreach ($msgphp['domains'] as $domain) {
         $types[$domain['package']->name][$class::NAME] = $class;
     }
 
-    ksort($types[$domain['package']->name]);
+    if (isset($types[$domain['package']->name])) {
+        ksort($types[$domain['package']->name]);
+    }
 }
 
 $template = <<<'MD'

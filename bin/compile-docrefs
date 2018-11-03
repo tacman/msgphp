@@ -1,6 +1,16 @@
 #!/usr/bin/env php
 <?php
 
+namespace MsgPhp;
+
+function file_to_class(string $file): string
+{
+    $dir = dirname($file, substr_count($file, \DIRECTORY_SEPARATOR) - 1);
+    $ns = key(json_decode(file_get_contents($dir.'/composer.json'), true)['autoload']['psr-4']);
+
+    return str_replace('/', '\\', str_replace($dir.\DIRECTORY_SEPARATOR, $ns, substr($file, 0, -4)));
+}
+
 use MsgPhp\Domain\Event\DomainEventInterface;
 use Twig\Environment;
 use Twig\Loader\ArrayLoader;
@@ -27,36 +37,36 @@ $msgphpGlobal = function(): array {
 
         $result['domains'][$package->name] = $entry + [
             'entities' => array_map(function (string $file): string {
-                return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
+                return file_to_class($file);
             }, glob(dirname($file).'/Entity/*.php')),
             'entity_fields' => array_map(function (string $file): string {
-                return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
+                return file_to_class($file);
             }, glob(dirname($file).'/Entity/Fields/*Field.php')),
             'entity_features' => array_map(function (string $file): string {
-                return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
+                return file_to_class($file);
             }, array_filter(glob(dirname($file).'/Entity/Features/*.php'), function (string $file): bool {
                 return 'Abstract' !== substr(basename($file), 0, 8);
             })),
             'identifiers' => array_map(function (string $file): array {
                 return [
-                    'class' => $class = 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4)),
+                    'class' => $class = file_to_class($file),
                     'scalar' => class_exists($scalar = substr($class, 0, -9)) ? $scalar : null,
                     'uuid' => class_exists($uuid = 'MsgPhp\\'.basename(dirname($file)).'\\Infra\\Uuid\\'.basename($file, 'Interface.php')) ? $uuid : null,
                 ];
             }, glob(dirname($file).'/*IdInterface.php')),
             'repositories' => array_map(function (string $file): string {
-                return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
+                return file_to_class($file);
             }, glob(dirname($file).'/Repository/*RepositoryInterface.php')),
             'commands' => array_map(function (string $file): string {
-                return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
+                return file_to_class($file);
             }, glob(dirname($file).'/Command/*Command.php')),
             'events' => array_filter(array_map(function (string $file): string {
-                return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
+                return file_to_class($file);
             }, glob(dirname($file).'/Event/*Event.php')), function (string $class): bool {
                 return !is_subclass_of($class, DomainEventInterface::class);
             }),
             'domain_events' => array_filter(array_map(function (string $file): string {
-                return 'MsgPhp\\'.str_replace('/', '\\', substr($file, 4, -4));
+                return file_to_class($file);
             }, glob(dirname($file).'/Event/{*,Domain/*}Event.php', \GLOB_BRACE)), function (string $class): bool {
                 return is_subclass_of($class, DomainEventInterface::class);
             }),

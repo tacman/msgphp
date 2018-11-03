@@ -37,14 +37,12 @@ Reference of available [entities](../ddd/entities.md) per domain.
 
 - `MsgPhp\User\Entity\Role`
 - `MsgPhp\User\Entity\User`
-- `MsgPhp\User\Entity\UserAttributeValue`
 - `MsgPhp\User\Entity\UserEmail`
 - `MsgPhp\User\Entity\UserRole`
 - `MsgPhp\User\Entity\Username`
 
 ### Fields
 
-- `MsgPhp\User\Entity\Fields\AttributeValuesField`
 - `MsgPhp\User\Entity\Fields\EmailsField`
 - `MsgPhp\User\Entity\Fields\RoleField`
 - `MsgPhp\User\Entity\Fields\RolesField`
@@ -60,5 +58,19 @@ Reference of available [entities](../ddd/entities.md) per domain.
 - `MsgPhp\User\Entity\Features\NicknameSaltedPasswordCredential`
 - `MsgPhp\User\Entity\Features\ResettablePassword`
 - `MsgPhp\User\Entity\Features\TokenCredential`
+
+## `msgphp/user-eav`
+
+### Entities
+
+- `MsgPhp\User\Entity\UserAttributeValue`
+
+### Fields
+
+- `MsgPhp\User\Entity\Fields\AttributeValuesField`
+
+### Features
+
+- No features available
 
 <!--ref-end:entities-->

@@ -31,17 +31,14 @@ Reference of available messages per domain that can be dispatched using a [messa
 
 ### Commands
 
-- `MsgPhp\User\Command\AddUserAttributeValueCommand`
 - `MsgPhp\User\Command\AddUserEmailCommand`
 - `MsgPhp\User\Command\AddUserRoleCommand`
-- `MsgPhp\User\Command\ChangeUserAttributeValueCommand`
 - `MsgPhp\User\Command\ChangeUserCredentialCommand`
 - `MsgPhp\User\Command\ConfirmUserCommand`
 - `MsgPhp\User\Command\ConfirmUserEmailCommand`
 - `MsgPhp\User\Command\CreateRoleCommand`
 - `MsgPhp\User\Command\CreateUserCommand`
 - `MsgPhp\User\Command\DeleteRoleCommand`
-- `MsgPhp\User\Command\DeleteUserAttributeValueCommand`
 - `MsgPhp\User\Command\DeleteUserCommand`
 - `MsgPhp\User\Command\DeleteUserEmailCommand`
 - `MsgPhp\User\Command\DeleteUserRoleCommand`
@@ -53,9 +50,6 @@ Reference of available messages per domain that can be dispatched using a [messa
 
 - `MsgPhp\User\Event\RoleCreatedEvent`
 - `MsgPhp\User\Event\RoleDeletedEvent`
-- `MsgPhp\User\Event\UserAttributeValueAddedEvent`
-- `MsgPhp\User\Event\UserAttributeValueChangedEvent`
-- `MsgPhp\User\Event\UserAttributeValueDeletedEvent`
 - `MsgPhp\User\Event\UserConfirmedEvent`
 - `MsgPhp\User\Event\UserCreatedEvent`
 - `MsgPhp\User\Event\UserCredentialChangedEvent`
@@ -68,5 +62,19 @@ Reference of available messages per domain that can be dispatched using a [messa
 - `MsgPhp\User\Event\UserPasswordRequestedEvent`
 - `MsgPhp\User\Event\UserRoleAddedEvent`
 - `MsgPhp\User\Event\UserRoleDeletedEvent`
+
+## `msgphp/user-eav`
+
+### Commands
+
+- `MsgPhp\User\Command\AddUserAttributeValueCommand`
+- `MsgPhp\User\Command\ChangeUserAttributeValueCommand`
+- `MsgPhp\User\Command\DeleteUserAttributeValueCommand`
+
+### Events
+
+- `MsgPhp\User\Event\UserAttributeValueAddedEvent`
+- `MsgPhp\User\Event\UserAttributeValueChangedEvent`
+- `MsgPhp\User\Event\UserAttributeValueDeletedEvent`
 
 <!--ref-end:messages-->
