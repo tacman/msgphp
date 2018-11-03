@@ -12,7 +12,7 @@ use MsgPhp\User\Entity\{Fields, UserAttributeValue};
  *
  * @internal
  */
-final class ObjectMappings implements ObjectMappingProviderInterface
+final class EavObjectMappings implements ObjectMappingProviderInterface
 {
     public static function provideObjectMappings(MappingConfig $config): iterable
     {
