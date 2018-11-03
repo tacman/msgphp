@@ -2,7 +2,7 @@
     "name": "msgphp/user-eav",
     "type": "library",
     "license": "MIT",
-    "description": "A bridge between the EAV and user domain",
+    "description": "A bridge between the `User` and `EAV` domain",
     "keywords": ["ddd", "domain-driven-design", "rich domain model", "user", "entity-attribute-value", "eav"],
     "authors": [
         {

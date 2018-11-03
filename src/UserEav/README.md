@@ -1,6 +1,6 @@
 # User Attribute Values
 
-A bridge between the [`EAV`](https://github.com/msgphp/eav) and [`User`](https://github.com/msgphp/user) domain.
+A bridge between the [`User`](https://github.com/msgphp/user) and [`EAV`](https://github.com/msgphp/eav) domain.
 
 [![Latest Stable Version](https://poser.pugx.org/msgphp/user-eav/v/stable)](https://packagist.org/packages/msgphp/user-eav)
 
