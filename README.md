@@ -14,9 +14,9 @@ MsgPHP is a project that aims to provide (common) message based domain layers fo
 ## Packages
 
 - [`msgphp/domain`](https://github.com/msgphp/domain)
-- [`msgphp/eav`](https://github.com/msgphp/eav)
-- [`msgphp/user`](https://github.com/msgphp/user)
-  - [`msgphp/user-eav`](https://github.com/msgphp/user-eav)
+  - [`msgphp/eav`](https://github.com/msgphp/eav)
+  - [`msgphp/user`](https://github.com/msgphp/user)
+    - [`msgphp/user-eav`](https://github.com/msgphp/user-eav)
 
 ### Symfony Bundles
 
