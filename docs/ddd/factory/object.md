@@ -29,9 +29,10 @@ A class mapping can be provided and is usually used to map abstracts to concrete
 
 Nested objects (e.g. `MyObject $myArgument`) can be provided as nested context (thus nested array).
 
-- `setNestedFactory(?DomainObjectFactoryInterface $factory): void`
+- `__construct(array $classMapping = [])`
     - `$classMapping`: The class mapping (`['SourceType' => 'TargetType']`)`
-    - `$factory`: The optional factory to use for nested objects. If not set the current factory will be used instead.
+- `setNestedFactory(?DomainObjectFactoryInterface $factory): void`
+    - `$factory`: The factory for nested objects. If not set the current factory will be used instead.
 
 #### Basic example
 
