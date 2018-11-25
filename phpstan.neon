@@ -19,10 +19,6 @@ parameters:
         # phpstan
         - '#Cannot call method getName\(\) on ReflectionClass\|null\.#'
 
-        # doctrine
-        - '#Parameter \#1 \$hydrationMode of method Doctrine\\ORM\\AbstractQuery::getResult\(\) expects int, string given\.#'
-        - '#Parameter \#1 \$hydrationMode of method Doctrine\\ORM\\AbstractQuery::getSingleResult\(\) expects int\|null, string given\.#'
-
         # msgphp
         - '#Method MsgPhp\\.+\\Infra\\Doctrine\\Repository\\.+Repository::find.*\(\) should return MsgPhp\\.+\\Entity\\.+ but returns object\.#'
         - '#Parameter \#1 \$command of method MsgPhp\\.+\\Command\\Handler\\.+Handler::getDomainEvent(Handler)?\(\) expects MsgPhp\\.+\\Command\\.+Command, object given\.#'
