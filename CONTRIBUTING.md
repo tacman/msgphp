@@ -23,11 +23,7 @@ bin/cs user-bundle
 ## Static Analysis
 
 ```bash
-# all packages
 bin/sa
-
-# single package
-bin/sa user-bundle
 ```
 
 ## Helping others

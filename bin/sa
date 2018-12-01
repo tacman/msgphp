@@ -1,17 +1,12 @@
 #!/usr/bin/env bash
 
-if [[ $# -eq 0 ]] ; then
-    DIR="src/ tests/fixtures/sa"
-elif [[ -d $1 ]] ; then
-    DIR="$1"
-    shift;
-else
-    DIR="src/$(echo $1 | sed -r 's/(^|-)(\w)/\U\2/g')"
-    shift;
+if [[ ! $# -eq 0 ]] ; then
+    echo "Usage: $0"
+    exit 1
 fi
 
 BIN="vendor/bin/phpstan.phar"
-CMD="${BIN} analyse ${@} ${DIR}"
+CMD="${BIN} analyse src/ tests/fixtures/sa"
 
 if [[ ! -f $BIN ]] ; then
     composer update --prefer-dist --quiet

@@ -8,7 +8,6 @@
         "phpstan/phpstan-phpunit": "^0.10",
         "phpunit/phpunit": "^7.4",
         "ro0nl/link": "^1.0",
-        "symfony/config": "^4.2",
         "twig/twig": "^2.5"
     },
     "autoload-dev": {
