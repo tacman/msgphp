@@ -36,9 +36,9 @@ framework:
                 middleware:
                     - msgphp.messenger.console_message_receiver
             event_bus:
+                default_middleware: allow_no_handlers
                 middleware:
                     - msgphp.messenger.console_message_receiver
-                    - allow_no_handler
 ```
 
 By default MsgPHP uses the bus configured under `framework.messenger.default_bus`. You can override its alias services
