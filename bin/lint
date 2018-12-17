@@ -2,12 +2,13 @@
 
 RETURN=0
 
-# lint PHP files
-for FILE in $(find . -type f -name "*.php" -not -path "*/vendor/*") ; do
+for FILE in $(find . -type f -name "*.php" -not -path "*/vendor/*" -not -path "./var/*") ; do
+    echo -en "\e[0K\r${FILE}"
     RESULT=$(php -l "$FILE")
     LAST=$? ; [[ $LAST -ne 0 ]] && RETURN=${LAST}
 
     if [[ ! $RESULT == "No syntax errors detected in "* ]] ; then
+        echo "\n"
         echo $RESULT
     fi
 done
