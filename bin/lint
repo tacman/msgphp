@@ -3,7 +3,7 @@
 RETURN=0
 
 # lint PHP files
-for FILE in $(find . -type f -name *.php -not -path "*/vendor/*") ; do
+for FILE in $(find . -type f -name "*.php" -not -path "*/vendor/*") ; do
     RESULT=$(php -l "$FILE")
     LAST=$? ; [[ $LAST -ne 0 ]] && RETURN=${LAST}
 
