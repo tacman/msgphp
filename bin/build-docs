@@ -34,7 +34,7 @@ git -C src pull
 
 API_DIR="src/api"
 DOCS_DIR="src/docs"
-if [[ $REV != master ]]; then
+if [[ ${REV} != master ]]; then
     DOCS_DIR="${DOCS_DIR}-${REV}"
 fi
 
@@ -44,7 +44,7 @@ mv build-api "${API_DIR}"
 
 echo -en "\e[34mPush docs for \"${REV}\"? [yN]\e[0m"
 read answer
-if [[ $answer =~ ^y|Y|yes|YES$ ]]; then
+if [[ ${answer} =~ ^y|Y|yes|YES$ ]]; then
     git -C src add --all
     git -C src commit -m "Update docs for \"${REV}\" to $(git rev-parse --short --verify HEAD)"
     git -C src push

@@ -9,17 +9,16 @@ CMD="${@}"
 RETURN=0
 
 for PACKAGE in $(find src/*/composer.json -type f); do
-    DIR=$(dirname ${PACKAGE})
+    DIR="$(dirname ${PACKAGE})"
     pushd "${DIR}" &> /dev/null
     LABEL="Running in \"${DIR}\""
-    if [[ $TRAVIS = true ]]; then
+    if [[ ${TRAVIS} = true ]]; then
         tfold "${LABEL}" "${CMD}"
     else
         echo -e "\e[34m${LABEL}\e[0m"
         bash -xc "${CMD}" 2>&1
     fi
-    LAST=$?
-    [[ $LAST -ne 0 ]] && RETURN=${LAST}
+    [[ $? -ne 0 ]] && RETURN=$?
     popd &> /dev/null
 done
 
