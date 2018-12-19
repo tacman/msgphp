@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ $# -gt 1 ]] ; then
+if [[ $# -gt 1 ]]; then
     echo "Usage: $0 [<target-directory>]"
     exit 1
 fi
@@ -9,13 +9,13 @@ DIR="${1:-var/test-project/}"
 PACKAGES="orm "
 DEV_PACKAGES="debug maker server "
 
-for PACKAGE in $(find src/*Bundle/composer.json -type f) ; do
+for PACKAGE in $(find src/*Bundle/composer.json -type f); do
     PACKAGE_NAME=$(grep -E "^\s*\"name\"\s*:\s*\"msgphp\/([^\"]+)\"\s*,\s*$" "${PACKAGE}")
-    if [[ ! -z $PACKAGE_NAME ]] ; then
+    if [[ -n $PACKAGE_NAME ]]; then
         PACKAGE_NAME=$(echo "${PACKAGE_NAME}" | sed -e "s/^\s*\"name\":\s*\"msgphp\///" -e "s/\"\s*,\s*$//")
         echo -en "\e[34mInstall \"msgphp/${PACKAGE_NAME}\"? [yN]\e[0m "
         read answer
-        if [[ $answer =~ ^y|Y|yes|YES$ ]] ; then
+        if [[ $answer =~ ^y|Y|yes|YES$ ]]; then
             PACKAGES="${PACKAGES}msgphp/${PACKAGE_NAME} "
         fi
     fi
@@ -36,9 +36,9 @@ popd &> /dev/null
 
 echo -en "\e[34mLink dependencies? [Yn]\e[0m"
 read answer
-if [[ ${answer:-y} =~ ^y|Y|yes|YES$ ]] ; then
+if [[ ${answer:-y} =~ ^y|Y|yes|YES$ ]]; then
     composer link -h &> /dev/null
-    if [[ $? != 0 ]] ; then
+    if [[ $? -ne 0 ]]; then
         composer update --prefer-dist --quiet
         [[ $? -ne 0 ]] && exit 1
     fi

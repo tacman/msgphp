@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ ! -f var/cache/sami.phar ]] ; then
+if [[ ! -f var/cache/sami.phar ]]; then
     mkdir -p var/cache
     curl -Lso var/cache/sami.phar http://get.sensiolabs.org/sami.phar
 fi

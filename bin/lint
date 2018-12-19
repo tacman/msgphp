@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 
+if [[ $# -ne 0 ]]; then
+    echo "Usage: $0"
+    exit 1
+fi
+
 RETURN=0
 
-for FILE in $(find . -type f -name "*.php" -not -path "*/vendor/*" -not -path "./var/*") ; do
+for FILE in $(find . -type f -name "*.php" -not -path "*/vendor/*" -not -path "./var/*"); do
     echo -en "\e[0K\r${FILE}"
-    RESULT=$(php -l "$FILE")
-    LAST=$? ; [[ $LAST -ne 0 ]] && RETURN=${LAST}
+    RESULT=$(php -l "${FILE}")
+    LAST=$?
+    [[ $LAST -ne 0 ]] && RETURN=${LAST}
 
-    if [[ ! $RESULT == "No syntax errors detected in "* ]] ; then
-        echo "\n"
+    if [[ $RESULT != "No syntax errors detected in "* ]]; then
         echo $RESULT
     fi
 done
 
 exit $RETURN
-

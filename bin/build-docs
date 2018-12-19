@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ ! $# -eq 0 ]] ; then
+if [[ $# -ne 0 ]]; then
     echo "Usage: $0"
     exit 1
 fi
@@ -11,7 +11,7 @@ mkdir -p "${DIR}"
 rm -rf var/cache/api
 
 lando version >/dev/null 2>&1
-if [[ $? -eq 0 ]] ; then
+if [[ $? -eq 0 ]]; then
     lando bash "bin/sami update .sami.dist"
 else
     bin/sami update .sami.dist
@@ -23,7 +23,7 @@ bin/mkdocs build
 pushd "${DIR}" &> /dev/null
 
 echo -e "\e[34mSynchronizing source...\e[0m"
-if [[ ! -d src/.git ]] ; then
+if [[ ! -d src/.git ]]; then
     echo "Cloning..."
     git clone --quiet git@github.com:msgphp/msgphp.github.io.git src
     [[ $? -ne 0 ]] && echo "Failed!" && exit 1
@@ -34,7 +34,7 @@ git -C src pull
 
 API_DIR="src/api"
 DOCS_DIR="src/docs"
-if [[ $REV != master ]] ; then
+if [[ $REV != master ]]; then
     DOCS_DIR="${DOCS_DIR}-${REV}"
 fi
 
@@ -44,7 +44,7 @@ mv build-api "${API_DIR}"
 
 echo -en "\e[34mPush docs for \"${REV}\"? [yN]\e[0m"
 read answer
-if [[ $answer =~ ^y|Y|yes|YES$ ]] ; then
+if [[ $answer =~ ^y|Y|yes|YES$ ]]; then
     git -C src add --all
     git -C src commit -m "Update docs for \"${REV}\" to $(git rev-parse --short --verify HEAD)"
     git -C src push

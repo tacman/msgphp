@@ -1,35 +1,32 @@
 #!/usr/bin/env bash
 
-if [[ ! $# -eq 1 ]] ; then
+if [[ $# -ne 1 ]]; then
     echo "Usage: $0 <pr-number>"
     exit 1
 fi
 
-if [[ ! $1 =~ ^[1-9][0-9]*$ ]] ; then
+if [[ ! $1 =~ ^[1-9][0-9]*$ ]]; then
     echo "Invalid pull request number \"$1\""
     exit 1
 fi
 
-source .env.dist
-if [[ -f .env ]] ; then
-    source .env
-fi
+source .env.dist .env
 
 PR="$1"
 BRANCH="github-pr-${PR}"
 URL="https://api.github.com/repos/msgphp/msgphp/pulls/${PR}"
-if [[ ! -z $GITHUB_TOKEN ]] ; then
+if [[ -n $GITHUB_TOKEN ]]; then
     URL="$URL?access_token=${GITHUB_TOKEN}"
 fi
 
-if [[ $(git branch --list ${BRANCH}) ]] ; then
+if [[ $(git branch --list "${BRANCH}") ]]; then
     echo "Branch \"${BRANCH}\" already exists"
     exit 1
 fi
 
 BODY=$(curl -sS -w ">>>%{http_code}" "${URL}")
 
-if [[ ! $BODY =~ \>\>\>200\s*$ ]] ; then
+if [[ ! $BODY =~ \>\>\>200\s*$ ]]; then
     echo "Error fetching pull request #${PR}..."
     echo "${BODY}"
     exit 1
@@ -46,7 +43,7 @@ EOF
 )
 UPSTREAM_SSH_URL=$(php -r "echo ${UPSTREAM_SSH_URL}")
 
-if [[ -z $UPSTREAM_SSH_URL ]] ; then
+if [[ -z $UPSTREAM_SSH_URL ]]; then
     echo "Upstream SSH URL not found for pull request \"${URL}\""
     exit 1
 fi
@@ -63,7 +60,7 @@ UPSTREAM_BRANCH=$(php -r "echo ${UPSTREAM_BRANCH}")
 echo "Adding pull request remote \"${UPSTREAM_SSH_URL}\"..."
 git remote remove "${BRANCH}" &> /dev/null
 git remote add "${BRANCH}" "${UPSTREAM_SSH_URL}" --fetch --track "${UPSTREAM_BRANCH}"
-if [[ $? -eq 1 ]] ; then
+if [[ $? -eq 1 ]]; then
     git remote remove "${BRANCH}"
     echo "Pull request closed. Aborted."
     exit 1
