@@ -50,4 +50,4 @@ before_cache:
 cache:
   directories:
     - $HOME/.composer/cache
-    - var/cache/
+    - var/cache
