@@ -9,16 +9,4 @@ if [[ ! -f ${PHAR} ]]; then
     chmod +x ${PHAR}
 fi
 
-if [[ $# -eq 0 ]]; then
-    DIR="src/"
-elif [[ -d $1 ]]; then
-    DIR="$1"
-    shift;
-else
-    DIR="src/$(echo "$1" | sed -r 's/(^|-)(\w)/\U\2/g')"
-    shift;
-fi
-
-CMD="${PHAR} fix --dry-run --verbose --diff ${@} ${DIR}"
-
-bash -xc "${CMD}" 2>&1
+bash -xc "${PHAR} fix --dry-run --verbose --diff ${@} src/" 2>&1
