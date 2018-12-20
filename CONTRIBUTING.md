@@ -3,21 +3,13 @@
 ## Testing
 
 ```bash
-# all packages
 bin/phpunit
-
-# single package
-bin/phpunit user-bundle
 ```
 
 ## Code Style
 
 ```bash
-# all packages
 bin/cs
-
-# single package
-bin/cs user-bundle
 ```
 
 ## Static Analysis
