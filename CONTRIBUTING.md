@@ -26,6 +26,12 @@ bin/cs user-bundle
 bin/sa
 ```
 
+## Linting
+
+```bash
+bin/lint
+```
+
 ## Helping others
 
 To checkout another open pull request from this repository use:
