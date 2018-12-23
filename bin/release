@@ -12,7 +12,7 @@ run() {
 }
 
 [[ $# -ne 3 ]] && echo "Usage: $0 <major> <minor> <patch>" && exit 1
-CURRENT_VERSION=$(git describe --abbrev=0 --tags)
+CURRENT_VERSION="$(git describe --abbrev=0 --tags)"
 NEXT_VERSION="v$1.$2.$3"
 [[ ${CURRENT_VERSION} == ${NEXT_VERSION} ]] && echo "Invalid version" && exit 1
 

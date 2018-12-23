@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+[[ $# -ne 0 ]] && echo "Usage: $0" && exit 1
+
 VERSION="v2.13.1"
 PHAR="var/cache/php-cs-fixer-${VERSION}.phar"
 
@@ -9,4 +11,4 @@ if [[ ! -f ${PHAR} ]]; then
     chmod +x ${PHAR}
 fi
 
-bash -xc "${PHAR} fix --dry-run --verbose --diff ${@} src/" 2>&1
+bash -xc "${PHAR} fix --dry-run --verbose --diff src/" 2>&1
