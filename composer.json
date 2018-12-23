@@ -17,9 +17,10 @@
     },
     "extra": {
         "merge-plugin": {
-            "include": [
+            "require": [
                 "src/*/composer.json"
-            ]
+            ],
+            "recurse": false
         }
     },
     "replace": {
