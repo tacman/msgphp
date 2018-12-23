@@ -10,7 +10,10 @@ if [[ ! $1 =~ ^[1-9][0-9]*$ ]]; then
     exit 1
 fi
 
-source .env.dist .env
+source .env.dist
+if [[ -f .env ]]; then
+    source .env
+fi
 
 PR="$1"
 BRANCH="github-pr-${PR}"

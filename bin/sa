@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 
-if [[ $# -ne 0 ]]; then
-    echo "Usage: $0"
-    exit 1
-fi
+[[ $# -ne 0 ]] && echo "Usage: $0" && exit 1
 
 BIN="vendor/bin/phpstan.phar"
-CMD="${BIN} analyse src/ tests/fixtures/sa"
 
 if [[ ! -f ${BIN} ]]; then
     composer install --prefer-dist --quiet
     [[ $? -ne 0 ]] && exit 1
 fi
 
-bash -xc "${CMD}" 2>&1
+bash -xc "${BIN} analyse src/ tests/fixtures/sa" 2>&1

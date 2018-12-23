@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+run() {
+    lando version >/dev/null 2>&1
+    if [[ $? -eq 0 ]]; then
+        lando bash "$1"
+    else
+        bash -xc "$1" 2>&1
+    fi
+
+    return $?
+}
+
+[[ $# -ne 3 ]] && echo "Usage: $0 <major> <minor> <patch>" && exit 1
+CURRENT_VERSION=$(git describe --abbrev=0 --tags)
+NEXT_VERSION="v$1.$2.$3"
+[[ ${CURRENT_VERSION} == ${NEXT_VERSION} ]] && echo "Invalid version" && exit 1
+
+echo -e "\e[34m1. SMOKE TEST\e[0m"
+run "bin/smoke-test"
+[[ $1 -ne 0 ]] && echo "Release step failed" && exit 1
+
+echo -e "\e[34m2. BUILD DOCS\e[0m"
+run bin/compile-docrefs && bin/build-docs
+[[ $1 -ne 0 ]] && echo "Release step failed" && exit 1
+
+[[ $(git status --porcelain) ]] && echo "Working directory is not clean" && exit 1
+
+echo -en "\e[34mRelease ${CURRENT_VERSION} -> ${NEXT_VERSION}? [yN]\e[0m"
+read answer
+[[ ! ${answer:-n} =~ ^y|Y|yes|YES$ ]] && echo "Aborted!" && exit 1
+
+git tag -sm enjoy "${NEXT_VERSION}"
+
+echo "Done!"
+exit 0

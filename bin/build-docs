@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-if [[ $# -ne 0 ]]; then
-    echo "Usage: $0"
-    exit 1
-fi
+[[ $# -ne 0 ]] && echo "Usage: $0" && exit 1
 
 REV=$(git rev-parse --abbrev-ref --short --verify HEAD)
 DIR="var/docs"
-mkdir -p "${DIR}"
-rm -rf var/cache/api
+API_DIR="src/api"
+DOCS_DIR="src/docs"
+[[ ${REV} != master ]] && DOCS_DIR="${DOCS_DIR}-${REV}"
+
+mkdir -p "${DIR}" && rm -rf var/cache/api
 
 lando version >/dev/null 2>&1
 if [[ $? -eq 0 ]]; then
@@ -29,25 +29,24 @@ if [[ ! -d src/.git ]]; then
     [[ $? -ne 0 ]] && echo "Failed!" && exit 1
 fi
 
-git -C src fetch --tags
-git -C src pull
-
-API_DIR="src/api"
-DOCS_DIR="src/docs"
-if [[ ${REV} != master ]]; then
-    DOCS_DIR="${DOCS_DIR}-${REV}"
-fi
-
-rm -rf "${DOCS_DIR}" "${API_DIR}"
-mv build "${DOCS_DIR}"
+git -C src fetch --tags && \
+git -C src pull && \
+rm -rf "${DOCS_DIR}" "${API_DIR}" && \
+mv build "${DOCS_DIR}" && \
 mv build-api "${API_DIR}"
 
-echo -en "\e[34mPush docs for \"${REV}\"? [yN]\e[0m"
-read answer
-if [[ ${answer} =~ ^y|Y|yes|YES$ ]]; then
-    git -C src add --all
-    git -C src commit -m "Update docs for \"${REV}\" to $(git rev-parse --short --verify HEAD)"
-    git -C src push
+if [[ $(git -C src status --porcelain) ]]; then
+    echo -en "\e[34mPush docs for \"${REV}\"? [yN]\e[0m"
+    read answer
+    if [[ ${answer} =~ ^y|Y|yes|YES$ ]]; then
+        git -C src add --all && \
+        git -C src commit -m "Update docs for \"${REV}\" to $(git rev-parse --short --verify HEAD)" && \
+        git -C src push
+    fi
 fi
 
+RETURN=$?
+
 popd &> /dev/null
+
+exit ${RETURN}

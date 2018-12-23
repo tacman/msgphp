@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ ! $# -eq 0 ]]; then
-    echo "Usage: $0"
-    exit 1
-fi
+[[ $# -ne 0 ]] && echo "Usage: $0" && exit 1
 
 echo -e "\e[34mUpdating dependencies...\e[0m"
 bin/composer update --prefer-dist --quiet && composer update --prefer-dist --quiet
@@ -16,3 +13,5 @@ bin/cs && bin/sa
 echo -e "\e[34mUnit Tests\e[0m"
 bin/phpunit
 [[ $? -ne 0 ]] && exit 1
+
+exit 0
