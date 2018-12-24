@@ -2,8 +2,8 @@
 
 label() {
     case $2 in
-    ok) echo -e "\e[42m $1 \e[0m";;
-    ko) echo -e "\e[41m $1 \e[0m";;
+    ok) echo -e "\e[42m$1\e[0m";;
+    ko) echo -e "\e[41m$1\e[0m";;
     *) echo -e "\e[34m$1\e[0m";;
     esac
 }
@@ -72,3 +72,8 @@ download_bin() {
     chmod +x "$1"
 }
 export -f download_bin
+
+assert_clean() {
+    [[ $(git status --porcelain) ]] && label "Working directory is not clean" ko && exit 1
+}
+export -f assert_clean

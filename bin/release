@@ -1,36 +1,25 @@
 #!/usr/bin/env bash
 
-run() {
-    lando version >/dev/null 2>&1
-    if [[ $? -eq 0 ]]; then
-        lando bash "$1"
-    else
-        bash -xc "$1" 2>&1
-    fi
+source bin/.bashrc
+[[ $# -ne 3 ]] && label "Usage: $0 <major> <minor> <patch>" ko && exit 1
 
-    return $?
-}
+curr_version="$(git describe --abbrev=0 --tags)"
+next_version="v$1.$2.$3"
+[[ ${curr_version} == ${next_version} ]] && label "Invalid version" ko && exit 1
 
-[[ $# -ne 3 ]] && echo "Usage: $0 <major> <minor> <patch>" && exit 1
-CURRENT_VERSION="$(git describe --abbrev=0 --tags)"
-NEXT_VERSION="v$1.$2.$3"
-[[ ${CURRENT_VERSION} == ${NEXT_VERSION} ]] && echo "Invalid version" && exit 1
+label "1. SMOKE TEST"
+bin/smoke-test
+[[ $? -ne 0 ]] && label "Failed" ko && exit 1
 
-echo -e "\e[34m1. SMOKE TEST\e[0m"
-run "bin/smoke-test"
-[[ $1 -ne 0 ]] && echo "Release step failed" && exit 1
+label "2. BUILD DOCS"
+run php bin/compile-docrefs && bin/build-docs
+[[ $? -ne 0 ]] && label "Failed" ko && exit 1
 
-echo -e "\e[34m2. BUILD DOCS\e[0m"
-run bin/compile-docrefs && bin/build-docs
-[[ $1 -ne 0 ]] && echo "Release step failed" && exit 1
+assert_clean
 
-[[ $(git status --porcelain) ]] && echo "Working directory is not clean" && exit 1
+confirm "Release ${curr_version} -> ${next_version}?"
+[[ $? -ne 1 ]] && label "Aborted" ok && exit
 
-echo -en "\e[34mRelease ${CURRENT_VERSION} -> ${NEXT_VERSION}? [yN]\e[0m"
-read answer
-[[ ! ${answer:-n} =~ ^y|Y|yes|YES$ ]] && echo "Aborted!" && exit 1
+git tag -sm enjoy "${next_version}"
 
-git tag -sm enjoy "${NEXT_VERSION}"
-
-echo "Done!"
-exit 0
+label "Done" ok
