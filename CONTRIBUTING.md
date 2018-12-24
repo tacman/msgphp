@@ -53,9 +53,3 @@ To quickly see if CI is likely to pass use:
 ```bash
 bin/smoke-test
 ```
-
-## Using [Lando](https://docs.devwithlando.io)
-
-```bash
-lando bash 'bin/<cmd> <arg>'
-```

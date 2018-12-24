@@ -1,52 +1,44 @@
 #!/usr/bin/env bash
 
-[[ $# -ne 0 ]] && echo "Usage: $0" && exit 1
+source bin/.bashrc
+[[ $# -ne 0 ]] && label "Usage: $0" ko && exit 1
 
-REV=$(git rev-parse --abbrev-ref --short --verify HEAD)
-DIR="var/docs"
-API_DIR="src/api"
-DOCS_DIR="src/docs"
-[[ ${REV} != master ]] && DOCS_DIR="${DOCS_DIR}-${REV}"
+repo_url="git@github.com:msgphp/msgphp.github.io.git"
+build_dir="var/docs"
+api_dir="src/api"
+docs_dir="src/docs"
+rev=$(git rev-parse --abbrev-ref --short --verify HEAD)
+[[ ${rev} != master ]] && docs_dir="${docs_dir}-${rev}"
 
-mkdir -p "${DIR}" && rm -rf var/cache/api
+rm -rf var/cache/api
+mkdir -p "${build_dir}"
 
-lando version >/dev/null 2>&1
-if [[ $? -eq 0 ]]; then
-    lando bash "bin/sami update .sami.dist"
-else
-    bin/sami update .sami.dist
-fi
-
+bin/sami update .sami.dist
 bin/mkdocs build
-[[ $? -ne 0 ]] && exit 1
 
-pushd "${DIR}" &> /dev/null
+pushd "${build_dir}" &> /dev/null
 
-echo -e "\e[34mSynchronizing source...\e[0m"
+label "Synchronizing source"
 if [[ ! -d src/.git ]]; then
     echo "Cloning..."
-    git clone --quiet git@github.com:msgphp/msgphp.github.io.git src
-    [[ $? -ne 0 ]] && echo "Failed!" && exit 1
+    git clone --quiet ${repo_url} src
+    [[ $? -eq 0 ]] && label "Failed" ko && popd &> /dev/null && exit 1
 fi
-
 git -C src fetch --tags && \
 git -C src pull && \
-rm -rf "${DOCS_DIR}" "${API_DIR}" && \
-mv build "${DOCS_DIR}" && \
-mv build-api "${API_DIR}"
+rm -rf "${docs_dir}" "${api_dir}" && \
+mv build "${docs_dir}" && \
+mv build-api "${api_dir}"
+[[ $? -ne 0 ]] && label "Failed" ko && popd &> /dev/null && exit 1
 
 if [[ $(git -C src status --porcelain) ]]; then
-    echo -en "\e[34mPush docs for \"${REV}\"? [yN]\e[0m"
-    read answer
-    if [[ ${answer} =~ ^y|Y|yes|YES$ ]]; then
+    confirm "Push docs for \"${rev}\"?"
+    if [[ $? -eq 1 ]]; then
         git -C src add --all && \
-        git -C src commit -m "Update docs for \"${REV}\" to $(git rev-parse --short --verify HEAD)" && \
+        git -C src commit -m "Update docs for \"${rev}\" to $(git rev-parse --short --verify HEAD)" && \
         git -C src push
+        [[ $? -ne 0 ]] && label "Failed" ko && popd &> /dev/null && exit 1
     fi
 fi
 
-RETURN=$?
-
 popd &> /dev/null
-
-exit ${RETURN}
