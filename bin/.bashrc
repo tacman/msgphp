@@ -33,8 +33,7 @@ run() {
     fi
     lando version >/dev/null 2>&1
     if [[ $? -eq 0 ]]; then
-        local cmd=${@}
-        lando bash "${cmd}"
+        lando bash "${*}"
         return $?
     fi
     run_local ${@}
@@ -43,8 +42,7 @@ run() {
 export -f run
 
 run_local() {
-    local cmd=${@}
-    bash -xc "${cmd}" 2>&1
+    bash -xc "${*}" 2>&1
     return $?
 }
 export -f run_local
