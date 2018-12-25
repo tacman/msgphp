@@ -1,12 +1,29 @@
 #!/usr/bin/env bash
 
 source bin/.bashrc
-[[ $# -ne 3 ]] && label "Usage: $0 <major> <minor> <patch>" ko && exit 1
+[[ $# -ne 1 ]] && label "Usage: $0 <type>" ko && exit 1
+
+next_version() {
+    local version=$1 && [[ ${version} == v* ]] && version=${1:1}
+    local parts=(${version//./ })
+    [[ ${#parts[@]} -ne 3 ]] && echo "Invalid input version" && exit 1
+    case $2 in
+    major) ((parts[0]++)); parts[1]=0; parts[2]=0;;
+    minor) ((parts[1]++)); parts[2]=0;;
+    patch) ((parts[2]++));;
+    esac
+    echo "v${parts[0]}.${parts[1]}.${parts[2]}"
+}
+branch_alias() {
+    local version=$1 && [[ ${version} == v* ]] && version=${1:1}
+    local parts=(${version//./ })
+    echo "${parts[0]}.${parts[1]}-dev"
+}
 
 assert_clean
 
 curr_version="$(git describe --abbrev=0 --tags)"
-next_version="v$1.$2.$3"
+next_version=$(next_version "${curr_version}" "$1")
 [[ ${curr_version} == ${next_version} ]] && label "Invalid version" ko && exit 1
 
 label "1. SMOKE TEST"
@@ -22,6 +39,10 @@ assert_clean
 confirm "Release ${curr_version} -> ${next_version}?"
 [[ $? -ne 1 ]] && label "Aborted" ok && exit
 
-git tag -sm enjoy "${next_version}"
+run_in_package composer config "extra.branch-alias.dev-master" "$(branch_alias "${next_version}")"
+[[ $? -ne 0 ]] && label "Failed" ko && exit 1
+[[ $(git status --porcelain) ]] && git add --all && git commit -m "bump version"
 
-label "Done" ok
+git tag -sm enjoy "${next_version}" && \
+
+label "Released ${next_version}" ok
