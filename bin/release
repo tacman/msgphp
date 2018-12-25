@@ -14,7 +14,7 @@ bin/smoke-test
 [[ $? -ne 0 ]] && label "Failed" ko && exit 1
 
 label "2. BUILD DOCS"
-run php docs/.refs/compile && bin/build-docs
+bin/build-docs
 [[ $? -ne 0 ]] && label "Failed" ko && exit 1
 
 assert_clean
