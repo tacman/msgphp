@@ -8,7 +8,8 @@ use Twig\Environment;
 use Twig\Loader\ArrayLoader;
 
 if (!is_file('vendor/autoload.php')) {
-    passthru('composer install --no-interaction --no-suggest', $return);
+    echo "\e[34mInstalling dependencies\e[0m\n";
+    passthru('composer install --prefer-dist --quiet', $return);
     if (0 !== $return) {
         exit($return);
     }
@@ -26,11 +27,8 @@ function file_to_class(string $file): string
 
 function load_template(string $file): array
 {
-    $oldBaseDir = getcwd();
-    chdir(dirname(__DIR__));
     extract(['msgphp' => global_vars()]);
     $template = include $file;
-    chdir($oldBaseDir);
 
     return $template;
 }

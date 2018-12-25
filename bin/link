@@ -6,7 +6,7 @@ source bin/.bashrc
 run composer link -h >/dev/null 2>&1
 if [[ $? -ne 0 ]]; then
     label "Installing dependencies"
-    composer install --prefer-dist --quiet
-    [[ $? -ne 0 ]] && label "Installing dependencies failed" ko && exit 1
+    run composer install --prefer-dist --quiet
+    [[ $? -ne 0 ]] && label "Failed" ko && exit 1
 fi
 run_in_package "composer install --prefer-dist --quiet && composer link \${PWD} --working-dir=../.."

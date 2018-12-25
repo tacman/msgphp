@@ -3,6 +3,8 @@
 source bin/.bashrc
 [[ $# -ne 3 ]] && label "Usage: $0 <major> <minor> <patch>" ko && exit 1
 
+assert_clean
+
 curr_version="$(git describe --abbrev=0 --tags)"
 next_version="v$1.$2.$3"
 [[ ${curr_version} == ${next_version} ]] && label "Invalid version" ko && exit 1
@@ -12,7 +14,7 @@ bin/smoke-test
 [[ $? -ne 0 ]] && label "Failed" ko && exit 1
 
 label "2. BUILD DOCS"
-run php bin/compile-docrefs && bin/build-docs
+run php docs/.refs/compile && bin/build-docs
 [[ $? -ne 0 ]] && label "Failed" ko && exit 1
 
 assert_clean

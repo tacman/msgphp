@@ -4,39 +4,40 @@ source bin/.bashrc
 [[ $# -ne 0 ]] && label "Usage: $0" ko && exit 1
 
 repo_url="git@github.com:msgphp/msgphp.github.io.git"
-build_dir="var/docs"
-api_dir="src/api"
-docs_dir="src/docs"
 rev=$(git rev-parse --abbrev-ref --short --verify HEAD)
 [[ ${rev} != master ]] && docs_dir="${docs_dir}-${rev}"
 
-rm -rf var/cache/api
-mkdir -p "${build_dir}"
+mkdir -p var/build var/docs
 
-bin/sami update .sami.dist
-bin/mkdocs build
+label "Compiling"
+run docs/.refs/compile
+[[ $? -ne 0 ]] && label "Failed" ko && exit 1
 
-pushd "${build_dir}" &> /dev/null
+label "Building"
+bin/sami update --force .sami.dist
+bin/mkdocs build --site-dir var/build/docs
 
-label "Synchronizing source"
-if [[ ! -d src/.git ]]; then
+pushd var/docs &> /dev/null
+
+label "Synchronizing"
+if [[ ! -d .git ]]; then
     echo "Cloning..."
-    git clone --quiet ${repo_url} src
-    [[ $? -eq 0 ]] && label "Failed" ko && popd &> /dev/null && exit 1
+    git clone --quiet ${repo_url} .
+    [[ $? -ne 0 ]] && label "Failed" ko && popd &> /dev/null && exit 1
 fi
-git -C src fetch --tags && \
-git -C src pull && \
-rm -rf "${docs_dir}" "${api_dir}" && \
-mv build "${docs_dir}" && \
-mv build-api "${api_dir}"
+git fetch --tags && \
+git pull && \
+rm -rf api docs && \
+mv ../build/docs docs && \
+mv ../build/api api
 [[ $? -ne 0 ]] && label "Failed" ko && popd &> /dev/null && exit 1
 
-if [[ $(git -C src status --porcelain) ]]; then
+if [[ $(git status --porcelain) ]]; then
     confirm "Push docs for \"${rev}\"?"
     if [[ $? -eq 1 ]]; then
-        git -C src add --all && \
-        git -C src commit -m "Update docs for \"${rev}\" to $(git rev-parse --short --verify HEAD)" && \
-        git -C src push
+        git add --all && \
+        git commit -m "Update docs for \"${rev}\" to $(git rev-parse --short --verify HEAD)" && \
+        git push
         [[ $? -ne 0 ]] && label "Failed" ko && popd &> /dev/null && exit 1
     fi
 fi
