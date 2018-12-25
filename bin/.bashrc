@@ -27,12 +27,17 @@ load_env() {
 export -f load_env
 
 run() {
-    if [[ ${CI} != true && $(lando version >/dev/null 2>&1) -eq 0 ]]; then
+    if [[ ${CI} == true ]]; then
+        run_local ${@}
+        return $?
+    fi
+    lando version >/dev/null 2>&1
+    if [[ $? -eq 0 ]]; then
         local cmd=${@}
         lando bash "${cmd}"
-    else
-        run_local ${@}
+        return $?
     fi
+    run_local ${@}
     return $?
 }
 export -f run
