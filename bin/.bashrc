@@ -33,7 +33,7 @@ run() {
     fi
     lando version >/dev/null 2>&1
     if [[ $? -eq 0 ]]; then
-        lando bash "${*}"
+        lando run ${@}
         return $?
     fi
     run_local ${@}
