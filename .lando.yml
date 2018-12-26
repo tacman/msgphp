@@ -16,5 +16,5 @@ tooling:
     cmd: composer
   run:
     service: appserver
-    description: Run Bash command
+    description: Run any command
     cmd: ~

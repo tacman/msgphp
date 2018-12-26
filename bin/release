@@ -8,22 +8,25 @@ next_version() {
     local parts=(${version//./ })
     [[ ${#parts[@]} -ne 3 ]] && echo "Invalid input version" && exit 1
     case $2 in
-    major) ((parts[0]++)); parts[1]=0; parts[2]=0;;
-    minor) ((parts[1]++)); parts[2]=0;;
-    patch) ((parts[2]++));;
+    major) ((++parts[0])); parts[1]=0; parts[2]=0;;
+    minor) ((++parts[1])); parts[2]=0;;
+    patch) ((++parts[2]));;
     esac
     echo "v${parts[0]}.${parts[1]}.${parts[2]}"
 }
+
 branch_alias() {
     local version=$1 && [[ ${version} == v* ]] && version=${1:1}
     local parts=(${version//./ })
-    echo "${parts[0]}.${parts[1]}-dev"
+    echo "${parts[0]}.${parts[1]}"
 }
 
+load_env
 assert_clean
 
 curr_version="$(git describe --abbrev=0 --tags)"
-next_version=$(next_version "${curr_version}" "$1")
+next_version="$(next_version "${curr_version}" "$1")"
+branch_alias="$(branch_alias "${next_version}")"
 [[ ${curr_version} == ${next_version} ]] && label "Invalid version" ko && exit 1
 
 label "1. SMOKE TEST"
@@ -37,12 +40,26 @@ bin/build-docs
 assert_clean
 
 confirm "Release ${curr_version} -> ${next_version}?"
-[[ $? -ne 1 ]] && label "Aborted" ok && exit
+[[ $? -ne 1 ]] && label "Aborted" ok && exit 0
 
-run_in_package composer config "extra.branch-alias.dev-master" "$(branch_alias "${next_version}")"
+run_in_package composer config "extra.branch-alias.dev-master" "${branch_alias}-dev"
 [[ $? -ne 0 ]] && label "Failed" ko && exit 1
-[[ $(git status --porcelain) ]] && git add --all && git commit -m "bump version"
 
-git tag -sm enjoy "${next_version}" && \
+since_version="${curr_version}" && [[ $1 == patch ]] && since_version="$(git describe --abbrev=0 --tags $(git rev-list --max-count=1 --skip=1 "v${branch_alias}.0"))"
+bin/github-changelog-generator -u msgphp -p msgphp -t "${GITHUB_TOKEN}" \
+    --cache-file var/cache/changelog \
+    --output "CHANGELOG-${branch_alias}.md" \
+    --since-tag "${since_version}" \
+    --future-release "${next_version}" \
+    --no-issues \
+    --no-filter-by-milestone \
+    --simple-list \
+    --no-verbose && \
+sed -E "s/^(\s*\-\s*)+/\-\ /" -i "CHANGELOG-${branch_alias}.md"
+[[ $? -ne 0 ]] && label "Failed" ko && exit 1
+
+[[ $(git status --porcelain) ]] && git add --all && git commit -m "make release ${next_version}"
+
+git tag -sm enjoy "${next_version}"
 
 label "Released ${next_version}" ok
