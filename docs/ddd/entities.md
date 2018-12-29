@@ -5,10 +5,7 @@ fields and features are provided in the form of PHP [traits]. Fields can be comp
 features represent a read/write-operation.
 
 They are defined in a dedicated namespace for discovery, respectively `Msgphp\Domain\Entity\Fields\` and
-`MsgPhp\Domain\Entity\Features\`. Additionally more specific fields and features can be provided per domain layer.
-
-!!! note
-    See the [reference](../reference/entities.md) page for all available entities provided per domain
+`MsgPhp\Domain\Entity\Features\`.
 
 ## Basic Example
 
@@ -40,6 +37,9 @@ if (!$entity->isEnabled()) {
     $entity->enable();
 }
 ```
+
+!!! note
+    See the [reference](../reference/entities.md#msgphpdomain) page for all available entity fields and features
 
 [POPO]: https://stackoverflow.com/questions/41188002/what-does-the-term-plain-old-php-object-popo-exactly-mean
 [traits]: https://secure.php.net/traits

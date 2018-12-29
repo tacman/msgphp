@@ -26,16 +26,15 @@ bin/lint
 
 ## Setup a Test Project
 
+Create a new bare Symfony skeleton application with specific MsgPHP bundles pre-installed.
+
 ```bash
 bin/create-project
 ```
 
-It will create a new Symfony skeleton application and ask you which MsgPHP bundles to install. The bundles can be
-automatically symlinked to your local clone after.
-
 ## Perform a Smoke Test
 
-To quickly see if CI is likely to pass use:
+To quickly see if CI is likely to pass, use:
 
 ```bash
 bin/smoke-test
