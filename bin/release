@@ -3,8 +3,13 @@
 source bin/.bashrc
 [[ $# -ne 1 ]] && label "Usage: $0 <type>" ko && exit 1
 
+curr_version() {
+    local version="$(git describe --abbrev=0 --tags)" && [[ ${version} == v* ]] && version=${version:1}
+    echo "${version}"
+}
+
 next_version() {
-    local version=$1 && [[ ${version} == v* ]] && version=${1:1}
+    local version=${1:?missing version} && [[ ${version} == v* ]] && version=${version:1}
     local parts=(${version//./ })
     [[ ${#parts[@]} -ne 3 ]] && echo "Invalid input version" && exit 1
     case $2 in
@@ -12,22 +17,26 @@ next_version() {
     minor) ((++parts[1])); parts[2]=0;;
     patch) ((++parts[2]));;
     esac
-    echo "v${parts[0]}.${parts[1]}.${parts[2]}"
+    echo "${parts[0]}.${parts[1]}.${parts[2]}"
 }
 
 branch_alias() {
-    local version=$1 && [[ ${version} == v* ]] && version=${1:1}
+    local version=${1:?missing version} && [[ ${version} == v* ]] && version=${version:1}
     local parts=(${version//./ })
     echo "${parts[0]}.${parts[1]}"
 }
 
-load_env
-assert_clean
+release_branches() {
+    git branch --list "[0-9].[0-9]"
+}
 
-curr_version="$(git describe --abbrev=0 --tags)"
-next_version="$(next_version "${curr_version}" "$1")"
-branch_alias="$(branch_alias "${next_version}")"
-[[ ${curr_version} == ${next_version} ]] && label "Invalid version" ko && exit 1
+tag() {
+    local version=${1:?missing version} && [[ ${version} == v* ]] && version=${version:1}
+    git tag -sm enjoy "v${version}"
+}
+
+assert_clean
+load_env
 
 label "1. SMOKE TEST"
 bin/smoke-test
@@ -39,11 +48,43 @@ bin/build-docs
 
 assert_clean
 
-confirm "Release ${curr_version} -> ${next_version}?"
+label "3. SYNCHRONIZING"
+git_sync var/release "${SRC_REPO}"
+[[ $? -ne 0 ]] && label "Failed" ko && exit 1
+
+confirm "Release?"
 [[ $? -ne 1 ]] && label "Aborted" ok && exit 0
 
+pushd var/release &> /dev/null
+mv .lando.yml .lando.yml.old
+restore() {
+    mv .lando.yml.old .lando.yml
+    popd &> /dev/null
+}
+
+#case $1 in
+#major|minor)
+#    git checkout -b "${branch_alias}" && \
+#    run_in_package composer config "extra.branch-alias.dev-master" "${branch_alias}-dev"
+#    [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+#    ;;
+#patch)
+#    for branch in $(release_branches); do
+#        git checkout -B "${branch}"
+#        patch_version=$(next_version "$(curr_version)" patch)
+#        label "Patch release ${patch_version}"
+#        tag "${patch_version}"
+#        [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+#    done;
+#    ;;
+#esac
+
+curr_version="$(curr_version)"
+next_version="$(next_version "${curr_version}" "$1")"
+branch_alias="$(branch_alias "${next_version}")"
+
 run_in_package composer config "extra.branch-alias.dev-master" "${branch_alias}-dev"
-[[ $? -ne 0 ]] && label "Failed" ko && exit 1
+[[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
 
 since_version="${curr_version}" && [[ $1 == patch ]] && since_version="$(git describe --abbrev=0 --tags $(git rev-list --max-count=1 --skip=1 "v${branch_alias}.0"))"
 bin/github-changelog-generator -u msgphp -p msgphp -t "${GITHUB_TOKEN}" \
@@ -56,10 +97,11 @@ bin/github-changelog-generator -u msgphp -p msgphp -t "${GITHUB_TOKEN}" \
     --simple-list \
     --no-verbose && \
 sed -E "s/^(\s*\-\s*)+/\-\ /" -i "CHANGELOG-${branch_alias}.md"
-[[ $? -ne 0 ]] && label "Failed" ko && exit 1
+[[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
 
 [[ $(git status --porcelain) ]] && git add --all && git commit -m "make release ${next_version}"
 
-git tag -sm enjoy "${next_version}"
+tag "${next_version}"
+[[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
 
-label "Released ${next_version}" ok
+label "Released ${next_version}" ok && restore
