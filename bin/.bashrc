@@ -70,9 +70,11 @@ run_in_package() {
 export -f run_in_package
 
 download_bin() {
-    mkdir -p $(dirname "$1") && \
-    curl -Lso "$1" "$2" && \
-    chmod +x "$1"
+    local file="${1:?missing file}"
+    local url="${2:?missing url}"
+    mkdir -p $(dirname "${file}") && \
+    curl -Lso "${file}" "${url}" && \
+    chmod +x "${file}"
 }
 export -f download_bin
 
@@ -80,3 +82,19 @@ assert_clean() {
     [[ $(git status --porcelain) ]] && label "Working directory is not clean" ko && exit 1
 }
 export -f assert_clean
+
+git_sync() {
+    local dir="${1:?missing dir}"
+    local url="${2:?missing url}"
+    local branch="${3:-master}"
+    if [[ ! -d "${dir}/.git" ]]; then
+        mkdir -p "${dir}" && \
+        git clone --branch "${branch}" "${url}" "${dir}"
+    else
+        git -C "${dir}" tag -l | xargs git -C "${dir}" tag -d && \
+        git -C "${dir}" fetch --all --prune --tags && \
+        git -C "${dir}" checkout "${branch}" && \
+        git -C "${dir}" pull origin "${branch}"
+    fi
+}
+export -f git_sync

@@ -3,43 +3,35 @@
 source bin/.bashrc
 [[ $# -ne 0 ]] && label "Usage: $0" ko && exit 1
 
-repo_url="git@github.com:msgphp/msgphp.github.io.git"
-rev=$(git rev-parse --abbrev-ref --short --verify HEAD)
-[[ ${rev} != master ]] && docs_dir="${docs_dir}-${rev}"
+load_env
+assert_clean
 
-mkdir -p var/build var/docs
+rev=$(git rev-parse --abbrev-ref --short --verify HEAD)
+docs_dir="docs" && [[ ${rev} != master ]] && docs_dir="${docs_dir}-${rev}"
 
 label "Compiling"
 run docs/.refs/compile
 [[ $? -ne 0 ]] && label "Failed" ko && exit 1
 
-label "Building"
-bin/sami update --force .sami.dist
-bin/mkdocs build --site-dir var/build/docs
+assert_clean
 
-pushd var/docs &> /dev/null
+label "Building"
+mkdir -p var/build
+bin/sami update --force .sami.dist
+bin/mkdocs build --site-dir "var/build/${docs_dir}"
 
 label "Synchronizing"
-if [[ ! -d .git ]]; then
-    echo "Cloning..."
-    git clone --quiet ${repo_url} .
-    [[ $? -ne 0 ]] && label "Failed" ko && popd &> /dev/null && exit 1
-fi
-git fetch --tags && \
-git pull && \
-rm -rf api docs && \
-mv ../build/docs docs && \
-mv ../build/api api
-[[ $? -ne 0 ]] && label "Failed" ko && popd &> /dev/null && exit 1
+git_sync var/docs "${DOCS_REPO}" && \
+rm -rf var/docs/api && mv var/build/api var/docs/api && \
+rm -rf "var/docs/${docs_dir}" && mv "var/build/${docs_dir}" "var/docs/${docs_dir}"
+[[ $? -ne 0 ]] && label "Failed" ko && exit 1
 
-if [[ $(git status --porcelain) ]]; then
+if [[ $(git -C var/docs status --porcelain) ]]; then
+    git -C var/docs add --all && \
+    git -C var/docs commit -m "Update docs for \"${rev}\" to $(git rev-parse --short --verify HEAD)" && \
     confirm "Push docs for \"${rev}\"?"
     if [[ $? -eq 1 ]]; then
-        git add --all && \
-        git commit -m "Update docs for \"${rev}\" to $(git rev-parse --short --verify HEAD)" && \
-        git push
-        [[ $? -ne 0 ]] && label "Failed" ko && popd &> /dev/null && exit 1
+        git -C var/docs push origin master
+        [[ $? -ne 0 ]] && label "Failed" ko && exit 1
     fi
 fi
-
-popd &> /dev/null
