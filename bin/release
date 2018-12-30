@@ -11,7 +11,7 @@ curr_version() {
 next_version() {
     local version=${1:?missing version} && [[ ${version} == v* ]] && version=${version:1}
     local parts=(${version//./ })
-    [[ ${#parts[@]} -ne 3 ]] && echo "Invalid input version" && exit 1
+    [[ ${#parts[@]} -ne 3 ]] && echo "Invalid version" && exit 1
     case $2 in
     major) ((++parts[0])); parts[1]=0; parts[2]=0;;
     minor) ((++parts[1])); parts[2]=0;;
@@ -23,11 +23,21 @@ next_version() {
 branch_alias() {
     local version=${1:?missing version} && [[ ${version} == v* ]] && version=${version:1}
     local parts=(${version//./ })
+    [[ ${#parts[@]} -ne 3 ]] && echo "Invalid version" && exit 1
     echo "${parts[0]}.${parts[1]}"
 }
 
 release_branches() {
-    git branch --list "[0-9].[0-9]"
+    local branches="$(git branch --remote --list "origin/[0-9].[0-9]")"
+    echo "${branches:-origin/master}"
+}
+
+checkout() {
+    local branch=${1:?missing branch}
+    local parts=(${branch//// })
+    [[ ${#parts[@]} -ne 2 ]] && echo "Invalid branch" && exit 1
+    git checkout --quiet -B "${parts[1]}" "${parts[0]}/${parts[1]}" && \
+    git pull --quiet "${parts[0]}" "${parts[1]}"
 }
 
 tag() {
@@ -62,46 +72,47 @@ restore() {
     popd &> /dev/null
 }
 
-#case $1 in
+case $1 in
 #major|minor)
 #    git checkout -b "${branch_alias}" && \
 #    run_in_package composer config "extra.branch-alias.dev-master" "${branch_alias}-dev"
 #    [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
 #    ;;
-#patch)
-#    for branch in $(release_branches); do
-#        git checkout -B "${branch}"
-#        patch_version=$(next_version "$(curr_version)" patch)
-#        label "Patch release ${patch_version}"
-#        tag "${patch_version}"
-#        [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
-#    done;
-#    ;;
-#esac
+patch)
+    for branch in $(release_branches); do
+        checkout "${branch}"
+        [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+        patch_version=$(next_version "$(curr_version)" patch)
+        tag "${patch_version}"
+        [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+        label "Patch release ${patch_version}"
+    done;
+    ;;
+esac
 
-curr_version="$(curr_version)"
-next_version="$(next_version "${curr_version}" "$1")"
-branch_alias="$(branch_alias "${next_version}")"
-
-run_in_package composer config "extra.branch-alias.dev-master" "${branch_alias}-dev"
-[[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
-
-since_version="${curr_version}" && [[ $1 == patch ]] && since_version="$(git describe --abbrev=0 --tags $(git rev-list --max-count=1 --skip=1 "v${branch_alias}.0"))"
-bin/github-changelog-generator -u msgphp -p msgphp -t "${GITHUB_TOKEN}" \
-    --cache-file var/cache/changelog \
-    --output "CHANGELOG-${branch_alias}.md" \
-    --since-tag "${since_version}" \
-    --future-release "${next_version}" \
-    --no-issues \
-    --no-filter-by-milestone \
-    --simple-list \
-    --no-verbose && \
-sed -E "s/^(\s*\-\s*)+/\-\ /" -i "CHANGELOG-${branch_alias}.md"
-[[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
-
-[[ $(git status --porcelain) ]] && git add --all && git commit -m "make release ${next_version}"
-
-tag "${next_version}"
-[[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+#curr_version="$(curr_version)"
+#next_version="$(next_version "${curr_version}" "$1")"
+#branch_alias="$(branch_alias "${next_version}")"
+#
+#run_in_package composer config "extra.branch-alias.dev-master" "${branch_alias}-dev"
+#[[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+#
+#since_version="${curr_version}" && [[ $1 == patch ]] && since_version="$(git describe --abbrev=0 --tags $(git rev-list --max-count=1 --skip=1 "v${branch_alias}.0"))"
+#bin/github-changelog-generator -u msgphp -p msgphp -t "${GITHUB_TOKEN}" \
+#    --cache-file var/cache/changelog \
+#    --output "CHANGELOG-${branch_alias}.md" \
+#    --since-tag "${since_version}" \
+#    --future-release "${next_version}" \
+#    --no-issues \
+#    --no-filter-by-milestone \
+#    --simple-list \
+#    --no-verbose && \
+#sed -E "s/^(\s*\-\s*)+/\-\ /" -i "CHANGELOG-${branch_alias}.md"
+#[[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+#
+#[[ $(git status --porcelain) ]] && git add --all && git commit -m "make release ${next_version}"
+#
+#tag "${next_version}"
+#[[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
 
 label "Released ${next_version}" ok && restore

@@ -91,9 +91,9 @@ git_sync() {
         mkdir -p "${dir}" && \
         git clone --branch "${branch}" "${url}" "${dir}"
     else
-        git -C "${dir}" tag -l | xargs git -C "${dir}" tag -d && \
-        git -C "${dir}" fetch --all --prune --tags && \
-        git -C "${dir}" checkout "${branch}" && \
+        git -C "${dir}" tag -l | xargs -n 1 -I {} git -C "${dir}" tag --delete {} >/dev/null && \
+        git -C "${dir}" fetch --all --prune --tags --quiet && \
+        git -C "${dir}" checkout --quiet -B "${branch}" "origin/${branch}" && \
         git -C "${dir}" pull origin "${branch}"
     fi
 }
