@@ -112,8 +112,8 @@ major|minor)
     if [[ $? -eq 1 ]]; then
         git checkout --quiet -b "${branch}" && \
         tag "${next_version}" && \
-        git checkout --quieqqt master && \
-        bump "$(branch_alias "$(next_version "${next_version}" minor)")" # todo ask last minor yes/no; if yes bump next major
+        git checkout --quiet master && \
+        bump "$(branch_alias "$(next_version "${next_version}" minor)")"
     else
         tag "${next_version}"
     fi

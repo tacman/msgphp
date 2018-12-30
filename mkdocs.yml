@@ -28,8 +28,8 @@ pages:
     - Entities: ddd/entities.md
     - Repositories: ddd/repositories.md
 - Event-Sourcing:
-    - Events: event-sourcing/events.md
     - Event Handlers: event-sourcing/event-handlers.md
+    - Events: event-sourcing/events.md
 - Message Driven:
     - Message Bus: message-driven/message-bus.md
     - Message Dispatcher: message-driven/message-dispatcher.md
