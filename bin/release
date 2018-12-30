@@ -46,22 +46,42 @@ tag() {
 }
 
 changelog() {
-    local type=${1:?missing type}
-    local curr_version=${2:?missing current version} && [[ ${curr_version} == v* ]] && curr_version=${curr_version:1}
+    local branch=${1:?missing branch}
+    local since_version=${2:?missing since version} && [[ ${since_version} == v* ]] && since_version=${since_version:1}
     local next_version=${3:?missing next version} && [[ ${next_version} == v* ]] && next_version=${next_version:1}
-    local since_version="v${curr_version}" && [[ ${type} == patch ]] && since_version="$(git describe --abbrev=0 --tags $(git rev-list --max-count=1 --skip=1 "v$(branch_alias "${curr_version}").0"))"
     local filename="CHANGELOG-"$(branch_alias "${next_version}")".md"
 
-    bin/github-changelog-generator -u msgphp -p msgphp -t "${GITHUB_TOKEN}" \
-        --cache-file var/cache/changelog \
-        --output "${filename}" \
-        --since-tag "${since_version}" \
+    if [[ -f "${filename}" ]]; then
+        sed -e "s/^# Changelog$//" -i "${filename}" && \
+        sed -e :a -e '/./,$!d;/^\n*$/{$d;N;};/\n$/ba' -i "${filename}"
+    else
+        echo "" >> "${filename}"
+    fi
+
+    [[ -d ../../var/cache/changelog ]] && cp -R ../../var/cache/changelog var/cache/
+    [[ ! -d "var/cache/changelog/${branch}" ]] && mkdir -p "var/cache/changelog/${branch}"
+
+    rm -f "${filename}.tmp" && \
+    ../../bin/github-changelog-generator -u msgphp -p msgphp -t "${GITHUB_TOKEN}" \
+        --cache-file "var/cache/changelog/${branch}" \
+        --output "${filename}.tmp" \
+        --release-branch "${branch}" \
+        --since-tag "v${since_version}" \
         --future-release "v${next_version}" \
+        --header-label "" \
         --no-issues \
         --no-filter-by-milestone \
         --simple-list \
         --no-verbose && \
-    sed -E "s/^(\s*\-\s*)+/\-\ /" -i "${filename}" && \
+    cp -R var/cache/changelog ../../var/cache/ && \
+    sed -E -e "s/^(\s*\-\s*)+/\-\ /" -e "s/^\\\\\*\ \*This\ Change\ Log\ was\ automatically\ generated\ .*//" -i "${filename}.tmp" && \
+    sed -e :a -e '/./,$!d;/^\n*$/{$d;N;};/\n$/ba' -i "${filename}.tmp" && \
+    echo "" >> "${filename}.tmp" && \
+    cat "${filename}" >> "${filename}.tmp" && \
+    rm -f "${filename}" &&
+    echo "# Changelog" >> "${filename}" && echo "" >> "${filename}" &&
+    cat "${filename}.tmp" >> "${filename}" &&\
+    rm -f "${filename}.tmp" && \
     git add "${filename}" && \
     git commit --quiet -m "updated changelog to ${next_version}"
 }
@@ -105,7 +125,7 @@ major|minor)
     curr_version="$(curr_version)"
     next_version="$(next_version "${curr_version}" "$1")"
     branch="$(branch_alias "${next_version}")"
-    changelog "$1" "${curr_version}" "${next_version}" && \
+    changelog "$(git rev-parse --abbrev-ref HEAD)" "${curr_version}" "${next_version}" && \
     bump "${branch}"
     [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
     confirm "Create release branch ${branch}?" yes
@@ -126,7 +146,7 @@ patch)
         [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
         curr_version="$(curr_version)"
         next_version="$(next_version "${curr_version}" patch)"
-        changelog patch "${curr_version}" "${next_version}" && \
+        changelog "$(git rev-parse --abbrev-ref HEAD)" "${curr_version}" "${next_version}" && \
         tag "${next_version}"
         [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
         label "Released ${next_version}"
