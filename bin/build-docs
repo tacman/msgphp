@@ -28,8 +28,8 @@ rm -rf "var/www/${docs_dir}" && mv "var/build/${docs_dir}" "var/www/${docs_dir}"
 
 if [[ $(git -C var/www status --porcelain) ]]; then
     git -C var/www add --all && \
-    git -C var/www commit -m "Update docs for \"${rev}\" to $(git rev-parse --short --verify HEAD)" && \
-    confirm "Push docs for \"${rev}\"?"
+    git -C var/www commit --quiet -m "https://github.com/msgphp/msgphp/commit/$(git rev-parse --short --verify HEAD)" && \
+    confirm "Push docs?"
     if [[ $? -eq 1 ]]; then
         git -C var/www push origin master
         [[ $? -ne 0 ]] && label "Failed" ko && exit 1
