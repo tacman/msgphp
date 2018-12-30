@@ -12,7 +12,7 @@ It decorates any `Symfony\Component\Messenger\MessageBusInterface` type.
 - `__construct(MessageBusInterface $bus)`
     - `$bus`: The decorated bus
 
-### Basic example
+### Basic Example
 
 ```php
 <?php

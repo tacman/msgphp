@@ -12,7 +12,7 @@ It decorates any `SimpleBus\Message\Bus\MessageBus` type.
 - `__construct(MessageBus $bus)`
     - `$bus`: The decorated bus
 
-### Basic example
+### Basic Example
 
 ```php
 <?php

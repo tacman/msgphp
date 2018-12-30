@@ -26,7 +26,7 @@ default [`Type`][api-type] implementation and can be used either generic or as a
     See the [reference](../reference/doctrine-identifier-types.md) page for all available identifier types provided per
     domain
 
-### Basic example
+### Basic Example
 
 ```php
 <?php

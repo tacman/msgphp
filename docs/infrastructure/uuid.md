@@ -16,7 +16,7 @@ leverages type `Ramsey\Uuid\UuidInterface` as underlying data type.
 !!! note
     See the [reference](../reference/identifiers.md) page for all available UUID identifiers provided per domain
 
-### Basic example
+### Basic Example
 
 ```php
 <?php

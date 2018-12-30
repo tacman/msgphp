@@ -12,7 +12,7 @@ It decorates any `Doctrine\Common\Collections\Collection` type.
 - `__construct(Collection $collection)`
     - `$collection`: The decorated collection
 
-### Basic example
+### Basic Example
 
 ```php
 <?php

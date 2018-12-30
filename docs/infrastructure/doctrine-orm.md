@@ -14,7 +14,7 @@ the identity mapping from its class metadata.
     - `$em`: The entity manager to use
     - `$classMapping`: Global class mapping. Usually used to map abstracts to concretes.
 
-### Basic example
+### Basic Example
 
 ```php
 <?php
@@ -41,7 +41,7 @@ underlying persistence layer.
     - `$identityHelper`: Custom domain identity helper. By default it's resolved from the given entity manager.
       [Read more](../ddd/identities.md).
 
-### Basic example
+### Basic Example
 
 ```php
 <?php
@@ -102,7 +102,7 @@ with [inheritance][orm-inheritance].
     - `$em`: The entity manager to use
     - `$classMapping`: Global class mapping. Usually used to map abstracts to concretes.
 
-### Basic example
+### Basic Example
 
 ```php
 <?php
@@ -171,7 +171,7 @@ value (due to `__toString()`). In case the underlying data type is e.g. `integer
 
 To overcome, two hydration modes are available to hydrate the primitive identifier value instead.
 
-### Basic example
+### Basic Example
 
 ```php
 <?php
