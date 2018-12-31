@@ -42,14 +42,14 @@ run() {
 export -f run
 
 run_local() {
-    bash -xc "${*}" 2>&1
+    bash -c "${*}" 2>&1
     return $?
 }
 export -f run_local
 
 run_in_package() {
     local ret=0
-    for package in $(find src/*/composer.json -type f); do
+    for package in $(packages); do
         pushd "$(dirname "${package}")" &> /dev/null
         if [[ ${TRAVIS} == true ]]; then
             if [[ $1 == --local ]]; then tfold "[CWD] $(pwd)" ${@:2};
@@ -68,6 +68,16 @@ run_in_package() {
     return ${ret}
 }
 export -f run_in_package
+
+packages() {
+    find src/*/composer.json -type f
+}
+export -f packages
+
+package_name() {
+    echo "$(echo $(grep -E "^\s*\"name\"\s*:\s*\"msgphp\/([^\"]+)\"\s*,\s*$" "${1:?missing file}") | sed -e "s/^\s*\"name\":\s*\"msgphp\///" -e "s/\"\s*,\s*$//")"
+}
+export -f package_name
 
 download_bin() {
     local file="${1:?missing file}"

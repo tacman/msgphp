@@ -51,44 +51,48 @@ changelog() {
     local next_version=${3:?missing next version} && [[ ${next_version} == v* ]] && next_version=${next_version:1}
     local filename="CHANGELOG-"$(branch_alias "${next_version}")".md"
 
-    if [[ -f "${filename}" ]]; then
-        sed -e "s/^# Changelog$//" -i "${filename}" && \
-        sed -e :a -e '/./,$!d;/^\n*$/{$d;N;};/\n$/ba' -i "${filename}"
-    else
-        echo "" >> "${filename}"
-    fi
-
-    [[ -d ../../var/cache/changelog ]] && cp -R ../../var/cache/changelog var/cache/
     [[ ! -d "var/cache/changelog/${branch}" ]] && mkdir -p "var/cache/changelog/${branch}"
+    [[ -d ../../var/cache/changelog ]] && cp -R ../../var/cache/changelog var/cache/
 
-    rm -f "${filename}.tmp" && \
-    ../../bin/github-changelog-generator -u msgphp -p msgphp -t "${GITHUB_TOKEN}" \
-        --cache-file "var/cache/changelog/${branch}" \
-        --output "${filename}.tmp" \
-        --release-branch "${branch}" \
-        --since-tag "v${since_version}" \
-        --future-release "v${next_version}" \
-        --header-label "" \
-        --no-issues \
-        --no-filter-by-milestone \
-        --simple-list \
-        --no-verbose && \
-    cp -R var/cache/changelog ../../var/cache/ && \
-    sed -E -e "s/^(\s*\-\s*)+/\-\ /" -e "s/^\\\\\*\ \*This\ Change\ Log\ was\ automatically\ generated\ .*//" -i "${filename}.tmp" && \
-    sed -e :a -e '/./,$!d;/^\n*$/{$d;N;};/\n$/ba' -i "${filename}.tmp" && \
-    echo "" >> "${filename}.tmp" && \
-    cat "${filename}" >> "${filename}.tmp" && \
-    rm -f "${filename}" &&
-    echo "# Changelog" >> "${filename}" && echo "" >> "${filename}" &&
-    cat "${filename}.tmp" >> "${filename}" &&\
-    rm -f "${filename}.tmp" && \
-    git add "${filename}" && \
-    git commit --quiet -m "updated changelog to ${next_version}"
+    for package in $(packages); do
+        name="$(package_name "${package}")"
+        file="$(dirname "${package}")/${filename}"
+        [[ ! -f "${file}" ]] && echo "# Changelog" >> "${file}"
+        rm -f "${file}.tmp" && \
+        ../../bin/github-changelog-generator -u msgphp -p msgphp -t "${GITHUB_TOKEN}" \
+            --cache-file "var/cache/changelog/${branch}" \
+            --output "${file}.tmp" \
+            --since-tag "v${since_version}" \
+            --future-release "v${next_version}" \
+            --release-branch "${branch}" \
+            --release-url "https://github.com/msgphp/${name}/tree/%s" \
+            --include-labels "${name/-/,}" \
+            --simple-list \
+            --header-label "" \
+            --no-issues \
+            --no-filter-by-milestone \
+            --no-author \
+            --no-compare-link \
+            --no-verbose >/dev/null && \
+        sed -e '/^\\\* \*This Change Log was automatically generated .*/d' -i "${file}.tmp" && \
+        sed -e :a -e '/./,$!d;/^\n*$/{$d;N;};/\n$/ba' -i "${file}.tmp" && \
+        sed -e '1 a \\n' -i "${file}" && \
+        sed -e "2 r ${file}.tmp" -i "${file}" && \
+        sed -e :a -e '/./,$!d;/^\n*$/{$d;N;};/\n$/ba' -i "${file}" && \
+        rm -f "${file}.tmp" && \
+        git add "${file}"
+        [[ $? -ne 0 ]] && return 1
+    done
+
+    cp -R var/cache/changelog ../../var/cache/
+    git commit --quiet -m "update changelog to ${next_version}"
 }
 
 bump() {
     local branch=${1:?missing branch}
+    mv .lando.yml .lando.yml.tmp && \
     run_in_package composer config "extra.branch-alias.dev-master" "${branch}-dev" && \
+    mv .lando.yml.tmp .lando.yml && \
     git add src/*/composer.json && \
     git commit --quiet -m "bumped branch alias to ${branch}"
 }
@@ -96,17 +100,19 @@ bump() {
 assert_clean
 load_env
 
-label "1. SMOKE TEST"
-bin/smoke-test
-[[ $? -ne 0 ]] && label "Failed" ko && exit 1
+confirm "Run smoke test first?" yes
+if [[ $? -eq 1 ]]; then
+    bin/smoke-test
+    [[ $? -ne 0 ]] && label "Failed" ko && exit 1
+fi
 
-label "2. BUILD DOCS"
-bin/build-docs
-[[ $? -ne 0 ]] && label "Failed" ko && exit 1
+confirm "Build docs?" yes
+if [[ $? -eq 1 ]]; then
+    bin/build-docs && assert_clean
+    [[ $? -ne 0 ]] && label "Failed" ko && exit 1
+fi
 
-assert_clean
-
-label "3. SYNCHRONIZING"
+label "Synchronizing source"
 git_sync var/release "${SRC_REPO}"
 [[ $? -ne 0 ]] && label "Failed" ko && exit 1
 
@@ -114,9 +120,7 @@ confirm "Release?"
 [[ $? -ne 1 ]] && label "Aborted" ok && exit 0
 
 pushd var/release &> /dev/null
-mv .lando.yml .lando.yml.old
 restore() {
-    mv .lando.yml.old .lando.yml
     popd &> /dev/null
 }
 
@@ -125,6 +129,7 @@ major|minor)
     curr_version="$(curr_version)"
     next_version="$(next_version "${curr_version}" "$1")"
     branch="$(branch_alias "${next_version}")"
+    label "Releasing ${curr_version} -> ${next_version}"
     changelog "$(git rev-parse --abbrev-ref HEAD)" "${curr_version}" "${next_version}" && \
     bump "${branch}"
     [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
@@ -138,7 +143,7 @@ major|minor)
         tag "${next_version}"
     fi
     [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
-    label "Released ${next_version}"
+    label "Done" ok
     ;;
 patch)
     for branch in $(release_branches); do
@@ -146,12 +151,13 @@ patch)
         [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
         curr_version="$(curr_version)"
         next_version="$(next_version "${curr_version}" patch)"
+        label "Releasing ${curr_version} -> ${next_version}"
         changelog "$(git rev-parse --abbrev-ref HEAD)" "${curr_version}" "${next_version}" && \
         tag "${next_version}"
         [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
-        label "Released ${next_version}"
+        label "Done" ok
     done;
     ;;
 esac
 
-label "Done" ok && restore
+restore
