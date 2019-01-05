@@ -11,4 +11,4 @@ if [[ ! -f var/cache/php-cs-fixer.phar ]]; then
     [[ $? -ne 0 ]] && label "Installing PHP-CS-Fixer failed" ko && exit 1
 fi
 
-run var/cache/php-cs-fixer.phar fix --dry-run --verbose --diff src/
+run var/cache/php-cs-fixer.phar fix --dry-run --verbose --diff --config=.php_cs.dist src/ tests/
