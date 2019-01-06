@@ -1,37 +1,37 @@
-# Identities
+# Identity Helper
 
 `MsgPhp\Domain\DomainIdentityHelper` is a utility domain service. Its purpose is to ease working with domain identities
 and the [identity mapping](identity-mapping.md).
 
-A domain identity is a composite value (`array`) of one or more individual identifier values, indexed by an identifier
-field name. Its usage is to uniquely identify a domain object, thus qualifying it an entity object.
+A domain identity is a composite value (`array`) holding one or more individual identifier values, indexed by an
+identifier field name. Its purpose is to uniquely identify a domain entity.
 
-Identifier values can be of any type; a [domain identifier](identifiers.md), another (foreign) entity object, or any
-primitive value.
+Identifier values can be of any type; a [domain identifier](identifiers.md), another (foreign) domain entity, or any
+primitive scalar.
 
-A single identifier value might represent an identity in case the identity is composed from a single identifier field.
+A single identifier value might represent an identity in case the identity is not a composite.
 
 ## API
 
 ### `isIdentifier($value): bool`
 
-Tells if `$value` is a known identifier value. This is either a [domain identifier](identifiers.md) object or an entity
-object.
+Tells if `$value` is a known identifier value. This is either a [domain identifier](identifiers.md) object, or another
+domain entity.
 
 ---
 
 ### `isEmptyIdentifier($value): bool`
 
-Tells if `$value` is a known empty identifier value. It returns `true` if the specified value is either `null`, an empty
-[domain identifier](identifiers.md) or an entity object without its identity set.
+Tells if `$value` is a known empty identifier value. It returns `true` if the specified value is either `null`, an 
+_empty_ [domain identifier](identifiers.md), or another domain entity without its identity set.
 
 ---
 
 ### `normalizeIdentifier($value)`
 
-Returns the primitive identifier value of `$value`. Empty identifier values (see `isEmptyIdentifier()`) are normalized
-as `null`, a [domain identifier](identifiers.md) as string value and an entity object as normalized identity value.
-A value of any other type is returned as is.
+Returns the primitive identifier value of `$value`. An empty identifier (see `isEmptyIdentifier()`) is normalized to
+`null`, a [domain identifier](identifiers.md) to `string`, and another domain entity to its normalized identity (`scalar|array`).
+Any other type of value is preserved.
 
 ---
 
@@ -43,14 +43,13 @@ Returns the actual identifier values of `$object`.
 
 ### `getIdentifierFieldNames(string $class): array`
 
-Returns the identifier field names for `$class`. Any instance should have an identity composed of these field values.
-See also `DomainIdentityMappingInterface::getIdentifierFieldNames()`.
+See `DomainIdentityMappingInterface::getIdentifierFieldNames()`.
 
 ---
 
 ### `isIdentity(string $class, $value): bool`
 
-Tells if `$value` is a valid identity for type `$class`. An identity value is considered valid if an entity object uses
+Tells if `$value` is a valid identity for type `$class`. An identity is considered valid if the entity class uses
 a single identifier value as identity and `$value` is a non empty identifier (see `isEmptyIdentifier()`).
 
 In case of one or more identifier values, given in the form of an array, its keys must exactly match the available
@@ -66,8 +65,7 @@ Returns a composite identity value for `$class` from `$value`.
 
 ### `getIdentity(object $object): array`
 
-Returns the actual, non empty, identifier values of `$object`. Each identifier value is keyed by its corresponding
-identifier field name. See also `DomainIdentityMappingInterface::getIdentity()`.
+See `DomainIdentityMappingInterface::getIdentity()`.
 
 ## Basic Example
 

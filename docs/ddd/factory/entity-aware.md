@@ -13,8 +13,8 @@ An entity aware factory is an [object factory](object.md) and additionally bound
 
 ### `reference(string $class, $id): object`
 
-Returns a factorized reference object for a known existing entity object. The object must be of type `$class`. Any type
-of [identity](../identities.md) value can be passed as `$id`.
+Returns a factorized reference object of type `$class` for an entity known to exist. Supported identity values are
+`scalar`, `array` (for composite identifiers), and `object` (i.e. another entity or its [identifier](../identifiers.md)). 
 
 ---
 
@@ -37,7 +37,7 @@ A generic entity factory.
 
 - `__construct(DomainObjectFactoryInterface $factory, DomainIdentityHelper $identityHelper, array $identifierMapping = [])`
     - `$factory`: The decorated [object factory](object.md)
-    - `$identityHelper`: The [identity helper](../identities.md)
+    - `$identityHelper`: The [identity helper](../identity-helper.md)
     - `$identifierMapping`: The identifier class mapping (`['EntityType' => 'IdType']`)
 
 #### Basic example

@@ -1,13 +1,13 @@
 # Identity Mapping
 
-An identity mapping is a domain service and is bound to `MsgPhp\Domain\DomainIdentityMappingInterface`. It tells about
-the identifier metadata for a known domain object.
+The domain identity mapping is a service object and is bound to `MsgPhp\Domain\DomainIdentityMappingInterface`. Its
+purpose is to expose identifier metadata for a known domain entity.
 
 ## API
 
 ### `getIdentifierFieldNames(string $class): array`
 
-Returns the identifier field names for `$class`. Any instance should have an identity composed of these field values.
+Returns the identifier field names for `$class`. Any instance should have an identity composed from these fields.
 
 ---
 

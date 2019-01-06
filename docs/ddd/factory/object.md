@@ -11,7 +11,7 @@ Returns a factorized domain object by class name. Optionally a context can be pr
 
 ### `getClass(string $class, array $context = []): string`
 
-Returns the actual class name the factory will create and equalizes `get_class($factory->create($class, $context))`.
+Returns the actual class name the factory will create and equals `get_class($factory->create($class, $context))`.
 
 ## Implementations
 

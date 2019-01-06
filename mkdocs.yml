@@ -18,15 +18,15 @@ pages:
 - Code Conventions: code-conventions.md
 - Domain-Driven-Design:
     - Identifiers: ddd/identifiers.md
-    - Identities: ddd/identities.md
-    - Identity Mapping: ddd/identity-mapping.md
     - Collections: ddd/collections.md
+    - Entities: ddd/entities.md
+    - Repositories: ddd/repositories.md
     - Factories:
         - Object Factory: ddd/factory/object.md
         - Entity Aware Factory: ddd/factory/entity-aware.md
         - Static Factory: ddd/factory/static.md
-    - Entities: ddd/entities.md
-    - Repositories: ddd/repositories.md
+    - Identity Mapping: ddd/identity-mapping.md
+    - Identity Helper: ddd/identity-helper.md
 - Event-Sourcing:
     - Event Handlers: event-sourcing/event-handlers.md
     - Events: event-sourcing/events.md

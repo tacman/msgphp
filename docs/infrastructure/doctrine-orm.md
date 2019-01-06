@@ -39,7 +39,7 @@ underlying persistence layer.
     - `$class`: The entity class this repository is tied to
     - `$em`: The entity manager to use
     - `$identityHelper`: Custom domain identity helper. By default it's resolved from the given entity manager.
-      [Read more](../ddd/identities.md).
+      [Read more](../ddd/identity-helper.md).
 
 ### Basic Example
 
