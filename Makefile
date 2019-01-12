@@ -47,7 +47,7 @@ phpunit: phpunit-install
 	done
 phpunit-coverage: phpunit-install
 	for package in $$(find src/*/composer.json -type f); do \
-		${phpunit_coverage} -c $$(dirname $${package}) --coverage-clover=var/coverage.xml; \
+		${phpunit_coverage} -c $$(dirname $${package}) --coverage-clover=var/coverage/$$(basename $$(dirname $${package})).xml; \
 	done
 
 # code style / static analysis
