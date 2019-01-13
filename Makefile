@@ -54,7 +54,7 @@ phpunit-coverage: phpunit-install
 cs:
 	${qa} php-cs-fixer fix --dry-run --verbose --diff --config=.php_cs.dist src/ tests/
 sa: install phpunit-install
-	${qa} phpstan analyse src/ tests/fixtures/sa
+	${qa} phpstan analyse
 
 # docs
 docs-serve:

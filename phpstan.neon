@@ -4,10 +4,13 @@ includes:
 
 parameters:
     level: max
-    tmpDir: var/phpstan
+    paths:
+        - src/
+        - tests/fixtures/sa
     autoload_directories:
         - tests/fixtures/sa
         - var/composer/vendor/bin/.phpunit/phpunit-7.5/src
+    tmpDir: var/phpstan
 
     ignoreErrors:
         - '#Constructor of class MsgPhp\\Domain\\Tests\\Factory\\KnownTestObject has an unused parameter \$arg\.#'
@@ -25,6 +28,6 @@ parameters:
         - '#Cannot call method classMappingNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.#'
 
     excludes_analyse:
-        - '*/vendor/*'
-        - src/UserBundle/Resources/skeleton/
+        - %currentWorkingDirectory%/**/vendor/*
+        - %currentWorkingDirectory%/src/*/Resources/*
         - src/UserBundle/Maker/UserMaker.php
