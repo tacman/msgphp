@@ -1,0 +1,127 @@
+#!/usr/bin/env php
+<?php
+
+const NL = "\n";
+const BS = '\\';
+const SP = '   ';
+
+$ns = $_SERVER['DOMAIN_NS'] ?? 'App\\Domain';
+
+function out($txt): void
+{
+    foreach (func_get_args() as $txt) {
+        fwrite(STDOUT, $txt.NL);
+    }
+}
+function err($txt): void
+{
+    foreach (func_get_args() as $txt) {
+        fwrite(STDERR, $txt.NL);
+    }
+}
+function abort($txt): void
+{
+    err(...func_get_args());
+    exit(1);
+}
+function usage($abort = true): void
+{
+    ($abort ? 'abort' : 'out')(
+        'Usage: '.basename($_SERVER['argv'][0]),
+        SP.'[--dry-run]',
+        SP.'[--pretty]',
+        SP.'[--abstract]',
+        SP.'<Domain>:<Entity[#<id|Entity[@<Domain>]>[#<idN|#EntityN[@<Domain>]>]]>',
+        SP.'[<DomainN>:<EntityN>]',
+        NL.'Example: '.($_SERVER['argv'][0]).' --dry-run '.BS,
+        SP.'Group:Group '.BS,
+        SP.'User:User User:Role#name '.BS,
+        SP.'User:UserRole#User#Role User:GroupRole#Group@Group#Role '.BS,
+        SP.'User:UserGroup#User#Group@Group'
+    );
+}
+if (1 >= $argc) {
+    usage();
+}
+
+array_shift($argv);
+if ($dryRun = false !== $i = array_search('--dry-run', $argv, true)) {
+    unset($argv[$i]);
+}
+if ($pretty = false !== $i = array_search('--pretty', $argv, true)) {
+    unset($argv[$i]);
+}
+if ($abstract = false !== $i = array_search('--abstract', $argv, true)) {
+    unset($argv[$i]);
+}
+
+$domains = [];
+foreach ($argv as $arg) {
+    if ('-' === $arg[0]) {
+        abort('Unknown option:', SP.$arg);
+    }
+    if (1 !== substr_count($arg, ':')) {
+        abort('Invalid option:', SP.$arg.' (single ":" expected)');
+    }
+
+    [$domain, $spec] = explode(':', $arg, 2);
+    if ('' === $domain || false !== strpos($domain, '@')) {
+        abort('Invalid option:', SP.$arg.' (invalid domain name)');
+    }
+    $ids = explode('#', $spec);
+    $entity = array_shift($ids);
+    if ('' === $entity || false !== strpos($entity, '@')) {
+        abort('Invalid option:', SP.$arg.' (invalid entity name)');
+    }
+
+    foreach ($ids as $x => $id) {
+        if ('' === $id) {
+            abort('Invalid option:', SP.$arg.' (invalid identifier name)');
+        }
+        $ids[$x] = explode('@', $id);
+        if (2 < count($ids[$x])) {
+            abort('Invalid option:', SP.$arg.' (invalid referenced domain name)');
+        }
+    }
+
+    if (isset($domains[$domain][$entity])) {
+        abort('Invalid option:', SP.$arg.' (duplicate entity name)');
+    }
+
+    $domains[$domain][$entity] = $ids;
+}
+if (!$domains) {
+    abort('Missing domain entity argument');
+}
+
+$data = [];
+foreach ($domains as $domain => $entities) {
+    foreach ($entities as $entity => $ids) {
+        $data[$domain][$entity] = [];
+        if (!$ids) {
+            $data[$domain][$entity]['id'] = ['type' => 'vo'];
+            continue;
+        }
+
+        foreach ($ids as $id) {
+            [$id, $refDomain] = $id;
+            if (null === $refDomain) {
+                if (isset($domains[$domain][$id])) {
+                    $data[$domain][$entity][$id] = ['type' => 'entity', 'domain' => $domain];
+                } else {
+                    $data[$domain][$entity][$id] = ['type' => 'primitive'];
+                }
+                continue;
+            }
+
+            if (isset($domains[$refDomain][$id])) {
+                $data[$domain][$entity][$id] = ['type' => 'entity', 'domain' => $refDomain];
+                continue;
+            }
+
+            abort('Unknown referenced domain: '.$refDomain);
+        }
+    }
+}
+
+out(json_encode(['abstract' => $abstract, 'structure' => [$ns => $data]], $pretty ? JSON_PRETTY_PRINT : 0));
