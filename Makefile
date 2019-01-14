@@ -62,6 +62,10 @@ docs-serve:
 docs-build:
 	${mkdocs} build --site-dir var/build/docs
 
+# linting
+lint-yaml:
+	${dockerized} sdesbure/yamllint yamllint .yamllint .*.yml *.yml
+
 # CI
 ci-install:
 	for package in $$(find src/*/composer.json -type f); do \
