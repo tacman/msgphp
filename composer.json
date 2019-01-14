@@ -1,13 +1,22 @@
 {
-    "prefer-stable": true,
-    "minimum-stability": "dev",
+    "name": "msgphp/msgphp",
+    "description": "Combined MsgPHP package for CI purposes",
+    "replace": {
+        "msgphp/domain": "*",
+        "msgphp/eav": "*",
+        "msgphp/eav-bundle": "*",
+        "msgphp/user": "*",
+        "msgphp/user-bundle": "*",
+        "msgphp/user-eav": "*"
+    },
     "require-dev": {
         "wikimedia/composer-merge-plugin": "^1.4"
     },
-    "autoload-dev": {
-        "psr-4": {
-            "MsgPhp\\": "src/"
-        }
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
     },
     "extra": {
         "merge-plugin": {
@@ -17,12 +26,10 @@
             "recurse": false
         }
     },
-    "replace": {
-        "msgphp/domain": "*",
-        "msgphp/eav": "*",
-        "msgphp/eav-bundle": "*",
-        "msgphp/user": "*",
-        "msgphp/user-bundle": "*",
-        "msgphp/user-eav": "*"
-    }
+    "autoload-dev": {
+        "psr-4": {
+            "MsgPhp\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
 }

@@ -39,7 +39,7 @@ update-lowest-standalone:
 
 # tests
 phpunit-install:
-	${composer} global require --dev ${composer_args} symfony/phpunit-bridge
+	${composer} global require ${composer_args} symfony/phpunit-bridge
 	${phpunit} install
 phpunit: phpunit-install
 	for package in $$(find src/*/composer.json -type f); do \
@@ -65,7 +65,7 @@ docs-build:
 # CI
 ci-install:
 	for package in $$(find src/*/composer.json -type f); do \
-		${composer} require --dev --no-update --quiet --working-dir=$$(dirname $${package}) symfony/debug:^4.2.2; \
+		${composer} require --no-update --quiet --working-dir=$$(dirname $${package}) symfony/debug:^4.2.2; \
 	done
 	${qa} bin/ci-packager HEAD^ $$(find src/*/composer.json -type f -printf '%h\n')
 
@@ -74,7 +74,7 @@ smoke-test: update update-standalone phpunit cs sa
 shell:
 	${qa} /bin/sh
 link: install-standalone
-	${composer} global require --dev ${composer_args} ro0nl/link
+	${composer} global require ${composer_args} ro0nl/link
 	for package in $$(find src/*/composer.json -type f); do \
 		${composer} link $$(dirname $${package}); \
 	done
@@ -83,3 +83,9 @@ test-project:
 	${composer} config --working-dir var/test-project extra.symfony.allow-contrib true
 	${composer} require --working-dir var/test-project ${composer_args} orm
 	${composer} require --working-dir var/test-project --dev ${composer_args} debug maker server
+composer-normalize: install install-standalone
+	${composer} global require ${composer_args} localheinz/composer-normalize
+	${composer} normalize
+	for package in $$(find src/*/composer.json -type f); do \
+		${composer} normalize --working-dir=$$(dirname $${package}); \
+	done
