@@ -2,6 +2,7 @@ notifications:
   email: false
 
 language: generic
+dist: xenial
 services:
   - docker
 
