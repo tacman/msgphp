@@ -29,5 +29,5 @@ parameters:
 
     excludes_analyse:
         - */vendor/*
-        - src/UserBundle/Resources/skeleton/*
+        - src/UserBundle/Resources/skeleton
         - src/UserBundle/Maker/UserMaker.php
