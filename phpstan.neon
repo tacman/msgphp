@@ -5,7 +5,7 @@ includes:
 parameters:
     level: max
     paths:
-        - src/
+        - src
         - tests/fixtures/sa
     autoload_directories:
         - tests/fixtures/sa
@@ -28,6 +28,6 @@ parameters:
         - '#Cannot call method classMappingNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.#'
 
     excludes_analyse:
-        - %currentWorkingDirectory%/**/vendor/*
-        - %currentWorkingDirectory%/src/*/Resources/*
+        - */vendor/*
+        - src/UserBundle/Resources/skeleton
         - src/UserBundle/Maker/UserMaker.php
