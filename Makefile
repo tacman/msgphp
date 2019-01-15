@@ -7,15 +7,17 @@ endif
 
 dockerized=docker run --init -it --rm \
 	-u $(shell id -u):$(shell id -g) \
-	-v $(shell pwd):/app -w /app
+	-v $(shell pwd):/app \
+	-w /app
 qa=${dockerized} \
 	-e COMPOSER_HOME=/app/var/composer \
+	-e SYMFONY_PHPUNIT_DIR=/app/var/phpunit \
 	-e SYMFONY_PHPUNIT_VERSION=${PHPUNIT} \
 	jakzal/phpqa:php${PHP}-alpine
 mkdocs=${dockerized} -p 8000:8000 squidfunk/mkdocs-material
 
-phpunit=${qa} var/composer/vendor/bin/simple-phpunit
-phpunit_coverage=${qa} phpdbg -qrr var/composer/vendor/bin/simple-phpunit
+phpunit=${qa} simple-phpunit
+phpunit_coverage=${qa} phpdbg -qrr /tools/.composer/vendor/bin/simple-phpunit
 composer=${qa} composer
 composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
 
@@ -32,20 +34,19 @@ update-standalone:
 	for package in $$(find src/*/composer.json -type f); do \
 		${composer} update ${composer_args} --working-dir=$$(dirname $${package}); \
 	done
-update-lowest-standalone:
+update-standalone-lowest:
 	for package in $$(find src/*/composer.json -type f); do \
 		${composer} update ${composer_args} --prefer-stable --prefer-lowest --working-dir=$$(dirname $${package}); \
 	done
 
 # tests
 phpunit-install:
-	${composer} global require ${composer_args} symfony/phpunit-bridge
 	${phpunit} install
-phpunit: phpunit-install
+phpunit:
 	for package in $$(find src/*/composer.json -type f); do \
 		${phpunit} -c $$(dirname $${package}); \
 	done
-phpunit-coverage: phpunit-install
+phpunit-coverage:
 	for package in $$(find src/*/composer.json -type f); do \
 		${phpunit_coverage} -c $$(dirname $${package}) --coverage-clover=$$(dirname $${package})/coverage.xml; \
 	done

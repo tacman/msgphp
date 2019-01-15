@@ -27,7 +27,7 @@ before_script:
 
 script:
   - make ci-install
-  - if [[ ${DEPS} == low ]]; then make update-lowest-standalone; else make update-standalone; fi
+  - if [[ ${DEPS} == low ]]; then make update-standalone-lowest; else make update-standalone; fi
   - if [[ ${CC} == true ]]; then make phpunit-coverage; else make phpunit; fi
 
 after_success:
