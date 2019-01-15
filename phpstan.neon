@@ -9,7 +9,7 @@ parameters:
         - tests/fixtures/sa
     autoload_directories:
         - tests/fixtures/sa
-        - var/composer/vendor/bin/.phpunit/phpunit-7.5/src
+        - var/phpunit/phpunit-7.5/src
     tmpDir: var/phpstan
 
     ignoreErrors:
