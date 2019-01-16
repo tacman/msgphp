@@ -55,10 +55,9 @@ phpunit-coverage:
 cs:
 	${qa} php-cs-fixer fix --dry-run --verbose --diff --config=.php_cs.dist src/ tests/
 sa: install phpunit-install
-	mkdir -p src/*/vendor
+	mkdir -p $$(find src/ -mindepth 1 -maxdepth 1 -type d -print -quit)/vendor
 	${qa} phpstan analyse
 	${qa} psalm --show-info=false
-
 # docs
 docs-serve:
 	${mkdocs}
