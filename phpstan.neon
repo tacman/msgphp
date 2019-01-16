@@ -29,6 +29,6 @@ parameters:
         - '#Call to an undefined method object::.+\(\)\.#' # src/*/Tests/Entity/{Features,Fields}/*Test.php
 
     excludes_analyse:
-        - src/*/vendor
+        - %currentWorkingDirectory%/src/*/vendor/*
         - src/UserBundle/Resources/skeleton
         - src/UserBundle/Maker/UserMaker.php
