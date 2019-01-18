@@ -22,11 +22,18 @@ parameters:
         # phpstan
         - '#Cannot call method getName\(\) on ReflectionClass\|null\.#'
 
+        # https://github.com/phpstan/phpstan/issues/1809
+        - '#Default value of the parameter \#3 \$identityHelper \(null\) of method MsgPhp\\User\\Infra\\Doctrine\\Repository\\UsernameRepository::__construct\(\) is incompatible with type array\.#'
+
         # msgphp
         - '#Method MsgPhp\\.+\\Infra\\Doctrine\\Repository\\.+Repository::find.*\(\) should return MsgPhp\\.+\\Entity\\.+ but returns object\.#'
-        - '#Parameter \#1 \$command of method MsgPhp\\.+\\Command\\Handler\\.+Handler::getDomainEvent(Handler)?\(\) expects MsgPhp\\.+\\Command\\.+Command, object given\.#'
+        #- '#Parameter \#1 \$command of method MsgPhp\\.+\\Command\\Handler\\.+Handler::getDomainEvent(Handler)?\(\) expects MsgPhp\\.+\\Command\\.+Command, object given\.#'
         - '#Cannot call method classMappingNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.#'
+        - '#Return type \(MsgPhp\\Domain\\Infra\\Config\\ClassMappingNode\) of method MsgPhp\\Domain\\Infra\\Config\\ClassMappingNodeDefinition::instantiateNode\(\) should be compatible with return type \(Symfony\\Component\\Config\\Definition\\VariableNode\) of method Symfony\\Component\\Config\\Definition\\Builder\\VariableNodeDefinition::instantiateNode\(\)#'
         - '#Call to an undefined method object::.+\(\)\.#' # src/*/Tests/Entity/{Features,Fields}/*Test.php
+        -
+            message: '#Access to an undefined property object::\$(a|b|test)\.#'
+            path: src/Domain/Tests/Factory/DomainObjectFactoryTest.php
 
     excludes_analyse:
         - %currentWorkingDirectory%/src/*/vendor/*
