@@ -11,7 +11,7 @@ Returns a factorized domain object by class name. Optionally a context can be pr
 
 ---
 
-### `reference(string $class, $id): object`
+### `reference(string $class, array $context = []): object`
 
 Returns a factorized domain reference object by class name. Optionally a context can be provided for the factory to act
 upon.
