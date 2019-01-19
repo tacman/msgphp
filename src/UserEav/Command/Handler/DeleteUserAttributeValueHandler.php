@@ -7,7 +7,6 @@ namespace MsgPhp\User\Command\Handler;
 use MsgPhp\Domain\Exception\EntityNotFoundException;
 use MsgPhp\Domain\Factory\EntityAwareFactoryInterface;
 use MsgPhp\Domain\Message\{DomainMessageBusInterface, MessageDispatchingTrait};
-use MsgPhp\Eav\Entity\AttributeValue;
 use MsgPhp\User\Command\DeleteUserAttributeValueCommand;
 use MsgPhp\User\Event\UserAttributeValueDeletedEvent;
 use MsgPhp\User\Repository\UserAttributeValueRepositoryInterface;
@@ -31,7 +30,7 @@ final class DeleteUserAttributeValueHandler
     public function __invoke(DeleteUserAttributeValueCommand $command): void
     {
         try {
-            $userAttributeValue = $this->repository->find($this->factory->identify(AttributeValue::class, $command->id));
+            $userAttributeValue = $this->repository->find($command->attributeValueId);
         } catch (EntityNotFoundException $e) {
             return;
         }
