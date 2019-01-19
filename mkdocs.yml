@@ -13,7 +13,7 @@ markdown_extensions:
     - toc:
           permalink: true
 
-pages:
+nav:
     - Home: index.md
     - Code Conventions: code-conventions.md
     - Domain-Driven-Design:
