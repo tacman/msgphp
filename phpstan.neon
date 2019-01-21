@@ -17,7 +17,6 @@ parameters:
         - '#Cannot call method getName\(\) on ReflectionClass\|null\.#'
 
         # msgphp
-        - '#Static property MsgPhp\\Domain\\Tests\\Infra\\Doctrine\\.+Test::\$em \(Doctrine\\ORM\\EntityManager\) does not accept null\.#'
         - '#Method MsgPhp\\.+\\Infra\\Doctrine\\Repository\\.+Repository::find.*\(\) should return MsgPhp\\.+\\Entity\\.+ but returns object\.#'
         - '#Parameter \#1 \$command of method MsgPhp\\.+\\Command\\Handler\\.+Handler::getDomainEvent(Handler)?\(\) expects MsgPhp\\.+\\Command\\.+Command, object given\.#'
         - '#Return type \(MsgPhp\\Domain\\Infra\\Config\\ClassMappingNode\) of method MsgPhp\\Domain\\Infra\\Config\\ClassMappingNodeDefinition::instantiateNode\(\) should be compatible with return type \(Symfony\\Component\\Config\\Definition\\VariableNode\) of method Symfony\\Component\\Config\\Definition\\Builder\\VariableNodeDefinition::instantiateNode\(\)#'
@@ -28,6 +27,7 @@ parameters:
         - '#Constructor of class MsgPhp\\Domain\\Tests\\Factory\\KnownTestObject has an unused parameter \$arg\.#'
         - '#Parameter \$arg of method MsgPhp\\Domain\\Tests\\Factory\\KnownTestObject::__construct\(\) has invalid typehint type MsgPhp\\Domain\\Tests\\Factory\\UnknownTestObject\.#'
         - '#Class MsgPhp\\Domain\\Tests\\Factory\\WrongCase referenced with incorrect case: MsgPhp\\Domain\\Tests\\Factory\\wrongcase\.#'
+        - '#Static property MsgPhp\\Domain\\Tests\\Infra\\Doctrine\\.+Test::\$em \(Doctrine\\ORM\\EntityManager\) does not accept null\.#'
         -
             message: '#Call to an undefined method object::.+\(\)\.#'
             path: *src/*/Tests/Entity/Fields/*Test.php
