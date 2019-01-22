@@ -11,9 +11,19 @@ use MsgPhp\Eav\AttributeValueIdInterface;
  */
 class ChangeUserAttributeValueCommand
 {
+    /**
+     * @var AttributeValueIdInterface
+     */
     public $attributeValueId;
+
+    /**
+     * @var mixed
+     */
     public $value;
 
+    /**
+     * @param mixed $value
+     */
     final public function __construct(AttributeValueIdInterface $attributeValueId, $value)
     {
         $this->attributeValueId = $attributeValueId;

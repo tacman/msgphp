@@ -12,11 +12,29 @@ use MsgPhp\User\UserIdInterface;
  */
 class AddUserAttributeValueCommand
 {
+    /**
+     * @var UserIdInterface
+     */
     public $userId;
+
+    /**
+     * @var AttributeIdInterface
+     */
     public $attributeId;
+
+    /**
+     * @var mixed
+     */
     public $value;
+
+    /**
+     * @var array
+     */
     public $context;
 
+    /**
+     * @param mixed $value
+     */
     final public function __construct(UserIdInterface $userId, AttributeIdInterface $attributeId, $value, array $context = [])
     {
         $this->userId = $userId;

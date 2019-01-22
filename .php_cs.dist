@@ -30,6 +30,7 @@ $rules = [
     'no_short_echo_tag' => true,
     'no_useless_else' => true,
     'no_useless_return' => true,
+    'phpdoc_inline_tag' => false,
     'phpdoc_order' => true,
     'phpdoc_trim_consecutive_blank_line_separation' => true,
     'phpdoc_to_comment' => false,

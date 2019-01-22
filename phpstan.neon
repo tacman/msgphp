@@ -6,9 +6,9 @@ parameters:
     level: max
     paths:
         - src
-        - tests/fixtures/sa
+        - tests
     autoload_directories:
-        - tests/fixtures/sa
+        - tests
         - var/phpunit/phpunit-7.5/src
     tmpDir: var/phpstan
 
@@ -18,9 +18,12 @@ parameters:
 
         # msgphp
         - '#Method MsgPhp\\.+\\Infra\\Doctrine\\Repository\\.+Repository::find.*\(\) should return MsgPhp\\.+\\Entity\\.+ but returns object\.#'
+        - '#Method MsgPhp\\.+\\Command\\Handler\\.+Handler::getDomainEventHandler\(\) should return MsgPhp\\Domain\\Event\\DomainEventHandlerInterface but returns MsgPhp\\.+\\Entity\\.+\.#'
         - '#Parameter \#1 \$command of method MsgPhp\\.+\\Command\\Handler\\.+Handler::getDomainEvent(Handler)?\(\) expects MsgPhp\\.+\\Command\\.+Command, object given\.#'
         - '#Return type \(MsgPhp\\Domain\\Infra\\Config\\ClassMappingNode\) of method MsgPhp\\Domain\\Infra\\Config\\ClassMappingNodeDefinition::instantiateNode\(\) should be compatible with return type \(Symfony\\Component\\Config\\Definition\\VariableNode\) of method Symfony\\Component\\Config\\Definition\\Builder\\VariableNodeDefinition::instantiateNode\(\)#'
         - '#Cannot call method classMappingNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\.#'
+        - '#Method MsgPhp\\Domain\\Infra\\Elasticsearch\\ProjectionTypeRegistry::all\(\) should return array<string> but returns array<int\|string>.#'
+        - '#Property MsgPhp\\Domain\\Infra\\Elasticsearch\\ProjectionTypeRegistry::\$types \(array<string>\|null\) does not accept array<int, int\|string>.#'
 
         # msgphp tests
         - '#Class MsgPhp\\Domain\\Tests\\Factory\\UnknownTestObject not found\.#'
@@ -37,11 +40,14 @@ parameters:
         -
             message: '#Call to an undefined method object::dispatch\(\)\.#'
             path: src/Domain/Tests/Message/MessageDispatchingTraitTest.php
-        -
-            message: '#Access to an undefined property object::\$(a|b|test)\.#'
-            path: src/Domain/Tests/Factory/DomainObjectFactoryTest.php
 
     excludes_analyse:
         - */src/*/vendor/*
         - src/UserBundle/Resources/skeleton
         - src/UserBundle/Maker/UserMaker.php
+
+services:
+	-
+		class: MsgPhp\SA\PHPStan\DomainObjectFactoryTypeExtension
+		tags:
+			- phpstan.broker.dynamicMethodReturnTypeExtension

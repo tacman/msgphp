@@ -20,6 +20,9 @@ final class AddUserAttributeValueHandler
 {
     use MessageDispatchingTrait;
 
+    /**
+     * @var UserAttributeValueRepositoryInterface
+     */
     private $repository;
 
     public function __construct(DomainObjectFactoryInterface $factory, DomainMessageBusInterface $bus, UserAttributeValueRepositoryInterface $repository)

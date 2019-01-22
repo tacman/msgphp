@@ -11,6 +11,9 @@ use MsgPhp\User\Entity\UserAttributeValue;
  */
 class UserAttributeValueDeletedEvent
 {
+    /**
+     * @var UserAttributeValue
+     */
     public $userAttributeValue;
 
     final public function __construct(UserAttributeValue $userAttributeValue)

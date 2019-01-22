@@ -8,7 +8,7 @@
        totallyTyped="false">
     <projectFiles>
         <directory name="src" />
-        <directory name="tests/fixtures/sa" />
+        <directory name="tests" />
         <ignoreFiles>
             <directory name="src/*/vendor" />
             <directory name="src/UserBundle/Resources/skeleton" />
@@ -18,6 +18,8 @@
 
     <issueHandlers>
         <!-- info = conventional, suppress = false positive -->
+        <DeprecatedClass errorLevel="info" />
+        <DeprecatedMethod errorLevel="info" />
         <InternalMethod errorLevel="info" />
         <InvalidClass>
             <errorLevel type="suppress">
@@ -26,12 +28,6 @@
         </InvalidClass>
         <InvalidReturnType errorLevel="info" />
         <InvalidReturnStatement errorLevel="info" />
-        <MissingReturnType errorLevel="info" />
-        <MoreSpecificReturnType>
-            <errorLevel type="info">
-                <file name="src/*/Infra/Doctrine/Repository/*Repository.php" />
-            </errorLevel>
-        </MoreSpecificReturnType>
         <LessSpecificReturnStatement>
             <errorLevel type="info">
                 <file name="src/*/Infra/Doctrine/Repository/*Repository.php" />
@@ -39,14 +35,28 @@
         </LessSpecificReturnStatement>
         <MissingClosureParamType errorLevel="info" />
         <MissingClosureReturnType errorLevel="info" />
-        <MissingParamType errorLevel="info" />
-        <MissingPropertyType errorLevel="info" />
+        <MissingParamType>
+            <errorLevel type="suppress">
+                <directory name="src/*/Tests" />
+            </errorLevel>
+        </MissingParamType>
+        <MissingPropertyType>
+            <errorLevel type="suppress">
+                <directory name="src/*/Tests" />
+            </errorLevel>
+        </MissingPropertyType>
+        <MoreSpecificReturnType>
+            <errorLevel type="info">
+                <file name="src/*/Infra/Doctrine/Repository/*Repository.php" />
+            </errorLevel>
+        </MoreSpecificReturnType>
         <PossiblyUndefinedMethod>
             <errorLevel type="suppress">
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeBuilder::classMappingNode" />
             </errorLevel>
         </PossiblyUndefinedMethod>
         <PropertyNotSetInConstructor errorLevel="suppress" />
+        <RedundantConditionGivenDocblockType errorLevel="info" />
         <UndefinedClass>
             <errorLevel type="suppress">
                 <referencedClass name="MsgPhp\Domain\Tests\Factory\UnknownTestObject" />

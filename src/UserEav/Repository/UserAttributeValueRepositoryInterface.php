@@ -20,6 +20,8 @@ interface UserAttributeValueRepositoryInterface
     public function findAllByAttributeId(AttributeIdInterface $attributeId, int $offset = 0, int $limit = 0): DomainCollectionInterface;
 
     /**
+     * @param mixed $value
+     *
      * @return DomainCollectionInterface|UserAttributeValue[]
      */
     public function findAllByAttributeIdAndValue(AttributeIdInterface $attributeId, $value, int $offset = 0, int $limit = 0): DomainCollectionInterface;
