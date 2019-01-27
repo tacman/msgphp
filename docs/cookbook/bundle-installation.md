@@ -52,9 +52,6 @@ msgphp_<name>:
         MsgPhp\SomeDomain\SomeIdInterface: some_type_name
 ```
 
-!!! note
-    See the [reference](../reference/identifiers.md) page for all available identifiers provided per domain
-
 By convention any [Doctrine DBAL type] can be used for a type name. Additionally the following UUID types are detected
 as well:
 
