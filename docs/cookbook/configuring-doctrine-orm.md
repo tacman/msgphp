@@ -68,19 +68,7 @@ parameters:
         key_max_length: 191
 ```
 
-Override built-in mapping files as a whole:
-
-```xml
-<!-- config/msgphp/doctrine/User.Entity.User.orm.xml -->
-
-<doctrine-mapping>
-    <mapped-superclass name="MsgPhp\User\Entity\User">
-        <!-- ... -->    
-    </mapped-superclass>
-</doctrine-mapping>
-
-```
-
+By default MsgPHPs built-in mapping files can be overridden by putting a modified version in `%kernel.project_dir%/config/msgphp/doctrine`.
 To specify a different location, use:
 
 ```yaml

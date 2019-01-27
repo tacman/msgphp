@@ -92,6 +92,21 @@ public function getId(): UserIdInterface
 }
 ```
 
+### Override Mapping Configuration
+
+If for some reason the default mapping needs to be customized, create the file `config/msgphp/doctrine/User.Entity.User.orm.xml`:
+
+```xml
+<doctrine-mapping>
+    <mapped-superclass name="MsgPhp\User\Entity\User">
+        <!-- ... -->    
+    </mapped-superclass>
+</doctrine-mapping>
+```
+
+!!! info
+    See [default mapping files](https://github.com/msgphp/user/tree/master/Infra/Doctrine/Resources/dist-mapping)
+
 ## Configure the User Identity
 
 The user is identified by a built-in [domain identifier](../../ddd/identifiers.md) of type `MsgPhp\User\UserIdInterface`.
