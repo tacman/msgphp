@@ -16,9 +16,10 @@ markdown_extensions:
 nav:
     - Home: index.md
     - Symfony Cookbook:
-          - Bundle Installation: cookbook/bundle-installation.md
-          - Configuring Doctrine ORM: cookbook/configuring-doctrine-orm.md
+          - User Bundle:
+                - Installation: cookbook/user-bundle/installation.md
           - Configuring Symfony Messenger: cookbook/configuring-symfony-messenger.md
+          - Configuring Doctrine ORM: cookbook/configuring-doctrine-orm.md
     - Domain-Driven-Design:
           - Identifiers: ddd/identifiers.md
           - Collections: ddd/collections.md
