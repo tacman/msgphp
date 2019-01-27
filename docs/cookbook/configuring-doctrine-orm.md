@@ -56,6 +56,41 @@ services:
     msgphp.doctrine.entity_manager: '@doctrine.orm.other_entity_manager'
 ```
 
+## Overriding Mapping Configuration
+
+Use a fixed max key length:
+
+```yaml
+# config/services.yaml
+
+parameters:
+    msgphp.doctrine.mapping_config:
+        key_max_length: 191
+```
+
+Override built-in mapping files as a whole:
+
+```xml
+<!-- config/msgphp/doctrine/User.Entity.User.orm.xml -->
+
+<doctrine-mapping>
+    <mapped-superclass name="MsgPhp\User\Entity\User">
+        <!-- ... -->    
+    </mapped-superclass>
+</doctrine-mapping>
+
+```
+
+To specify a different location, use:
+
+```yaml
+# config/services.yaml
+
+parameters:
+    msgphp.doctrine.mapping_config:
+        mapping_dir: /some/path
+```
+
 [ORM]: https://en.wikipedia.org/wiki/Object-relational_mapping
 [recipe configuration]: https://github.com/symfony/recipes/blob/master/doctrine/doctrine-bundle/1.6/config/packages/doctrine.yaml
 [doctrine-bundle-mapping-config]: https://symfony.com/doc/master/bundles/DoctrineBundle/configuration.html#mapping-configuration
