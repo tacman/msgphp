@@ -111,9 +111,9 @@ If for some reason the default mapping needs to be customized, create the file `
 
 The user is identified by a built-in [domain identifier](../../ddd/identifiers.md) of type `MsgPhp\User\UserIdInterface`.
 
-The default data type is `integer` and uses the first-class `MsgPhp\User\UserId` implementation.
+The default data type is considered `integer` using a default implementation of type: `MsgPhp\User\UserId`.
 
-Optionally change the data type and implementation being used by MsgPHP:
+Optionally change the data type and implementation used by MsgPHP:
 
 ```yaml
 # config/packages/msgphp_user.yaml
@@ -135,7 +135,7 @@ msgphp_user:
         MsgPhp\User\UserIdInterface: uuid # uuid_binary, uuid_binary_ordered_time
 ```
 
-This changes the default implementation to `MsgPhp\User\Infra\Uuid\UserId`, a sub class of the default [UUID domain identifier](../../infrastructure/uuid.md#domain-identifier).
+This changes the default implementation used by MsgPHP to `MsgPhp\User\Infra\Uuid\UserId`, a sub class of the default [UUID domain identifier](../../infrastructure/uuid.md#domain-identifier).
 
 [Composer]: https://getcomposer.org
 [Symfony Flex]: https://symfony.com/doc/current/setup/flex.html
