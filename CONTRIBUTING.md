@@ -12,16 +12,9 @@ make sa
 
 # run all tests/checks on latest deps
 make smoke-test
+
+# create a test project
+make test-project
 ```
 
-_([Docker] required)_
-
-## Setup a Test Project
-
-Create a new bare Symfony skeleton application with specific MsgPHP bundles pre-installed.
-
-```bash
-bin/create-project
-```
-
-[Docker]: https://www.docker.com/
+_([Docker](https://www.docker.com) required)_
