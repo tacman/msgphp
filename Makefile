@@ -77,7 +77,9 @@ ci-install:
 	${qa} bin/ci-packager HEAD^ $$(find src/*/composer.json -type f -printf '%h\n')
 
 # misc
-smoke-test: update update-standalone phpunit cs sa
+clean:
+	rm -rf var/phpstan var/psalm var/php-cs-fixer.cache
+smoke-test: clean update update-standalone phpunit cs sa
 shell:
 	${qa} /bin/sh
 link: install-standalone
