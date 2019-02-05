@@ -3,6 +3,15 @@
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
+$header = <<<'EOT'
+This file is part of the MsgPHP package.
+
+(c) Roland Franssen <franssen.roland@gmail.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+EOT;
+
 $rules = [
     '@PSR2' => true,
     '@Symfony' => true,
@@ -11,6 +20,7 @@ $rules = [
     '@PHP70Migration:risky' => true,
     '@PHP71Migration' => true,
     '@PHP71Migration:risky' => true,
+    'header_comment' => ['header' => $header],
     'array_syntax' => ['syntax' => 'short'],
     'compact_nullable_typehint' => true,
     'explicit_string_variable' => true,
