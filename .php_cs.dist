@@ -11,6 +11,7 @@ $rules = [
     '@PHP70Migration:risky' => true,
     '@PHP71Migration' => true,
     '@PHP71Migration:risky' => true,
+    'header_comment' => ['header' => ''],
     'array_syntax' => ['syntax' => 'short'],
     'compact_nullable_typehint' => true,
     'explicit_string_variable' => true,
