@@ -2,7 +2,7 @@
 
 A bridge between the [`User`](https://github.com/msgphp/user) and [`EAV`](https://github.com/msgphp/eav) domain.
 
-[![Latest Stable Version](https://poser.pugx.org/msgphp/user-eav/v/stable)](https://packagist.org/packages/msgphp/user-eav)
+[![Latest Stable Version][packagist:img]][packagist]
 
 ## Installation
 
@@ -20,3 +20,6 @@ composer require msgphp/user-eav
 ## Contributing
 
 This repository is **READ ONLY**. Issues and pull requests should be submitted in the [main development repository](https://github.com/msgphp/msgphp).
+
+[packagist]: https://packagist.org/packages/msgphp/domain
+[packagist:img]: https://img.shields.io/packagist/v/msgphp/domain.svg?style=flat-square

@@ -2,7 +2,8 @@
 
 MsgPHP is a project that aims to provide (common) message based domain layers for your application. It has a low development time overhead and avoids being overly opinionated.
 
-[![Build Status](https://travis-ci.org/msgphp/msgphp.svg?branch=master)](https://travis-ci.org/msgphp/msgphp) [![codecov](https://codecov.io/gh/msgphp/msgphp/branch/master/graph/badge.svg)](https://codecov.io/gh/msgphp/msgphp)
+[![Build status][master:travis:img]][master:travis]
+[![Code coverage][master:codecov:img]][master:codecov]
 
 ## Documentation
 
@@ -14,3 +15,8 @@ MsgPHP is a project that aims to provide (common) message based domain layers fo
 ## Contributing
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md)
+
+[master:travis]: https://travis-ci.org/msgphp/msgphp
+[master:travis:img]: https://img.shields.io/travis/msgphp/msgphp/master.svg?style=flat-square
+[master:codecov]: https://codecov.io/gh/msgphp/msgphp
+[master:codecov:img]: https://img.shields.io/codecov/c/github/msgphp/msgphp/master.svg?style=flat-square
