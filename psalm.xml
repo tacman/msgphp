@@ -62,14 +62,13 @@
                 <referencedClass name="MsgPhp\Domain\Tests\Factory\UnknownTestObject" />
             </errorLevel>
         </UndefinedClass>
-        <UndefinedFunction>
-            <errorLevel type="suppress">
-                <file name="src/*Bundle/Resources/config/*.php" />
-            </errorLevel>
-        </UndefinedFunction>
     </issueHandlers>
 
     <mockClasses>
         <class name="PHPUnit\Framework\MockObject\MockObject"/>
     </mockClasses>
+
+    <stubs>
+        <file name="tests/sa/stubs/symfony-di-dsl.php" />
+    </stubs>
 </psalm>
