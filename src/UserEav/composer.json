@@ -18,8 +18,8 @@
         }
     ],
     "require": {
-        "msgphp/eav": "^0.8",
-        "msgphp/user": "^0.8"
+        "msgphp/eav": "^0.9",
+        "msgphp/user": "^0.9"
     },
     "require-dev": {
         "doctrine/orm": "^2.6"
