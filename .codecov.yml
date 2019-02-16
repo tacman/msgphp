@@ -1,7 +1,5 @@
 comment: 'off'
 ignore:
     - src/*/Tests/
-    - src/*/Event/Domain/*Event.php
-    - src/*/Infra/Doctrine/Type/*Type.php
     - src/*/Resources/
     - src/Domain/Infra/DependencyInjection/*Helper.php
