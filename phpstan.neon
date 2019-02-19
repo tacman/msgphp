@@ -18,7 +18,6 @@ parameters:
         - '#Cannot call method getName\(\) on ReflectionClass\|null\.#'
 
         # deprecated
-        - '#Call to method getClass\(\) of deprecated class Doctrine\\Common\\Util\\ClassUtils\.#'
         - '#Call to deprecated method toString\(\) of class Ramsey\\Uuid\\UuidInterface\.#'
 
         # msgphp
