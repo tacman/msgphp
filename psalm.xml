@@ -67,8 +67,4 @@
     <mockClasses>
         <class name="PHPUnit\Framework\MockObject\MockObject"/>
     </mockClasses>
-
-    <stubs>
-        <file name="tests/sa/stubs/symfony-di-dsl.php" />
-    </stubs>
 </psalm>
