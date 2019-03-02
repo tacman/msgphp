@@ -43,7 +43,7 @@ use MsgPhp\Domain\{DomainIdInterface, DomainIdTrait};
 
 // --- SETUP ---
 
-class MyDomainId implements DomainIdInterface
+final class MyDomainId implements DomainIdInterface
 {
     use DomainIdTrait;
 }
@@ -64,8 +64,8 @@ $id->toString(); // "1"
 $emptyId->toString(); // ""
 ```
 
-### `MsgPhp\Domain\Infra\Uuid\DomainId`
+### `MsgPhp\Domain\Infra\Uuid\DomainIdTrait`
 
-A UUID tailored domain identifier.
+A UUID tailored domain identifier trait.
 
 - [Read more](../infrastructure/uuid.md#domain-identifier)

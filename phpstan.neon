@@ -20,7 +20,7 @@ parameters:
         # deprecated
         -
             message: '#Call to deprecated method toString\(\) of class Ramsey\\Uuid\\UuidInterface\.#'
-            path: src/Domain/Infra/Uuid/DomainId.php
+            path: src/Domain/Infra/Uuid/DomainIdTrait.php
         -
             message: '#Call to deprecated method getRoles\(\) of class Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface\.#'
             path: src/User/Infra/Security/DataCollector.php
