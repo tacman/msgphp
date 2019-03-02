@@ -34,6 +34,7 @@ $rules = [
     'no_unset_on_property' => true,
     'no_useless_else' => true,
     'no_useless_return' => true,
+    'ordered_imports' => true,
     'php_unit_method_casing' => true,
     'php_unit_set_up_tear_down_visibility' => true,
     'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
@@ -41,7 +42,6 @@ $rules = [
     'phpdoc_order' => true,
     'phpdoc_to_comment' => false,
     'phpdoc_trim_consecutive_blank_line_separation' => true,
-    'single_import_per_statement' => false,
     'string_line_ending' => true,
 ];
 

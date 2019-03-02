@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-use MsgPhp\Domain\{DomainIdInterface, DomainIdTrait};
+use MsgPhp\Domain\DomainIdInterface;
+use MsgPhp\Domain\DomainIdTrait;
 
 interface SomeIdInterface extends DomainIdInterface
 {

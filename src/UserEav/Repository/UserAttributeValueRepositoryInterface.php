@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace MsgPhp\User\Repository;
 
 use MsgPhp\Domain\DomainCollectionInterface;
-use MsgPhp\Eav\{AttributeIdInterface, AttributeValueIdInterface};
+use MsgPhp\Eav\AttributeIdInterface;
+use MsgPhp\Eav\AttributeValueIdInterface;
 use MsgPhp\User\Entity\UserAttributeValue;
 use MsgPhp\User\UserIdInterface;
 

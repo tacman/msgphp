@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace MsgPhp\User\Command\Handler;
 
 use MsgPhp\Domain\Factory\DomainObjectFactoryInterface;
-use MsgPhp\Domain\Message\{DomainMessageBusInterface, MessageDispatchingTrait};
+use MsgPhp\Domain\Message\DomainMessageBusInterface;
+use MsgPhp\Domain\Message\MessageDispatchingTrait;
 use MsgPhp\Eav\AttributeValueIdInterface;
 use MsgPhp\Eav\Entity\Attribute;
 use MsgPhp\User\Command\AddUserAttributeValueCommand;
-use MsgPhp\User\Entity\{User, UserAttributeValue};
+use MsgPhp\User\Entity\User;
+use MsgPhp\User\Entity\UserAttributeValue;
 use MsgPhp\User\Event\UserAttributeValueAddedEvent;
 use MsgPhp\User\Repository\UserAttributeValueRepositoryInterface;
 

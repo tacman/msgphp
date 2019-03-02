@@ -6,7 +6,8 @@ namespace MsgPhp\User\Tests\Entity;
 
 use MsgPhp\Eav\AttributeValueIdInterface;
 use MsgPhp\Eav\Entity\AttributeValue;
-use MsgPhp\User\Entity\{User, UserAttributeValue};
+use MsgPhp\User\Entity\User;
+use MsgPhp\User\Entity\UserAttributeValue;
 use PHPUnit\Framework\TestCase;
 
 final class UserAttributeValueTest extends TestCase

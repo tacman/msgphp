@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace MsgPhp\User\Command\Handler;
 
 use MsgPhp\Domain\Factory\DomainObjectFactoryInterface;
-use MsgPhp\Domain\Message\{DomainMessageBusInterface, MessageDispatchingTrait};
+use MsgPhp\Domain\Message\DomainMessageBusInterface;
+use MsgPhp\Domain\Message\MessageDispatchingTrait;
 use MsgPhp\User\Command\ChangeUserAttributeValueCommand;
 use MsgPhp\User\Event\UserAttributeValueChangedEvent;
 use MsgPhp\User\Repository\UserAttributeValueRepositoryInterface;

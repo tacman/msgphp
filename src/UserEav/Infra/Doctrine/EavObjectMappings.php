@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace MsgPhp\User\Infra\Doctrine;
 
-use MsgPhp\Domain\Infra\Doctrine\{MappingConfig, ObjectMappingProviderInterface};
-use MsgPhp\User\Entity\{Fields, UserAttributeValue};
+use MsgPhp\Domain\Infra\Doctrine\MappingConfig;
+use MsgPhp\Domain\Infra\Doctrine\ObjectMappingProviderInterface;
+use MsgPhp\User\Entity\Fields;
+use MsgPhp\User\Entity\UserAttributeValue;
 
 /**
  * @author Roland Franssen <franssen.roland@gmail.com>
