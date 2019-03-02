@@ -12,6 +12,19 @@ development time overhead and avoids being overly opinionated.
 > enterprise business model. The major scope of this layer is to create a standardized and federated set of objects, 
 > that could be potentially reused within different projects. ([source](https://www.javacodegeeks.com/2013/05/multilayered-architecture-2-the-domain-layer.html))
 
+The current supported domain layers are:
+
+- [`Eav`][domain:eav]
+- [`User`][domain:user]
+  - [`UserEav`][domain:user-eav]
+
+On the roadmap are:
+
+- `Organization`
+- `File`
+- `Taxonomy`
+- ...
+
 ## Message Based
 
 Each domain layer provides a set of messages to consume it. Typically the messages are categorized into command-, event-
@@ -62,3 +75,6 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 [master:travis:img]: https://img.shields.io/travis/msgphp/msgphp/master.svg?style=flat-square
 [master:codecov]: https://codecov.io/gh/msgphp/msgphp
 [master:codecov:img]: https://img.shields.io/codecov/c/github/msgphp/msgphp/master.svg?style=flat-square
+[domain:eav]: https://github.com/msgphp/eav
+[domain:user]: https://github.com/msgphp/user
+[domain:user-eav]: https://github.com/msgphp/user-eav
