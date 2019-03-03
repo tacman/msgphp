@@ -35,10 +35,10 @@ parameters:
         - '#Property MsgPhp\\Domain\\Infra\\Elasticsearch\\ProjectionTypeRegistry::\$types \(array<string>\|null\) does not accept array<int, int\|string>.#'
 
         # msgphp tests
-        - '#Class MsgPhp\\Domain\\Tests\\Factory\\UnknownTestObject not found\.#'
-        - '#Constructor of class MsgPhp\\Domain\\Tests\\Factory\\KnownTestObject has an unused parameter \$arg\.#'
-        - '#Parameter \$arg of method MsgPhp\\Domain\\Tests\\Factory\\KnownTestObject::__construct\(\) has invalid typehint type MsgPhp\\Domain\\Tests\\Factory\\UnknownTestObject\.#'
-        - '#Class MsgPhp\\Domain\\Tests\\Factory\\WrongCase referenced with incorrect case: MsgPhp\\Domain\\Tests\\Factory\\wrongcase\.#'
+        - '#Class MsgPhp\\Domain\\Tests\\Factory\\TestUnknownObject not found\.#'
+        - '#Constructor of class MsgPhp\\Domain\\Tests\\Factory\\TestKnownObject has an unused parameter \$arg\.#'
+        - '#Parameter \$arg of method MsgPhp\\Domain\\Tests\\Factory\\TestKnownObject::__construct\(\) has invalid typehint type MsgPhp\\Domain\\Tests\\Factory\\TestUnknownObject\.#'
+        - '#Class MsgPhp\\Domain\\Tests\\Factory\\TestClassWrongCase referenced with incorrect case: MsgPhp\\Domain\\Tests\\Factory\\testclasswrongcase\.#'
         - '#Static property MsgPhp\\.+\\Tests\\.+Test::\$em \(Doctrine\\ORM\\EntityManagerInterface\) does not accept null\.#'
         - '#Static property MsgPhp\\.+\\Tests\\.+Test::\$bus \(Symfony\\Component\\Messenger\\MessageBusInterface\) does not accept null\.#'
         -

@@ -23,7 +23,7 @@
         <InternalMethod errorLevel="info" />
         <InvalidClass>
             <errorLevel type="suppress">
-                <referencedClass name="MsgPhp\Domain\Tests\Factory\wrongcase" />
+                <referencedClass name="MsgPhp\Domain\Tests\Factory\testclasswrongcase" />
             </errorLevel>
         </InvalidClass>
         <InvalidReturnType errorLevel="info" />
@@ -59,7 +59,7 @@
         <RedundantConditionGivenDocblockType errorLevel="info" />
         <UndefinedClass>
             <errorLevel type="suppress">
-                <referencedClass name="MsgPhp\Domain\Tests\Factory\UnknownTestObject" />
+                <referencedClass name="MsgPhp\Domain\Tests\Factory\TestUnknownObject" />
             </errorLevel>
         </UndefinedClass>
     </issueHandlers>
