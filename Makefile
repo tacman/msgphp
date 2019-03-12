@@ -39,9 +39,9 @@ phpunit-coverage:
 
 # code style / static analysis
 cs:
-	${qa} php-cs-fixer fix --dry-run --verbose --diff --config=.php_cs.dist src/ tests/
+	${qa} php-cs-fixer fix --dry-run --verbose --diff --config=.php_cs src/ tests/
 cs-fix:
-	${qa} php-cs-fixer fix --config=.php_cs.dist src/ tests/
+	${qa} php-cs-fixer fix --config=.php_cs src/ tests/
 sa: install phpunit-install
 	mkdir -p $$(find src/ -mindepth 1 -maxdepth 1 -type d -print -quit)/vendor
 	${qa} phpstan analyse
