@@ -18,8 +18,8 @@
         }
     ],
     "require": {
-        "msgphp/eav": "^0.9",
-        "msgphp/user": "^0.9"
+        "msgphp/eav": "^0.10",
+        "msgphp/user": "^0.10"
     },
     "require-dev": {
         "doctrine/orm": "^2.6"
@@ -32,7 +32,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "0.9-dev"
+            "dev-master": "0.10-dev"
         }
     },
     "autoload": {
