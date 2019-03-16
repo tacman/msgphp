@@ -17,9 +17,11 @@ parameters:
         # phpstan
         - '#Cannot call method getName\(\) on ReflectionClass\|null\.#'
         # https://github.com/phpstan/phpstan-phpunit/issues/43
-        - '''
-        #Call to static method PHPUnit\\Framework\\Assert::assertSame\(\) with array\(1, '2'\) and array\(1\) will always evaluate to false\.#
-        '''
+        -
+            message: '''
+            #Call to static method PHPUnit\\Framework\\Assert::assertSame\(\) with array\(1, '2'\) and array\(1\) will always evaluate to false\.#
+            '''
+            path: src/Domain/Tests/DomainCollectionTest.php
 
         # deprecated
         -
