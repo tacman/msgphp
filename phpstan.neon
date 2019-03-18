@@ -22,6 +22,10 @@ parameters:
             #Call to static method PHPUnit\\Framework\\Assert::assertSame\(\) with array\(1, '2'\) and array\(1\) will always evaluate to false\.#
             '''
             path: src/Domain/Tests/GenericDomainCollectionTest.php
+        # https://github.com/phpstan/phpstan-phpunit/issues/31
+        -
+            message: '#Parameter \#1 \$encoder of class MsgPhp\\User\\Infra\\Security\\PasswordHashing constructor expects Symfony\\Component\\Security\\Core\\Encoder\\PasswordEncoderInterface, PHPUnit\\Framework\\MockObject\\MockObject given\.#'
+            path: src/User/Tests/Infra/Security/PasswordHashingTest.php
 
         # deprecated
         -
