@@ -68,8 +68,7 @@ clean:
 smoke-test: clean update update-standalone phpunit cs sa
 shell:
 	${qa} /bin/sh
-link: install-standalone
-	${qa} composer global require ${composer_args} ro0nl/link
+link: install install-standalone
 	${qa} bin/package-exec composer link --working-dir=/app "\$$(pwd)"
 test-project:
 	${qa} composer create-project --prefer-dist --no-progress --no-interaction symfony/skeleton var/test-project

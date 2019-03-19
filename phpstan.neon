@@ -8,9 +8,6 @@ parameters:
     paths:
         - src
         - tests/sa/fixtures
-    autoload_directories:
-        - tests/sa/fixtures
-        - var/phpunit/phpunit-7.5/src
     tmpDir: var/phpstan
 
     ignoreErrors:
