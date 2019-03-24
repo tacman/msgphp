@@ -10,7 +10,7 @@ dockerized=docker run --init -it --rm \
 	-v $(shell pwd):/app \
 	-w /app
 qa=${dockerized} \
-	-e COMPOSER_HOME=/app/var/composer \
+	-e COMPOSER_CACHE_DIR=/app/var/composer \
 	-e SYMFONY_PHPUNIT_DIR=/app/var/phpunit \
 	-e SYMFONY_PHPUNIT_VERSION=${PHPUNIT} \
 	jakzal/phpqa:php${PHP}-alpine
@@ -77,6 +77,5 @@ test-project:
 	${qa} composer require --working-dir var/test-project ${composer_args} orm
 	${qa} composer require --working-dir var/test-project --dev ${composer_args} debug maker server
 composer-normalize: install install-standalone
-	${qa} composer global require ${composer_args} localheinz/composer-normalize
 	${qa} composer normalize
 	${qa} bin/package-exec composer normalize
