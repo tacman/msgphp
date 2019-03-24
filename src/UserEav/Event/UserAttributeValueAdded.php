@@ -21,7 +21,7 @@ class UserAttributeValueAdded
      */
     public $context;
 
-    final public function __construct(UserAttributeValue $userAttributeValue, array $context)
+    public function __construct(UserAttributeValue $userAttributeValue, array $context)
     {
         $this->userAttributeValue = $userAttributeValue;
         $this->context = $context;

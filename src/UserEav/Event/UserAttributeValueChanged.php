@@ -30,7 +30,7 @@ class UserAttributeValueChanged
      * @param mixed $oldValue
      * @param mixed $newValue
      */
-    final public function __construct(UserAttributeValue $userAttributeValue, $oldValue, $newValue)
+    public function __construct(UserAttributeValue $userAttributeValue, $oldValue, $newValue)
     {
         $this->userAttributeValue = $userAttributeValue;
         $this->oldValue = $oldValue;

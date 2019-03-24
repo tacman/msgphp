@@ -35,7 +35,7 @@ class AddUserAttributeValue
     /**
      * @param mixed $value
      */
-    final public function __construct(UserId $userId, AttributeId $attributeId, $value, array $context = [])
+    public function __construct(UserId $userId, AttributeId $attributeId, $value, array $context = [])
     {
         $this->userId = $userId;
         $this->attributeId = $attributeId;

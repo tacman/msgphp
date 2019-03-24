@@ -16,7 +16,7 @@ class UserAttributeValueDeleted
      */
     public $userAttributeValue;
 
-    final public function __construct(UserAttributeValue $userAttributeValue)
+    public function __construct(UserAttributeValue $userAttributeValue)
     {
         $this->userAttributeValue = $userAttributeValue;
     }

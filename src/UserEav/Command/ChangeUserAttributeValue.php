@@ -24,7 +24,7 @@ class ChangeUserAttributeValue
     /**
      * @param mixed $value
      */
-    final public function __construct(AttributeValueId $attributeValueId, $value)
+    public function __construct(AttributeValueId $attributeValueId, $value)
     {
         $this->attributeValueId = $attributeValueId;
         $this->value = $value;
