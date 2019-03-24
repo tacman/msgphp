@@ -45,8 +45,8 @@ $rules = [
     'phpdoc_to_comment' => false,
     'phpdoc_trim_consecutive_blank_line_separation' => true,
 //    'static_lambda' => true,
-//    'strict_comparison' => true,
-//    'strict_param' => true,
+    'strict_comparison' => true,
+    'strict_param' => true,
     'string_line_ending' => true,
 ];
 
