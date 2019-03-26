@@ -18,9 +18,9 @@ mkdocs=${dockerized} -p 8000:8000 squidfunk/mkdocs-material
 composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
 
 # deps
-install:
+install: phpunit-install
 	${qa} composer install ${composer_args}
-update:
+update: phpunit-install
 	${qa} composer update ${composer_args}
 install-standalone:
 	${qa} bin/package-exec composer install ${composer_args}
@@ -42,7 +42,7 @@ cs:
 	${qa} php-cs-fixer fix --dry-run --verbose --diff --config=.php_cs src/ tests/
 cs-fix:
 	${qa} php-cs-fixer fix --config=.php_cs src/ tests/
-sa: phpunit-install install
+sa: install
 	mkdir -p $$(find src/ -mindepth 1 -maxdepth 1 -type d -print -quit)/vendor
 	${qa} phpstan analyse
 	${qa} psalm --show-info=false
