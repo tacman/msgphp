@@ -98,6 +98,7 @@ changelog() {
 
     cp -R var/changelog ../../var/
     git commit --quiet -m "update changelog to ${next_version}"
+    return 0
 }
 
 bump() {
