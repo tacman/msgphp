@@ -106,8 +106,10 @@ bump() {
         run_composer config --working-dir="$(dirname "${package}")" extra.branch-alias.dev-master "${branch}-dev"
         [[ $? -ne 0 ]] && return 1
     done
+    [[ $(git status --porcelain) ]] && \
     git add src/*/composer.json && \
     git commit --quiet -m "bumped branch alias to ${branch}"
+    return 0
 }
 
 confirm "Run smoke test?" yes
