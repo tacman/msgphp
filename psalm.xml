@@ -12,6 +12,7 @@
             <directory name="src/*/vendor" />
             <directory name="src/UserBundle/Resources/skeleton" />
             <file name="src/UserBundle/Maker/UserMaker.php" />
+            <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
 
