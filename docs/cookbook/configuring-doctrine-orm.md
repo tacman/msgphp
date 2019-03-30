@@ -68,7 +68,7 @@ parameters:
         key_max_length: 191
 ```
 
-By default MsgPHPs built-in mapping files can be overridden by putting a modified version in `%kernel.project_dir%/config/msgphp/doctrine`.
+By default MsgPHPs [built-in mapping files] can be overridden by putting a modified version in `%kernel.project_dir%/config/msgphp/doctrine`.
 To specify a different location, use:
 
 ```yaml
@@ -83,3 +83,4 @@ parameters:
 [recipe configuration]: https://github.com/symfony/recipes/blob/master/doctrine/doctrine-bundle/1.6/config/packages/doctrine.yaml
 [doctrine-bundle-mapping-config]: https://symfony.com/doc/master/bundles/DoctrineBundle/configuration.html#mapping-configuration
 [mapped superclasses]: https://www.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html#mapped-superclasses
+[built-in mapping files]: https://github.com/msgphp/msgphp/tree/master/src/User/Infrastructure/Doctrine/Resources/dist-mapping
