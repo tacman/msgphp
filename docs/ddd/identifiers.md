@@ -5,7 +5,7 @@ identifier value, usually used to identity an entity with.
 
 ## API
 
-### `static fromValue($value): DomainId`
+### `static fromValue(mixed $value): DomainId`
 
 Returns a factorized identifier from any primitive value. Using `null` might imply an empty identifier.
 

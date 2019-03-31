@@ -24,13 +24,13 @@ Tells if a collection is considered empty, i.e. contains zero elements.
 
 ---
 
-### `contains($element): bool`
+### `contains(mixed $element): bool`
 
 Tells if a collection contains the given element. Comparison is done strictly.
 
 ---
 
-### `containsKey($key): bool`
+### `containsKey(string|int $key): bool`
 
 Tells if a collection contains an element at the given key.
 
@@ -48,7 +48,7 @@ Returns the last element from a collection.
 
 ---
 
-### `get($key): mixed`
+### `get(string|int $key): mixed`
 
 Returns the element at the given key from a collection.
 

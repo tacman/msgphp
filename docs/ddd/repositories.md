@@ -21,7 +21,7 @@ one of) and `object` (i.e. another entity or its [identifier](identifiers.md)). 
 
 ---
 
-### `doFind($id): object`
+### `doFind(mixed $id): object`
 
 Finds a single entity by its identity. Supported identity values should be `scalar`, `array` (for composite identifiers), 
 and `object` (i.e. another entity or its [identifier](identifiers.md)).
@@ -34,7 +34,7 @@ Finds the first entity matching the specified fields. See `doFindAllByFields()` 
 
 ---
 
-### `doExists($id): bool`
+### `doExists(mixed $id): bool`
 
 Verifies if an entity exists by its identity. See `doFind()` for supported identity values.
 
