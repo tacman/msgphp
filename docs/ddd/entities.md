@@ -1,7 +1,7 @@
 # Entities
 
-Domain entities are "[vanilla] PHP objects" owned by the user. To simplify its definition common _fields_ and _features_
-are provided in the form of PHP [traits].
+Domain entities are "[vanilla] PHP objects". To simplify its model definition common _fields_ and _features_ are
+provided in the form of [traits].
 
 ## Entity Fields
 
