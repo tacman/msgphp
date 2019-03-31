@@ -21,13 +21,13 @@ nav:
                 - Creating a User: cookbook/user-bundle/creating-a-user.md
           - Configuring Symfony Messenger: cookbook/configuring-symfony-messenger.md
           - Configuring Doctrine ORM: cookbook/configuring-doctrine-orm.md
-    - Domain-Driven-Design:
+    - Domain Driven Design:
           - Identifiers: ddd/identifiers.md
           - Collections: ddd/collections.md
           - Entities: ddd/entities.md
           - Repositories: ddd/repositories.md
           - Object Factory: ddd/object-factory.md
-    - Event-Sourcing:
+    - Event Sourcing:
           - Event Handlers: event-sourcing/event-handlers.md
           - Events: event-sourcing/events.md
     - Message Driven:

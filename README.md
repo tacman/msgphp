@@ -1,7 +1,7 @@
-# Message driven PHP
+# Message Driven PHP
 
-[![Build status][master:travis:img]][master:travis]
-[![Code coverage][master:codecov:img]][master:codecov]
+[![Build Status][master:travis:img]][master:travis]
+[![Code Coverage][master:codecov:img]][master:codecov]
 
 MsgPHP is a project that aims to provide (common) message based domain layers for your application. It has a low
 development time overhead and avoids being overly opinionated.
