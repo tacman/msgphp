@@ -111,7 +111,7 @@ If for some reason the default mapping needs to be customized, create the file `
 
 The user is identified by a built-in [domain identifier](../../ddd/identifiers.md) of type `MsgPhp\User\UserId`.
 
-The default data type is considered `integer` using a default implementation of type: `MsgPhp\User\UserId`.
+The default data type is considered `integer` using a default implementation of type: `MsgPhp\User\ScalarUserId`.
 
 Optionally change the data type and implementation used by MsgPHP:
 
@@ -122,7 +122,7 @@ msgphp_user:
     id_type_mapping:
         MsgPhp\User\UserId: bigint
     class_mapping:
-        MsgPhp\User\UserId: App\Entity\User\UserId
+        MsgPhp\User\UserId: App\Entity\User\MyUserId
 ```
 
 ### Using a UUID identifier
