@@ -1,4 +1,5 @@
 includes:
+    - /tools/.composer/vendor-bin/phpstan/vendor/phpstan/phpstan/conf/bleedingEdge.neon
     - /tools/.composer/vendor-bin/phpstan/vendor/phpstan/phpstan-deprecation-rules/rules.neon
     - /tools/.composer/vendor-bin/phpstan/vendor/phpstan/phpstan-phpunit/extension.neon
     - /tools/.composer/vendor-bin/phpstan/vendor/phpstan/phpstan-phpunit/rules.neon
@@ -49,6 +50,9 @@ parameters:
         -
             message: '#Call to an undefined method object::dispatch\(\)\.#'
             path: src/Domain/Tests/Message/MessageDispatchingTraitTest.php
+        -
+            message: '#Constructor of class MsgPhp\\Domain\\Tests\\Factory\\TestClass has an unused parameter \$\w+\.#'
+            path: src/Domain/Tests/Factory/ClassMethodResolverTest.php
 
     excludes_analyse:
         - */src/*/vendor/*
