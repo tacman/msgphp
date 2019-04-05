@@ -143,19 +143,37 @@ major|minor)
     next_version="$(next_version "${curr_version}" "$1")"
     branch="$(branch_alias "${next_version}")"
     label "Releasing ${curr_version} -> ${next_version}"
-    changelog "$(git rev-parse --abbrev-ref HEAD)" "${curr_version}" "${next_version}" && \
-    bump "${branch}"
-    [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
-    confirm "Create release branch ${branch}?"
+
+    confirm "Generate changelog?" yes
     if [[ $? -eq 1 ]]; then
-        git checkout --quiet -b "${branch}" && \
-        tag "${next_version}" && \
+        changelog "$(git rev-parse --abbrev-ref HEAD)" "${curr_version}" "${next_version}"
+        [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+    fi;
+
+    confirm "Bump version?" yes
+    if [[ $? -eq 1 ]]; then
+        bump "${branch}"
+        [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+    fi
+
+    confirm "Create release branch ${branch}?"
+    release_branch=$?
+    if [[ ${release_branch} -eq 1 ]]; then
+        git checkout --quiet -b "${branch}"
+        [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+    fi;
+
+    confirm "Tag version?" yes
+    if [[ $? -eq 1 ]]; then
+        tag "${next_version}"
+        [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+    fi;
+    if [[ ${release_branch} -eq 1 ]]; then
         git checkout --quiet master && \
         bump "$(branch_alias "$(next_version "${next_version}" minor)")"
-    else
-        tag "${next_version}"
+        [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
     fi
-    [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+
     label "Done" ok
     ;;
 patch)
