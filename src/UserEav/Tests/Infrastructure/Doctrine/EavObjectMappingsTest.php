@@ -12,7 +12,7 @@ final class EavObjectMappingsTest extends TestCase
 {
     public function testMapping(): void
     {
-        $available = array_flip(array_map(function (string $file): string {
+        $available = array_flip(array_map(static function (string $file): string {
             return 'MsgPhp\\User\\Model\\'.basename($file, '.php');
         }, glob(\dirname(__DIR__, 3).'/Model/*.php')));
 
