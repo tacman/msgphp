@@ -24,6 +24,9 @@ parameters:
         -
             message: '#Parameter \#1 \$encoder of class MsgPhp\\User\\Infrastructure\\Security\\PasswordHashing constructor expects Symfony\\Component\\Security\\Core\\Encoder\\PasswordEncoderInterface, PHPUnit\\Framework\\MockObject\\MockObject given\.#'
             path: src/User/Tests/Infrastructure/Security/PasswordHashingTest.php
+        -
+            message: '#Parameter \#1 \$elements of class MsgPhp\\Domain\\GenericDomainCollection constructor expects iterable, PHPUnit\\Framework\\MockObject\\MockObject given\.#'
+            path: src/Domain/Tests/GenericDomainCollectionTest.php
 
         # deprecated
         -
