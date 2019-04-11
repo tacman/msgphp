@@ -101,17 +101,29 @@ changelog() {
     return 0
 }
 
-bump() {
+bump_version() {
     local branch=${1:?missing branch}
-    for package in $(find src/*/composer.json -type f); do
-        run_composer config --working-dir="$(dirname "${package}")" extra.branch-alias.dev-master "${branch}-dev"
-        [[ $? -ne 0 ]] && return 1
-    done
+    sh -c "$(make -s entrypoint) bin/package-exec composer config extra.branch-alias.dev-master \"${branch}-dev\""
+    [[ $? -ne 0 ]] && return 1
     [[ $(git status --porcelain) ]] && \
     git add src/*/composer.json && \
     git commit --quiet -m "bumped branch alias to ${branch}"
     return 0
 }
+
+bump_deps() {
+    local branch=${1:?missing branch}
+    bin/package-exec sed -i -E "s/\(\\\"msgphp\\\/.+\\\":\\\s*\\\"\).+\(\\\",?\)/\\\1^${branch}\\\2/" composer.json
+    [[ $? -ne 0 ]] && return 1
+    [[ $(git status --porcelain) ]] && \
+    git add src/*/composer.json && \
+    git commit --quiet -m "bumped dependencies to ${branch}"
+    return 0
+}
+
+################################################################################
+## RELEASE #####################################################################
+################################################################################
 
 confirm "Run smoke test?" yes
 if [[ $? -eq 1 ]]; then
@@ -152,8 +164,14 @@ major|minor)
 
     confirm "Bump version?" yes
     if [[ $? -eq 1 ]]; then
-        bump "${branch}"
+        bump_version "${branch}"
         [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+
+        confirm "Bump msgphp dependencies?" yes
+        if [[ $? -eq 1 ]]; then
+            bump_deps "${branch}"
+            [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
+        fi
     fi
 
     confirm "Create release branch ${branch}?"
@@ -169,8 +187,10 @@ major|minor)
         [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
     fi;
     if [[ ${release_branch} -eq 1 ]]; then
+        upcoming_branch="$(branch_alias "$(next_version "${next_version}" minor)")"
         git checkout --quiet master && \
-        bump "$(branch_alias "$(next_version "${next_version}" minor)")"
+        bump_version "${upcoming_branch}" && \
+        bump_deps "${upcoming_branch}"
         [[ $? -ne 0 ]] && label "Failed" ko && restore && exit 1
     fi
 

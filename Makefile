@@ -79,3 +79,5 @@ test-project:
 composer-normalize: install install-standalone
 	${qa} composer normalize
 	${qa} bin/package-exec composer normalize
+entrypoint:
+	echo "${qa}"

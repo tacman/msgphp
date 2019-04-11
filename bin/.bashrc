@@ -1,11 +1,5 @@
 #!/usr/bin/env bash
 
-run_composer() {
-    docker run --init -it --rm -u $(id -u):$(id -g) -v $(pwd):/app -w /app \
-        -e COMPOSER_HOME=/app/var/composer \
-	    jakzal/phpqa:php7.2-alpine composer ${@}
-}
-
 label() {
     case $2 in
     ok) echo -e "\e[42m$1\e[0m";;
