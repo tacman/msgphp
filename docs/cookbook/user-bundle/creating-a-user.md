@@ -53,7 +53,7 @@ Define the custom fields:
 ```php
 <?php
 
-// src/Entity/User/User.php
+// src/Entity/User.php
 
 // ...
 
