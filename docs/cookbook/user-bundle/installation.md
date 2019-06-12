@@ -15,9 +15,9 @@ composer require msgphp/user-bundle
 ```php
 <?php
 
-// src/Entity/User/User.php
+// src/Entity/User.php
 
-namespace App\Entity\User;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use MsgPhp\User\User as BaseUser;
@@ -48,12 +48,8 @@ class User extends BaseUser
 
 msgphp_user:
     class_mapping:
-        MsgPhp\User\User: App\Entity\User\User
+        MsgPhp\User\User: App\Entity\User
 ```
-
-!!! note
-    The extra `/User/` layer specifies the _domain_ the entity is bound to and can be left out depending on the
-    complexity of your application
 
 ### Disable Required Constructor Argument
 
@@ -67,7 +63,8 @@ not have to be queried for it after. To disable it, use:
 
 public function __construct()
 {
-    $this->id = new \MsgPhp\User\ScalarUserId(); // represents an "empty" ID (i.e. "new")
+    $this->id = new \MsgPhp\User\ScalarUserId();
+    //$this->id = new \MsgPhp\User\Infrastructure\Uuid\UserUuid();
 }
 ```
 
@@ -94,7 +91,7 @@ public function getId(): UserId
 
 ### Override Mapping Configuration
 
-If for some reason the default mapping needs to be customized, create the file `config/msgphp/doctrine/User.Entity.User.orm.xml`:
+If, for some reason, the default mapping needs to be customized, create the file `config/msgphp/doctrine/User.User.orm.xml`:
 
 ```xml
 <doctrine-mapping>
@@ -105,7 +102,7 @@ If for some reason the default mapping needs to be customized, create the file `
 ```
 
 !!! info
-    See [default mapping files](https://github.com/msgphp/user/tree/master/Infra/Doctrine/Resources/dist-mapping)
+    See [default mapping files](https://github.com/msgphp/user/tree/master/Infrastructure/Doctrine/Resources/dist-mapping)
 
 ## Configure the User Identity
 
@@ -122,7 +119,7 @@ msgphp_user:
     id_type_mapping:
         MsgPhp\User\UserId: bigint
     class_mapping:
-        MsgPhp\User\UserId: App\Entity\User\MyUserId
+        MsgPhp\User\UserId: App\Entity\UserId
 ```
 
 ### Using a UUID identifier
@@ -135,7 +132,7 @@ msgphp_user:
         MsgPhp\User\UserId: uuid # uuid_binary, uuid_binary_ordered_time
 ```
 
-This changes the default implementation used by MsgPHP to `MsgPhp\User\Infrastructure\Uuid\UserId`, a sub class of the default [UUID domain identifier](../../infrastructure/uuid.md#domain-identifier).
+This changes the default implementation used by MsgPHP to `MsgPhp\User\Infrastructure\Uuid\UserUuid`.
 
 [Composer]: https://getcomposer.org
 [Symfony Flex]: https://symfony.com/doc/current/setup/flex.html
