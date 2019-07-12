@@ -1,72 +1,70 @@
 <?xml version="1.0"?>
-<psalm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns="https://getpsalm.org/schema/config"
-       xsi:schemaLocation="https://getpsalm.org/schema/config https://raw.githubusercontent.com/vimeo/psalm/master/config.xsd"
-       cacheDirectory="var/psalm"
-       allowPhpStormGenerics="true"
-       totallyTyped="false">
+<psalm
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config https://raw.githubusercontent.com/vimeo/psalm/master/config.xsd"
+    autoloader="psalm-autoload.php"
+    cacheDirectory="var/psalm"
+    allowPhpStormGenerics="true"
+>
     <projectFiles>
-        <directory name="src" />
-        <directory name="tests/sa/fixtures" />
+        <directory name="src"/>
+        <directory name="tests"/>
         <ignoreFiles>
-            <directory name="src/*/vendor" />
-            <directory name="src/UserBundle/Resources/skeleton" />
-            <file name="src/UserBundle/Maker/UserMaker.php" />
-            <directory name="vendor" />
+            <directory name="vendor"/>
+            <directory name="src/*/vendor"/>
+            <directory name="src/UserBundle/Resources/skeleton"/>
+            <file name="src/UserBundle/Maker/UserMaker.php"/>
         </ignoreFiles>
     </projectFiles>
 
     <issueHandlers>
         <!-- info = conventional, suppress = false positive -->
-        <DeprecatedClass errorLevel="info" />
-        <DeprecatedMethod errorLevel="info" />
-        <InternalMethod errorLevel="info" />
+        <DeprecatedClass errorLevel="info"/>
+        <DeprecatedMethod errorLevel="info"/>
+        <InternalMethod errorLevel="info"/>
         <InvalidClass>
             <errorLevel type="suppress">
-                <referencedClass name="MsgPhp\Domain\Tests\Factory\testclasswrongcase" />
+                <referencedClass name="MsgPhp\Domain\Tests\Factory\testclasswrongcase"/>
             </errorLevel>
         </InvalidClass>
         <LessSpecificReturnStatement>
             <errorLevel type="info">
-                <file name="src/*/Infrastructure/Doctrine/Repository/*Repository.php" />
+                <file name="src/*/Infrastructure/Doctrine/Repository/*Repository.php"/>
             </errorLevel>
         </LessSpecificReturnStatement>
-        <MissingClosureParamType errorLevel="info" />
-        <MissingClosureReturnType errorLevel="info" />
+        <MissingClosureParamType errorLevel="info"/>
+        <MissingClosureReturnType errorLevel="info"/>
         <MissingParamType>
             <errorLevel type="suppress">
-                <directory name="src/*/Tests" />
+                <directory name="src/*/Tests"/>
             </errorLevel>
         </MissingParamType>
         <MissingPropertyType>
             <errorLevel type="suppress">
-                <directory name="src/*/Tests" />
+                <directory name="src/*/Tests"/>
             </errorLevel>
         </MissingPropertyType>
         <MoreSpecificReturnType>
             <errorLevel type="info">
-                <file name="src/*/Infrastructure/Doctrine/Repository/*Repository.php" />
+                <file name="src/*/Infrastructure/Doctrine/Repository/*Repository.php"/>
             </errorLevel>
         </MoreSpecificReturnType>
         <PossiblyUndefinedMethod>
             <errorLevel type="suppress">
-                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeBuilder::classMappingNode" />
+                <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeBuilder::classMappingNode"/>
             </errorLevel>
         </PossiblyUndefinedMethod>
-        <PropertyNotSetInConstructor errorLevel="suppress" />
-        <RedundantConditionGivenDocblockType errorLevel="info" />
+        <PropertyNotSetInConstructor errorLevel="suppress"/>
+        <RedundantConditionGivenDocblockType errorLevel="info"/>
         <UndefinedClass>
             <errorLevel type="info">
-                <referencedClass name="Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken" />
+                <referencedClass name="Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken"/>
             </errorLevel>
             <errorLevel type="suppress">
-                <referencedClass name="MsgPhp\Domain\Tests\Factory\TestUnknownObject" />
-                <referencedClass name="MsgPhp_Test_Action" />
+                <referencedClass name="MsgPhp\Domain\Tests\Factory\TestUnknownObject"/>
+                <referencedClass name="MsgPhp_Test_Action"/>
             </errorLevel>
         </UndefinedClass>
     </issueHandlers>
-
-    <mockClasses>
-        <class name="PHPUnit\Framework\MockObject\MockObject"/>
-    </mockClasses>
 </psalm>

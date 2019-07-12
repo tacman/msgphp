@@ -25,7 +25,7 @@ $test = new class() {
 };
 
 $test->accept(ScalarEntityId::fromValue('id'));
-$test->accept($id = ScalarEntityId::fromValue('id'));
+$test->accept(ScalarEntityId::fromValue('id'));
 
 // test it autocompletes
-//$id->auto
+//ScalarEntityId::fromValue('id')->autoc
