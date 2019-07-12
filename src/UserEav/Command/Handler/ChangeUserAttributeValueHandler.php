@@ -18,9 +18,7 @@ final class ChangeUserAttributeValueHandler
 {
     use MessageDispatchingTrait;
 
-    /**
-     * @var UserAttributeValueRepository
-     */
+    /** @var UserAttributeValueRepository */
     private $repository;
 
     public function __construct(DomainObjectFactory $factory, DomainMessageBus $bus, UserAttributeValueRepository $repository)

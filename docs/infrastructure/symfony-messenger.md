@@ -6,7 +6,7 @@ An overview of available infrastructural code when using [Symfony Messenger][mes
 
 ## Domain Message Bus
 
-A Symfony Messenger tailored [domain message bus](../message-driven/message-bus.md) is provided by `MsgPhp\Domain\Infrastructure\Messenger\DomainMessageBus`.
+A Symfony Messenger tailored [domain message bus](../ddd/message-bus.md) is provided by `MsgPhp\Domain\Infrastructure\Messenger\DomainMessageBus`.
 
 ### Basic Example
 

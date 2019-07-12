@@ -11,19 +11,10 @@ use MsgPhp\User\UserAttributeValue;
  */
 class UserAttributeValueChanged
 {
-    /**
-     * @var UserAttributeValue
-     */
     public $userAttributeValue;
-
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     public $oldValue;
-
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     public $newValue;
 
     /**

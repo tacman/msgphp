@@ -1,6 +1,6 @@
 # Configuring Symfony Messenger
 
-To be able to dispatch messages provided by MsgPHP a [domain message bus](../message-driven/message-bus.md) must be
+To be able to dispatch messages provided by MsgPHP a [domain message bus](../ddd/message-bus.md) must be
 configured.
 
 In this article is explained how to setup [Symfony Messenger infrastructure](../infrastructure/symfony-messenger.md).

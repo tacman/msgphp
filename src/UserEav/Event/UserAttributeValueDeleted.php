@@ -11,9 +11,6 @@ use MsgPhp\User\UserAttributeValue;
  */
 class UserAttributeValueDeleted
 {
-    /**
-     * @var UserAttributeValue
-     */
     public $userAttributeValue;
 
     public function __construct(UserAttributeValue $userAttributeValue)

@@ -11,14 +11,7 @@ use MsgPhp\User\UserAttributeValue;
  */
 class UserAttributeValueAdded
 {
-    /**
-     * @var UserAttributeValue
-     */
     public $userAttributeValue;
-
-    /**
-     * @var array
-     */
     public $context;
 
     public function __construct(UserAttributeValue $userAttributeValue, array $context)

@@ -12,24 +12,10 @@ use MsgPhp\User\UserId;
  */
 class AddUserAttributeValue
 {
-    /**
-     * @var UserId
-     */
     public $userId;
-
-    /**
-     * @var AttributeId
-     */
     public $attributeId;
-
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     public $value;
-
-    /**
-     * @var array
-     */
     public $context;
 
     /**

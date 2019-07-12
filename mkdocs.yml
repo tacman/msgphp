@@ -27,12 +27,10 @@ nav:
           - Entities: ddd/entities.md
           - Repositories: ddd/repositories.md
           - Object Factory: ddd/object-factory.md
+          - Message Bus: ddd/message-bus.md
     - Event Sourcing:
           - Event Handlers: event-sourcing/event-handlers.md
           - Events: event-sourcing/events.md
-    - Message Driven:
-          - Message Bus: message-driven/message-bus.md
-          - Message Dispatcher: message-driven/message-dispatcher.md
     - Projection:
           - Models: projection/models.md
           - Documents: projection/documents.md
