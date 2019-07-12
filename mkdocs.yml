@@ -33,7 +33,6 @@ nav:
     - Message Driven:
           - Message Bus: message-driven/message-bus.md
           - Message Dispatcher: message-driven/message-dispatcher.md
-          - CQRS: message-driven/cqrs.md
     - Projection:
           - Models: projection/models.md
           - Documents: projection/documents.md

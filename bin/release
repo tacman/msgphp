@@ -121,10 +121,6 @@ bump_deps() {
     return 0
 }
 
-################################################################################
-## RELEASE #####################################################################
-################################################################################
-
 confirm "Run smoke test?" yes
 if [[ $? -eq 1 ]]; then
     make smoke-test
@@ -137,12 +133,12 @@ if [[ $? -eq 1 ]]; then
     [[ $? -ne 0 ]] && label "Failed" ko && exit 1
 fi
 
+confirm "Continue release?"
+[[ $? -ne 1 ]] && label "Aborted" ok && exit 0
+
 label "Synchronizing source"
 git_sync var/release "${repo}"
 [[ $? -ne 0 ]] && label "Failed" ko && exit 1
-
-confirm "Continue release?"
-[[ $? -ne 1 ]] && label "Aborted" ok && exit 0
 
 pushd var/release &> /dev/null
 restore() {

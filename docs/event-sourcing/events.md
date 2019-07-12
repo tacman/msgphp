@@ -1,7 +1,8 @@
 # Events
 
-A domain event is bound to `MsgPhp\Domain\Event\DomainEvent`. Its purpose is to represent any action that can _happen_
-regarding the domain. When handled it might lead to an application state change.
+A domain event is considered [domain-specific language] (DSL) and is bound to `MsgPhp\Domain\Event\DomainEvent`. Its
+purpose is to represent any action that can _happen_ regarding the domain. When handled it might lead to an application
+state change.
 
 ## API
 
@@ -44,3 +45,5 @@ $entity->isEnabled(); // true
 !!! note
     Because `CanBeEnabled` defines `onEnableEvent(Enable $event)` it's detected in `DomainEventHandlerTrait::handleEvent()`
     by convention
+
+[domain-specific language]: https://en.wikipedia.org/wiki/Domain-specific_languages
