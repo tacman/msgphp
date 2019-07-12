@@ -48,8 +48,10 @@ cs-fix:
 
 # static analysis
 psalm: install phpunit-pull
+	mkdir -p src/Domain/vendor
 	${qa} psalm --show-info=false
 psalm-info: install phpunit-pull
+	mkdir -p src/Domain/vendor
 	${qa} psalm --show-info=true
 
 # docs
