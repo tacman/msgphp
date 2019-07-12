@@ -22,10 +22,7 @@ final class AttributeValuesFieldTest extends TestCase
         self::assertNotSame($attributeValues, $object->getAttributeValues());
     }
 
-    /**
-     * @return object
-     */
-    private function getObject($value)
+    private function getObject($value): object
     {
         return new class($value) {
             use AttributeValuesField;
