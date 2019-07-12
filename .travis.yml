@@ -16,7 +16,7 @@ jobs:
     - stage: Unit tests
       env: CC=true
     - env: DEPS=low
-    - env: PHP=7.1
+    - env: PHP=7.3
     - stage: Code quality
       script:
         - make cs
