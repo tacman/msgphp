@@ -35,10 +35,6 @@
         "psr-4": {
             "MsgPhp\\": "src/",
             "MsgPhp\\User\\": "src/UserEav/"
-        },
-        "classmap": [
-            "tests/",
-            "var/phpunit/phpunit-7.5/src/"
-        ]
+        }
     }
 }
