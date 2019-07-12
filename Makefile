@@ -44,7 +44,6 @@ cs-fix:
 	${qa} php-cs-fixer fix
 sa: install
 	mkdir -p $$(find src/ -mindepth 1 -maxdepth 1 -type d -print -quit)/vendor
-	${qa} phpstan analyse
 	${qa} psalm --show-info=false
 
 # docs
@@ -64,7 +63,7 @@ ci-install:
 
 # misc
 clean:
-	rm -rf var/phpstan var/psalm var/php-cs-fixer.cache src/*/coverage.xml
+	rm -rf var/psalm var/php-cs-fixer.cache src/*/coverage.xml
 smoke-test: clean update update-standalone phpunit cs sa
 shell:
 	${qa} /bin/sh
