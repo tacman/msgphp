@@ -18,9 +18,7 @@ jobs:
     - env: DEPS=low
     - env: PHP=7.3
     - stage: Code quality
-      script:
-        - make cs
-        - make sa
+      script: make cs psalm
 
 before_script:
   - if [[ ${CC} == true && ${TRAVIS_PULL_REQUEST} != false ]]; then unset CC; fi
@@ -32,9 +30,6 @@ script:
 
 after_success:
   - if [[ ${CC} == true ]]; then bash <(curl -s https://codecov.io/bash); fi
-
-before_cache:
-  - rm -rf var/composer/files/msgphp
 
 cache:
   directories:
