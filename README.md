@@ -6,8 +6,8 @@
 MsgPHP is a project that aims to provide (common) message based domain layers for your application. It has a low
 development time overhead and avoids being overly opinionated.
 
-MsgPHP follows [Semantic Versioning] (as of `v1.0`). During development phase a package can be marked `@experimental` to
-indicate "[BC] breaks" could happen (when clear consensus is reached).
+MsgPHP follows [Semantic Versioning]. During development phase a package can be marked `@experimental` to indicate "[BC]
+breaks" could happen (when clear consensus is reached).
 
 ## Domain Layers
 
