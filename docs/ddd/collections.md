@@ -115,20 +115,20 @@ Get the total no. of items in the full result set.
 
 ## Implementations
 
-### `MsgPhp\Domain\DomainCollection`
+### `MsgPhp\Domain\GenericDomainCollection`
 
-A first class citizen domain collection.
+A first-class citizen domain collection compatible with any `iterable` value.
 
 #### Basic Example
 
 ```php
 <?php
 
-use MsgPhp\Domain\DomainCollection;
+use MsgPhp\Domain\GenericDomainCollection;
 
 // --- SETUP ---
 
-$collection = new DomainCollection(['a', 'b', 'c', 1, 2, 3, 'key' => 'value']);
+$collection = new GenericDomainCollection(['a', 'b', 'c', 1, 2, 3, 'key' => 'value']);
 
 // --- USAGE ---
 
@@ -159,9 +159,9 @@ $firstTwoIntsPlussed = $firstTwoInts->map(function (int $value): int {
 });
 ```
 
-### `MsgPhp\Domain\PaginatedDomainCollection`
+### `MsgPhp\Domain\GenericPaginatedDomainCollection`
 
-A first class citizen paginated domain collection to transform any collection into a paginated collection.
+A first-class citizen paginated domain collection compatible with any `iterable` value.
 
 ### `MsgPhp\Domain\Infrastructure\Doctrine\DomainCollection`
 

@@ -32,7 +32,7 @@ be returned.
 
 ### `MsgPhp\Domain\DomainIdTrait`
 
-A first class citizen domain identifier trait.
+A first-class citizen domain identifier trait compatible with any `scalar` value.
 
 #### Basic Example
 
