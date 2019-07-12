@@ -6,6 +6,9 @@
 MsgPHP is a project that aims to provide (common) message based domain layers for your application. It has a low
 development time overhead and avoids being overly opinionated.
 
+MsgPHP follows [Semantic Versioning] (as of `v1.0`). During development phase a package can be marked `@experimental` to
+indicate "[BC] breaks" could happen (when clear consensus is reached).
+
 ## Domain Layers
 
 > The domain layer is a collection of entity objects and related business logic that is designed to represent the 
@@ -24,6 +27,13 @@ On the roadmap are:
 - `File`
 - `Taxonomy`
 - ...
+
+## Design-Time Considerations
+
+- The base domain package (`msgphp/domain`) integrates with **YOUR** domain layer (it's dependency free by design)
+- You inherit from the default domain layers, if used
+- The first-class supported ORM is [Doctrine ORM]
+- The first-class supported message bus is [Symfony Messenger]
 
 ## Message Based
 
@@ -78,3 +88,7 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 [domain:eav]: https://github.com/msgphp/eav
 [domain:user]: https://github.com/msgphp/user
 [domain:user-eav]: https://github.com/msgphp/user-eav
+[Semantic Versioning]: https://semver.org/
+[BC]: https://en.wikipedia.org/wiki/Backward_compatibility
+[Doctrine ORM]: https://www.doctrine-project.org/projects/orm.html
+[Symfony Messenger]: https://symfony.com/doc/current/components/messenger.html
