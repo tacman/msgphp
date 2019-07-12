@@ -4,7 +4,7 @@ ret=0
 for package in $(find src/*/composer.json -type f); do
     cd "$(dirname "${package}")"
     sh -c "${*}" 2>&1
-    last=$?; [ ${last} -ne 0 ] && ret=${last}
+    [ $? -ne 0 ] && ret=1
     cd - >/dev/null
 done
 
