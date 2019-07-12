@@ -66,7 +66,6 @@ lint-yaml:
 
 # CI
 ci-install:
-	#${qa} bin/package-exec composer require --no-update --quiet symfony/debug:^4.2.2
 	${qa} bin/ci-packager HEAD^ $$(find src/*/composer.json -type f -printf '%h\n')
 
 # phpqa
