@@ -90,3 +90,5 @@ test-project:
 	${qa} composer config --working-dir=var/test-project repositories.msgphp path "../../src/*"
 	${qa} composer require --no-update --working-dir=var/test-project ${composer_args} orm
 	${qa} composer require --working-dir=var/test-project --dev ${composer_args} debug maker
+entrypoint:
+	echo "${qa}"
