@@ -22,11 +22,6 @@
         <DeprecatedClass errorLevel="info"/>
         <DeprecatedMethod errorLevel="info"/>
         <InternalMethod errorLevel="info"/>
-        <InvalidClass>
-            <errorLevel type="suppress">
-                <referencedClass name="MsgPhp\Domain\Tests\Factory\testclasswrongcase"/>
-            </errorLevel>
-        </InvalidClass>
         <LessSpecificReturnStatement>
             <errorLevel type="info">
                 <file name="src/*/Infrastructure/Doctrine/Repository/*Repository.php"/>
