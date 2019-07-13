@@ -21,7 +21,11 @@
         <!-- info = conventional, suppress = false positive -->
         <DeprecatedClass errorLevel="info"/>
         <DeprecatedMethod errorLevel="info"/>
-        <InternalMethod errorLevel="info"/>
+        <InternalMethod>
+            <errorLevel type="suppress">
+                <directory name="src/*/Tests"/>
+            </errorLevel>
+        </InternalMethod>
         <LessSpecificReturnStatement>
             <errorLevel type="info">
                 <file name="src/*/Infrastructure/Doctrine/Repository/*Repository.php"/>
