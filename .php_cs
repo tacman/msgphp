@@ -41,7 +41,7 @@ $rules = [
     'php_unit_method_casing' => true,
     'php_unit_set_up_tear_down_visibility' => true,
     'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
-//    'phpdoc_add_missing_param_annotation' => true,
+    'phpdoc_add_missing_param_annotation' => true,
     'phpdoc_inline_tag' => false,
     'phpdoc_order' => true,
     'phpdoc_to_comment' => false,
