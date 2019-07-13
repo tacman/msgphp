@@ -19,9 +19,6 @@ final class UserAttributeValueRepository implements BaseUserAttributeValueReposi
 {
     use EntityAttributeValueRepositoryTrait;
 
-    /**
-     * @return DomainCollection|UserAttributeValue[]
-     */
     public function findAllByAttributeId(AttributeId $attributeId, int $offset = 0, int $limit = 0): DomainCollection
     {
         $qb = $this->createQueryBuilder();
@@ -30,9 +27,6 @@ final class UserAttributeValueRepository implements BaseUserAttributeValueReposi
         return $this->createResultSet($qb->getQuery(), $offset, $limit);
     }
 
-    /**
-     * @return DomainCollection|UserAttributeValue[]
-     */
     public function findAllByAttributeIdAndValue(AttributeId $attributeId, $value, int $offset = 0, int $limit = 0): DomainCollection
     {
         $qb = $this->createQueryBuilder();
@@ -41,17 +35,11 @@ final class UserAttributeValueRepository implements BaseUserAttributeValueReposi
         return $this->createResultSet($qb->getQuery(), $offset, $limit);
     }
 
-    /**
-     * @return DomainCollection|UserAttributeValue[]
-     */
     public function findAllByUserId(UserId $userId, int $offset = 0, int $limit = 0): DomainCollection
     {
         return $this->doFindAllByFields(['user' => $userId], $offset, $limit);
     }
 
-    /**
-     * @return DomainCollection|UserAttributeValue[]
-     */
     public function findAllByUserIdAndAttributeId(UserId $userId, AttributeId $attributeId, int $offset = 0, int $limit = 0): DomainCollection
     {
         $qb = $this->createQueryBuilder();
