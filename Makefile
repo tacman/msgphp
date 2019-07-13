@@ -76,7 +76,7 @@ qa-update:
 # misc
 clean:
 	git clean -dxf var/
-smoke-test: clean update-standalone phpunit cs psalm
+smoke-test: clean qa-update update-standalone phpunit cs psalm
 shell:
 	${qa} /bin/sh
 composer-normalize: install install-standalone
