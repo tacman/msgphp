@@ -19,13 +19,12 @@ class ScalarEntityId implements EntityId
 }
 
 $test = new class() {
-    public function accept(EntityId $id): void
+    public function accept(EntityId $id, ScalarEntityId $scalarId): void
     {
     }
 };
 
-$test->accept(ScalarEntityId::fromValue('id'));
-$test->accept(ScalarEntityId::fromValue('id'));
+$test->accept(ScalarEntityId::fromValue('id'), ScalarEntityId::fromValue('id'));
 
 // test it autocompletes
 //ScalarEntityId::fromValue('id')->autoc
