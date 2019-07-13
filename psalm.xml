@@ -26,11 +26,6 @@
                 <directory name="src/*/Tests"/>
             </errorLevel>
         </InternalMethod>
-        <LessSpecificReturnStatement>
-            <errorLevel type="info">
-                <file name="src/*/Infrastructure/Doctrine/Repository/*Repository.php"/>
-            </errorLevel>
-        </LessSpecificReturnStatement>
         <MissingClosureParamType errorLevel="info"/>
         <MissingClosureReturnType errorLevel="info"/>
         <MissingParamType>
@@ -38,11 +33,6 @@
                 <directory name="src/*/Tests"/>
             </errorLevel>
         </MissingParamType>
-        <MoreSpecificReturnType>
-            <errorLevel type="info">
-                <file name="src/*/Infrastructure/Doctrine/Repository/*Repository.php"/>
-            </errorLevel>
-        </MoreSpecificReturnType>
         <PossiblyUndefinedMethod>
             <errorLevel type="suppress">
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeBuilder::classMappingNode"/>
