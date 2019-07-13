@@ -14,7 +14,7 @@ use MsgPhp\User\UserAttributeValue;
  *
  * @internal
  */
-final class EavObjectMappings implements ObjectMappingProvider
+final class UserEavObjectMappings implements ObjectMappingProvider
 {
     public static function provideObjectMappings(MappingConfig $config): iterable
     {
