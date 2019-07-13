@@ -13,14 +13,14 @@ use MsgPhp\User\UserAttributeValue;
  */
 trait AttributeValuesField
 {
-    /** @var iterable<UserAttributeValue> */
+    /** @var iterable<array-key, UserAttributeValue> */
     private $attributeValues = [];
 
     /**
-     * @return DomainCollection<UserAttributeValue>
+     * @return DomainCollection<array-key, UserAttributeValue>
      */
     public function getAttributeValues(): DomainCollection
     {
-        return new GenericDomainCollection($this->attributeValues);
+        return GenericDomainCollection::fromValue($this->attributeValues);
     }
 }

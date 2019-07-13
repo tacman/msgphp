@@ -16,24 +16,24 @@ use MsgPhp\User\UserId;
 interface UserAttributeValueRepository
 {
     /**
-     * @return DomainCollection<UserAttributeValue>
+     * @return DomainCollection<array-key, UserAttributeValue>
      */
     public function findAllByAttributeId(AttributeId $attributeId, int $offset = 0, int $limit = 0): DomainCollection;
 
     /**
      * @param mixed $value
      *
-     * @return DomainCollection<UserAttributeValue>
+     * @return DomainCollection<array-key, UserAttributeValue>
      */
     public function findAllByAttributeIdAndValue(AttributeId $attributeId, $value, int $offset = 0, int $limit = 0): DomainCollection;
 
     /**
-     * @return DomainCollection<UserAttributeValue>
+     * @return DomainCollection<array-key, UserAttributeValue>
      */
     public function findAllByUserId(UserId $userId, int $offset = 0, int $limit = 0): DomainCollection;
 
     /**
-     * @return DomainCollection<UserAttributeValue>
+     * @return DomainCollection<array-key, UserAttributeValue>
      */
     public function findAllByUserIdAndAttributeId(UserId $userId, AttributeId $attributeId, int $offset = 0, int $limit = 0): DomainCollection;
 
