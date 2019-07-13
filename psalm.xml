@@ -34,11 +34,6 @@
                 <directory name="src/*/Tests"/>
             </errorLevel>
         </MissingParamType>
-        <MissingPropertyType>
-            <errorLevel type="suppress">
-                <directory name="src/*/Tests"/>
-            </errorLevel>
-        </MissingPropertyType>
         <MoreSpecificReturnType>
             <errorLevel type="info">
                 <file name="src/*/Infrastructure/Doctrine/Repository/*Repository.php"/>
@@ -49,16 +44,10 @@
                 <referencedMethod name="Symfony\Component\Config\Definition\Builder\NodeBuilder::classMappingNode"/>
             </errorLevel>
         </PossiblyUndefinedMethod>
-        <PropertyNotSetInConstructor errorLevel="suppress"/>
-        <RedundantConditionGivenDocblockType errorLevel="info"/>
-        <UndefinedClass>
-            <errorLevel type="info">
-                <referencedClass name="Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken"/>
-            </errorLevel>
+        <PropertyNotSetInConstructor errorLevel="suppress">
             <errorLevel type="suppress">
-                <referencedClass name="MsgPhp\Domain\Tests\Factory\TestUnknownObject"/>
-                <referencedClass name="MsgPhp_Test_Action"/>
+                <directory name="src/*/Tests"/>
             </errorLevel>
-        </UndefinedClass>
+        </PropertyNotSetInConstructor>
     </issueHandlers>
 </psalm>
