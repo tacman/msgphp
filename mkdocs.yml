@@ -1,5 +1,5 @@
 site_name: MsgPHP Documentation
-site_description: Message based domain layers. Shipped with industry standard infrastructure.
+site_description: Reusable domain layers. Shipped with industry standard infrastructure.
 repo_url: https://github.com/msgphp/msgphp
 edit_uri: blob/master/docs/
 

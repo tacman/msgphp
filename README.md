@@ -3,17 +3,17 @@
 [![Build Status][master:travis:img]][master:travis]
 [![Code Coverage][master:codecov:img]][master:codecov]
 
-MsgPHP is a project that aims to provide (common) message based domain layers for your application. It has a low
-development time overhead and avoids being overly opinionated.
+MsgPHP is a project that aims to provide reusable domain layers for your application. It has a low development time
+overhead and avoids being overly opinionated.
 
-MsgPHP follows [Semantic Versioning]. During development phase a package can be marked `@experimental` to indicate "[BC]
-breaks" could happen (when clear consensus is reached).
+It follows [Semantic Versioning], yet during development phase a package can be marked `@experimental` to indicate
+"[BC] breaks" could be introduced.
 
 ## Domain Layers
 
-> The domain layer is a collection of entity objects and related business logic that is designed to represent the 
-> enterprise business model. The major scope of this layer is to create a standardized and federated set of objects, 
-> that could be potentially reused within different projects. ([source](https://www.javacodegeeks.com/2013/05/multilayered-architecture-2-the-domain-layer.html))
+> The domain layer is a collection of entity objects and related business logic that is designed to represent the
+enterprise business model. The major scope of this layer is to create a standardized and federated set of objects, that
+could be potentially reused within different projects. ([source](https://www.javacodegeeks.com/2013/05/multilayered-architecture-2-the-domain-layer.html))
 
 The current supported domain layers are:
 
