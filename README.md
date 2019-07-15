@@ -81,8 +81,8 @@ class MakeSomethingWork
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
-[master:travis]: https://travis-ci.org/msgphp/msgphp
-[master:travis:img]: https://img.shields.io/travis/msgphp/msgphp/master.svg?style=flat-square
+[master:travis]: https://travis-ci.com/msgphp/msgphp
+[master:travis:img]: https://img.shields.io/travis/com/msgphp/msgphp/master.svg?style=flat-square
 [master:codecov]: https://codecov.io/gh/msgphp/msgphp
 [master:codecov:img]: https://img.shields.io/codecov/c/github/msgphp/msgphp/master.svg?style=flat-square
 [domain:eav]: https://github.com/msgphp/eav
