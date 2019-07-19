@@ -15,7 +15,7 @@ It follows [Semantic Versioning], yet during development phase a package can be 
 enterprise business model. The major scope of this layer is to create a standardized and federated set of objects, that
 could be potentially reused within different projects. ([source](https://www.javacodegeeks.com/2013/05/multilayered-architecture-2-the-domain-layer.html))
 
-The current supported domain layers are:
+Currently supported domain layers are:
 
 - [`Eav`][domain:eav]
 - [`User`][domain:user]
