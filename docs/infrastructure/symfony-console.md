@@ -26,10 +26,10 @@ utility service.
 bin/console projection:synchronize
 ```
 
-## Context Factory
+## Context Definition
 
-A context factory is bound to `MsgPhp\Domain\Infrastructure\Console\Context\ContextFactory`. Its purpose is to leverage
-a CLI command in an effort to interactively built an arbitrary array value (the context).
+A context definition is bound to `MsgPhp\Domain\Infrastructure\Console\Definition\DomainContextDefinition`. Its purpose
+is to (interactively) build a context array using the [CLI].
 
 ### API
 
@@ -47,14 +47,10 @@ Any element value provided by `$values` takes precedence and should be used as-i
 
 ### Implementations
 
-#### `MsgPhp\Domain\Infrastructure\Console\Context\ClassContextFactory`
+#### `MsgPhp\Domain\Infrastructure\Console\Definition\ClassContextDefinition`
 
-Factorizes a context based on any class method signature. It configures the CLI signature by mapping required class
-method arguments to command arguments, whereas optional ones are mapped to command options.
-
-```bash
-bin/console command --optional-argument [--] required-argument
-```
+Creates a context based on any class method signature. It configures the [CLI] signature by mapping required method
+arguments to command arguments, whereas optional ones are mapped to command options.
 
 In both cases a value is optional, if the actual class method argument is required and no value is given it will be
 asked interactively. If interaction is not possible an exception will be thrown instead.
@@ -84,7 +80,7 @@ transforms argument names to human readable values so that `$argumentName` becom
 ```php
 <?php
 
-use MsgPhp\Domain\Infrastructure\Console\Context\ClassContextFactory;
+use MsgPhp\Domain\Infrastructure\Console\Definition\ClassContextDefinition;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -101,11 +97,11 @@ class MyObject
 
 class MyCommand extends Command
 {
-    private $contextFactory;
+    private $definition;
 
     public function __construct()
     {
-        $this->contextFactory = new ClassContextFactory(MyObject::class, '__construct');
+        $this->definition = new ClassContextDefinition(MyObject::class, '__construct');
 
         parent::__construct();
     }
@@ -113,13 +109,13 @@ class MyCommand extends Command
     protected function configure(): void
     {
        $this->setName('my-command');
-       $this->contextFactory->configure($this->getDefinition());
+       $this->definition->configure($this->getDefinition());
     }
 
     protected function execute(InputInterface $input,OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $context = $this->contextFactory->getContext($input, $io);
+        $context = $this->definition->getContext($input, $io);
         $object = new MyObject(...array_values($context));
 
         // do something
@@ -133,13 +129,13 @@ class MyCommand extends Command
 // $ bin/console my-command [--option=OPTION] [--] [<argument>]
 ```
 
-#### `MsgPhp\Domain\Infrastructure\Console\Context\DoctrineEntityContextFactory`
+#### `MsgPhp\Domain\Infrastructure\Console\Definition\DoctrineContextDefintion`
 
-A [Doctrine](doctrine-orm.md) entity aware context factory. It decorates any context factory. Its purpose is to
-provide a discriminator value into the resulting context when working with [ORM inheritance].
+Use the [Doctrine](doctrine-orm.md) context definition to provide a class discriminator value into the final context.
+Typically this implementation is used when working with [ORM inheritance].
 
-- `__construct(ContextFactory $factory, EntityManagerInterface $em, string $class)`
-    - `$factory`: The decorated context factory
+- `__construct(DomainContextDefinition $definition, EntityManagerInterface $em, string $class)`
+    - `$definition`: The decorated context definition
     - `$em`: The entity manager to use
     - `$class`: The entity class to use
 
@@ -151,3 +147,4 @@ provide a discriminator value into the resulting context when working with [ORM 
 [api-styleinterface]: https://api.symfony.com/master/Symfony/Component/Console/Style/StyleInterface.html
 [api-contextelement]: https://msgphp.github.io/api/MsgPhp/Domain/Infra/Console/Context/ContextElement.html
 [ORM inheritance]: http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/inheritance-mapping.html
+[CLI]: https://en.wikipedia.org/wiki/Command-line_interface
