@@ -24,12 +24,6 @@ use MsgPhp\Domain\Projection\ProjectionTypeRegistry;
 
 class MyEntity
 {
-    public $id;
-
-    public function __construct($id)
-    {
-        $this->id = $id;
-    }
 }
 
 /** @var ProjectionTypeRegistry $typeRegistry */
@@ -40,8 +34,8 @@ $repository = ...;
 $transformer = ...;
 $provider = new ProjectionDocumentProvider($transformer, [
     function (): iterable {
-        yield new MyEntity(1);
-        yield new MyEntity(2);
+        yield new MyEntity();
+        yield new MyEntity();
     },
 ]);
 $synchronization = new ProjectionSynchronization($typeRegistry, $repository, $provider);
