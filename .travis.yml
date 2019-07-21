@@ -25,6 +25,10 @@ script:
 after_success:
   - if [[ ${CC} == true ]]; then bash <(curl -s https://codecov.io/bash); fi
 
+before_cache:
+  - rm -rf var/composer/files/msgphp
+  - rm -f var/composer/repo/*/provider-msgphp*
+
 cache:
   directories:
     - var/
