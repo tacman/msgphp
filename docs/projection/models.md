@@ -2,7 +2,7 @@
 
 Projection models are "[vanilla] PHP objects". Its purpose is to represent a stored document.
 
-The document is usually a transformation from a domain object (e.g. an entity) and therefor projections should be
+The projection is usually a transformation from a domain object (e.g. an entity) and therefor projections should be
 considered read-only and disposable, given they can be re-created / synchronized at any point in time from a source of
 truth (the repository).
 

@@ -42,17 +42,17 @@ class MyEntityRepository
 }
 
 /** @var EntityManagerInterface $em */
-$em = ...;
+
 $repository = new MyEntityRepository(MyEntity::class, $em);
 
 // --- USAGE ---
 
-if ($repository->exists($id = ['name' => ..., 'year' => ...])) {
+if ($repository->exists($id = ['name' => '...', 'year' => date('Y')])) {
     $entity = $repository->find($id);
 } else {
     $entity = new MyEntity();
-    $entity->name = ...;
-    $entity->year = ...;
+    $entity->name = '...';
+    $entity->year = date('Y');
 
     $repository->save($entity);
 }
@@ -100,7 +100,7 @@ class MyOtherEntity extends MyEntity
 }
 
 /** @var EntityManagerInterface $em */
-$em = ...;
+
 $factory = new DomainObjectFactory(new BaseDomainObjectFactory(), $em);
 
 // --- USAGE ---
@@ -151,7 +151,7 @@ MyDomainIdType::setDataType(Type::INTEGER);
 Type::addType(MyDomainIdType::NAME, MyDomainIdType::class);
 
 /** @var EntityManagerInterface $em */
-$em = ...;
+
 $config = $em->getConfiguration();
 
 $config->addCustomHydrationMode(ScalarHydrator::NAME, ScalarHydrator::class);

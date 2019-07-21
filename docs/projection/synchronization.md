@@ -27,17 +27,16 @@ class MyEntity
 }
 
 /** @var ProjectionTypeRegistry $typeRegistry */
-$typeRegistry = ...;
 /** @var ProjectionRepository $repository */
-$repository = ...;
-/** @var ProjectionDocumentTransformer $transformer */
-$transformer = ...;
-$provider = new ProjectionDocumentProvider($transformer, [
+
+$provider = new ProjectionDocumentProvider([
     function (): iterable {
         yield new MyEntity();
         yield new MyEntity();
     },
-]);
+], function (object $object): array {
+    return (array) $object;
+});
 $synchronization = new ProjectionSynchronization($typeRegistry, $repository, $provider);
 
 // --- USAGE ---

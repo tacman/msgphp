@@ -43,18 +43,14 @@ An Elasticsearch tailored projection repository.
 
 use MsgPhp\Domain\Projection\ProjectionRepository;
 
-// --- SETUP ---
-
-/** @var ProjectionRepository $repository */
-$repository = ...;
-
 // --- USAGE ---
 
-$id = ...;
-$document = $repository->find('my_projection', $id);
+/** @var ProjectionRepository $repository */
+
+$document = $repository->find('my_projection', 'ID');
 
 if (null === $document) {
-    $document = ['id' => $id, 'some_field' => 'value'];
+    $document = ['id' => 'ID', 'some_field' => 'value'];
     $repository->save('my_projection', $document);
 }
 ```

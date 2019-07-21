@@ -27,7 +27,7 @@ use MsgPhp\Domain\Infrastructure\Elasticsearch\ProjectionTypeRegistry;
 // --- SETUP ---
 
 /** @var Client $client */
-$client = ...;
+
 $typeRegistry = new ProjectionTypeRegistry($client, 'app_dev-', [
     'my_projection' => [
         'some_field' => 'some_type', // defaults to ['type' => 'some_type']
@@ -58,7 +58,7 @@ use MsgPhp\Domain\Infrastructure\Elasticsearch\ProjectionRepository;
 // --- SETUP ---
 
 /** @var Client $client */
-$client = ...;
+
 $repository = new ProjectionRepository($client, 'app_dev-');
 ```
 

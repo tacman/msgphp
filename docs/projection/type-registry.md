@@ -37,12 +37,9 @@ An Elasticsearch tailored projection type registry.
 
 use MsgPhp\Domain\Projection\ProjectionTypeRegistry;
 
-// --- SETUP ---
+// --- USAGE ---
 
 /** @var ProjectionTypeRegistry $typeRegistry */
-$typeRegistry = ...;
-
-// --- USAGE ---
 
 $typeRegistry->destroy();
 $typeRegistry->initialize();

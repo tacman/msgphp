@@ -27,12 +27,9 @@ class EventMessage
 }
 
 /** @var MessageBusInterface $commandBus */
-$commandBus = ...;
-/** @var MessageBusInterface $commandBus */
-$eventBus = ...;
-$eventClasses = [EventMessage::class];
+/** @var MessageBusInterface $eventBus */
 
-$domainBus = new DomainMessageBus($commandBus, $eventBus, $eventClasses);
+$domainBus = new DomainMessageBus($commandBus, $eventBus, [EventMessage::class]);
 
 // --- USAGE ---
 

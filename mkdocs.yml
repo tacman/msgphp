@@ -33,7 +33,6 @@ nav:
           - Events: event-sourcing/events.md
     - Projection:
           - Models: projection/models.md
-          - Document Transformers: projection/document-transformers.md
           - Type Registry: projection/type-registry.md
           - Repositories: projection/repositories.md
           - Synchronization: projection/synchronization.md
