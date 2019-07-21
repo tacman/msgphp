@@ -23,24 +23,8 @@ It works directly with any [`Client`][api-client] and a known configuration of t
 
 use Elasticsearch\Client;
 use MsgPhp\Domain\Infrastructure\Elasticsearch\ProjectionTypeRegistry;
-use MsgPhp\Domain\Projection\Projection;
 
 // --- SETUP ---
-
-class MyProjection implements Projection
-{
-    public $someField;
-    public $otherField;
-
-    public static function fromDocument(array $document): Projection
-    {
-        $projection = new static();
-        $projection->someField = $document['some_field'] ?? null;
-        $projection->otherField = $document['other_field'] ?? null;
-
-        return $projection;
-    }
-}
 
 /** @var Client $client */
 $client = ...;

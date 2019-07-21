@@ -41,18 +41,9 @@ An Elasticsearch tailored projection repository.
 ```php
 <?php
 
-use MsgPhp\Domain\Projection\Projection;
 use MsgPhp\Domain\Projection\ProjectionRepository;
 
 // --- SETUP ---
-
-class MyProjection implements Projection
-{
-    public static function fromDocument(array $document): Projection
-    {
-        // ...
-    }
-}
 
 /** @var ProjectionRepository $repository */
 $repository = ...;
