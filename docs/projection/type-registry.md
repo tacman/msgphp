@@ -16,12 +16,6 @@ changed.
 
 Destroys the registry and thus requires to be re-initialized after.
 
----
-
-### `lookup(string $name): string`
-
-Lookup a type name for an arbitrary name.
-
 ## Implementations
 
 ### `MsgPhp\Domain\Infrastructure\Elasticsearch\ProjectionTypeRegistry`

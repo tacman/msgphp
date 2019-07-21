@@ -15,7 +15,6 @@ Synchronizes all projections. Returns the no. of projections synchronized.
 <?php
 
 use MsgPhp\Domain\Projection\ProjectionDocumentProvider;
-use MsgPhp\Domain\Projection\ProjectionDocumentTransformer;
 use MsgPhp\Domain\Projection\ProjectionRepository;
 use MsgPhp\Domain\Projection\ProjectionSynchronization;
 use MsgPhp\Domain\Projection\ProjectionTypeRegistry;
@@ -36,6 +35,8 @@ $provider = new ProjectionDocumentProvider([
     },
 ], function (object $object): array {
     return (array) $object;
+}, function (object $object): string {
+    return 'index';
 });
 $synchronization = new ProjectionSynchronization($typeRegistry, $repository, $provider);
 
