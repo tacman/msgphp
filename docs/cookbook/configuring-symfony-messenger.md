@@ -52,4 +52,4 @@ services:
     msgphp.messenger.event_bus: '@event_bus'
 ```
 
-[recipe configuration]: https://github.com/symfony/recipes/blob/master/symfony/messenger/4.1/config/packages/messenger.yaml
+[recipe configuration]: https://github.com/symfony/recipes/blob/master/symfony/messenger/4.3/config/packages/messenger.yaml
